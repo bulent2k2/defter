@@ -1,0 +1,9 @@
+* symmetry:
+instead of AlignedArray -> Array
+PackedPartition -> Partition. DRC support thru bbox'ing..
+* incremental placement:
+wrapper cell to "collect" all "firm groups"
+topological (slicing) constraints (stockmeyer..)
+* templates:
+see doc..
+* the end

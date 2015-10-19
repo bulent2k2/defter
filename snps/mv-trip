@@ -1,0 +1,18 @@
+* All
+What have you worked on during the last 6 months, 1 month, future 6 months?
+* Yakov
+** LDE:
+InstanceSpecificRules defined in tech property map:
+  spacing/enclosure
+  spacing: From/To also need 
+  enclosure: Enclosing/Enclosed
+  primary or derived layers..
+  Needs auxLayer (z1, z3, ..)
+  cnhxoautil removes the (temporary) aux layers..
+  cnxgen Programmable constraint generator/transformer (from search: "dependent" result title: Netlist)
+
+Placer: limitations?
+How does it handle "multiple shapes"? Multiple forms/variants for a sub-ucell.. 
+* Joe
+  two adjacent abuttable devices belong to different rule sets, they won't be abutted by row. What about PNstack?
+* The end

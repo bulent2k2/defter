@@ -1,0 +1,14 @@
+From LDE spec doc:
+  auxLayer objs have OA Boolean property cniTempObj set to true
+
+  pythonic tool (:-)
+  
+  instanceSpecificRules can be applied on constraint grouops as well as
+  primitive instances.
+  	    a lower level setting (e.g., M1,M2 are in a Row and both M1 and Row
+  have ISR. M1's will be used for M1, Row's will be used for M2.)
+  IMPL: Top-down propagation from Row to M1/M2 is done using
+  context-passing mechanism in Helix
+
+ 
+  

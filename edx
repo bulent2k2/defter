@@ -1,0 +1,128 @@
+* write-up for 2nd peer-assessment assignment (did not do the first!)
+** submitted
+"The weather has been so good for the last two weeks, I expect it to be equally wonderful tomorrow, too." Induction is a method we often use when we reason about life in general. It mostly works, but then, sometimes, it does not :-). 
+
+When we use induction, we rely on a set of observations about matters of fact: the myriad of computers we have used so far have all displayed poor, unexpected behavior from time to time. We call them "bugs in the machine." Further, it seems that there is not one single computer we have used in the past that did not display any bugs. Given all that, it seems fair to conclude that all computers have bugs. 
+
+Premise 1: All observed computers have bugs.
+Premise 2: Nature of computers is uniform.
+Conclusion: All computers have bugs.
+
+This is very human. We make such generalizations day in, day out. We believe such generalizations. We are mostly right. But, not always. 
+
+"I have smoked so many cigars, and none has killed me so far. But, the next one might. So, I better stop now!"
+
+This sounds very human, too. But, this is what is known as "counter-induction"! We know deep down that life is full of surprises. We actually enjoy surprises, and if I may say so, we live for surprises. My daughter asks me without an exception every time I pick her up from school: 'Daddy, do you have a surprise for me today?' She wants one, you see?
+
+Hume, one of my favorite thinkers of all time (he was a kindred soul to Buddha!) wrote that inductive reasoning, which would prohibit computers without bugs in some blissful future point in time, is not justified. Why not? Because, simply, it is not a logical way to come up with truths, to really know about matters of fact! Hume showed that by pointing out the circular nature of inductive reasoning: we claim B to be true, because all of our observations so far confirm B. But, inherent in that assertion is a belief that we will never be surprised in our observations! Most scientists who lived after Newton, but before Maxwell firmly believed in the law of Gravity. After all, countless experiments confirmed the familiar formula: G = k * M1 * M2 / (r * r). Beautiful. What's not to believe? It took only about 350 years to observe that the beautiful formula is only an approximation! So, it wasn't true after all. Hume was right! Scientists are much more modest these days (well, at least the honest ones!): they know that science does not give us truths, only approximations.
+
+OK, we have seen how humans reason using induction or counter induction and how neither is truly error-proof. Sometimes we believe that life is uniform (and predictable), and at other times it is full of surprises. Our trust in uniformity relies on inductive reasoning. Thanks to Hume, we now know that we better have doubt instead when it comes to our understanding of nature and life. Our pleasure in surprises, our acceptance of the quote "Life is full of surprises" is made possible by counter-inductive reasoning. But, do we trust it? No, we only like to be surprised once in a while. If you are a child at heart, maybe once a day, but as you mature, hopefully less often. Remember the Chinese wisdom of the ancestors who thought the following as the best curse to put on your friends:  "May you live in interesting times!" We do live in interesting times, don't we? And, I think, we have Hume to thank for explaining to us why we can trust that.
+
+** draft
+"The weather has been so good for the last two weeks, I expect it to be equally wonderful tomorrow, too." Induction is a method we often use when we reason about life in general. It mostly works, but then, sometimes, it does not :-). 
+
+When we use induction, we rely on a set of observations about matters of fact: the myriad of computers we have used so far have all displayed poor, unexpected behavior from time to time. We call them "bugs in the machine." Further, it seems that there is not one single computer we have used in the past that did not display any bugs. Given all that, it seems fair to conclude that all computers have bugs. 
+
+Premise 1: All observed computers have bugs.
+Premise 2: Nature of computers is uniform.
+Conclusion: All computers have bugs.
+
+This is very human. We make such generalizations day in, day out. We belive such generalizations. We are mostly right. But, not always. 
+
+"I have smoked so many cigars, and none has killed me so far. But, the next one might. So, I better stop now!"
+
+This sounds very human, too. But, this is what is known as "counter-induction"! We know deep down that life is full of surprises. We actually enjoy surprises, and if I may say so, we live for surprises. My daughter asks me without an exception everytime I pick her up from school: 'Daddy, do you have a surprise for me today?' She wants one, you see?
+
+Hume, one of my favorite thinkers of all time (he was a kindred soul to Buddha!) wrote that inductive reasoning, which would prohibit computers without bugs in some blissful future point in time, is not justified. Why not? Because, simply, it is not a logical way to come up with truths, to really know about matters of fact! Hume showed that by pointing out the circular nature of inductive reasoning: we claim B to be true, because all of our observations so far confirm B. But, inherent in that assertion is a belief that we will never be surprised in our observations! Most scientists who lived after Newton, but before Maxwell firmly believed in the law of Gravity. After all, countless experiments confirmed the familiar formula: F = k * M1 * M2 / (r * r). Beautiful. What's not to believe? It took only about 350 years to observe that the beautiful formula is only an approximation! So, it wasn't true after all. Hume was right! Scientists are much more modest these days (well, at least the honest ones!): they know that science does not give us truths, only approximations.
+
+OK, we have seen how humans reason using induction or counter induction and how neither is truly error-proof. Sometimes we believe that life is uniform (and predictable), and at other times it is full of suprises. Our trust in uniformity relies on inductive reasoning. Thanks to Hume, we now know that we better have doubt instead when it comes to our understanding of nature and life. Our pleasure in surprises, our acceptance of the quote "Life is full of surprises" is made possible by counter-inductive reasoning. But, do we trust it? No, we only like to be surprised once in a while. If you are a child at heart, maybe once a day, but as you mature, hopefully less often. Remember the Chinese wisdom of the ancestors who thought the following as the best curse to put on your friends:  "May you live in interesting times!" We do live in interesting times, don't we. And, I think, we have Hume to thank for explaining us why we can trust that.
+
+** defn:
+Peer Assessment Question 2: Hume's Problem with Induction
+
+Your Prompt:
+Hume says that there is a problem with inductive reasoning. What is the problem? Can you see a solution to it?
+
+Guidelines:
+The Structure of Your Response:
+
+Please begin by explaining, as clearly as you can, what inductive reasoning is.
+
+Next explain what counter-inductive reasoning is.
+
+Next explain why Hume thought that beliefs we come to by way of inductive reasoning are not justified. (The basic idea, remember, is that any valid argument to the conclusion that inductive reasoning is better than counter-inductive reasoning will be circular – you will not believe all the premises unless you already believe that inductive reasoning is better than counter-inductive reasoning.)
+
+Next explain why you think Hume is right or wrong about this.
+
+End by very briefly summarizing what you have said.
+
+Please write between 500 and 1000 words.
+
+You will be asked to grade each other's submissions using the rubric found here.
+
+* mit: is 
+https://courses.edx.org/courses/MITx/15.390x/1T2014/courseware/29a9987a83ff4777ab113885319bb0ed/5d21f9592bcb4d89a093b78487120cbf/
+HERE'S WHAT WE RECOMMEND YOU DO BEFORE WEEK 2:
+
+1) Articulate the idea. Describe it. If you aren’t sure how, focus on answering these questions:
+What is the problem you want to solve
+Who experiences that problem
+How you want to solve that problem
+Why this is a better solution
+For example:
+“I want to solve the problem of clean water scarcity in developing countries. This problem is experienced by people in rural areas where water supply and treatment infrastructure doesn’t exist. I want to solve that problem by providing village-scale pumps that would give every village a way to draw on clean water from underground sources. This would be a better solution because it would be easy and quick to install, it would be simple to operate, it would not require large investments in infrastructure, it would last long, and rural entrepreneurs could even earn money by selling clean water.”
+2) Reach out to at least 10 people who you think are potential users/customers for the idea.  Schedule time to meet with them or speak by phone.  
+This is not a graded assignment. 
+Previous
+Next
+* harvard: gse1x
+I would like to be:
+1- less "reactive" (less of a robot :-)) to what I perceive in me and around me.
+2- more present (being aware of the here-and-now) and not lost in deep/repetitive thoughts.
+3- burdened less by the past (what happened).
+4- driven less by the drive to secure the future (control what will happen).
+I would like to see:
+1- the good in what I perceive. 
+2- more clearly what truly matters here and now.
+* UTAustinX 5.01x LAFF
+LAFF in the Cloud
+
+Here are the instructions for the cloud package installation. This option works online only, but this also means you just need a browser to get it working. If you do have troubles after following these instructions, check the discussion board or the wiki.
+
+QUICK INSTALL DEMO
+
+Skip to a navigable version of this video's transcript.
+
+0:00 / 1:52
+SPEED1.0x
+Fill browserHD offSkip to end of transcript.
+Go back to start of transcript.
+Step 1
+
+Signup here https://koding.com, check your email, and verify your new account by setting up a password.  Go back to Koding, and then click on the terminal button  at the top.
+
+Step 2
+
+Then type or copy, paste, and run each one of the following commands:
+
+Downloading
+
+wget "http://edx-org-utaustinx.s3.amazonaws.com/UT501x/pkgs/cloudLAFFpkg(Feb-07-2014).tar.bz2"
+
+Extracting (will take about 30 seconds)
+
+tar -jxf cloudLAFFpkg\(Feb-07-2014\).tar.bz2
+
+Running
+
+LAFF/start
+
+Step 3
+
+Replace "username" with your own username and go to username.kd.io:8888
+
+Finally "Click to continue: username.kd.io:8888"
+
+* The IPython Notebook is not fully supported on Internet Explorer.
+
+Please make sure you download and install Google Chrome or Firefox.

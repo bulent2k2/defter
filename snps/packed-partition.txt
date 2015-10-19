@@ -1,0 +1,450 @@
+* Title: (DRAFT) Functional Spec for "PackedPartition" Constraint (2013.12-SP)
+(DRAFT 0.2).
+
+* 1- Introduction
+
+PackedPartition constraint, PP for short, is a variant of the Partition
+constraint. In this document, we highlight the unique functionality in PP
+above and beyond that of the Partition constraint. Please refer to the user
+guide for more details on the Partition constraint.  
+
+In the next section, we introduce the core problem that PP and Partition
+constraints intend to solve. We also briefly describe the behavior that is
+common to both as a refresher. 
+
+Next, we describe in detail how PP differs from Partition. Let us note that
+PP is NOT a super-set of Partition. It cannot do everything that Partition
+does. Specifically, the detailed DRC functionality of Partition is distinct
+from PP. More on that later.. 
+
+Finally, we provide the schema definition, expected appearence in the Helix
+GUI and support in XGen. 
+
+
+* 2- The Partition Problem
+
+A "Partition" constraint (Partition for short) groups a set of elements in
+a cell in order to help design a good placement for those elements. The
+elements are grouped together and will be in close proximity. Their
+placement will not be constrained by a strict structure that some of the
+other constraints impose, e.g., Row, Column, Matrix, etc. Instead, they
+will have a free-form/general placement in order to optimize area and
+wirelength. It is expected to support not only slicing floor-plans, but
+also any general floor-plan topology comprised of "spirals." Please see
+Figure below. 
+
+
+** Figure 1: (a) Slicing vs (b) non-slicing floor-plans
+
+                  (a)                                              (b)
+
+ +-------+  +--------------+  +---------+       +-------------------------+  +---------+ 
+ |       |  |              |  |         |       |                         |  |         | 
+ |       |  |              |  |         |       |                         |  |         | 
+ |       |  |              |  |         |       |                         |  |         | 
+ |       |  +--------------+  |         |       +-------------------------+  |         | 
+ |       |  +--------------+  |         |       +-------+  +--------------+  |         | 
+ |       |  |              |  |         |       |       |  |              |  |         | 
+ |       |  |              |  |         |       |       |  |              |  |         | 
+ |       |  |              |  |         |       |       |  |              |  |         | 
+ |       |  |              |  |         |       |       |  |              |  |         | 
+ |       |  +--------------+  +---------+       |       |  +--------------+  +---------+ 
+ |       |  +---------------------------+       |       |  +---------------------------+ 
+ |       |  |                           |       |       |  |                           | 
+ |       |  |                           |       |       |  |                           | 
+ +-------+  +---------------------------+       +-------+  +---------------------------+ 
+
+
+We define a general Partition constraint as follows: 
+
+    P := {e1, e2, ..., e(n)}
+
+where e(i) denotes a (sub-)element of Partition. An element could be a
+device, another constraint (e.g., a Row, Halo, or an Island, etc.), or an
+existing layout for a sub-cell.  
+
+Also note that there is a set of parameters to control how the elements are
+placed in a Partition (OverlapLayers, BoundaryAssociation, etc.). Please
+see the user guide for a description of all the params of Partition. 
+
+Partition constraint has two main drawbacks: 
+
+1- Area minimization is not optimal when the layout of some of its elements
+are "non-rectangular". While packing, it treats each element as a
+rectangle. When an element has, e.g., an L-like shape, this causes the
+placement to use more area than may be necessary (Please see Figure 1). 
+
+2- Runtime performance is slow for big designs. For each placement
+iteration, DRC is checked between interacting elements for accuracy. This
+slows down the tool. Further, the core technology is generally a slower
+method among global optimization techniques. 
+
+
+** Figure 2: P = {e1, e2} and a typical placement that Row or Partition constraint could create
+                                   
+     +------------------------------------+    +---------------+
+     |                                    |    |               |
+     |  e1                                |    |  e2           |
+     |                                    |    |               |
+     |                                    |    |               |
+     |                                    |    +---------------+
+     |                                    |
+     +---------------------+              |
+                           |              |
+                           |              |
+                           |              |
+                           |              |
+                           |              |
+                           +--------------+
+
+
+* 3 PackedPartition Functionality
+
+The PackedPartition constraint (PP for short) intends to save area by
+improving packing of the placement. This is achieved by exploiting
+whitespace within the elements. Any element can be placed within
+the whitespace inside or overlapping the bounding box of another element 
+E.g., e2 can be placed in the corner defined by an L-shaped element e1.
+Please see the figure below. 
+
+
+** Figure 3: P = {e1, e2} from Figure ?? and a typical placement from PackedPartition
+                                   
+     +------------------------------------+  
+     |                                    |  
+     |  e1                                |  
+     |                                    |  
+     |                                    |  
+     |                                    |  
+     |                                    |
+     +---------------------+              |
+         +---------------+ |              |
+         |               | |              |
+         |  e2           | |              |
+         |               | |              |
+         |               | |              |
+         +---------------+ +--------------+
+
+
+
+* 3-a Gridding Control: Xgrid/Ygrid/GriddingBox Params
+
+PP places its elements on a grid defined by two parameters: x-grid and
+y-grid. E.g., x-grid = 0.40u, y-grid = 0.60u. The default values for 
+x-grid and y-grid are specified in the Santana techfile. 
+
+Given that an element can be a complex layout, there is an additional
+parameter called "gridding-box" that defines precisely what, in that
+element, is to be placed on the grid defined by x/y-grid params.  
+
+A gridding-box is like the bounding box of an element (bbox for short) 
+where the precise coordinates of the bbox can be controlled by one the
+following choices: 
+   PRBoundary,
+   IncludeLayers,
+   ExcludeLayers,
+   CustomParams,
+   CustomFunction.
+
+PRBoundary:     The bbox is computed from all of the contents of each
+                element. If there is a cell boundary shape, the "origin" of
+                its bounding box will be placed on the grid.
+
+IncludeLayers:  The bbox is computed from only shapes of each element on
+                the given layers. E.g., IncludeLayers: [metal1, metal2] 
+
+ExcludeLayers:  The bbox is computed from all shapes on layers except
+	        those provided with this option. E.g., 
+	        ExcludeLayers: [diffusion, poly, pplus, nplus, nwell] 
+
+CustomParams,
+CustomFunction: Please see the description of param "Custom Spacing" for
+                Partition constraint in the user guide for a description of
+                these controls. 
+
+Note that, PP will place the "origin" of the gridding-box on the grid
+defined by x-grid/y-grid params. For non-flipped elements, the origin is
+the lower-left corner of the gridding box. However, if flipping is enabled,
+and PP chooses to flip an element, the origin might refer to one of the
+other corners: lower-right (in case of x-flip only), upper-right (both x
+and y flips) or upper-left (only y-flip). 
+
+
+
+* 3-b Overlap Control
+
+PP achieves rectilinear packing by computing an "effective-area" for each
+element: the space outside the effective-area is assumed to be available
+for other elements to use. We denote the space outside of the effective
+area of an element as "white-space". I.e., we have:
+  whitespace := bbox - effectiveArea
+
+The effective area is represented as a rectilinear polygon. For example,
+given a C-shaped element, e1, and an L-shaped element, e2, PP will flip and
+rotate as needed and pack them into a compact rectangle.
+
+
+** Figure 4: Effective area in packing
+
+ +-------------------------+  +---------+
+ |                         |  |         |
+ | e1                      |  |         |
+ |                         |  |         |
+ |       +-----------------+  |         |
+ |       |  +-----------------+         |
+ |       |  |                           |
+ |       |  |  e2                       |
+ |       |  |                           |
+ |       |  |                           |
+ |       |  +---------------------------+
+ |       +------------------------------+
+ |                                      |
+ |                                      |
+ +--------------------------------------+
+
+
+More generally, each element will be represented as set of rectilinear
+polygons, not just one polygon per element.. 
+
+
+** Figure 5: two polygons (e1a and e1b) in the effective area of one element (e1).
+Note that the physical boundary (PRBoundary) of e1 is one single polygon,
+in this case a rectangle, and it is drawn with wider-spaced dash-lines. 
+
+
+                +  -   -   -   -   -   -   -   -   -   -   -   -   -   -  +
+                                                                          |
+                |                                                          
+                       +-------------+                   +----------+     |
+                |      | e1a         |                   | e1b      |      
+                       |        +----+  +--------+       |          |     |
+                |      |        |       |        |       |          |      
+                       |        |       | e2     |       |          |     |
+                |      |        |       |        |       |          |      
+                       |        |       |        |  +----+          |     |
+                |      |        |       |        |  |               |      
+                       +--------+       |        |  +---------------+     |
+                |                       |        |                         
+                  e1                    |        |                        |
+                +  -   -   -   -   -    |  -   - | -   -   -   -   -   -  +
+                                        |        |
+                         +--------------+        +-------------+
+                         |                                     |
+                         |                                     |
+                         |                                     |
+                         +-------------------------------------+
+
+
+
+* 3-b-i OverlapLayers Param
+
+PP provides a parameter called OverlapLayers so that the user can control
+how exactly the effective area is computed. As another example, let us
+consider a simple case where implant layers in each element are sufficient
+to determine the (effective) area and keeping them "disjoint", i.e.,
+ensuring that they are not overlapped will be good enough for clean DRC:
+
+  OverlapLayers: [nwell, diff, poly, contact, m1, ...]
+
+where the list above includes all but nplus and pplus layers. 
+
+
+
+* 3-b-i OverlapPRBoundary Param
+
+PP also provides a boolean control, called OverlapPRBoundary, which can be
+useful when effective area computation with design layers or ID (marking)
+layers is harder to use, or slower due to the large design size of elements
+of PP. By default, OverlapPRBoundary is set to True, which means that the
+cell boundary shapes (in general a polygon, if any) is ignored and effective
+area is computed using OverlapLayers param as described above. However, when
+this param is set to False, then, for each sub-cell within the PP, with a
+cell boundary shape OverlapLayers will be ignored and the cell boundary
+will be used as the effective area. 
+
+To clarify, please consider the following PP:
+  PP = {e1, e2, e3}
+
+where e1 is a sub-cell (C), e2 is a Row and e3 is a device (e.g., a transistor.)
+Further, let C have in its layout some flat transistors, and two sub-cells
+of its own: C1 and C2. Now consider the following cases:
+
+a) C has a cell boundary. In this case, the layout inside C, C1 and C2 will
+be ignored. The cell boundary of C defines the effective area.
+b) C and C1 have no cell boundary, C2 has a cell boundary. In this case,
+for all the layout in C and C1 (except for C2), OverlapLayers will be used
+to compute the effecive area (A1), and the cell boundary of C2 will also be
+added to A1 to find the final effective area for the PP.
+
+
+* 3-c BoundaryAssociation
+
+To be consistent with other Helix constraints, PP also supports the
+BoundaryAssociation param that can be used to guide the placement when I/O
+pin locations are known in advance.
+
+
+* 3-d Halo/Island Support
+
+All Halo constraints are expected to be honored by PackedPartition. 
+(For this release, at the moment, only "top-level" Halo's are honored. By
+"top-level Halo," we denote any element e(i) of PP that __is__ a Halo
+itself. Here is an example to illustrate a "lower-level Halo": consider an
+element of PP, say e1, that is a Row constraint itself. Let e1 have
+three elements in turn: e1a, e1b, e1c. If e1a is a Halo constraint, we
+denote it as a "lower-level" halo for PP, and as a "top-level" halo for
+e1.)
+
+This behavior is consistent with all other Helix constraints. It means that
+no element will overlap with any halo area in the sub-hierarchy of the
+design.
+
+A halo around a rectilinear element will __also__ be rectilinear__. This
+means that other elements can be packed into the whitespace within the
+bounding box of the halo. E.g., given an L-shaped object, the halo around
+it will also be L-shaped and other elements will be packed within the
+corner but stay outside of the L-shaped halo. 
+
+
+** Figure 6: Rectilinear halo support (a): without halos, we have PP = {e1, e2}, 
+   and (b), we have a halo constraint around e1:  PP = { Halo(e1), e2 } 
+
+
+     +------------------------------------+        +-h--h--h--h--h--h--h--h--h--h--h--h--h--h+  
+     |                                    |        |  +------------------------------------+ |  
+     |  e1                                |        h  |                                    | h  
+     |                                    |        |  |  e1                                | |  
+     |                                    |        |  |                                    | |  
+     |                                    |        h  |                                    | h  
+     |                                    |        |  |                                    | |  
+     +---------------------+              |        |  |                                    | |  
+         +---------------+ |              |        h  +---------------------+              | h  
+         |               | |              |        +-h--h--h--h--h--h--h--+ |              | |  
+         |  e2           | |              |              +--------------+ | |              | |  
+         |               | |              |              |   e2         | h |              | h  
+         |               | |              |              |              | | |              | |  
+         +---------------+ +--------------+              |              | h |              | |  
+                                                         |              | | +--------------+ h  
+                                                         +--------------+ +-h---h---h---h---h+  
+
+
+
+
+
+* 3-e PackingMode Global Design Parameter
+
+In this release, there is also a configuration option called PackingMode
+which enables the user to switch among alternative optimization engines
+under the hood. This is only for internal testing and development and is
+not recommended for the end-users yet.
+
+It can be used by modifying the <cellname>.hxcfg file as follows:
+
+HelixParams
+(
+        PackingMode(<option>)
+	...
+)
+
+The valid options are:
+  Fast:        (Default) Uses a fast and effective global optimization technique
+  Traditional: Uses the optimization engine employed in Partition constraint
+  Auto:        Automatically chooses between Fast and Traditional modes
+               depending on the number of elements in PP. If less than 13,
+               use traditional optimization. 
+
+* 4- Schema Definition
+
+The schema will have the following under:
+- !Schema
+  name: UCell
+  desc: UCell directives
+
+  ...
+
+      PackedPartition:
+        Param:
+          mapping:
+            Xgrid:
+              type: number
+              range: {min: 0}
+              optional:
+                default: 0
+            Ygrid:
+              type: number
+              range: {min: 0}
+              optional:
+                default: 0
+            GriddingBox:
+              type: BoundingBoxType
+              optional: yes
+            OverlapLayers: &overlapLayersType
+              sequence: 
+                 type: str
+              optional: yes                         
+            OverlapPRBoundary:
+              oneof: ['true', 'false']
+              optional:
+                default: 'true'
+            BoundaryAssociation:
+              sequence: 
+                type: NetPosition
+              optional: yes 
+          optional: yes                         
+
+We still need to decide whether it makes sense to keep OverlapPRBoundary
+and BoundaryAssociation params in this release.  
+
+Note that we already have:
+
+- !Schema
+  name: BoundingBoxType
+  desc: Parameter definition for StripeRoute bounding box
+  mapping:
+    CustomFunction:
+      type: str
+      optional: yes
+    CustomParams:
+      type: map
+      optional: yes
+    IncludeLayers:
+      sequence:
+        type: str
+      optional: yes
+    ExcludeLayers:
+      sequence:
+        type: str
+      optional: yes
+    PRBoundary:
+      oneof: ['true', 'false']
+      optional: yes
+ 
+
+
+
+* 5- GUI
+
+The graphical user interface of PackedPartition will be similar to that of
+the Partition constraint. An editor (as in Row or PNStack constraints) is
+not needed. 
+
+
+
+* 6- XGen
+
+XGen API will be enhanced with a new method:
+  createPackedPartition(...)
+
+Regressions will be updated with a new test:
+  testPackedPartition(...)
+
+
+
+* 7- Summary
+
+PackedPartition is a variant of the Partition constraint which provides
+a powerful, fast and general rectilinear packing and gridded placement of
+devices as well as large complex blocks.
+
+It can be enhanced in the near future to also support symmetric device
+groups to achieve differential device matching with ease.

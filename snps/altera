@@ -1,0 +1,377 @@
+* See: ~/defter/snps/altera-mod-grid
+
+* TODO??
+bbasaran@suselsf29 ~/berry/me/altera/2014-10-22/case1 % which cnhxgui 
+/slowfs/amsgcn1/net/apps/ciranova/nightly/helix_qsci/opt/linux_rhel40_64/install_helix/bin/cnhxgui
+bbasaran@suselsf29 ~/berry/me/altera/2014-10-22/case1 % xterm &
+[1] 31534
+bbasaran@suselsf29 ~/berry/me/altera/2014-10-22/case1 % cnhxgui
+Floating exception
+bbasaran@suselsf29 ~/berry/me/altera/2014-10-22/case1 % 
+
+* schema:
+ TileAbutment: Column, Row, StructuredPartition, Pattern/VPattern and VMatrix 
+CustomSpacing: Column, Row, Matrix/VMatrix, Partition, AlignedArray, Top-level
+
+AbutmentBoundary: StructuredPartition
+
+AbutmentType: 
+  PNStack & PackedPartition oneof: ['none', 'auto1', 'auto2']
+  Pattern/VPattern          oneof: [none,auto1,auto2,force,boundaryTile]
+  Column/VMatrix            oneof: ['none','force','boundaryTile']
+  Matrix?
+  Row                       oneof: ['none','auto1','auto2','force','boundaryTile','abuttableStack']
+CustomSpacing*:
+  Partition, Matrix/VMatrix, AlignedArray, Row, Column
+
+* HIGH-LEVEL
+
+Ross,
+
+Ming asked me to clarify one thing with you. In your discussions with Yakov, a negative value for spacing has been considered. For now, this is a non-requirement from Altera, and we want to know whether you know of any real-life scenarios where it might be important. 
+
+To clarify, here is a higher-level summary of Altera's request:
+
+1- Abut then push away if/when needed
+2- Don't add any bridges
+
+The first entails the following:
+1.a- A pr-boundary exists and will be used to abut components. 
+1.b- "Value" option is ignored. In fact, the tool will compute it automatically for each pair of components to address design rules including modular gridding rules. It will result in 0 or > 0, for any two components.
+
+The second entails:
+2.a- OverlapLayers or merge-able layers, if any, are all ignored.
+2.b- If internal shapes from the two components touch or overlap, they will short. This _is_ a key part of the requirement from Altera.
+
+Best,
+Bulent
+
+* NEW
+
+This STAR is to support Altera's cell-based placement methodology based on use of (modular) gridding rules.
+
+Please note that Altera uses Helix not for device placement, but for cell placement. As such they rely heavily on StructuredPartition to create clusters of std-lib cells (let's denote them as "blocks"), and then use Partition/Row/Column to come up with a good placement of blocks and other macros.
+
+The following request is meant for the above context only.
+
+Please enhance CustomSpacing param to enforce design rules. Suggested schema change:
+
+            CustomSpacing: &customSpacingType
+              mapping:
+                ...
+                EnforceDesignRulesTile:
+                  oneof: ['true', 'false']
+		  optional:
+                    default: 'false'
+		...
+
+When EnforceDesignRules is set to 'false', CustomSpacing works as before.
+
+When EnforceDesignRules is set to 'true', 
+AB is an optional parameter (following the definition in StructuredPartition): It is a string to specify the name of the layer to be used for abutment. If not specified, PRBoundary is used by default.
+
+When TileAbutment is set to 'DRCheck', Partition is expected to improve upon the 'basic' TileAbutment mode by enforcing spacing and (modular) gridding rules.
+
+For the sake of description and further discussion, let us assume the following "pseudo-code" for implementation of TileAbutment:
+
+Step 1- Create placement for 'basic' mode.
+Step 2- If mode is set to 'basic', we are done. Return.
+Step 3- If mode is set to 'boundaryTile', use the result of Step 1 as "initial placement."
+Step 4- If there are no spacing or gridding errors, we are done. Return.
+Step 5- Otherwise, run basic fg-APIs in 2D (level 1/2 spacing, and gridding) to move the "moving" component, which dissolves the abutment, in order that:
+a) the moving component is snapped to a modular grid point, and,
+b) spacing rules between the fixed and the moving component are met.
+
+Note that after initial placement (say, we are in Step 4) geometries of two components may touch (abut) or overlap. This is expected behavior and it is OK. If this causes illegal overlaps or merges, the responsibility falls on the user, not the tool. This is similar to auto-place and route of cells without proper PRBoundaries. We don't expect this to be a problem for Altera or any coherent cell-placement methodology.
+
+Please note that, based on discussions with Siarhei, we take the following to be true:
+1- fg-APIs (level 1/2 spacing, and gridding) already provide a flag to turn off the following behavior which is used in Partition today:
+  To prevent illegal merges, the two components are separated by 1 unit (which breaks the abutment) before running DR checks.
+2- if the aforementioned flag does not exist today, it can be easily added by Oleg or Siarhei.
+
+To re-iterate, in this new mode of TileAbutment='DRCheck', we do not expect Partition to create any bridges (neither for OverlapLayers, nor for merge-able layers).
+Further, when DRCheck mode is used, OverlapLayers and CustomSpacing params are expected not to be set. It would be necessary to catch this as an exception in constraint-compilation and ask the user to revise her settings:
+  error if TileAbutment=='DRCheck' && (OverlapLayers != none || CustomSpacing != none).
+
+Please note: This scheme suggests another new mode that might be useful to other customers: TileAbutment='basic' with CustomSpacing. For the sake of expediency, let's plan to not support this mode for now, if it requires considerable effort. Accordingly, we can make the assertion above stricter by re-defining it as:
+  error if TileAbutment != none && (OverlapLayers != none || CustomSpacing != none)
+
+Finally, we observe that Row and Column (and with less possibility, *Matrix and *Pattern as they are mostly used for devices) constraints would also benefit from the DRCheck and AbutmentBoundary params. We propose to create spin-off STARs, as needed to enhance those constraints, too. Ideally, they will all re-use most of the implementation needed for this STAR. However, the changes to the schema for Row/Column/*Matrix/*Pattern might be slightly different than what is suggested for Partition here.
+
+For reference, let us also record the email where Siarhei summarized Lyndon's request. If what is described above seems to conflict Siarhei's summary below, please add your concerns to this STAR. Thank you!
+
+Overview:
+- initial placement of components by abutting pr-boundaries;
+- if there are spacing or gridding rules violations at the initial location, space the components further apart (snap to next modular grid point) to satisfy the design rules.
+
+In terms of Helix implementation, that means:
+- initial placement of two components is defined by abutting pr-boundaries;
+- if geometries from the two components touch or overlap, it's OK;
+- Helix does not create any bridges on overlap layers because there are no overlap layers to specify at all;
+- Helix does not rely on fgPlace to decide if components can abut or should be spaced apart;
+- fgPlace is called only to fix spacing and gridding violations if they are reported for the initial placement.
+
+
+** custom spacing
+
+The Row constraint provides for the specification of a custom spacing function
+to be written in Python, and then used by the Row constraint to perform spacing
+operations:
+■ CustomSpacing — Contains the "Function" and "Params" parameters,
+which specify the name of the Python function and any optional Python
+dictionary of custom parameter names and values. This custom Python
+function returns the calculated bounding box for the element.
+■ IncludeLayers — List of layers which should be considered when calculating
+spacing.
+■ ExcludeLayers — List of layers which should not be considered for spacing.
+■ PRBoundary — When this Boolean parameter is set, then spacing is
+determined using the device PR boundaries.
+
+
+From Partition:
+■ CustomSpacing — Contains the "Function" and "Params" parameters,
+which specify the name of the Python function and any optional Python
+dictionary of custom parameter names and values. This custom Python
+function returns the calculated bounding box for the element.
+
+* STAR: 9000826586- Two new options for Partition constraint: TileAbutment and AbutmentBoundary
+* STAR description
+This STAR is to support Altera's cell-based placement methodology based on use of (modular) gridding rules.
+
+Please note that Altera uses Helix not for device placement, but for cell placement. As such they rely heavily on StructuredPartition to create clusters of std-lib cells (let's denote them as "blocks"), and then use Partition/Row/Column to come up with a good placement of blocks and other macros.
+
+The following request is meant for the above context only.
+
+Please enhance the Partition constraint to support two new params:
+
+            TileAbutment:
+              oneof: ['basic', 'DRCheck']
+              optional:
+                default: 'DRCheck'
+            AbutmentBoundary:
+              type: str
+              optional: yes
+
+When TileAbutment is not set, AbutmentBoundary is ignored and Partition works as before.
+
+When TileAbutment is set to 'basic', Partition works just as Row(AbutmentType <- 'boundaryTile') with the added functionality of "AbutmentBoundary" (AB) param.
+AB is an optional parameter (following the definition in StructuredPartition): It is a string to specify the name of the layer to be used for abutment. If not specified, PRBoundary is used by default.
+
+When TileAbutment is set to 'DRCheck', Partition is expected to improve upon the 'basic' TileAbutment mode by enforcing spacing and (modular) gridding rules.
+
+For the sake of description and further discussion, let us assume the following "pseudo-code" for implementation of TileAbutment:
+
+Step 1- Create placement for 'basic' mode.
+Step 2- If mode is set to 'basic', we are done. Return.
+Step 3- If mode is set to 'boundaryTile', use the result of Step 1 as "initial placement."
+Step 4- If there are no spacing or gridding errors, we are done. Return.
+Step 5- Otherwise, run basic fg-APIs in 2D (level 1/2 spacing, and gridding) to move the "moving" component, which dissolves the abutment, in order that:
+a) the moving component is snapped to a modular grid point, and,
+b) spacing rules between the fixed and the moving component are met.
+
+Note that after initial placement (say, we are in Step 4) geometries of two components may touch (abut) or overlap. This is expected behavior and it is OK. If this causes illegal overlaps or merges, the responsibility falls on the user, not the tool. This is similar to auto-place and route of cells without proper PRBoundaries. We don't expect this to be a problem for Altera or any coherent cell-placement methodology.
+
+Please note that, based on discussions with Siarhei, we take the following to be true:
+1- fg-APIs (level 1/2 spacing, and gridding) already provide a flag to turn off the following behavior which is used in Partition today:
+  To prevent illegal merges, the two components are separated by 1 unit (which breaks the abutment) before running DR checks.
+2- if the aforementioned flag does not exist today, it can be easily added by Oleg or Siarhei.
+
+To re-iterate, in this new mode of TileAbutment='DRCheck', we do not expect Partition to create any bridges (neither for OverlapLayers, nor for merge-able layers).
+Further, when DRCheck mode is used, OverlapLayers and CustomSpacing params are expected not to be set. It would be necessary to catch this as an exception in constraint-compilation and ask the user to revise her settings:
+  error if TileAbutment=='DRCheck' && (OverlapLayers != none || CustomSpacing != none).
+
+Please note: This scheme suggests another new mode that might be useful to other customers: TileAbutment='basic' with CustomSpacing. For the sake of expediency, let's plan to not support this mode for now, if it requires considerable effort. Accordingly, we can make the assertion above stricter by re-defining it as:
+  error if TileAbutment != none && (OverlapLayers != none || CustomSpacing != none)
+
+Finally, we observe that Row and Column (and with less possibility, *Matrix and *Pattern as they are mostly used for devices) constraints would also benefit from the DRCheck and AbutmentBoundary params. We propose to create spin-off STARs, as needed to enhance those constraints, too. Ideally, they will all re-use most of the implementation needed for this STAR. However, the changes to schema for Row/Column/*Matrix/*Pattern are slightly different to what is suggested for Pattern.
+
+For reference, let us also record the email where Siarhei summarized Lyndon's request. If what is described above seems to conflict Siarhei's summary below, please add your concerns to this STAR. Thank you!
+
+Overview:
+- initial placement of components by abutting pr-boundaries;
+- if there are spacing or gridding rules violations at the initial location, space the components further apart (snap to next modular grid point) to satisfy the design rules.
+
+In terms of Helix implementation, that means:
+- initial placement of two components is defined by abutting pr-boundaries;
+- if geometries from the two components touch or overlap, it's OK;
+- Helix does not create any bridges on overlap layers because there are no overlap layers to specify at all;
+- Helix does not rely on fgPlace to decide if components can abut or should be spaced apart;
+- fgPlace is called only to fix spacing and gridding violations if they are reported for the initial placement.
+
+
+**draft STAR
+
+Two new options for Partition constraint TileAbutment and AbutmentBoundary
+
+Please enhance the Partition constraint to support two new params:
+
+            TileAbutment:
+              oneof: ['basic', 'DRCheck']
+              optional:
+                default: 'DRCheck'
+            AbutmentBoundary:
+              type: str
+              optional: yes
+
+When TileAbutment is not set, AbutmentBoundary is ignored and Partition works as before.
+
+When TileAbutment is set to 'basic', Partition works just as Row(AbutmentType <- 'boundaryTile') with the added functionality of "AbutmentBoundary" (AB) param. 
+AB is an optional parameter (following the definition in StructuredPartition): It is a string to specify the name of the layer to be used for abutment. If not specified, PRBoundary is used by default.
+
+When TileAbutment is set to 'DRCheck', Partition is expected to improve upon the 'basic' TileAbutment mode by enforcing spacing and (modular) gridding rules.
+
+For the sake of description and further discussion, let us assume the following "pseudo-code" for implementation of TileAbutment:
+
+Step 1- Create placement for 'basic' mode.
+Step 2- If mode is set to 'basic', we are done. Return.
+Step 3- If mode is set to 'boundaryTile', use the result of Step 1 as "initial placement."
+Step 4- If there are no spacing or gridding errors, we are done. Return.
+Step 5- Otherwise, run basic fg-APIs in 2D (level 1/2 spacing, and gridding) to move the "moving" component, which dissolves the abutment, in order that:
+a) the moving component is snapped to a modular grid point, and,
+b) spacing rules between the fixed and the moving component are met.
+
+Note that after initial placement (say, we are in Step 4) geometries of two components may touch (abut) or overlap. This is expected behavior and it is OK. If this causes illegal overlaps or merges, the responsibility falls on the user, not the tool. This is similar to auto-place and route of cells without proper PRBoundaries. We don't expect this to be a problem for Altera or any coherent cell-placement methodology.
+
+Please note that, based on discussions with Siarhei, we take the following to be true:
+1- fg-APIs (level 1/2 spacing, and gridding) already provide a flag to turn off the following behavior which is used in Partition today:
+  To prevent illegal merges, the two components are separated by 1 unit (which breaks the abutment) before running DR checks.
+2- if the aforementioned flag does not exist today, it can be easily added by Oleg or Siarhei.
+
+To re-iterate, in this new mode of TileAbutment='DRCheck', we do not expect Partition to create any bridges (neither for OverlapLayers, nor for merge-able layers).
+Further, when DRCheck mode is used, OverlapLayers and CustomSpacing params are expected not to be set. It would be necessary to catch this as an exception in constraint-compilation and ask the user to revise her settings: 
+  error if TileAbutment=='DRCheck' && (OverlapLayers != none || CustomSpacing != none).
+
+Please note: This scheme suggests another new mode that might be useful to other customers: TileAbutment='basic' with CustomSpacing. For the sake of expediency, let's plan to not support this mode for now, if it requires considerable effort. Accordingly, we can make the assertion above stricter by re-defining it as:
+  error if TileAbutment != none && (OverlapLayers != none || CustomSpacing != none)
+
+Finally, we observe that Row and Column (and with less possibility, *Matrix and *Pattern) constraints would also benefit from the DRCheck and AbutmentBoundary params. We propose to create spin-off STARs, as needed to enhance those constraints, too. Ideally, they will all re-use most of the implementation needed for this STAR. However, the changes to schema for Row/Column/*Matrix/*Pattern are slightly different to what is suggested for Pattern. 
+
+For reference, let us also record the email where Siarhei summarized Lyndon's request. If what is described above seems to conflict Siarhei's summary below, please add your concerns to this STAR. Thank you!
+
+Overview:
+- initial placement of components by abutting pr-boundaries;
+- if there are spacing or gridding rules violations at the initial location, space the components further apart (snap to next modular grid point) to satisfy the design rules.
+
+In terms of Helix implementation, that means:
+- initial placement of two components is defined by abutting pr-boundaries;
+- if geometries from the two components touch or overlap, it’s OK;
+- Helix does not create any bridges on overlap layers because there are no overlap layers to specify at all;
+- Helix does not rely on fgPlace to decide if components can abut or should be spaced apart;
+- fgPlace is called only to fix spacing and gridding violations if they are reported for the initial placement.
+
+* slides
+
+** grids
+There are three kinds now:
+1) Manufacturing grid (5nm -> 1nm)  -- All edges!
+2) DFM grid (poly pitch ~100nm)     -- Distance from finger to finger
+3) Module grid (m4 tile ~10u)       -- Many std-lib cells
+
+** how are things placed?
+StdPart:
+-- abut bboxes
+-- no drc
+-- grid: no x-grid, rows determine y-grid
+
+No overlap layers! User can optionally set a layer to compute bboxes
+
+Row/Partition
+-- abut bboxes
+-- insert 1unit gap
+-- add bridges over gaps
+-- run fgPlace
+bbox: computed using OL
+bridges: added for OL and ML
+
+PackedPartition
+-- gridding-bbox, overlap-layers
+
+Proposal from Lyndon
+- initial placement of components by abutting pr-boundaries;
+- if there are spacing or gridding rules violations at the initial location, space the components further apart (snap to next modular grid point) to satisfy the design rules.
+
+Details:
+- initial placement of two components is defined by abutting pr-boundaries;
+- if geometries from the two components touch or overlap, it’s OK;
+- Helix does not create any bridges on overlap layers because there are no overlap layers to specify at all;
+- Helix does not rely on fgPlace to decide if components can abut or should be spaced apart;
+- fgPlace is called only to fix spacing and gridding violations if they are reported for the initial placement.
+
+**
+
+* http://crmdbci.synopsys.com:9958/sap(bD1lbiZjPTkxMA==)/bc/bsp/sap/zservice/getService.do?id=9000812194
+Title: Make evolutionary engine aware of grid rules
+
+This STAR is overtaking the enhancement suggested by Siarhei from STAR  9000788017, since the latter has been filed for an entirely different purpose.  All the correspondence related to that enhancement has been moved from  9000788017 into this STAR.
+
+(http://crmdbci.synopsys.com:9958/sap(bD1lbiZjPTkxMA==)/bc/bsp/sap/zservice/getService.do?id=9000788071)
+
+Written by Siarhei:
+
+There is one drawback in our current implementation: we only consider the modular grid rules during rendering phase in Helix.
+Because of big values of the modular grids, the output Helix layouts might be quite different from what the solves works with.
+The idea is to enforce modular grid rules during the solution search phase.
+
+Below is my current proposal on how to do it:
+0) there is a ruleset in techfile with horizontalPlacementGridPitch and verticalPlacementGridPitch rules defined for each modular grid marking layer (this is what we have right now in icf14 techfile)
+1) we will provide an option “use modular grid” in Helix / GUI
+2) if a user specifies the modular grid option, Helix will collect modular grid rules information (from the ruleset specified for placement) in the form:
+<LPP> <x-grid> <y-grid> <x-offset> <y-offset> for each modular grid marker layer.
+3) Helix solver will make sure that lower-left corners of modular grid marker shapes (coming from sub-cells) are placed on the corresponding modular grids using the information from 2)
+4) Helix renderer will make sure that lower-left corners of modular grid marker shapes are placed on the corresponding modular grids just by using fgPlace (this is how it works right now)
+
+---------------------------------------------------------------------------------------------------------
+
+Minutes from the meeting devoted to discussion of that enhancement:
+
+09/10/2014 11:11:04 PST SIARHEI
+
+Siarhei, Ming, Mirko, Yakov and Ross had a meeting on 09/09/14 to discuss possible enhancements in Helix for modular grid methodology support.
+
+Notes from the meeting::
+
+- According to Yakov, there is no need for user to specify modular grid explicitly in Helix GUI and/or constraints.
+- Gridding for each component will be determined in the solver by fg-bumping the component, moving further 1 dbu, and fg-bumping again.
+- Solver will use this information the components on grid during search.
+- Please, note that this discussion and proposed solution is only about improving solver to understand the global gridding for components.
+- The outcome will be (possible) improvement in quality of Helix generated layouts.
+- This does not address the request of not using any marker layers to implement modular gridding.
+
+* Thu
+see google keep
+* From Sergey
+My understanding of what the customer (Lyndon) wants with respect to modular grid support (see slide 15):
+- initial placement of components by abutting pr-boundaries;
+- if there are spacing or gridding rules violations at the initial location, space the components further apart (snap to next modular grid point) to satisfy the design rules.
+ 
+In terms of Helix implementation, that means:
+- initial placement of two components is defined by abutting pr-boundaries;
+- if geometries from the two components touch or overlap, it’s OK;
+- Helix does not create any bridges on overlap layers because there are no overlap layers to specify at all;
+- Helix does not rely on fgPlace to decide if components can abut or should be spaced apart;
+- fgPlace is called only to fix spacing and gridding violations if they are reported for the initial placement.
+** earlier on persistence:
+customers want the modular grid assignment for a sub-cell to be persistent in OA. Having this info in constraint file does not fit the requirement at all.
+* Tue
+min-spacing needed between two elements..
+
+initial placement ( using bbox? )
+
+gridding using cad layers on grid
+mergable layers (share nwell, implant?, diffusion) uses bridging shapes..
+overlap layers -- recent enhancements
+bridging
+
+stuff outside PRBoundary in std-cells..
+
+grid asic, analog..
+
+tile using bbox.. + DR check to move apart..
+
+m0 local interconnect going off to the side (vdd, vss)
+  end of line enclosure for m0.. got shorted with bridge
+
+slow, memory, 
+
+specific requests from Lyndon
+* The end

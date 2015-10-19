@@ -1,0 +1,16 @@
+#
+# Hierarchical Constraint Groups
+#
+constraintGroups:
+  - Name: Row1
+    Type: Column
+    Param: {YFlip: [DFF2], AbutmentType: none, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: center}
+    Contains: [DFF1,DFF2]
+
+  - Name: p_part1
+    Type: PackedPartition
+    Contains: [Row1,NAND1,INV3,INV2,INV1]
+
+#
+# End
+#

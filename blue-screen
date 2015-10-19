@@ -1,0 +1,28 @@
+3pm May 6, 2014
+KERNEL_STACK_INPAGE_ERROR
+
+
+Problem signature:
+  Problem Event Name:	BlueScreen
+  OS Version:	6.1.7601.2.1.0.256.4
+  Locale ID:	1033
+
+Additional information about the problem:
+  BCCode:	77
+  BCP1:	0000000000000001
+  BCP2:	E279078F9859061B
+  BCP3:	0000000000000000
+  BCP4:	FFFFF88005BD5E80
+  OS Version:	6_1_7601
+  Service Pack:	1_0
+  Product:	256_1
+
+Files that help describe the problem:
+  C:\Windows\Minidump\050614-13197-01.dmp
+  C:\Users\bbasaran\AppData\Local\Temp\WER-85207-0.sysdata.xml
+
+Read our privacy statement online:
+  http://go.microsoft.com/fwlink/?linkid=104288&clcid=0x0409
+
+If the online privacy statement is not available, please read our privacy statement offline:
+  C:\Windows\system32\en-US\erofflps.txt

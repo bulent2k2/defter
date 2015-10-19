@@ -1,0 +1,59 @@
+FIND COURSES bulent ▾
+Help
+Log Out
+CS169.1x: Software as a ServiceBerkeleyX
+YOU ARE REGISTERED FOR THIS COURSE (CS169.1X)	
+
+overview
+ABOUT THIS COURSE
+
+CS169.1x teaches the fundamentals for engineering long–lasting software using highly–productive Agile techniques to develop Software as a Service (SaaS) using Ruby on Rails. Students will understand the new challenges and opportunities of SaaS versus shrink–wrapped software. They will understand and apply fundamental programming techniques to the design, development, testing, and public cloud deployment of a simple SaaS application. Students will use best–of–breed tools that support modern development techniques including behavior–driven design, user stories, test–driven development, velocity, and pair programming. Students will learn how modern programming language features like metaprogramming and reflection can improve productivity and code maintainability.
+Students will work individually on weekly coding projects. Those who successfully complete each assignment and earn a passing grade will get an honor code certificate from BerkeleyX.
+PREREQUISITES
+
+Programming proficiency in an object-oriented programming language such as Java, C#, C++, Python, or Ruby is required. We will teach the basics of Ruby at a very accelerated pace that assumes thorough familiarity with OOP inheritance, static/class vs. instance methods and attributes, recursion, hash tables/hash maps, list comprehensions, higher-order functions, lambda expressions. This course is NOT a good first course in programming. Basic Unix command–line skills are helpful; we will provide a cheat sheet.
+COURSE STAFF
+
+
+Armando Fox
+
+Armando Fox is an Adjunct Associate Professor at UC Berkeley and was previously an Assistant Professor at Stanford, where he received teaching and mentoring awards from the Associated Students of Stanford University, the Society of Women Engineers, and Tau Beta Pi Engineering Honor Society. In previous lives he helped design the Intel Pentium Pro microprocessor and founded a successful startup to commercialize his UC Berkeley dissertation research on mobile computing. His degrees in electrical engineering and computer science are from MIT, the University of Illinois, and UC Berkeley, and he is an ACM Distinguished Member.
+
+David Patterson
+
+David Patterson is the Pardee Professor of Computer Science at UC Berkeley and the recipient of the Distinguished Teaching Award (UC Berkeley), the Karlstrom Outstanding Educator Award (ACM), the Mulligan Education Medal (IEEE), and the Undergraduate Teaching Award (IEEE). He has served as Chair of Berkeley's CS Division, Chair of the CRA, and President of the ACM. His best–known research projects are Reduced Instruction Set Computers (RISC), Redundant Arrays of Inexpensive Disks (RAID), and Network of Workstations (NOW). Among other distinctions, he's been elected to the National Academy of Engineering, the National Academy of Sciences, and the Silicon Valley Engineering Hall of Fame, and is a Fellow of the Computer History Museum. He received all his degrees from UCLA.
+FREQUENTLY ASKED QUESTIONS
+
+How will this course be different from the SaaS course offered on Coursera in Feb/May/July 2012?
+
+There will be several improvements:
+All lectures will be re-recorded in high definition with a more interactive format, using a pen-enabled tablet to mark up the slides as they are presented.
+Lectures will be expanded with live video capturing discussions and detailed explanations about the self-assessment questions accompanying each lecture.
+The presentation order and amount of time spent on some material is being changed in response to feedback from both on-campus and online students.
+The quizzes will contain all new questions.
+What is the format of the class?
+
+The class will consist of lecture videos, which are broken into small chunks, usually between eight and twelve minutes each. Some of these may contain integrated "check-yourself" questions. There will also be programming assignments and standalone exams/quizzes, which are not part of the video lectures.
+How can I learn more about the course content?
+
+Please watch the video on this page that we recorded especially for this offering of the course.
+Will the text of the lectures be available?
+
+Yes, transcripts of the course will be made available.
+Do I need to watch the lectures live?
+
+No. You can watch the lectures at your leisure.
+How much does it cost to take the course?
+
+Nothing: the course is free. However, the recommended textbooks are not, but there are free online sources to follow if you do not wish to purchase textbooks.
+What versions of Ruby and Rails will we use in the course?
+
+We will make available at least 2 weeks before class a virtual machine image with all required courseware. You can either download this image and run it using the free VirtualBox (virtualbox.org) software on any Intel x86-based computer, or you can deploy it on Amazon's Elastic Compute Cloud using instructions we will provide. In general, we'll be using Rails 3.1 and Ruby 1.9.2, but we will also be using many other tools, gems, and libraries that will be preinstalled.
+Share with friends and family!  
+Course NumberCS169.1x
+Classes StartSep 24, 2012
+Classes EndOct 26, 2012
+Estimated Effort12 hours/week
+PrerequisitesYes
+ Find Courses About Blog Jobs Contact    
+© 2012 edX, some rights reserved. terms of service privacy policy honor code help

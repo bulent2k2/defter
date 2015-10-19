@@ -1,0 +1,1358 @@
+* /home/scratch.dgradin/users/rossa/g5_tx_inputstage_pe2_gm2xx/PyCells_HelperLib
+** cshrc
+#!/bin/csh -f
+
+#module load customdesigner
+
+#setenv PDKPATH /amsg_tsmc_n20/users/rkang/iPDK/tsmc/iPDK_CRN20SOC_v0.5_2p1a
+setenv PDKPATH /amsg_tsmc_n16/users/rajivr/PDKs/tsmc_cln16ff/pdk
+setenv CNI_TECH_NODE tsmcN16
+setenv CNI_AEWARE_DIR /amsg_tsmc_n16/users/rajivr/AE-Ware
+
+setenv CNI_ROOT /amsg_tsmc_n16/users/rossa/helix/gcc422_64_Py262_2013.12-eng1
+#setenv CNI_ROOT /remote/amscae28/Helix/rkang/tools/Helix/gcc412_64_2013.06_Py262
+#setenv CNI_ROOT /slowfs/amsgcn1/net/apps/ciranova/nightly/helix_py262_gcc412/opt/linux_rhel40_64/install_helix
+source ${CNI_ROOT}/quickstart/tcshrc
+
+setenv CNI_SCRIPT_DIR ${CNI_AEWARE_DIR}/scripts
+setenv CNI_TECH_DIR ${CNI_AEWARE_DIR}/tech
+
+setenv LOCAL_CNI_TECH_DIR `pwd`/tech
+
+setenv PYTHONPATH `pwd`/scripts:${PYTHONPATH}
+if ( -d ${PDKPATH}/Tcl ) then
+   setenv PYTHONPATH ${PDKPATH}/Tcl:${PYTHONPATH}
+endif
+
+set path=( `pwd`/scripts $path )
+** build.sh
+#!/bin/sh
+########################################################################
+# build.sh                                                             #
+#     Create the OpenAccess libraries.                                 #
+########################################################################
+#
+#  version: $Revision: 1.6 $
+# fileinfo: $Id: build.sh,v 1.6 2012/12/18 01:16:00 ctrcir1 Exp $
+
+cat<<END
+
+######################################################################
+#                                                                    #
+#  Helix Helper Library Compilation script  Ver 1.6. (Dec 19, 2012)  #
+#                                                                    #
+######################################################################
+
+Environment checking ...
+
+END
+
+if [ ! -d "$CNI_AEWARE_DIR" ]; then
+   echo "UNIX variable 'CNI_AEWARE_DIR' is not defined or incorrect!"
+   echo "Make sure you have sourced the shell script to get AE-Ware envrionment."
+   exit -1
+fi
+
+echo " CNI_AEWARE_DIR: ${CNI_AEWARE_DIR}"
+
+if [ ! -d "$CNI_TECH_DIR" ]; then
+   echo "UNIX variable 'CNI_TECH_DIR' is not defined or incorrect!"
+   echo "Make sure you have sourced the shell script to get AE-Ware envrionment."
+   exit -1
+fi
+
+echo " CNI_TECH_DIR: ${CNI_TECH_DIR}"
+
+if [ ! -d "$CNI_TECH_DIR/$CNI_TECH_NODE" ]; then
+   echo " Check path: $CNI_TECH_DIR/$CNI_TECH_NODE"
+   mkdir -p $CNI_TECH_DIR/$CNI_TECH_NODE
+   rc=$?
+   if [ $rc -ne 0 ]; then
+      echo "UNIX variable 'CNI_TECH_NODE' is not defined, incorrect or no permession!"
+      echo "Make sure you have sourced the shell script to get AE-Ware envrionment."
+      exit -1
+   fi
+fi
+
+echo " CNI_TECH_NODE: ${CNI_TECH_NODE}"
+
+if [ ! -d "$PDKPATH" ]; then
+   echo "UNIX variable 'PDKPATH' is not defined!"
+   echo "Make sure you have correct path in the file ../CSHRC and source it"
+   exit -1
+fi
+
+echo " PDKPATH: ${PDKPATH}"
+
+if [ -z "$LOCAL_CNI_TECH_DIR" ]; then
+   echo "UNIX variable 'LOCAL_CNI_TECH_DIR' is not defined!"
+   echo "Make sure you have correct path in the file ../CSHRC and source it"
+   exit -1
+else
+   if [ ! -d "$LOCAL_CNI_TECH_DIR" ]; then
+      mkdir -p $LOCAL_CNI_TECH_DIR
+      rc=$?
+      if [ $rc -ne 0 ]; then
+         cat<<END
+Fail to create directory ${LOCAL_CNI_TECH_DIR}!
+Make sure you have the write permission of the above path or,
+change the path to the variable 'LOCAL_CNI_TECH_DIR'.
+
+END
+         exit -1
+      fi
+   fi
+fi
+
+echo " LOCAL_CNI_TECH_DIR: ${LOCAL_CNI_TECH_DIR}"
+echo ""
+
+FLOW_ROOT=$PWD
+
+export CNI_TECH_NODE
+export CNI_TECH_DIR
+
+PDK=${CNI_TECH_NODE}
+TECH=${CNI_TECH_NODE}
+
+result=`grep masterType HelperCode/Variants.py | grep -v "#" | tail -1 | grep SKILL_PCELL | wc -l`
+if [ $result -eq 1 ]; then
+   if [ -z "$CNI_PROXY_SETTINGS" ]; then
+         cat<<END
+UNIX variable 'CNI_PROXY_SETTINGS' is not defined or incorrect!
+Make sure you have sourced the PCell Xtreme shell script before wrapping SKILL PDK.
+
+Example:
+
+   source ${CNI_AEWARE_DIR}/PCX_2012.12/pcellXtreme.csh
+
+END
+         exit -1
+   else
+      if [ ! -f "$CNI_PROXY_SETTINGS" ]; then
+         cat<<END
+The PCell Xtreme Auto-proxy file '${CNI_PROXY_SETTINGS}' does not exist!
+Make sure the variable 'CNI_PROXY_SETTINGS' points to the correct path.
+
+END
+         exit -1
+      fi
+   fi
+fi
+
+cniMsg=30
+export cniMsg
+
+########################################################################
+# Setup                                                                #
+########################################################################
+
+libs='libs'
+
+if [ -d $libs ]; then
+   \rm -rf $libs
+fi
+mkdir $libs
+
+directories="
+$libs
+.
+"
+
+cat<<END
+DEFINE ${PDK}            ${FLOW_ROOT}/$libs/${PDK}
+DEFINE TechLib_${TECH}   ${FLOW_ROOT}/$libs/TechLib_${TECH}
+DEFINE HelperLib_${TECH} ${FLOW_ROOT}/$libs/HelperLib_${TECH}
+DEFINE cnVPcellLib       \${CNI_ROOT}/db/cnVPcellLib
+END
+
+for directory in ${directories}; do
+cat<<END > ${directory}/lib.defs
+DEFINE ${PDK}            ${FLOW_ROOT}/$libs/${PDK} 
+DEFINE TechLib_${TECH}   ${FLOW_ROOT}/$libs/TechLib_${TECH} 
+DEFINE HelperLib_${TECH} ${FLOW_ROOT}/$libs/HelperLib_${TECH} 
+DEFINE cnVPcellLib       \${CNI_ROOT}/db/cnVPcellLib 
+END
+
+touch ${directory}/cds.lib
+\rm -rf ${directory}/cds.lib
+if [ ${directory} = '.' ]; then
+   ln -s lib.defs cds.lib
+else
+   pushd `pwd` >& /dev/null
+   cd ${directory}
+   ln -s lib.defs cds.lib
+   popd >& /dev/null
+fi
+
+done
+
+########################################################################
+# Create technology library                                            #
+########################################################################
+printf "\n\nCreating technology library\n"
+printf -- "----------------------------------------------------------\n"
+
+\rm -rf $libs/TechLib_${TECH}
+#cngenlib --create \
+#	--techfile ${LOCAL_CNI_TECH_DIR}/${PDK}/Santana.tech tech:only \
+#	--force_binary_techfile \
+#	TechLib_${TECH} $libs/TechLib_${TECH}
+cngenlib --create \
+	--techfile ${LOCAL_CNI_TECH_DIR}/${PDK}/Santana.tech \
+	--bundle=source pkg:polyContactCode \
+	TechLib_${TECH} $libs/TechLib_${TECH}
+#	--bundle=source pkg:CustomPyCellCode \
+
+#cngenlib \
+#        --bundle=source \
+#	pkg:polyContactCode \
+#        TechLib_${TECH} $libs/TechLib_${TECH}
+
+if [ -f ${PDKPATH}/${PDK}/${PDK}.layermap ]; then
+   cp ${PDKPATH}/${PDK}/${PDK}.layermap $libs/TechLib_${TECH}/TechLib_${TECH}.layermap
+fi
+
+if [ -f ${PDKPATH}/${PDK}/tech.db ]; then
+   echo " --> cp ${PDKPATH}/${PDK}/tech.db $libs/TechLib_${TECH}"
+   cp ${PDKPATH}/${PDK}/tech.db $libs/TechLib_${TECH}
+fi
+if [ -f ${PDKPATH}/${PDK}/cdsinfo.tag ]; then
+   cp ${PDKPATH}/${PDK}/cdsinfo.tag $libs/TechLib_${TECH}
+fi
+if [ -f ${PDKPATH}/display.drf ]; then
+   cp ${PDKPATH}/display.drf $libs/TechLib_${TECH}
+fi
+
+# Create the auto load file for Synopsys Custom Designer tool
+#echo "package require helix" > $libs/TechLib_${TECH}/autoLoad.file
+
+cndmfiles --attach TechLib_${TECH} techPropertyMap \
+  ${LOCAL_CNI_TECH_DIR}/${PDK}/techPropertyMap.file
+
+if [ -f $libs/${PDK}/libPropertyMap.file ]; then
+   cndmfiles --detach ${PDK} libPropertyMap
+fi
+cndmfiles --attach TechLib_${TECH} libPropertyMap \
+  ${LOCAL_CNI_TECH_DIR}/${PDK}/libPropertyMap.TechLib
+
+########################################################################
+# Copy Foundry PDK library                                                #
+########################################################################
+printf "\n\nCopy foundry PDK library\n"
+printf -- "----------------------------------------------------------\n"
+
+cp -r ${PDKPATH}/${PDK} $libs/
+if [ -f ${PDKPATH}/display.drf ]; then
+   cp -r ${PDKPATH}/display.drf $libs/.
+fi
+
+if [ -d ${PDKPATH}/skill ]; then
+   ln -s ${PDKPATH}/skill $libs/.
+fi
+if [ -d ${PDKPATH}/Tcl ]; then
+   ln -s ${PDKPATH}/Tcl $libs/.
+fi
+
+if [ -f $libs/${PDK}/libPropertyMap.file ]; then
+   cndmfiles --detach ${PDK} libPropertyMap
+fi
+cndmfiles --attach ${PDK} libPropertyMap \
+  ${LOCAL_CNI_TECH_DIR}/${PDK}/libPropertyMap.file
+
+
+########################################################################
+# Create Helper library                                                #
+########################################################################
+printf "\n\nCreating helper library\n"
+printf -- "----------------------------------------------------------\n"
+
+\rm -rf $libs/HelperLib_${TECH}
+cngenlib --create \
+	--techlib TechLib_${TECH} tech:only \
+	HelperLib_${TECH} $libs/HelperLib_${TECH}
+
+echo ""
+celllist=`grep "lib.definePcell" ${FLOW_ROOT}/HelperCode/__init__.py | grep -v "#" | \
+	awk '{ print $2 }' | sed -e s/\"//g | sed -e s/^hx_//g | sed -e s/,//g`
+
+for cell in $celllist; do
+  if [ -f $libs/${PDK}/${cell}/data.dm ]; then
+     mkdir $libs/HelperLib_${TECH}/hx_${cell}
+     echo "  cp $libs/${PDK}/${cell}/data.dm $libs/HelperLib_${TECH}/hx_${cell}/data.dm"
+     cp $libs/${PDK}/${cell}/data.dm $libs/HelperLib_${TECH}/hx_${cell}/data.dm
+  fi
+done
+
+PYTHONPATH=${FLOW_ROOT}:${CNI_TECH_DIR}/${PDK}:$PYTHONPATH:.
+if [ -f ${PDKPATH}/Tcl ]; then
+   PYTHONPATH=${PDKPATH}/Tcl:$PYTHONPATH
+fi
+
+echo ""
+cngenlib \
+    --update \
+    --no_core_dlos \
+    --bundle=source \
+    pkg:HelperCode HelperLib_${TECH} $libs/HelperLib_${TECH}
+
+cp $libs/${PDK}/cdsinfo.tag $libs/HelperLib_${TECH}
+
+cndmfiles --attach HelperLib_${TECH} libPropertyMap \
+  ${LOCAL_CNI_TECH_DIR}/${PDK}/libPropertyMap.file.HelperLib
+
+
+########################################################################
+# Set permissions.                                                     #
+########################################################################
+find $libs -type d -exec chmod 755 {} \;
+find $libs -type f -exec chmod 644 {} \;
+
+
+#############################################################################
+# Remind to copy Helper library and Technology library to default directory #
+#############################################################################
+cat<<END
+
+Environment variables:
+   PDKPATH:            $CNI_TECH_DIR
+   CNI_TECH_DIR:       $CNI_TECH_DIR
+   CNI_TECH_NODE:      $CNI_TECH_NODE
+   CNI_SCRIPT_DIR:     $CNI_SCRIPT_DIR
+   CNI_AEWARE_DIR:     $CNI_AEWARE_DIR
+   LOCAL_CNI_TECH_DIR: $CNI_TECH_DIR
+
+Please execute the following commands to complete the settings:
+  mkdir -p \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs
+  \rm -rf \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/${CNI_TECH_NODE}
+  \rm -rf \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/TechLib_${TECH}
+  \rm -rf \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/HelperLib_${TECH}
+  cp -r $libs/HelperLib_${TECH} \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/.
+  cp -r $libs/TechLib_${TECH} \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/.
+  cp -r $libs/${CNI_TECH_NODE} \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/.
+  cp -r $libs/display.drf \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/.
+END
+
+if [ -d ${PDKPATH}/skill ]; then
+   echo "  cp -rp $libs/skill \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/."
+fi
+if [ -d ${PDKPATH}/Tcl ]; then
+   echo "  cp -rp $libs/Tcl \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/."
+fi
+
+echo """
+  cat<<END > \${CNI_TECH_DIR}/\${CNI_TECH_NODE}/libs/lib.defs 
+DEFINE TechLib_${TECH}   ./TechLib_${TECH} 
+DEFINE HelperLib_${TECH} ./HelperLib_${TECH} 
+END
+"""
+
+cat<<END
+  ls ${CNI_TECH_DIR}/${CNI_TECH_NODE}/libs
+
+Add the following 'INCLUDE' statements into your library definition file (cds.lib or lib.defs).
+
+INCLUDE ${CNI_TECH_DIR}/${CNI_TECH_NODE}/libs/lib.defs
+
+Then, verify the basic Helix files by the following commands:
+
+  cd ../test
+  ./runTest
+
+END
+
+########################################################################
+# End                                                                  #
+########################################################################
+** __init__.py
+
+import os
+
+from .Variants import (
+  hx_pfet_svt,
+  hx_pfet_ulv,
+  hx_pfet_lvt,
+  hx_pfet_tg18ud15,
+  hx_nfet_svt,
+  hx_nfet_ulv,
+  hx_nfet_lvt,
+  hx_nfet_tg18ud15
+)
+
+def definePcells(lib): 
+    lib.definePcell( hx_pfet_svt,  "hx_pfet_svt" ) 
+    lib.definePcell( hx_pfet_ulv,  "hx_pfet_ulv" )
+    lib.definePcell( hx_pfet_lvt,  "hx_pfet_lvt" )
+    lib.definePcell( hx_pfet_tg18ud15,  "hx_pfet_tg18ud15" )
+    lib.definePcell( hx_nfet_svt,  "hx_nfet_svt" ) 
+    lib.definePcell( hx_nfet_ulv,  "hx_nfet_ulv" )
+    lib.definePcell( hx_nfet_lvt,  "hx_nfet_lvt" )
+    lib.definePcell( hx_nfet_tg18ud15,  "hx_nfet_tg18ud15" )
+
+
+
+** Variants.py
+
+########################################################################
+#                                                                      #
+#  Copyright (c) 2006-2012 by Synopsys, Inc. All rights reserved.      #
+#                                                                      #
+#  Synopsys PROPRIETARY/CONFIDENTIAL. Use is subject to license terms. #
+#                                                                      #
+########################################################################
+
+from cni.dlo import *
+
+from cni.integ.common import (
+    autoAbutment,
+)
+
+from .InstPyCellWrapper import (
+    extraTermMosWrapperBase,
+    extraTermWrapperBase,
+    MosWrapperBase,
+    WrapperBase,
+    MasterType,
+)
+
+from cni.dlo import (
+    Transform,
+    Numeric,
+    Orientation,
+)
+
+
+# ------------------------------------------------------------------
+# Mosfet - P
+# ------------------------------------------------------------------
+class hx_pfet_svt(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/pfet_svt/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['PP', 'drawing'], ['NW', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106, '0.018u':-0.110, '0.020u':-0.110, '0.02u':-0.110, '0.036u':-0.142}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+    
+class hx_pfet_ulv(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/pfet_ulv/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['PP', 'drawing'], ['NW', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106, '0.018u':-0.110, '0.020u':-0.110, '0.02u':-0.110, '0.036u':-0.142}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+    
+class hx_pfet_lvt(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/pfet_lvt/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['PP', 'drawing'], ['NW', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106, '0.018u':-0.110, '0.020u':-0.110, '0.02u':-0.110, '0.036u':-0.142}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+    
+class hx_pfet_tg18ud15(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/pfet_tg18ud15/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['PP', 'drawing'], ['NW', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106,'0.086u':-0.290}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+
+# ------------------------------------------------------------------
+# Mosfet - N
+# ------------------------------------------------------------------
+class hx_nfet_svt(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/nfet_svt/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['NP', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106, '0.018u':-0.110, '0.020u':-0.110, '0.02u':-0.110, '0.036u':-0.142}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+    
+class hx_nfet_ulv(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/nfet_ulv/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['NP', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106, '0.018u':-0.110, '0.020u':-0.110, '0.02u':-0.110, '0.036u':-0.142}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+    
+class hx_nfet_lvt(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/nfet_lvt/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['NP', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106, '0.018u':-0.110, '0.020u':-0.110, '0.02u':-0.110, '0.036u':-0.142}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+    
+class hx_nfet_tg18ud15(extraTermMosWrapperBase):
+    instPyCell    = "nvTsmc16/nfet_tg18ud15/layout"
+    masterType    = MasterType.SKILL_PCELL
+    fgrDirection  = Direction.NONE
+    rowDirection  = Direction.NORTH
+    mergeLayers   = [['NP', 'drawing']]
+    abutSpacing   = {'0.016u':-0.106, '0.086u':-0.290}
+    extraTerms    = {'B':TermType.INPUT_OUTPUT}
+
+** InstPyCellWrapper.py
+########################################################################
+#                                                                      #
+#  Copyright (c) 2006-2012 by Synopsys, Inc. All rights reserved.      #
+#                                                                      #
+#  Synopsys PROPRIETARY/CONFIDENTIAL. Use is subject to license terms. #
+#                                                                      #
+########################################################################
+
+########################################################################
+#                                                                      #
+# InstPyCellWrapper.py                                                 #
+#                                                                      #
+########################################################################
+"""Module:  InstPyCellWrapper
+
+This module implements a WrapperBase class for creating PyCells
+that add finger and row-stacking capabilities to other PyCells.
+    """
+
+from __future__ import (
+    with_statement,
+    absolute_import,
+)
+
+__version__  = "$Revision: 2.0 $"
+__fileinfo__ = "$Id: InstPyCellWrapper.py,v 2.0 2012/10/12 17:19:33 Roger Kang Exp $"
+
+
+from cni.dlo import *
+
+from cni.integ.common import (
+    Compare,
+    autoAbutment,
+)
+
+from cni.utils import (
+    AttrDict,
+)
+
+from _PyxToolsApi import (
+    DloMgr,
+)
+
+########################################################################
+
+class MasterType( object):
+    """
+    Enumerated types for type of PCell to be instantiated.
+    """
+    SKILL_PCELL, PYCELL, MACRO = range( 1,4)
+
+
+########################################################################
+
+class WORKAROUND( object):
+    BUG = True
+
+    RULES = dict(
+        PO_EXTEND_BEYOND_M0PO = 0.157,
+        CPO_OVERLAP_PO        = 0.035,
+#        CPO_OVERLAP_PO        = 0.028,
+    )
+
+
+########################################################################
+
+class WrapperBase( DloGen):
+    """
+    Defines a wrapper PyCell class to add finger and row-stacking.
+    """
+    instPyCell    = ""
+    masterType    = MasterType.PYCELL
+
+    fgrDirection  = Direction.EAST
+    rowDirection  = Direction.NORTH
+    extraTerms    = {}
+    mergeLayers   = []
+    termNames     = []
+    setParams     = {}
+    debugLayer    = [ "text", "drawing"]
+    incrPitch     = { Direction.EAST:0, Direction.NORTH:0}
+    abutSpacing   = {}
+
+    ####################################################################
+
+    @staticmethod
+    def loadCodePkgFor(libName, cellName, viewName):
+        from _PyxDloApi import CodePkg, _whichCodePkg, Lib
+        cpkg = CodePkg.getCodePkg(_whichCodePkg(libName, cellName, viewName))
+        cpkg.load(Lib.open(libName), False)
+
+    ####################################################################
+
+    @staticmethod
+    def makeWrapperClasses( baseClass, classPrefix, attributes, pcells, lib, view="layout"):
+
+        newAttributes = dict.copy( attributes)
+        for ( key, value) in newAttributes.iteritems():
+            if isinstance( value, list):
+                newAttributes[ key] = copy.deepcopy( value)
+
+        classes = dict()
+        for pcell in pcells:
+            masterCell = "%s/%s/%s" % ( lib, pcell, view)
+            className  = "%s%s" % ( classPrefix, pcell)
+            newAttributes[ "masterCell"] = masterCell
+            classes[ className] = type( className, (baseClass,), newAttributes)
+
+        return( classes)
+
+    ####################################################################
+
+    @classmethod
+    def defineParamSpecs( cls, specs):
+        # Promote parameters of instance PyCell into the wrapper.
+        if cls.instPyCell:
+            ( instLib, instCell, instView) = cls.instPyCell.split( "/")
+            ( lib, cell, view) = DloGen.currentDloGen().getName().split( "/")
+
+            instDlo             = Dlo( instLib, instCell, instView)
+
+            if cls.masterType == MasterType.PYCELL:
+                # For PyCell, execute defineParamSpecs() of the master.
+                clsPath             = instDlo._getTypeID()
+                ( modPath, clsName) = clsPath.rsplit('.', 1)
+
+                try:
+                    # Test whether package is loaded.
+                    codePkg = __import__( modPath, None, None, ["__name__"], 0)
+                except ImportError:
+                    # Force loading of code package.
+#                    Dlo( instLib, instCell, instView, params=ParamArray())
+                    WrapperBase.loadCodePkgFor( instLib, instCell, instView)
+                    codePkg = __import__( modPath, None, None, ["__name__"], 0)
+
+                getattr( codePkg, clsName).defineParamSpecs( specs)
+
+            elif cls.masterType == MasterType.SKILL_PCELL:
+                # For SKILL PCell, build ParamSpecArray directly.
+                parameters = DloMgr.getDefaultParams( instDlo)
+                for name in parameters:
+                    if parameters[name] == True \
+                    or parameters[name] == False:
+                        #print "Defining a boolean parameter: %s - %s (%s)" % (name, parameters[name], type(parameters[name]))
+                        #specs( name, parameters[name], 'Boolean parameter', ChoiceConstraint([True, False]))
+                        specs(name, bool(parameters[name]), '')
+                    else:
+                        #print "Defining a parameter: %s - %s (%s)" % (name, parameters[name], type(parameters[name]))
+                        specs( name, parameters[ name])
+
+            elif cls.masterType == MasterType.MACRO:
+                # No parameters to promote.
+                pass
+
+            else:
+                raise ValueError, "Invalid value for MasterType - %s" % cls.masterType
+
+        # Check for valid directions.
+        for dirName in ( "fgrDirection", "rowDirection"):
+            if getattr( cls, dirName) not in ( Direction.NORTH, Direction.EAST, Direction.NONE):
+                raise ValueError, "%s = %s.  Must be Direction.NORTH, Direction.EAST, Direction.NONE." % ( dirName, getattr( cls, dirName))
+
+        if ( cls.fgrDirection == Direction.NORTH) and ( cls.rowDirection not in ( Direction.EAST, Direction.NONE)):
+            raise ValueError, "When fgrDirection == Direction.NORTH, then rowDirection must be Direction.EAST, Direction.NONE, not %s." % cls.rowDirection
+
+        if ( cls.fgrDirection == Direction.EAST)  and ( cls.rowDirection not in ( Direction.NORTH, Direction.NONE)):
+            raise ValueError, "When fgrDirection == Direction.EAST, then rowDirection must be Direction.NORTH, Direction.NONE, not %s." % cls.rowDirection
+
+        # Add parameters for fingers and rows.
+        constraint = StepConstraint( 1, 1)
+        if cls.fgrDirection != Direction.NONE:
+            specs( "Fingers_for_Helix", 1, constraint=constraint)
+
+        if cls.rowDirection != Direction.NONE:
+            specs( "Rows_for_Helix", 1, constraint=constraint)
+
+        # Add debugging parameter.
+        specs( "Debug_for_Helix", False)
+
+    ####################################################################
+
+    def setupParams( self, params):
+        if "Fingers_for_Helix" in params:
+            hxFingers = params[ "Fingers_for_Helix"]
+            params.remove( "Fingers_for_Helix")
+        else:
+            hxFingers = 1
+
+        if "Rows_for_Helix" in params:
+            hxRows = params[ "Rows_for_Helix"]
+            params.remove( "Rows_for_Helix")
+        else:
+            hxRows = 1
+
+        # Interpretation of rows and fingers is swapped, depending
+        # on the final placed orientation by Ciranova Helix.
+        if self.fgrDirection.isXDir() or self.rowDirection.isYDir():
+            self.rows = hxRows
+            self.cols = hxFingers
+        else:
+            self.rows = hxFingers
+            self.cols = hxRows
+
+        # Debugging setup.
+        self.debug = params[ "Debug_for_Helix"]
+        params.remove( "Debug_for_Helix")
+        self.debugLayer = Layer( *self.debugLayer)
+
+        # Instance parameters, including explicit parameter settings.
+        self.params = params
+        for key in self.setParams:
+            self.params[ key] = self.setParams[ key]
+            #print "Really Setting: %s to %s (%s)" % (key, self.params[key], type(self.params[key]) )
+
+        # Merge layers for smaller footprint.
+#        self.mergeLayers = [ Layer( *l) for l in self.mergeLayers if l]
+        xx = []
+        for l in self.mergeLayers:
+            try:
+              lId = Layer( l)
+              xx.append( lId)
+            except:
+              pass
+
+        self.mergeLayers = xx
+
+
+    ####################################################################
+
+    def genLayout( self):
+        # Create array of instances.
+        # Surround with rectangles on requested layers.
+        instances = self.makeInstances().getComps()
+        if ( self.rows > 1) or ( self.cols > 1):
+            self.makeLayerRects( self.mergeLayers)
+
+        # Create terminals, and promote pin shapes.
+        pinData = self.getPinData( instances[ 0])
+        self.makeTerms( instances)
+        self.promotePins( pinData, instances)
+        self.makeAbutable( pinData, instances[ 0], 0)
+        self.renamePins()
+
+        # Add useful debugging information.
+        if self.debug:
+            self.addDebug( instances)
+
+    ####################################################################
+
+    def addDebug( self, instances):
+        for instance in instances:
+            label = Text( self.debugLayer, instance.getName(), instance.getOrigin(), 0.05)
+            label.setOrientation( Orientation.R90)
+
+        for pin in self.getPins():
+            pinName = pin.getName()
+            for shape in pin.getShapes():
+                if isinstance( shape, Rect):
+                    point = shape.getBBox().getCenter()
+                elif isinstance( shape, Path):
+                    point = shape.getPoints()[ 0]
+                else:
+                    continue
+
+                label = Text( self.debugLayer, pinName, point, 0.05)
+                label.setOrientation( Orientation.R90)
+
+    ####################################################################
+
+    def getPinData( self, instance):
+        """
+        Get pin information for an instance.  Use layer numbers,
+        not names, to be robust against different Santana.tech.
+        """
+        if self.termNames:
+            instTerms = [ instTerm for instTerm in instance.getInstTerms() if instTerm.getTermName() in self.termNames]
+        else:
+            instTerms = instance.getInstTerms()
+
+        pinData = []
+        for instTerm in instTerms:
+            for instPin in instTerm.getInstPins():
+                for shapeRef in instPin.getShapeRefs():
+                    layer = shapeRef.getLayer()
+                    #print "Layer: %s(%s) Props: %s Type:%s" % (layer, layer.getLayerNumber(), dict(shapeRef.getProps()), type(shapeRef))
+                    if isinstance( shapeRef, RectRef):
+                        pinData.append(
+                            AttrDict(
+                                term    = instTerm.getTermName(),
+                                pin     = instPin.getPinName(),
+                                layer   = layer.getLayerNumber(),
+                                purpose = layer.getPurposeNumber(),
+                                props   = dict( shapeRef.getProps()),
+                                shape   = Rect,
+                                box     = shapeRef.getBBox(),
+                            )
+                        )
+                    elif isinstance( shapeRef, PathRef):
+                        pinData.append(
+                            AttrDict(
+                                term    = instTerm.getTermName(),
+                                pin     = instPin.getPinName(),
+                                layer   = layer.getLayerNumber(),
+                                purpose = layer.getPurposeNumber(),
+                                props   = dict( shapeRef.getProps()),
+                                shape   = Path,
+                                points  = shapeRef.getPoints(),
+                                width   = shapeRef.getWidth(),
+                                bExt    = shapeRef.getBeginExt(),
+                                eExt    = shapeRef.getEndExt(),
+                                style   = shapeRef.getStyle(),
+                                box     = shapeRef.getBBox()
+                            )
+                        )
+                    elif isinstance( shapeRef, PolygonRef):
+                        pinData.append(
+                            AttrDict(
+                                term    = instTerm.getTermName(),
+                                pin     = instPin.getPinName(),
+                                layer   = layer.getLayerNumber(),
+                                purpose = layer.getPurposeNumber(),
+                                props   = dict( shapeRef.getProps()),
+                                shape   = Polygon,
+                                points  = shapeRef.getPoints(),
+                                box     = shapeRef.getBBox()
+                            )
+                        )
+        return( pinData)
+
+    ####################################################################
+
+    def makeAbutable( self, pinData, instance, pinSize):
+        """
+        Define this method if the instance PyCell supports abutment.
+        """
+        pass
+
+    ####################################################################
+
+    def makeInstances( self):
+        """
+        Create array of instances, according to fingers and rows.
+        """
+        instA = Instance( self.instPyCell, params=self.params, name="IA")
+        instB = instA.clone()
+
+        # Calculate x-pitch and y-pitch.  Use layer merging
+        # and filtering for tighter placement.
+        filter = ShapeFilter().exclude( self.mergeLayers)
+        pitch  = {}
+        for direction in ( Direction.NORTH, Direction.EAST):
+            instB.place( direction, instA, 0)
+            env = self.makeLayerRects( self.mergeLayers)
+            extraShapes = instB.fgAbut( direction, instA, self.mergeLayers, env=env)
+#            instB.fgPlace( direction, instA, filter=filter, env=env)
+            pitch[ direction] = instB.getBBox().getCoord( direction) - instA.getBBox().getCoord( direction)
+            env.destroy()
+            extraShapes.destroy()
+
+        # Make an array of instances.
+        instB.destroy()
+        instances = instA.makeArray( pitch[ Direction.EAST], pitch[ Direction.NORTH], self.rows, self.cols, baseName="I")
+        instA.destroy()
+
+        return( instances)
+
+    ####################################################################
+
+    def makeLayerRects( self, layers):
+        """
+        Create surrounding rectangles, either for fill or
+        for fg* functions.
+        """
+        rects = Grouping()
+        for layer in self.mergeLayers:
+            try:
+               bbox = self.getBBox( layer)
+            except:
+               continue
+            # empty bbox: Box(2147483.647,2147483.647,-2147483.648,-2147483.648)
+            if bbox.isInverted():
+               continue
+            rects.add( Rect( layer, self.getBBox( layer)))
+        return( rects)
+
+    ####################################################################
+
+    def makeTerms( self, instances):
+        """
+        Create the terminals.
+        """
+        mapping   = {}
+        terminal  = {}
+        inst      = instances[ 0]
+        instTerms = inst.getInstTerms()
+
+        # Create the primary terminals, for the first instance.
+        for instTerm in instTerms:
+            termName = instTerm.getTermName()
+            terminal[ termName] = Term( termName)
+            mapping[ instTerm]  = terminal[ termName]
+            instTerm.setNet( terminal[ termName].getNet())
+
+        # Set must-join among primary terminals.
+        for instTerm in instTerms:
+            if instTerm in mapping:
+                term = mapping[ instTerm]
+                for mustJoinInstTerm in instTerm.getMustJoinInstTerms():
+                    term.setMustJoin( mapping[ mustJoinInstTerm])
+                    mapping.pop( mustJoinInstTerm)
+                mapping.pop( instTerm)
+
+        # Create the secondary terminals, for all other instances.
+        # Secondary terminals must-join to primary terminals.
+        for inst in instances[ 1:]:
+            for instTerm in inst.getInstTerms():
+                termName = instTerm.getTermName()
+                termName_mustjoin = "%s_%s" % ( termName, inst.getName())
+                terminal[ termName_mustjoin] = Term( termName_mustjoin)
+                terminal[ termName_mustjoin].setMustJoin( terminal[ termName])
+                instTerm.setNet( terminal[ termName_mustjoin].getNet())
+
+    ####################################################################
+
+    def promotePins( self, pinData, instances):
+        """
+        Create the pins and their shapes.
+        """
+        tech    = self.tech
+        pin     = {}
+        layer   = {}
+
+        # Create pin shapes matching each instance.
+        i = 0
+        for inst in instances:
+            transform = inst.getTransform()
+            if i:
+                suffix = "_%s" % inst.getName()
+            else:
+                suffix = ""
+
+            for onePin in pinData:
+                layer = tech.getLayer( onePin.layer, onePin.purpose)
+                if onePin.shape == Rect:
+                    box    = Box( onePin.box)
+                    box.transform( transform)
+                    shape  = Rect( layer, box)
+                elif onePin.shape == Path:
+                    points = onePin.points.deepcopy()
+                    points.transform( transform)
+                    shape  = Path( layer, onePin.width, points, onePin.style, onePin.bExt, onePin.eExt)
+                elif onePin.shape == Polygon:
+                    box    = Box( onePin.box)
+                    box.transform( transform)
+                    points = onePin.points.deepcopy()
+                    points.transform( transform)
+                    shape  = Polygon( layer, points)
+
+                termName = "%s%s" % ( onePin.term, suffix)
+                pinName  = "%s%s" % ( onePin.pin,  suffix)
+                if pinName in pin:
+                    pin[ pinName].addShape( shape)
+                else:
+                    pin[ pinName] = Pin( pinName, termName).addShape( shape)
+
+#                if "abutClass" in shape.props or "pycAbutRules" in shape.props:
+#                   print "  pin shape with abutment property"
+
+                shape.props[ "cniTempObj"] = True
+
+            i += 1
+
+    ####################################################################
+
+    def renamePins( self):
+        """Define this method if renaming of promoted pins is required.
+            """
+        pass
+
+
+########################################################################
+
+class extraTermWrapperBase( WrapperBase):
+
+    def genLayout( self):
+        super( extraTermWrapperBase, self).genLayout()
+
+        # netlists sometimes have a mismatch between
+        #     number of terminals in the netlist vs the
+        #     SKILL PCell.
+        if len( self.extraTerms) > 0:
+           xx = self.getTerms()
+
+           for terminal in self.extraTerms:
+               if terminal not in xx:
+                  Term( terminal, self.extraTerms[terminal])
+
+########################################################################
+
+class MosWrapperBase( WrapperBase):
+
+    mapper       = {
+        Direction.SOUTH : "bottom",
+        Direction.NORTH : "top",
+    }
+
+    numMos = 0
+    abutParams    = { "met1TermRgt":True, "met1TermLft":True, "act1Lft":0.088, "act1Rgt":0.088 }
+    
+    
+
+    @classmethod
+    def defineParamSpecs( cls, specs):
+        super( MosWrapperBase, cls).defineParamSpecs( specs)
+        #print "Param Specs: %s" % specs
+        specs( "Gate_contact_for_Helix", "both", constraint = ChoiceConstraint( [ "bottom", "top", "both", "none"]))
+        specs( "Num_gate_contact_for_Helix", "single", constraint = ChoiceConstraint( [ "single", "double"]))
+        specs( "hx_met1TermRgt", "True", constraint = ChoiceConstraint( [ "False", "True"]))
+        specs( "hx_met1TermLft", "True", constraint = ChoiceConstraint( [ "False", "True"]))
+        specs( "hx_act1Rgt", "0.088")
+        specs( "hx_act1Lft", "0.088")
+
+        for param in cls.abutParams:
+            if param in specs:
+                (defVal, prompt, constraint) = specs[param]
+                #print "Defining abutParam: %s Type: %s" % (param, type(param))
+                cls.abutParams[param] = defVal
+
+
+    def setupParams( self, params):
+
+        self.gateContacts = dict(
+            bottom = [ Direction.SOUTH ],
+            top    = [ Direction.NORTH ],
+            both   = [ Direction.SOUTH, Direction.NORTH ],
+            none   = [ ],
+        )[ params[ "Gate_contact_for_Helix"]]
+        params.remove( "Gate_contact_for_Helix")
+
+        self.numGateContacts = 1 if params["Num_gate_contact_for_Helix"] == "single" else 2
+        params.remove( "Num_gate_contact_for_Helix")
+        
+        # Handle hx abutment parameters
+        params["met1TermRgt"] = True if params["hx_met1TermRgt"] == "True" else False
+        params.remove("hx_met1TermRgt")
+        
+        params["met1TermLft"] = True if params["hx_met1TermLft"] == "True" else False
+        params.remove("hx_met1TermLft")
+        
+        #params["act1Rgt"] = float(params["hx_act1Rgt"])
+        #params.remove("hx_act1Rgt")
+        #
+        #params["act1Lft"] = float(params["hx_act1Lft"])
+        #params.remove("hx_act1Lft")
+        
+        # Handle float values from abutment
+        #floats = ['act1Rgt', 'act1Lft']
+        #for f in floats:
+        #    params[f] = float(params[f])
+        
+        
+        super( MosWrapperBase, self).setupParams( params)
+        self.layer = AttrDict(
+            M0PO = Layer( "M0_PO", "drawing"),
+            M1   = Layer( "m1",   "drawing"),
+            PO   = Layer( "PO",   "drawing"),
+            CPO  = Layer( "CPO",  "drawing"),
+        )
+        
+        params["act1Rgt"] = float(params["hx_act1Rgt"])
+        params.remove("hx_act1Rgt")
+        
+        params["act1Lft"] = float(params["hx_act1Lft"])
+        params.remove("hx_act1Lft")
+
+
+    def genLayout( self):
+        MosWrapperBase.numMos += 1
+        super( MosWrapperBase, self).genLayout()
+
+        if len( self.gateContacts) > 0:
+            device   = [ comp for comp in self.getLeafComps() if isinstance( comp, Instance)][ 0]
+            contacts = self.createGateContacts( device)
+            polyExt  = self.extendPoly( device, contacts)
+            cutpoly  = self.createCutPoly( device, contacts, polyExt)
+
+
+    def adjustNumberOfGateContactsForAbutment( self):
+        for param in self.abutParams:
+            defVal = self.abutParams[param]
+            if defVal and param in self.params and defVal != self.params[param]:
+                self.numGateContacts = 2
+                
+
+    def createCutPoly( self, device, contacts, polyExtensions):
+        results = dict()
+
+        for ( direction, contact) in contacts.iteritems():
+            extendOptions       = { "direction" : [ direction]}   # This is only useful if fgExtend() is working.
+            rectwidth           = contact.getBBox().getWidth() + 2 * WORKAROUND.RULES[ "CPO_OVERLAP_PO"]
+            rect                = Rect( self.layer.CPO, Box( 0, 0, rectwidth, WORKAROUND.RULES[ "CPO_OVERLAP_PO"]))
+            results[ direction] = rect
+
+            env  = Grouping( components=polyExtensions[ direction])
+            rect.fgPlace( direction, contact, env=env)
+
+            edge = getattr( rect.getBBox(), self.mapper[ direction])
+            for shape in polyExtensions[ direction]:
+                setattr( shape, self.mapper[ direction], edge)
+
+            rect.fgExtend( env, options=extendOptions)
+            env.ungroup()
+
+        return( results)
+
+
+    def createGateContacts( self, device):
+        polyBox = device.getBBox( ShapeFilter( self.layer.PO))
+        results = dict()
+
+        self.adjustNumberOfGateContactsForAbutment()
+
+        for direction in self.gateContacts:
+            contact = Contact(
+                self.layer.M0PO,
+                self.layer.M1,
+                routeDir1 = Direction.EAST_WEST,
+                routeDir2 = Direction.EAST_WEST,
+                point1    = Point( 0, 0),
+                point2    = Point( polyBox.getWidth(), 0)
+            )
+            contact.fgPlace( direction, device)
+            contact.moveBy(polyBox.getCenterX() - contact.getBBox().getCenterX(), 0)
+
+            if self.numGateContacts == 2:
+                contactId = "CONTACT_%d_%s_%d" % (MosWrapperBase.numMos, direction, 1)
+                contact.props["cniContactId"] = contactId
+
+                contact2 = Contact(
+                    self.layer.M0PO,
+                    self.layer.M1,
+                    routeDir1 = Direction.EAST_WEST,
+                    routeDir2 = Direction.EAST_WEST,
+                    point1    = Point( 0, 0),
+                    point2    = Point( polyBox.getWidth(), 0)
+                )
+                contact2.fgPlace( direction, contact)
+                contact2.moveBy(polyBox.getCenterX() - contact2.getBBox().getCenterX(), 0)
+
+                contact = contact2
+                contactId = "CONTACT_%d_%s_%d" % (MosWrapperBase.numMos, direction, 2)
+                contact.props["cniContactId"] = contactId
+
+            results[ direction] = contact
+
+        return( results)
+
+
+    def extendPoly( self, device, contacts):
+        results    = dict()
+        polyShapes = device.fgMerge( self.layer.PO, filter=ShapeFilter( self.layer.PO))
+
+        for ( direction, contact) in contacts.iteritems():
+            extendOptions       = { "direction" : [ direction]}   # This is only useful if fgExtend() is working.
+            edge                = getattr( contact.getBBox(), self.mapper[ direction])
+            results[ direction] = []
+
+            for shape in polyShapes.getComps():
+                box = shape.getBBox()
+                y2  = edge
+                y1  = getattr( box, self.mapper[ direction.opposite()])
+
+                if y1 > y2:
+                    y2, y1 = y1, y2
+
+                if WORKAROUND.BUG:
+                    if direction == Direction.NORTH:
+                        y2 += WORKAROUND.RULES[ "PO_EXTEND_BEYOND_M0PO"]
+
+                    if direction == Direction.SOUTH:
+                        y1 -= WORKAROUND.RULES[ "PO_EXTEND_BEYOND_M0PO"]
+
+                    rect = Rect( self.layer.PO, Box( box.left, y1, box.right, y2))
+
+                else:
+                    rect = Rect( self.layer.PO, Box( box.left, y1, box.right, y2))
+                    rect.fgExtend( contact, options = extendOptions)
+
+                results[ direction].append( rect)
+
+        polyShapes.destroy()
+        return( results)
+
+
+
+    def renamePins( self):
+        pinShapes= []
+        for comp in self.getLeafComps():
+            if isinstance( comp, Shape):
+                if comp.props.get( "pycAbutRules", None) and comp.props.get( "abutClass", None):
+                    pinShapes.append( comp)
+
+        if len(pinShapes) > 1:
+           if pinShapes[0].getBBox().getCenterX() > pinShapes[1].getBBox().getCenterX():
+              pinShapes.reverse()
+
+           pinShapes[0].getPin().setName( "LEFT")
+           pinShapes[1].getPin().setName( "RIGHT")
+           
+    def GetDummyPoly(self, edge, currentValue):
+        if edge == "Left":
+            if currentValue == "both":
+                return "right"
+            elif currentValue == "right":
+                return "right"
+            elif currentValue == "left":
+                return "neither"
+            elif currentValue == "neither":
+                return "neither"
+            else:
+                return currentValue
+                
+        if edge == "Right":
+            if currentValue == "both":
+                return "left"
+            elif currentValue == "right":
+                return "neither"
+            elif currentValue == "left":
+                return "left"
+            elif currentValue == "neither":
+                return "neither"
+            else:
+                return currentValue
+        else:
+            return currentValue
+
+
+    def makeAbutable( self, pinData, instance, pinSize):
+        #print "Entering makeAbutable"
+        #print "pinData: %s" % pinData
+        instName = instance.getName()
+        for onePinData in pinData:
+            #print "One Pin Props: %s" % onePinData.props
+            pass
+            
+        abutPinData = [ onePinData
+            for onePinData in pinData if "abutClass" in onePinData.props or "pycAbutRules" in onePinData.props]
+    
+
+        if len(abutPinData) < 2:
+           print "No abutPinData"
+           return
+
+        if abutPinData[0].box.getLeft() > abutPinData[1].box.getLeft():
+            abutPinData.reverse()
+
+        w = self.params[ "nFin"]
+        l = self.params["l"]
+        #print "Abut spacing: %s" % self.abutSpacing
+        if l in self.abutSpacing.keys():
+            spacing = self.abutSpacing[l]
+        else:
+            print "Required value of l: %s was not found in abutSpacing keys: %s\n" % \
+                (l, self.abutSpacing.keys())
+        #try:
+        #    w = Numeric( w)/Numeric.scale_factors[ "u"]
+        #except:
+        #    w = Numeric("0.5u")/Numeric.scale_factors[ "u"]
+
+#        if Numeric( self.params[ "l"]) >= 90e-9:
+#           adjSpacing = 0.11
+#        elif Numeric( self.params[ "l"]) >= 50e-9:
+#           adjSpacing = 0.09
+#        else:
+#           adjSpacing = 0.08
+        
+        # Add abutment properties to pin shapes.
+        onePin  = abutPinData[ 0]
+        for shape in Pin.find( onePin.pin).getShapes():
+            layer = shape.getLayer()
+            if ( layer.getLayerNumber() == onePin.layer) and ( layer.getPurposeNumber() == onePin.purpose):
+                if shape.getBBox() == onePin.box:
+                    shape.setName( "LEFT")
+                    #print "Creating pin LEFT - using True/False"
+                    dummyPolyEdge = self.GetDummyPoly("Left", self.params["polyDmy"])
+                    autoAbutment(
+                        shape,
+                        w,
+                        [ Direction.WEST],
+                        "cniMos",
+                        abut2PinBigger  = [ { "spacing":spacing}, { "hx_met1TermLft":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermLft":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut3PinBigger  = [ { "spacing":spacing}, { "hx_met1TermLft":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermLft":'True',  "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut2PinEqual   = [ { "spacing":spacing}, { "hx_met1TermLft":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermLft":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut3PinEqual   = [ { "spacing":spacing}, { "hx_met1TermLft":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermLft":'True',  "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut2PinSmaller = [ { "spacing":spacing}, { "hx_met1TermLft":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermLft":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut3PinSmaller = [ { "spacing":spacing}, { "hx_met1TermLft":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermLft":'True',  "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge } ],
+                        noAbut          = [ { "spacing":0.106}],
+                        function        = "cniAbut",
+                        #adjBigger       = [ { "spacing":adjSpacing}, { "secondRightDummy":"OFF"}, { "secondRightDummy":"OFF"} ],
+                        #adjEqual        = [ { "spacing":adjSpacing}, { "secondRightDummy":"OFF"}, { "secondRightDummy":"OFF"} ],
+                        #adjSmaller      = [ { "spacing":adjSpacing}, { "secondRightDummy":"OFF"}, { "secondRightDummy":"OFF"} ],
+                      )
+                    break
+
+        onePin  = abutPinData[ 1]
+        for shape in Pin.find( onePin.pin).getShapes():
+            layer = shape.getLayer()
+            if ( layer.getLayerNumber() == onePin.layer) and ( layer.getPurposeNumber() == onePin.purpose):
+                if shape.getBBox() == onePin.box:
+                    shape.setName( "RIGHT")
+                    #print "Creating pin RIGHT - using 'True'/'False'"
+                    dummyPolyEdge = self.GetDummyPoly("Right", self.params["polyDmy"])
+                    autoAbutment(
+                        shape,
+                        w,
+                        [ Direction.EAST],
+                        "cniMos",
+                        abut2PinBigger  = [ { "spacing":spacing}, { "hx_met1TermRgt":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermRgt":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut3PinBigger  = [ { "spacing":spacing}, { "hx_met1TermRgt":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermRgt":'True',  "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut2PinEqual   = [ { "spacing":spacing}, { "hx_met1TermRgt":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermRgt":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut3PinEqual   = [ { "spacing":spacing}, { "hx_met1TermRgt":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermRgt":'True',  "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut2PinSmaller = [ { "spacing":spacing}, { "hx_met1TermRgt":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermRgt":'False', "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge } ],
+                        abut3PinSmaller = [ { "spacing":spacing}, { "hx_met1TermRgt":'False', "hx_act1Rgt":"0.088", "polyDmy":dummyPolyEdge }, { "hx_met1TermRgt":'True',  "hx_act1Lft":"0.088", "polyDmy":dummyPolyEdge } ],
+                        noAbut          = [ { "spacing":0.106}],
+                        function        = "cniAbut",
+#                        adjBigger       = [ { "spacing":adjSpacing}, { "secondRightDummy":"OFF"}, { "secondRightDummy":"OFF"} ],
+#                        adjEqual        = [ { "spacing":adjSpacing}, { "secondRightDummy":"OFF"}, { "secondRightDummy":"OFF"} ],
+#                        adjSmaller      = [ { "spacing":adjSpacing}, { "secondRightDummy":"OFF"}, { "secondRightDummy":"OFF"} ],
+                      )
+                    break
+
+
+########################################################################
+
+class extraTermMosWrapperBase( MosWrapperBase):
+
+    def genLayout( self):
+        super( extraTermMosWrapperBase, self).genLayout()
+
+        # netlists sometimes have a mismatch between
+        #     number of terminals in the netlist vs the
+        #     SKILL PCell.
+        if len( self.extraTerms) > 0:
+           xx = self.getTerms()
+
+           for terminal in self.extraTerms:
+               if terminal not in xx:
+                  Term( terminal, self.extraTerms[terminal])
+
+
+# end
+
+* The end
+
+

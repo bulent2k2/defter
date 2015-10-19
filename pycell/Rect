@@ -1,0 +1,412 @@
+MyTestingCell> help(Rect)
+Help on class Rect in module cni.dlo:
+
+class Rect(Shape)
+ |  Rectangle Shape.
+ |  
+ |  Rect(Layer layer, Box box) -> Rect
+ |  Construct a Rect with layer and box.
+ |  
+ |  Method resolution order:
+ |      Rect
+ |      Shape
+ |      PhysicalComponent
+ |      IPhysicalComponent
+ |      ManagedObj
+ |      __builtin__.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(...)
+ |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+ |  
+ |  __repr__(...)
+ |      x.__repr__() <==> repr(x)
+ |  
+ |  expand(...)
+ |      expand(self, Coord coord) -> self
+ |  
+ |  expandDir(...)
+ |      expandDir(self, Direction dir, Coord coord) -> self
+ |  
+ |  expandForMinArea(...)
+ |      expandForMinArea(self, Direction dir, AreaType minArea, Grid grid=None) -> self
+ |  
+ |  expandForMinWidth(...)
+ |      expandForMinWidth(self, Direction dir, Coord minWidth, Grid grid=None) -> self
+ |  
+ |  expandToGrid(...)
+ |      expandToGrid(self, Grid grid, Direction dir=None) -> self
+ |  
+ |  getBottom(...)
+ |      getBottom(self) -> Coord
+ |  
+ |  getCoord(...)
+ |      getCoord(self, Direction dir) -> Coord
+ |  
+ |  getHeight(...)
+ |      getHeight(self) -> Coord
+ |  
+ |  getLeft(...)
+ |      getLeft(self) -> Coord
+ |  
+ |  getRight(...)
+ |      getRight(self) -> Coord
+ |  
+ |  getTop(...)
+ |      getTop(self) -> Coord
+ |  
+ |  getWidth(...)
+ |      getWidth(self) -> Coord
+ |  
+ |  setBBox(...)
+ |      setBBox(self, Box box)
+ |      
+ |      Sets the bounding box of this rectangle.
+ |  
+ |  setBottom(...)
+ |      setBottom(self, Coord v) -> self
+ |  
+ |  setCoord(...)
+ |      setCoord(self, Direction dir, Coord coord) -> self
+ |  
+ |  setLeft(...)
+ |      setLeft(self, Coord v) -> self
+ |  
+ |  setRight(...)
+ |      setRight(self, Coord v) -> self
+ |  
+ |  setTop(...)
+ |      setTop(self, Coord v) -> self
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  bbox
+ |      getBBox(), setBBox()
+ |  
+ |  bottom
+ |      getBottom(), setBottom()
+ |  
+ |  left
+ |      getLeft(), setLeft()
+ |  
+ |  right
+ |      getRight(), setRight()
+ |  
+ |  top
+ |      getTop(), setTop()
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __new__ = <built-in method __new__ of type object at 0x2afc21ee47a0>
+ |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+ |  
+ |  fillBBoxWithRects = <built-in method fillBBoxWithRects of type object ...
+ |      fillBBoxWithRects(Layer layer, Box box, Coord width=None, Coord height=None,
+ |          Coord spaceX=None, Coord spaceY=None, GapStyle gapStyle=GapStyle.MINIMUM,
+ |          Grouping group=None) -> unsigned
+ |      Fill bounding box with Rects.
+ |      box:  Bounding box enclosing Rects. Filling proceeds from Box.lowerLeft
+ |        to Box.upperRight.
+ |      width, height:  width and height of Rect.
+ |      spaceX, spaceY:  spaces between Rects.
+ |      gapStyle:  GapStyle between Rects.
+ |      group:  Grouping to contain Rects.
+ |      return count of Rects
+ |  
+ |  fillDiagBoxWithDiagRects = <built-in method fillDiagBoxWithDiagRects o...
+ |      fillDiagBoxWithDiagRects(Layer layer, Box diagBox,
+ |          Coord width45, Coord height135, Coord space45, Coord space135,
+ |          GapStyle gapStyle=GapStyle.MINIMUM, Grouping group=None) -> unsigned
+ |      Fill Diagonal bounding box with Diagonal Rects (restricted Polygon).
+ |      diagBox:  Bounding box in diagonal axes. Filling proceeds from Box.lowerLeft
+ |        to Box.upperRight along axis45 and axis135.
+ |      width45, height135:  sqrt2-scaled width and height of diagonal Rect in axis45
+ |        and axis135.
+ |      space45, space135:  sqrt2-scaled spaces between diagonal Rects in axis45
+ |        and axis135.
+ |      return count of Rects
+ |  
+ |  fillDiagBoxWithRects = <built-in method fillDiagBoxWithRects of type o...
+ |      fillDiagBoxWithRects(Layer layer, Box diagBox,
+ |          Coord width=None, Coord height=None,
+ |          Coord space45=None, Coord space135=None,
+ |          GapStyle gapStyle=GapStyle.MINIMUM, Grouping group=None) -> unsigned
+ |      Fill Diagonal bounding box with normal Rects.
+ |      diagBox:  Bounding box in diagonal axes. Filling proceeds from Box.lowerLeft
+ |        to Box.upperRight along axis45 and axis135.
+ |      width, height:  width and height of Rect in normal axes.
+ |      space45, space135:  sqrt2-scaled spaces between Rects in axis45 and axis135.
+ |      return count of Rects
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from Shape:
+ |  
+ |  getBBox(...)
+ |      getBBox(self, ShapeFilter filter=ShapeFilter()) -> Box
+ |  
+ |  getColorMask(...)
+ |      getColorMask(self) -> anchor, color
+ |  
+ |  getLayer(...)
+ |      getLayer(self) -> Layer
+ |  
+ |  getName(...)
+ |      getName(self) -> str|None
+ |      
+ |      Get name which can be string or None.
+ |  
+ |  getNet(...)
+ |      getNet(self) -> Net
+ |      
+ |      Get Net this Shape is a part of. Return None if Shape is not part of any Net.
+ |  
+ |  getPin(...)
+ |      getPin(self) -> Pin
+ |      
+ |      Get Pin this Shape is a part of. Return None if Shape is not part of any Pin.
+ |  
+ |  setColorMask(...)
+ |      setColorMask(self, anchorStr, color) -> self
+ |  
+ |  setLayer(...)
+ |      setLayer(self, Layer layer)
+ |  
+ |  setName(...)
+ |      setName(str name | None)
+ |      
+ |      Set name which can be string or None.
+ |  
+ |  setNet(...)
+ |      setNet(self, Net net) -> self
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from Shape:
+ |  
+ |  layer
+ |      getLayer(), setLayer()
+ |  
+ |  name
+ |      getName(), setName()
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from Shape:
+ |  
+ |  find = <built-in method find of type object at 0x2afc21ee47a0>
+ |      find(str name='') -> Shape | None
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from PhysicalComponent:
+ |  
+ |  clone(...)
+ |      clone(self, NameMapper nameMap='', NameMapper netMap='') -> clonePhysicalComponent
+ |      
+ |      Clone a PhysicalComponent using nameMap and netMap to map
+ |      the original PhysicalComponent name and net names
+ |      to the cloned PhysicalComponent name and net names.
+ |      The Python type of clonePhysicalComponent is same
+ |      as the original PhysicalComponent.
+ |  
+ |  destroy(...)
+ |      destroy(self)
+ |  
+ |  fgAbut(...)
+ |      fgAbut(self, Direction dir, PhysicalComponent refComp, ulist[Layer] abutLayers,
+ |          ShapeFilter filter=ShapeFilter(), PhysicalComponent env=None,
+ |          bool align=True, ShapeFilter refFilter=None, dict options=None) -> Grouping
+ |  
+ |  fgAddEnclosingPolygon(...)
+ |      fgAddEnclosingPolygon(self, Layer layer, ShapeFilter filter=ShapeFilter(),
+ |          PhysicalComponent env=None, dict options=None) -> Grouping
+ |  
+ |  fgAddEnclosingRects(...)
+ |      fgAddEnclosingRects(self, ulist[Layer] layer, ShapeFilter filter=ShapeFilter(),
+ |          PhysicalComponent env=None, dict options=None) -> Grouping
+ |  
+ |  fgAnd(...)
+ |      fgAnd(self, PhysicalComponent comp, Layer resultLayer,
+ |          ShapeFilter filter=ShapeFilter(), ShapeFilter compFilter=None) -> Grouping
+ |  
+ |  fgDeriveLayer(...)
+ |      fgDeriveLayer(self, str derivationScript, Layer layer, 
+ |          ShapeFilter filter=ShapeFilter(), dict options=None) -> Grouping
+ |  
+ |  fgDeriveLayerEx(...)
+ |      fgDeriveLayerEx(self, ulist[str] additionalSourceLayers, 
+ |          GeometryDataStorage additionalData, str derivationScript, 
+ |          ulist[str] outputLayers, GeometryDataStorage output, 
+ |          ShapeFilter filter=ShapeFilter()) -> None
+ |  
+ |  fgEnclose(...)
+ |      fgEnclose(self, ulist[Layer] layer, ShapeFilter filter=ShapeFilter(),
+ |          dict options=None) -> Grouping
+ |  
+ |  fgExtend(...)
+ |      fgExtend(self, PhysicalComponent comp, ShapeFilter filter=ShapeFilter(),
+ |          dict options=None) -> bool
+ |  
+ |  fgFill(...)
+ |      fgFill(self, PhysicalComponent comp, Layer layer, Direction dir, Coord divider) -> Grouping
+ |  
+ |  fgMerge(...)
+ |      fgMerge(self, Layer resultLayer=None, ShapeFilter filter=None) -> Grouping
+ |  
+ |  fgMinSpacing(...)
+ |      fgMinSpacing(self, Direction dir, PhysicalComponent refComp,
+ |          ShapeFilter filter=ShapeFilter(), PhysicalComponent env=None,
+ |          bool align=True, ShapeFilter refFilter=None, dict options=None) -> Coord
+ |      
+ |      If refFilter is None, then it is assigned the same value as filter.
+ |  
+ |  fgNot(...)
+ |      fgNot(self, PhysicalComponent comp, Layer resultLayer,
+ |          ShapeFilter filter=ShapeFilter(), ShapeFilter compFilter=None) -> Grouping
+ |  
+ |  fgOr(...)
+ |      fgOr(self, PhysicalComponent comp, Layer resultLayer,
+ |          ShapeFilter filter=ShapeFilter(), ShapeFilter compFilter=None) -> Grouping
+ |  
+ |  fgPlace(...)
+ |      fgPlace(self, Direction dir, PhysicalComponent refComp,
+ |          ShapeFilter filter=ShapeFilter(), PhysicalComponent env=None,
+ |          bool align=True, ShapeFitler refFilter=None, dict options=None) -> self
+ |  
+ |  fgSize(...)
+ |      fgSize(self, ShapeFilter filter, Coord size, Layer resultLayer) -> Grouping
+ |  
+ |  fgXor(...)
+ |      fgXor(self, PhysicalComponent comp, Layer resultLayer,
+ |          ShapeFilter filter=ShapeFilter(), ShapeFilter compFilter=None) -> Grouping
+ |  
+ |  getCompOwner(...)
+ |      getCompOwner(self) -> DloGen | Grouping
+ |      
+ |      Get the composite owner of this PhysicalComponent.
+ |  
+ |  getDlo(...)
+ |      getDlo(self) -> DloGen
+ |      
+ |      Returns the Dlo|DloGen containing this PhysicalComponent.
+ |  
+ |  getGrid(...)
+ |      getGrid(self) -> Grid
+ |      
+ |      Returns the Grid corresponding to the least common multiple
+ |      of the grid resolutions found from all Layers in this PhysicalComponent.
+ |      Grid of 1 dbu is used if no Layer is present.
+ |  
+ |  getImp(...)
+ |  
+ |  getProps(...)
+ |      getProps(self) -> PropSet
+ |      get set of properties.
+ |  
+ |  makeArray(...)
+ |      makeArray(PhysicalComponent self, Coord dX, Coord dY, unsigned numRows, unsigned numCols, string baseName='', string name='') -> Grouping
+ |          dX:   delta-X between two members in X direction
+ |          dY:   delta-Y between two members in Y direction
+ |          baseName:   Name to use for base of all members in Grouping.
+ |          name:   Name of Grouping.
+ |      Create a Grouping containing numRows*numCols of PhysicalComponents cloned
+ |      from this PhysicalComponent. Name of members has the format <baseName>_<rowIndex>_<colIndex>
+ |  
+ |  overlaps(...)
+ |      overlaps(self, Box box) -> bool
+ |  
+ |  transform(...)
+ |      transform(self, Transform trans) -> self
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from PhysicalComponent:
+ |  
+ |  props
+ |      getProps()
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from IPhysicalComponent:
+ |  
+ |  abut(...)
+ |      abut(self, Direction dir, IPhysicalComponent refComp,
+ |          ShapeFilter filter=ShapeFilter(), bool align=True,
+ |          ShapeFilter refFilter=None) -> self
+ |      
+ |      If refFilter is None, then it is assigned the same value as filter.
+ |  
+ |  alignEdge(...)
+ |      alignEdge(self, Direction dir, IPhysicalComponent refComp, Direction refDir=None,
+ |          ShapeFilter filter=ShapeFilter(), ShapeFilter refFilter=None,
+ |          Coord offset=None) -> self
+ |      
+ |      If refDir is None, then it is assigned the same value as dir.
+ |      If refFilter is None, then it is assigned the same value as filter.
+ |  
+ |  alignEdgeToCoord(...)
+ |      alignEdgeToCoord(self, Direction dir, Coord coord, ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  alignEdgeToPoint(...)
+ |      alignEdgeToPoint(self, Direction dir, Point point, ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  alignLocation(...)
+ |      alignLocation(self, Location loc, IPhysicalComponent refComp, Location refLoc=None,
+ |          ShapeFilter filter=ShapeFilter(), ShapeFilter refFilter=None, Point offset=None) -> self
+ |      
+ |      If refLoc is None, then it is assigned the same value as loc.
+ |      If refFilter is None, then it is assigned the samve value as filter.
+ |  
+ |  alignLocationToPoint(...)
+ |      alignLocationToPoint(self, Location loc, Point point, ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  getSpacing(...)
+ |      getSpacing(self, Direction dir, IPhysicalComponent refComp, ShapeFilter filter=ShapeFilter(),
+ |          ShapeFilter refFilter=None) -> Coord
+ |  
+ |  mirrorX(...)
+ |      mirrorX(self, Coord yCoord=0) -> self
+ |  
+ |  mirrorY(...)
+ |      mirrorY(self, Coord xCoord=0) -> self
+ |  
+ |  moveBy(...)
+ |      moveBy(self, Coord dx, Coord dy) -> self
+ |  
+ |  moveTo(...)
+ |      moveTo(self, Point destination, Location loc=Location.CENTER_CENTER,
+ |          ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  moveTowards(...)
+ |      moveTowards(self, Direction dir, Coord d) -> self
+ |  
+ |  place(...)
+ |      place(self, Direction dir, IPhysicalComponent refComp, Coord distance,
+ |          ShapeFilter filter=ShapeFilter(), bool align=True,
+ |          ShapeFilter refFilter=None) -> self
+ |  
+ |  rotate180(...)
+ |      rotate180(self, Point origin=None) -> self
+ |  
+ |  rotate270(...)
+ |      rotate270(self, Point origin=None) -> self
+ |  
+ |  rotate90(...)
+ |      rotate90(self, Point origin=None) -> self
+ |  
+ |  snap(...)
+ |      snap(self, Grid grid, SnapType snapType, ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  snapTowards(...)
+ |      snapTowards(self, Grid grid, Direction dir, ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  snapX(...)
+ |      snapX(self, Grid grid, SnapType snapType, ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  snapY(...)
+ |      snapY(self, Grid grid, SnapType snapType, ShapeFilter filter=ShapeFilter()) -> self
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from ManagedObj:
+ |  
+ |  __reduce__(...)
+MyTestingCell> l1 = Layer('metal1')
+MyTestingCell> b1 = 

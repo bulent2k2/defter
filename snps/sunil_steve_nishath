@@ -1,0 +1,29 @@
+Nishath,
+
+I don’t think that would be the right thing to do. It is not needed, and it would incur more overhead than necessary. I can share my detailed reasoning behind this if you’d like.
+
+Instead, going forward, I want Steve to look at Sunil’s future questions, if any, and try to answer them from the top of his head, or by pointing to an appropriate picture from the DRM or from actual layout. Otherwise, he can give Shing-Te an estimate of time it would take him to provide the answer that would help Sunil. 
+
+Steve is the DRC expert in your team with many years of experience, and with active work on tsmc28/20. So, he should not need more than 10 minutes to draw a picture to help explain some complex rule, instead of criticizing Sunil that he does not understand abutted NPN (he does, because I explained it to him last week), or line-end rule (there are many new kinds of line-end rules and I don’t think even Steve understand them all). I think that is typical of professional behavior expected from senior members in a large group like yours.
+
+Thanks,
+Bulent
+
+
+
+Steve is the DRC expert in your team with many years of experience, and with active work on tsmc28/20. So, he should not need more than 10 minutes to draw a picture to help explain some complex rule, instead of criticizing Sunil that he does not understand abutted NPN (he does, because I explained it to him last week), or line-end rule (there are many new kinds of line-end rules and I don’t think even Steve understand them all). I think that is typical of professional behavior expected from senior members in a large group like yours.
+
+
+
+Here is why I think sending Sunil to Austin will be more harmful than helpful.
+
+We sent Shakir to Austin (for 3-4 days if I remember correctly) and what I gather is that he could not get any useful answers to his questions, no new content to help documentation, no insight into the behavior/implementation of Steve’s code... 
+
+What I see is that (and I managed Steve for more than a year and interacted with him for 3 years), Steve spends a lot of effort resisting the process and attacking the questioner (e.g., Ali, Shakir, Verma, and now Sunil), instead of trying to be helpful. 
+
+From his recent emails, too, it is clear that he is NOT interested in helping others, if it does not serve his own purposes. He answers the questions only if he is ordered to do so by Shing-Te.
+
+In the last 6 months or so, Sunil has learned and improved a lot on not only DRC, but also mol generation, device sizing, and hflow. He was able to fix critical bugs for IDT fairly quickly. 
+
+The current difficulty is due to the enhancements we want for tsmc28 and tsmc20. If I understand correctly, Steve is working on those rules for SBR. I don’t understand why it is so hard for him to explain his recent learnings to Sunil. I don’t understand why that would take more than 5% of his time. If we send Sunil to Austin, Steve would presumably spend much more than 5% of his time for one week.
+

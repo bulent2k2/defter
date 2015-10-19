@@ -1,0 +1,242 @@
+
+BerkeleyX: CS169.1x Software as a Service
+
+    bulent
+    ▾
+
+    Courseware
+    Course Info
+    Syllabus
+    Textbook & VM
+    Tutorials & Resources
+    Discussion
+    Wiki
+    Progress
+
+Overview
+Week 1
+Week 2
+Week 3
+Week 4
+Week 5
+
+    Lecture 10: Test Driven Development
+
+    Lecture 11: Test Driven Development Part 2
+
+    Homework 4
+
+    Homework due November 4
+
+    Quiz 3
+
+    Quiz due November 4
+
+    Previous
+    Next
+
+Homework 4
+
+Here are the instructions for submitting HW4. Submission will be similar to HW3. You will submit a .tar.gz file with various directories of your app:
+
+    app/
+    config/
+    db/migrate
+    features/
+    spec/
+    Gemfile
+
+If you modified any other files, please include them too. If you are using the Virtual Machine, navigate to the root directory for HW4 and run
+
+tar czf hw4.tar.gz app/ config/ db/migrate features/ spec/ Gemfile
+
+This will create the file hw4.tar.gz, which you will submit. Please note that the auto-grader may take longer than usual. If it takes more than several minutes, try refreshing the page.
+Correct
+
+On Time ----------------------------------------
+Running student tests found in features/ spec/:
+Using the default profile...
+Feature: search for movies by director
+  
+  As a movie buff
+  So that I can find movies with my favorite director
+  I want to include and serach on director information in movies I enter
+
+  Background: movies in database      # features/search_by_director.feature:7
+    Given the following movies exist: # features/step_definitions/movie_steps.rb:1
+      | title        | rating | director     | release_date |
+      | Star Wars    | PG     | George Lucas | 1977-05-25   |
+      | Blade Runner | PG     | Ridley Scott | 1982-06-25   |
+      | Alien        | R      |              | 1979-05-25   |
+      | THX-1138     | R      | George Lucas | 1971-03-11   |
+
+  Scenario: add director to existing movie                # features/search_by_director.feature:16
+    When I go to the edit page for "Alien"                # features/search_by_director.feature:17
+      Ambiguous match of "I go to the edit page for "Alien"":
+      
+      features/step_definitions/movie_steps.rb:7:in `/^(?:|I )go to (.+)$/'
+      features/step_definitions/web_steps.rb:48:in `/^(?:|I )go to (.+)$/'
+      
+      You can run again with --guess to make Cucumber be more smart about it
+       (Cucumber::Ambiguous)
+      features/search_by_director.feature:17:in `When I go to the edit page for "Alien"'
+    And I fill in "Director" with "Ridley Scott"          # features/step_definitions/web_steps.rb:60
+    And I press "Update Movie Info"                       # features/step_definitions/web_steps.rb:52
+    Then the director of "Alien" should be "Ridley Scott" # features/search_by_director.feature:20
+      Undefined step: "the director of "Alien" should be "Ridley Scott"" (Cucumber::Undefined)
+      features/search_by_director.feature:20:in `Then the director of "Alien" should be "Ridley Scott"'
+
+  Scenario: find movie with same director                       # features/search_by_director.feature:22
+    Given I am on the details page for "Star Wars"              # features/step_definitions/web_steps.rb:44
+      Can't find mapping from "the details page for "Star Wars"" to a path.
+      Now, go and add a mapping in /tmp/hw4_grader20121105-15067-b4b9sp/features/support/paths.rb (RuntimeError)
+      ./features/support/paths.rb:32:in `rescue in path_to'
+      ./features/support/paths.rb:26:in `path_to'
+      ./features/step_definitions/web_steps.rb:45:in `/^(?:|I )am on (.+)$/'
+      features/search_by_director.feature:23:in `Given I am on the details page for "Star Wars"'
+    When I follow "Find Movies With Same Director"              # features/step_definitions/web_steps.rb:56
+    Then I should be on the Similar Movies page for "Star Wars" # features/step_definitions/web_steps.rb:230
+    And I should see "THX-1138"                                 # features/step_definitions/web_steps.rb:105
+    But I should not see "Blade Runner"                         # features/step_definitions/web_steps.rb:123
+
+  Scenario: can't find similar movies if we don't know director (sad path) # features/search_by_director.feature:29
+    Given I am on the details page for "Alien"                             # features/step_definitions/web_steps.rb:44
+      Can't find mapping from "the details page for "Alien"" to a path.
+      Now, go and add a mapping in /tmp/hw4_grader20121105-15067-b4b9sp/features/support/paths.rb (RuntimeError)
+      ./features/support/paths.rb:32:in `rescue in path_to'
+      ./features/support/paths.rb:26:in `path_to'
+      ./features/step_definitions/web_steps.rb:45:in `/^(?:|I )am on (.+)$/'
+      features/search_by_director.feature:30:in `Given I am on the details page for "Alien"'
+    Then I should not see "Ridley Scott"                                   # features/step_definitions/web_steps.rb:123
+    When I follow "Find Movies With Same Director"                         # features/step_definitions/web_steps.rb:56
+    Then I should be on the home page                                      # features/step_definitions/web_steps.rb:230
+    And I should see "'Alien' has no director info"                        # features/step_definitions/web_steps.rb:105
+
+Failing Scenarios:
+cucumber features/search_by_director.feature:16 # Scenario: add director to existing movie
+cucumber features/search_by_director.feature:22 # Scenario: find movie with same director
+cucumber features/search_by_director.feature:29 # Scenario: can't find similar movies if we don't know director (sad path)
+
+3 scenarios (3 failed)
+17 steps (3 failed, 10 skipped, 1 undefined, 3 passed)
+0m2.657s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Coverage report generated for Cucumber Features to /tmp/hw4_grader20121105-15067-b4b9sp/coverage. 0 / 0 LOC (0.0%) covered.
+
+  Cucumber: 0 out of 3 scenarios passed
+  RSpec: 0 out of 0 tests passed
+  Score: 20/40
+----------------------------------------
+
+----------------------------------------
+Checking coverage for:
+  controllers >= 90.00%
+  models >= 90.00%
+----------------------------------------
+  all files: 28.57%% coverage
+  controllers: 22.45%% coverage
+  models: 66.67%% coverage
+  mailers: 100.00%% coverage
+  helpers: 75.00%% coverage
+  libraries: 100.00%% coverage
+  plugins: 100.00%% coverage
+
+Failed coverage test (controllers, models coverage too low).
+  Score: 0/20.0
+----------------------------------------
+
+----------------------------------------
+Running reference Cucumber scenarios:
+Disabling profiles...
+Feature: search for movies by director
+  
+  As a movie buff
+  So that I can find movies with my favorite director
+  I want to include and serach on director information in movies I enter
+
+  Background: movies in database      # /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:7
+    Given the following movies exist: # features/step_definitions/movie_steps.rb:1
+      | title        | rating | director     | release_date |
+      | Star Wars    | PG     | George Lucas | 1977-05-25   |
+      | Blade Runner | PG     | Ridley Scott | 1982-06-25   |
+      | Alien        | R      |              | 1979-05-25   |
+      | THX-1138     | R      | George Lucas | 1971-03-11   |
+
+  Scenario: add director to existing movie                # /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:16
+    When I go to the edit page for "Alien"                # /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:17
+      Ambiguous match of "I go to the edit page for "Alien"":
+      
+      features/step_definitions/movie_steps.rb:7:in `/^(?:|I )go to (.+)$/'
+      features/step_definitions/web_steps.rb:48:in `/^(?:|I )go to (.+)$/'
+      
+      You can run again with --guess to make Cucumber be more smart about it
+       (Cucumber::Ambiguous)
+      /home/ubuntu/rag/lib/graders/feature_grader/cuke_runner:34:in `main'
+      /home/ubuntu/rag/lib/graders/feature_grader/cuke_runner:38:in `<main>'
+      ./required_features/director.feature:17:in `When I go to the edit page for "Alien"'
+    And I fill in "Director" with "Ridley Scott"          # features/step_definitions/web_steps.rb:60
+    And I press "Update Movie Info"                       # features/step_definitions/web_steps.rb:52
+    Then the director of "Alien" should be "Ridley Scott" # /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:20
+
+  Scenario: find movie with same director                       # /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:22
+    Given I am on the details page for "Star Wars"              # features/step_definitions/web_steps.rb:44
+      Can't find mapping from "the details page for "Star Wars"" to a path.
+      Now, go and add a mapping in /tmp/hw4_grader20121105-15067-b4b9sp/features/support/paths.rb (RuntimeError)
+      ./features/support/paths.rb:32:in `rescue in path_to'
+      ./features/support/paths.rb:26:in `path_to'
+      ./features/step_definitions/web_steps.rb:45:in `/^(?:|I )am on (.+)$/'
+      ./required_features/director.feature:23:in `Given I am on the details page for "Star Wars"'
+    When I follow "Find Movies With Same Director"              # features/step_definitions/web_steps.rb:56
+    Then I should be on the Similar Movies page for "Star Wars" # features/step_definitions/web_steps.rb:230
+    And I should see "THX-1138"                                 # features/step_definitions/web_steps.rb:105
+    But I should not see "Blade Runner"                         # features/step_definitions/web_steps.rb:123
+
+  Scenario: can't find similar movies if we don't know director (sad path)   # /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:29
+    Given I am on the details page for "Alien"                               # features/step_definitions/web_steps.rb:44
+      Can't find mapping from "the details page for "Alien"" to a path.
+      Now, go and add a mapping in /tmp/hw4_grader20121105-15067-b4b9sp/features/support/paths.rb (RuntimeError)
+      ./features/support/paths.rb:32:in `rescue in path_to'
+      ./features/support/paths.rb:26:in `path_to'
+      ./features/step_definitions/web_steps.rb:45:in `/^(?:|I )am on (.+)$/'
+      ./required_features/director.feature:30:in `Given I am on the details page for "Alien"'
+    Then I should not see "Ridley Scott"                                     # features/step_definitions/web_steps.rb:123
+    When I follow "Find Movies With Same Director"                           # features/step_definitions/web_steps.rb:56
+    Then I should either be on the home page or the RottenPotatoes home page # features/step_definitions/saas_web_steps.rb:1
+    And I should see "'Alien' has no director info"                          # features/step_definitions/web_steps.rb:105
+
+Failing Scenarios:
+cucumber /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:16 # Scenario: add director to existing movie
+cucumber /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:22 # Scenario: find movie with same director
+cucumber /tmp/hw4_grader20121105-15067-b4b9sp/required_features/director.feature:29 # Scenario: can't find similar movies if we don't know director (sad path)
+
+3 scenarios (3 failed)
+17 steps (3 failed, 10 skipped, 1 undefined, 3 passed)
+0m2.591s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Coverage report generated for Cucumber Features, RSpec to /tmp/hw4_grader20121105-15067-b4b9sp/coverage. 0 / 0 LOC (0.0%) covered.
+----------------------------------------
+  0 out of 3 scenarios passed
+  Score: 0/40
+----------------------------------------
+Total score: 20.0 / 100.0
+Completed in 93.114794912 seconds.
+
+    Previous
+    Next
+
+Find Courses About Blog Jobs Contact
+
+© 2012 edX, some rights reserved.
+Terms of Service Privacy Policy Honor Code Help

@@ -1,0 +1,172 @@
+* !!! EDITED IN GMAIL DRAFTS! Amendment to PNStack Functional Spec
+** Intro
+[PPT by Roger that defines row heights, PNSpacing]
+
+We would like to start with referring the reader to the "PN Row Stacking Constraint, Design and Implementation Spec" document [ref to PN-Stack Constraint.docx by Prager, Kang and Wang].  
+
+The overview provided in that document is a good refresher for the purposes of this document as well:
+
+"This design spec describes a new constraint to be implemented in Helix.  The constraint is called PNStack and describes a custom digital leaf cell layout.  More specifically, the PNStack constraint will enable Helix to generate a coherent set of rows of devices, where devices in the rows are appropriately abutted, while P/N poly gates are aligned across the rows. ..."
+
+The PNStack constraint is now available through the Helix GUI. It has a corresponding YAML representation in the Helix constraint file (*.hxcs), and is accepted by the Helix.exe engine. 
+
+The purpose of this document is to provide amendments and clarifications to the original design document at the "functional-level" only. This means that, as opposed to the original document, this document will stay at the level of functionality and will not address lower level design and implementation concerns invisible to the user. The emphasis in this document is on the changes of the tool behavior and the interface visible to the user. 
+
+We first describe at the high-level the functionality of PNStack in Helix. The next section will define the terminology and clarify the core concepts in PNStack. Then, we motivate briefly and describe a number of major and minor changes to the tool behavior. Next, we describe the changes to the graphical user interface and the YAML representation underlying the user interface. Finally, we summarize and provide a brief application note to clarify the expected use of PNStack in the field.
+
+** Concepts and Terminology
+In this document, we will assume that PNStack constraint has a number of elements all of which are MOSFETs: 
+    M1, M2, ..., Mn
+Note: This implies that the UCellType for all elements of a PNStack is "PrimitiveSegmentedUCell."
+
+Each element is required to be assigned to one, and only one, "AllowedGroup," that we will denote simply as a "group" in the rest of this document.
+
+A PNStack must have at least two groups: G1 and G2. However, it could have many more. It is interesting to note that there is no practical limit on the number of grouops in a PNStack.
+
+Two elements can be abutted only if they are in the same group.
+
+Each group is required to be assigned to a "device-row", P or N, but not both.
+
+The simplest PNStack, therefore, is two device rows, P and N, P stacked on top of N. We denote this as a "PN" row. The simplest incarnation would have only two elements:
+M1, assigned to G1, G1 assigned to P.
+M2, assigned to G2, G2 assigned to N.
+
+We list below a few other interesting cases, just to illustrate various different flavors of layout one can generate automatically using PNStack:
+
+*** 6 device one PN row layout
+MinRows = MaxRows = 1
+M1, M3 -> G1 -> P
+M2     -> G2 -> P
+M4, M6 -> G3 -> N
+M5     -> G4 -> N
+
+Here, please note that M2 will never be abutted with M1 and M3 even though they will all be placed in one P row. Similarly, M5 is not going to be abutted with any other device.
+
+*** An illegal constraint
+MinRows = MaxRows = 2
+M1, M2, M3 -> G1 -> P
+M4, M5, M6 -> G2 -> N
+** Major Changes
+
+** Minor Changes
+
+** Changes to the GUI and the YAML representation
+[Ref: PNStack GUI Spec]
+
+** Summary
+
+*** Application Note
+** MATERIAL
+[+] HFL -> HFFL -- First and Final (:-) look for custom digital.
+
+StructuredPartition of PNStacks
+
+Input: top-cell containing a custom (purely) digital block (otherwise, provide a way for the user to "filter" sub-cells to include/exclude.)
+Output: final layout of SPP.
+
+[+] MinRow/MaxRow (to replace FixDimension param)
+One PNStack "row" is defined as a pair of "device-rows", P on top, N at the
+bottom. Call it PN.
+
+A PNstack can have one or more "rows."
+One row, the minimum, is PN. (P is top, N is bottom).
+Two rows, is NPPN (first N is the top-most device-row)
+
+When MaxRow > MinRow, we want at least (MaxRow - MinRow + 1) alternative solutions. One way to achieve this is to run the tool in parallel using the following number of rows:
+MinRow, MinRow+1, MinRow+2, ..., MaxRow-1, MaxRow
+
+[+] Option to enforce structure (to be used in StructuredPartition)
+Height of P-row
+Height of N-row
+PN-spacing
+
+With or without taps (array, or ring)
+
+[+] Auto correction is to be turned off (no need)
+
+[+] AutoAssignment
+Given N instances in a PNStack, create a set of allowed groups (G), assign each instance into exactly one G(i), and assign each G(i) into P-row xor N-row. Correctly!
+  Two questions to answer:
+  -  If two insts, I1 and I2, have their BODY pins on the same net, they can be in the same AllowedGroup..
+  -  Given an inst, I, does it have nwell?
+* The end
+* OLDER VERSION
+* PN-stack ease of use/automation/features
+
+PNStack Options to Create "Standart-Cell Like" Layout
+High Level Requirements
+
+** Intro
+
+We would like to enhance the PNStack constraint in Helix in order that it
+can be used along with StructuredPartition to automate layout creation for
+custom digital circuits. 
+
+In this document, we would like to define a high-level scope to help bring
+all stakeholders into alignment. 
+
+The next section provides a high-level flow to illustrate how we expect
+this functionality to be used within Helix. 
+
+Next, we will describe a number of different design scenarios and how the
+PNStack layout is expected to look in each scenario. For each scenario, we
+also discuss briefly what kinds of controls will be needed by the user. We
+intend to cover most, if not all, the scenarios that a typical customer of
+Helix will be interested in (assuming they are mixed-signal chip designers
+where the focus is on analog, but there is a large section of custom
+digital circuit(s) they want to lay out along with the analog.
+
+** Motivation
+
+Helix is a device-level layout automation tool which can also be used to
+create layout from scratch without having to rely on a library of
+pre-existing cells. However, in practice, design teams typically want to
+re-use layout from standard-cell libraries, if they are readily available. 
+
+For this purpose, Helix provides the StructuredPartition constraint which
+can place standard cells in rows. 
+
+
+
+
+
+   *) Model 1) Std cell input -> StructurePartition
+      Slow NOT because of SP. This is slow because of Std cell input..
+-> *) Model 2) PNStack -> StructurePartition
+      Much much faster for design cycle (no need to wait for mask designers)
+      a) Ross (internal test-case ...)
+      b) Lyndon (new pairing heuristic + orientation flipping)
+   *) Model 3) PNStack -> AVP (for row based placement)
+      This is faster than Model 2.
+   *) Model 4) Std cell input -> AVP
+      
+Ross X 2014.09 Jun 25 -> Sep 
+Lyndon X 
+Intel ( -> Mirko ) PackedPartition good enough.. 
+Model 4 ...
+** Align connected drains and sources as well as connected poly fingers! If not connected, use dummy device as counterpart or leave empty
+   If two diffusion straps on different nets are aligned, we get a short!
+** Alternating instances are to be flipped left/right
+   Within each row, follow orientation sequence: R0/MY/R0/MY/...
+** Multi-row automation/controls
+  min/max # of "rows" (1 row = NP, 2 rows = NPPN, etc..)
+** Enable boundary-tile abutment (in order that structure partition can be used on PNStacks)
+  a- User wants to be able to fix dimensions for NRow/PRow and also where
+     nwell starts and ends with precise control. Further, for the next
+     level of automation, we would like to automate these settings for a
+     given set of cells, and/or selection of primitive devices.
+  b- PRBoundary to align to the centerline of contact/cuts (to enable
+     shared and DRC clean guard-rings/arrays).
+  c- Mismatch in height between PNStacks for ucell in memory vs for a
+     sub-cell. This is a bug and we are investigating it at the moment.
+  d- Support for a unit-size option to put the PNStack width and height on
+     a grid. This will control the horizontal stretch of shapes (e.g.,
+     nwell, guard rings, etc.) and vertical location of shapes (e.g., top
+     guard-ring, etc.)
+** Auto computation of unit-size
+   We can use the contact pitch (min width + min space) as a default value.
+** Auto computation of NRow/PRow heights
+   Given a selection of NMOS/PMOS devices (or cells containing devices), we
+   want to automatically set the row heights in order to improve ease of
+   use (reduces setup time and possibility of user error).
+* The end

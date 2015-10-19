@@ -1,0 +1,284 @@
+I would like to focus on a few of the items you've mentioned in the feedback. We can discuss these in our meeting on Monday if you'd like:
+
+3)	support for origin shifting -- as far as I see, origin shifting is already supported and the new proposal is orthogonal to the existing origin shifting functionality. I am sorry I am not fully versed on the latter. So, it may be my ignorance. Please let me know.
+1)      corner-case.. if two objs are abutted (or spaced), but on grid, any case where due to a DR violation, we want to skip to the next grid line??
+6)      Support in Partition/Row/Column/*Matrix & *Pattern!
+2)	user interface: I agree 100% :-). Thank you for spelling this out clearly. CustomSpacing is not the way to do it.. Please stay tuned for a better ui..
+5)      python api: New option in fgPlace to enforce mod-grids, optionally abut on PRBoundary
+4)      sample usage for AreaBlockage and LayerBlockage..  PRBoundary
+  The area blockage is most commonly used to prevent standard cells from being placed within a certain area.
+  oaLayerBlockages may have an effective width. This is the value that is used by routing tools to determine the minimum spacing constraint for other geometry placed near the blockage. Typically, if a blockage has no effective width (hasEffectiveWidth() is false), the blockage should be treated as "real geometry" by tools, and its width is the width of the blockage plus any other adjacent geometry.
+
+7) XGen API. Existing apis should be sufficient.. Any issues?
+
+1)	corner case: I think you are right, and this made me ponder about how much we really care for design rules vs modular grid rules in a cell-placement methodology.. More to come..
+3)	support for origin shifting -- as far as I see, origin shifting is already supported and the new proposal is orthogonal to the existing origin shifting functionality. I am sorry I am not fully versed on the latter. So, it may be my ignorance. Please let me know.
+4)	DRC script support for oa objects PRBoundary, AreaBlockage, LayerBlockage. -- again, I don't see how these are relevant directly to the proposal. If they can be converted to layer shapes, they can be readily used in IncludeLayers/ExcludeLayers.. So, again it looks like an orthogonal concern. 
+5)	python api for the new "mode": useInitialPlacement
+OLD -- actually, the proposal is not introducing a new mode for fgPlace (or any other santana api), but a new mode of placement in Helix. I am not sure how fg-api are used in CustomConstruction or Finish scripts. I looked at a test-case in berry, but I don't see any reference to fg.. Regardless, I think both tiling and enforce-drc modes are already available using santana api (using fgAbut, fgMinSpacing, etc...). Again, maybe I a missing something. Please help clarify..
+
+From: Lyndon Lim [mailto:lynlim@altera.com] 
+Sent: Monday, December 08, 2014 1:15 AM
+To: Bulent Basaran
+Cc: 'Ming.Su@synopsys.com'; Mirko Spasojevic
+Subject: Feedback on Modular Grid Placement Enhancements
+
+
+Feedback for Modular Grid Placement enhancements proposed by Synopsys.
+
+------------------------------------------------------------------------
+
+This email provides feedback on 4 Synopsys emails,
+
+    Sent:       Thu 11/13/2014 9:21 AM
+    Subject:    RE: detail on two ideas from our meeting
+    Attachment: altera-mod-grid.txt
+    Summary:    Attachment describes proposed Partition enhancements
+                with corresponding constraint syntax and suggestion
+                that enhancement may be applied to other constraints.
+
+    Sent:       Fri 11/14/2014 10:26 AM
+    Subject:    RE: detail on two ideas from our meeting
+    Summary:    Additional proposal that Partition enhancement can be
+                encapsulated and then applied to other constraints.
+
+    Sent:       Thu 12/4/2014 1:36 PM
+    Subject:    corner case?
+   Summary:    Highlight that DRC correction after initial placement
+                with concident placement of PRBoundary edges may cause
+                DRC violations if no bridging is performed.
+
+    Sent:       Fri 12/5/2014 3:15 PM
+    Subject:    RE: corner case?
+    Attachment: corner-case.pptx
+    Summary:    Attachment to graphically describe corner case problem.
+
+Please let me know if I missed any emails in this discussion thread
+that requires response/review.
+
+------------------------------------------------------------------------
+
+This discussion is a continuation of the discussion and feedback
+captured in the PowerPoint document named "Modular Grid Placement
+Enhancements", sent Thu 10/16/2014 2:22 PM.
+
+In the PowerPoint document, the current Altera solution for cell-
+based placement with modular grid alignment is described.  The
+current solution fulfills 3 requirements:
+
+    [1] Modular grid alignment
+    [2] Origin shifting
+    [3] Instance PRBoundary Abutment
+
+The solution uses gridding layer rectangles, and a combination of
+customer Python function, Santana.tech design rules, hxcfg settings,
+techPropertyMap settings, and specifying OverlapLayers.
+
+The solution has these problems:
+
+    [1] Specifying many OverlapLayers is a misuse of the feature and
+        causes slow performance and larger memory usage.  Illegal
+        bridging shapes are created in the final layout.
+
+    [2] Specifying many OverlapLayers is not a robust approach, prone
+        to errors when new foundry technology files are received.
+
+    [3] Origin shifting must be implemented on a per-constraint basis.
+
+    [4] Modular grid alignment DRC rules are complicated because of
+        the dual role of gridding layer rectangles to specify alignment
+        and to specify abutment boundaries.
+
+    [5] DRC Script language does not have native support for OpenAccess
+        objects other than oaShapes.
+
+------------------------------------------------------------------------
+
+The Synopsys proposal addresses 2 of 3 requirements:
+
+    [1] Modular grid alignment
+
+    &
+
+    [3] Instance PRBoundary Abutment
+
+
+
+and consequently addresses these problems:
+
+    [1] Specifying many OverlapLayers is a misuse of the feature and
+        causes slow performance and larger memory usage.  Illegal
+        bridging shapes are created in the final layout.
+
+    [2] Specifying many OverlapLayers is not a robust approach, prone
+        to errors when new foundry technology files are received.
+
+    &
+
+    [4] Modular grid alignment DRC rules are complicated because of
+        the dual role of gridding layer rectangles to specify alignment
+        and to specify abutment boundaries.
+
+------------------------------------------------------------------------
+
+My feedback:
+
+[1] General approach.
+    The proposal is to keep the existing Partition placement algorithm
+    and add 2 additional capabilities, a tiling only mode, and a
+    tiling + DRC correction mode.  Both modes do not support layer
+    bridging.
+
+    The 2 new modes would simplify the cell-based placement flow
+    at Altera, and improve the overall robustness.
+    
+    In tiling only mode, all placement occurs by coincident edges of
+    adjacent instance PRBoundaries.
+
+    In tiling + DRC correction mode, initial placement occurs by
+    coincident edges of adjacent instance PRBoundaries, followed by
+    a DRC correction for spacing violations.  Illegal merges and
+    overlaps are possible, but responsibility of the customer.
+
+    DRC correction also enable modular grid alignment, when gridding
+    layer rectangles are present.
+
+    For Altera, the predominant use would be tiling + DRC correction.
+
+    A tiling + modular grid alignment mode, without full DRC correction
+    could be implemented using rulesets.
+
+    ** I am in agreement with the general approach.
+
+    A specific problem, described as a corner case, is identified,
+    where subsequent DRC correction may introduce a spacing violation
+    because bridging is not supported in the new modes.
+
+    ** This is an acceptable trade-off.  A layout designer can
+       fill in the gap afterwards.
+
+    However, I do not understand how this situation can arise in
+    actual practice.  My understanding of Helix placement algorithms
+    is that fgPlace is called iteratively until all DRC spacing
+    violations are resolved.  Hence, I would expect after the initial
+    spacing violation is introduced by the DRC correction after tiling,
+    the components would be further spaced apart until no DRC spacing
+    violation remains.
+
+    ** This is NOT an acceptable trade-off, since the resulting
+       placement will likely be much too large.
+
+
+
+[2] Constraint interface.
+
+    TileAbutment:
+      oneof: ['basic', 'DRCheck']
+      optional:
+        default: 'DRCheck'
+    AbutmentBoundary:
+      type: str
+      optional: yes
+
+    I do not like this proposed constraint syntax.  When "TileAbutment"
+    is not set, Partition works as before.  This design is awkward for
+    XGen automation, because the option is either set to 1 of 2 values,
+    or deleted.  A better design is to set an option to 1 of 3 values,
+    with a default when not set.
+
+    An analogy would be to order Kentucky Fried Chicken, with either
+    Extra Crispy, or Grilled.  But, if you want Original Recipe, you
+    must not specify a flavor.
+
+    I think a better syntax would be a PlacementMode option, with values
+    for DRC correction, tiling only, or tiling with DRC correction.
+    I disagree with the suggestion to modify CustomSpacing syntax, as
+    the expectation with Custom* options, such as CustomSpacing,
+    CustomConstruction, etc., is essentially manual override,
+    no automatic operation.
+
+    ** I am NOT in agreement with the proposed constraint syntax.
+
+
+
+[3] Encapsulation for other constraints.
+    Encapsulating the approach, and propagating to as many constraints
+    as possible, should be considered mandatory.  Even before I left
+    Synopsys, Helix R&D had received customer complaints about the
+    inconsistency in capabilities of different constraint operators.
+
+    I had assembled a spreadsheet showing the inconsistencies, and we
+    had embarked on an effort to clean up the constraint operators.
+    Being a customer now, I can reaffirm prior customer complaints
+    that inconsistency of the operators is frustrating, and give an
+    impression of carelessness.
+
+    I was told, in the past, that the algorithms for the different
+    operators were custom, and such encapsulation was not feasible.
+    Regardless of implementation details about encapsulation, the
+    enhancements for modular grid alignment in placement should be
+    consistently supported in various constraint operators.
+
+    ** I am in agreement with the proposal that constraint operators
+       should be consistently enhanced.  The implementation details,
+       i.e. encapsulation, are open for Helix R&D to decide.
+
+
+
+[4] Issues not addressed
+    [a] Origin shifting
+        Origin shifting is an important and necessary capability in
+        creating a coherent and consistent methodology.  Otherwise,
+        missing this capability, many constraint operators are unusable.
+
+    [b] DRC script support for other OpenAccess objects.
+        When the underlying C++ code is written for the proposed
+        enhancements, it would be a terrible mistake to write special
+        functions for only handling PRBoundary, as opposed to the
+        already requested general capability to manipulate OpenAccess
+        objects, such as PRBoundary, Blockage, etc, as layers.
+
+        The ability of export OpenAccess objects as shape information
+        is already supported in Export Stream for other tools.
+
+    [c] Python API support for tiling + DRC correction.
+        No description was provided for Python API support, such as
+        an new mode for fgPlace().  The proposed enhancements should
+        consider how to support CustomConstruction Python functions
+        developed by the customer.
+
+------------------------------------------------------------------------
+
+Summary:
+[1] General approach - I agree with this approach.
+    But, we disagree on the corner case description.  If the corner
+    case results in small spacing violation, that is acceptable.
+    I believe the corner case does not result in a spacing violation,
+    but a DRC correct, excessively large, spacing between components.
+
+[2] I do not like the proposed constraint syntax.
+    The syntax causes automated constraint generation to be more
+    complicated than necessary.
+
+[3] Adding this capability to all appropriate constraints in a
+    consistent manner is expected.
+
+[4] I would like to see the proposal address the issues mentioned.
+    Otherwise, building a coherent and consistent methodology won't
+    be possible.  Please understand that I am looking for a set of
+    enhancements to implement a complete flow.
+
+    Currently, I have a flow with gaps where many placement tasks
+    are simply not possible.
+
+------------------------------------------------------------------------
+
+
+--
+Lyndon C. Lim  ( lynlim@altera.com )
+
+
+________________________________________
+
+Confidentiality Notice.
+This message may contain information that is confidential or otherwise protected from disclosure. If you are not the intended recipient, you are hereby notified that any use, disclosure, dissemination, distribution, or copying of this message, or any attachments, is strictly prohibited. If you have received this message in error, please advise the sender by reply e-mail, and delete the message and any attachments. Thank you.

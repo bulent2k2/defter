@@ -1,0 +1,11 @@
+* CD: 
+-> Shift-f: Open full hierarchy.. (Sets stop level to 32)
+-> Ctrl-f:  View only top level (Sets it back to 0)
+-> design editor api:
+set contexts [de::getContexts]
+de::dbGetCount $contexts
+de::open <lib/cell/view>
+de::select? (figure selection -> does logical selection)
+he:: (logical selection)
+db::foreach p [db::getPrefs lx*] { puts [db::getAttr name -of $p] }
+* The end

@@ -1,0 +1,16 @@
+* Helix terminology, questions
+UCell := constraint (owns insts/subcells) -- hierarchical constraint group
+Helix constraint schema
+Helix Constraint Compiler 
+YAML description in *.hxcs file
+Input consistency checking
+PNStackUCell S-expression goes into the *.hxdsn file.
+Helix.exe has DesignBuilder class -> reads the PNStackUCell S-expression, and gathers all the parameters specified by the user.
+Helix “cloning”: allows the user to “copy” a constraint hierarchy for a set of “source” sub-cells onto a set of “target” sub-cells. Helix is supposed to produce identical topological arrangements for both sets of sub-cells.
+sub-cell := inst
+** PN stack
+"sub-row stacking"?
+twell? (well tap?)
+PRow and NRow are dictionaries
+OverlapLayer rules can be defined in AllowedGroup, layers between the subCells in the same allowedGroup will be excluded when checking the spacing.
+* The end

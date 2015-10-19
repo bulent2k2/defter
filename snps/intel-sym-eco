@@ -1,0 +1,10 @@
+- symmetry:
+  axis: vertical or horizontal, and if not set, they want to get both kinds of layout symmetry
+  lo/hi: they like it. Any group element not in lo/hi will be self-symmetric. They were not sure, but, asked and answered. That's what they want.
+
+- incr:
+  if we have a firm group of (e.g., three) frozen groups, it is OK to insert free elements into the space between the frozen groups. 
+  Let's have a simple example: a group G of groups (Gsub1, Gsub2, Gsub3):
+  degree(G) = -1                              -> Everything is frozen. G is black-box, no insertion: free elements must be placed outside of G (and therefore outside of Gsub*).
+  degree(G) = 0  && degree(Gsub*) = -1        -> Gsub* are frozen, but G is a grey-box and free elements can be inserted into it.
+  degree(G) = n, n>0 && degree(Gsub*) = -1    -> Gsub* are frozen, but G is not. A large free element can be inserted between, e.g., Gsub1 and Gsub2, by pushing them apart by at most "n" microns (in addition to the space in between them already if they refer to the same start-layout.

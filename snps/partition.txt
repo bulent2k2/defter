@@ -1,0 +1,232 @@
+* Title: (DRAFT) Functional Spec for "PackedPartition" Constraint (2013.12-SP) (DRAFT).
+
+
+* 1- Introduction
+
+PackedPartition constraint, PP for short, is a variant of the Partition
+constraint. In this document, we highlight the unique functionality in PP
+above and beyond that of the Partition constraint. Please refer to the user
+guide for more details on the Partition constraint.  
+
+In the next section, we introduce the core problem that PP and Partition
+constraints intend to solve. We define the behavior that is common to both
+as a refresher. 
+
+Next, we describe in detail how PP differs from Partition. Let us note that
+PP is NOT a super-set of Partition. It cannot do everything that Partition
+does. Specifically, the detailed DRC functionality of Partition is distinct
+from PP. More on that later.. 
+
+Finally, we provide the schema definition, expected appearence in the Helix
+GUI and support in XGen. 
+
+
+* 2- The Problem
+
+A "Partition" constraint (Partition for short) groups a set of elements in
+a cell in order to help come up with a good placement for those
+elements. The elements are grouped together and will be in close
+proximity. Their placement will not be constrained by a strict structure
+that some of the other constraints impose, e.g., Row, Column, Matrix,
+etc. Instead, they will have a free-form/general placement in order to
+optimize area and wirelength. 
+
+We define a general Partition constraint as follows: 
+    P := {e1, e2, ..., e(n)}
+where e(i) denotes a (sub-)element of Partition. An element could be a
+    device, another constraint (e.g., a Row or a Halo), or existing layout
+    for a sub-cell.  
+
+Also note that there is a set of parameters to control how the elements are
+placed in a Partition. Please see the user guide for a description of all
+the params of Partition. 
+
+Partition constraint has two main drawbacks: 
+1- Area minimization is not optimal when the layout of some of its elements
+are "non-rectangular". While packing, it treats each element as a
+rectangle. When an element has, e.g., an L-like shape, this causes the
+placement to use more area than may be necessary. (FIGURE) 
+
+2- Runtime performance is slow for big designs. For each placement
+iteration, DRC is checked between interacting elements for accuracy. This
+slows down the tool. Further, the core technology is generally a also
+slower method among global optimization techniques. 
+
+The PackedPartition constraint (PP for short) intends to save area by
+improving packing of the placement. This is achieved by exploiting
+whitespace within the elements. E.g., an element e1 can be placed within
+the whitespace inside the bounding box of another element, e2. Or, e3 can
+be placed in the corner defined by an L-shaped element, say e4. (FIGURE)  
+
+
+** 2-a Gridding Control
+
+PP places its elements on a grid defined by two parameters:
+x-grid/y-grid. E.g., x-grid = 0.40u, y-grid = 0.60u. (WHAT IS THE DEFAULT?) 
+
+Given that an element can be a complex layout, there is an additional
+parameter called gridding-box that defines precisely what in that element
+is to be placed on the grid defined by x/y-grid params.  
+
+A gridding-box is like the bounding box (bbox for short) of an element
+where the precise coordinates of the bbox can be controlled by one the
+following choices: 
+   PRBoundary,
+   IncludeLayers,
+   ExcludeLayers,
+   CustomParams,
+   CustomFunction.
+
+PRBoundary: the bbox is computed from all of the contents of the
+element. If there is a cell boundary shape, the "origin" of its bounding
+box will be placed on the grid (CONFIRM!) 
+
+IncludeLayers: the bbox is computed from only shapes on the given
+               layers. E.g., IncludeLayers: [metal1, metal2] 
+
+ExcludeLayers: the bbox is computed from all the shapes on layers except
+	       those provided with this option. E.g., 
+	       ExcludeLayers: [diffusion, poly, pplus, nplus, nwell] 
+
+CustomParams,
+CustomFunction: Please see the description of param "Custom
+		Spacing" for Partition constraint in the user guide for a
+		description of these controls. 
+
+Note that, PP will place the "origin" of the gridding-box on the grid
+defined by x-grid/y-grid params. For non-flipped elements, the origin is
+the lower-left corner of the gridding box. However, if flipping is enabled,
+and PP chooses to flip an element, the origin might refer to one of the
+other corners, lower-right (in case of x-flip only), upper-right (both x
+and y flips) or upper-left (only y-flip). 
+
+
+
+** 2-b Overlap Control
+
+PP achieves rectilinear packing by computing an "effective-area" for each
+element: the space outside the effective-area is assumed to be available
+for other elements to use. Let us use "area", in short, to denote effective
+area of an element and "white-space" to denote the rest (whitespace := bbox
+- area). The area is represented as a general rectilinear polygon. For
+example, if e1 and e2 each has a C-shaped area, PP can flip e2 in x and
+pack e1 and e2 into a compact rectangle. (FIGURE) 
+
+PP provides a parameter called overlap-layers so that the user can control
+how exactly the area is computed. As an example, let us consider a simple
+case where implant layers in each element are sufficient to determine the
+(effective) area and keeping them "disjoint", i.e., ensuring that they are
+not overlapped will be good enough for clean DRC:  
+
+ OverlapLayers: [nwell, diff, poly, contact, m1, ...]
+
+where the overlap-layers param above includes all but nplus and pplus
+layers. 
+
+
+
+** 2-c Halo/Island Support
+
+Top level halos are honored by PackedPartition. This means that no element
+will overlap the halo area. However, any lower-level halos (e.g., an Island
+of a Halo) would potentially be "white-space" for packing purposes and
+other elements could be placed to overlap them. In the Island of a Halo
+example, if the OverlapLayers param has the same layer used in Island,
+packing should happen. Otherwise, it won't.  
+
+A halo around a rectilinear element will also be __rectilinear__. This
+means that other elements can be packed into the whitespace within the
+bounding box of the halo. E.g., given an L-shaped object, the halo around
+it will also be L-shaped and other elements will be packed within the
+corner but stay outside of the L-shaped halo. 
+
+
+
+* 3- Schema Definition
+
+The schema will have the following under:
+- !Schema
+  name: UCell
+  desc: UCell directives
+
+  ...
+
+      PackedPartition:
+        Param:
+          mapping:
+            Xgrid:
+              type: number
+              range: {min: 0}
+              optional:
+                default: 0
+            Ygrid:
+              type: number
+              range: {min: 0}
+              optional:
+                default: 0
+            GriddingBox:
+              type: BoundingBoxType
+              optional: yes
+            OverlapLayers: &overlapLayersType
+              sequence: 
+                 type: str
+              optional: yes                         
+            OverlapPRBoundary:
+              oneof: ['true', 'false']
+              optional:
+                default: 'true'
+            BoundaryAssociation:
+              sequence: 
+                type: NetPosition
+              optional: yes 
+          optional: yes                         
+
+We still need to decide whether it makes sense to keep OverlapPRBoundary
+and BoundaryAssociation params in this release.  
+
+Note that we already have:
+
+- !Schema
+  name: BoundingBoxType
+  desc: Parameter definition for StripeRoute bounding box
+  mapping:
+    CustomFunction:
+      type: str
+      optional: yes
+    CustomParams:
+      type: map
+      optional: yes
+    IncludeLayers:
+      sequence:
+        type: str
+      optional: yes
+    ExcludeLayers:
+      sequence:
+        type: str
+      optional: yes
+    PRBoundary:
+      oneof: ['true', 'false']
+      optional: yes
+ 
+
+
+
+* 4- GUI
+
+The graphical user interface of PackedPartition will be similar to that of
+the Partition constraint. An editor (as in Row or PNStack constraints) is
+not needed. 
+
+
+
+* 5- XGen
+
+XGen API will be enhanced with a new method:
+  createPackedPartition(...)
+
+Regressions will be updated with a new test:
+  testPackedPartition(...)
+
+
+
+* 6- Summary

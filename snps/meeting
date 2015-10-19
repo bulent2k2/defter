@@ -1,0 +1,31 @@
+* No meeting with Shing-Te on Sep 18 (routing offsite) and 25 (managers meeting)
+* 2013 Sep 10
+- Update on prototyping/experiments                         Shakir/Bulent
+
+Reviewed: 1- SBR experiments so far, 2- hi-level spec for the prototype. We expect that the prototyping will have a few phases. The objectives are two-fold: - fast migration, - fast rule/pdk setup. To achieve these, we will rely on the following:
+a) Bottom-up fast abstract run
+b) Short wires to be delegated to SBR
+c) Cookie-cut to clean-up abstract interfaces
+d) Hierarchical routing (Renlin has some script?)
+e) pcell inst routing (in the first phase, rely on pcell params, e.g., Sato's pdk)
+
+- Estimates for dashboard items                             Sumit
+- 9000664551- via/via-arrays should be flattenned in lib-a
+  Sato's testcase in Noida
+- Infeasibilities when path_bonds=1
+- Poly spacer settings    OFFLINE with Shakir
+* 2013 Sep 3
+-1  Opens? (Any other items for the agenda?)
+0-  Customer update (Sato's design and three co. from Japan)
+    Renesas meeting on Wednesday (tomorrow)
+    Estimate work remaining for customer engagement (Sony, Ricoh, Renesas)
+1-  Learnings from auto-fix experiment so far
+    tsmc28 plans/action items?
+    AI: Rahul: please talk to Shabbir re:
+    a) does oaTech exist with rules for auto-fix for tsmc45/28/20/16 (any tcl cmd to read/write, can we dump them out?)
+    b) support for 45-degree shapes (poly/path)
+2-  Review task list from Mohit
+3-  Review task list from Sunil
+4-  45-degree update ¡V lineend rule issue
+AI: Bulent: talk to SHing-Te re: GSP
+* The end

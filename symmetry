@@ -1,0 +1,119 @@
+There are two kinds of symmetric devices in general:
+- a self symmetric (SS) device (or two or more abutted devices e.g.,
+  for a common-centroid pair)
+- symmetric pair (SP) of devices (with a gap in the active layer (diffusion
+  or rpo, e.g.)
+
+There are three "minimal" configurations that we need to identify in
+layout. Otherwise, there is no symmetry. They are:
+
+1- at least two SS 
+2- at least two SP
+3- at least one SS and one SP 
+
+Let's denote them using the general term: a symmetry group (SG). So, an SG,
+by definition has at a minimum two SS's, or one SP. In general, an SG can
+have multiple SS's and SP's that make up a portion of the layout.
+
+Given an SG, we also talk about "elements" of the SG. For two SS's, each SS
+device is an element. For an SP, each device is an element.
+
+The requirement for case 1 (at least two SS's):
+- for vertical (horizontal) devices, SS1 and SS2 are stacked vertically
+  (horizontally). We want the tool to check that their centerlines are
+  aligned. I.e., they have the same coordinate. e.g., y=10u for vertical
+  devices. 
+
+The requirement for case 2 (at least one SP):
+- for vertical (horizontal) devices, the top and bottom (left and right)
+  edges of the "left-hand" (bottom-side) device, denote as M(LB) are
+  aligned with those edges of the "right-hand" (top-side) device, denote as
+  M(RT). 
+
+The requirement for case 3 (one SP and one SS):
+- for vertical (horizontal) devices, the top and bottom (left and right)
+edges are aligne for the SP and the centerline of the SS is aligned with
+the centerline of the SP.
+
+Further, in all three cases, we want the elements (devices) of the symmetry
+group to be in close "proximity." I.e., if we query the neighborhood of one
+element of the SG, the resulting set of immediate neighbors, just denote it
+as "neighbor" must include the other element. 
+
+In case of multiple elements in an SG, consider the following cases:
+
+1- three or more SS: first find the closest pair of elements. Now, one of
+   the remaining elements must be a "neighbor" of the first pair. And, so
+   on, for fourth element and on..
+
+2- two or more SP: first find the SP for which the two elements are
+   neightbors. Now, from the remaining SPs, at least one must have one
+   element of the first SP as a "neighbor." And, so on for the third SP and
+   on. 
+
+3- mixed SP, SS: first find the SP or SS with the closest elements. If it
+   is an SS (as in case 1), then find an SS, or SP, for which the elements
+   are closest to the first SS, and continue.
+
+
+So, we want the tool to automatically identify SS and SPs in layout using
+"neighborhood" and "edge alignment" in the sense described above.
+
+
+
+For vertical devices, we have the following minimal configurations (or,
+there is no symmetry in layout):
+
+
+                              +---------------------------+
+                              |                           |
+                              |                           |
+                              |                           |
+                              |                           |
+                              |e1                         |
+                              +---------------------------+         SS - self-symmetric pairs
+                                    +---------------+
+                                    |               |
+                                    |               |
+                                    |e2             |
+                                    +---------------+
+
+
+                                                                     +-----------+  +-----------+
+                                                                     |           |  |           |
+                                                                     |           |  |           |
+                                                                     |           |  |           |
+                                                                     |           |  |           |
+                                                                     |           |  |           |
+                                                                     +-----------+  +-----------+
+
+                                                                 +-------------+       +------------+
+                                                                 |             |       |            |
+                                                                 |             |       |            |
+                                                                 |             |       |            |
+                                                                 |             |       |            |
+                                                                 | e1          |       |e2          |
+                                                                 +-------------+       +------------+
+
+
+                                                                           SP - two symmetric pairs
+
+
+                    +------------+    +------------+
+                    |            |    |            |
+                    |            |    |            |
+                    |            |    |            |
+                    +------------+    +------------+
+                           +---------------+
+                           |               |
+                           |               |
+                           |               |
+                           |               |
+                           |               |
+                           |               |
+                           +---------------+
+
+
+
+                       SP+SS - one symmetric pair and one self-symmetric device 
+

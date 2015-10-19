@@ -1,0 +1,49 @@
+- row 4: helix constraint view based on particular placement.
+Work was on hold due to higher priority STARs (rows 14/15 below). ETA ~ Mid January, if no other distractions.
+
+- row 5: User customization of Modular Grid definitions
+R&D proposal reviewed and approved. Implementation starts this week. ETA ~ 3 weeks.
+
+- row 6: Helix native support of modular placement grid concept.
+Coding is in progress to enhance the engine to natively support gridding rules. ETA: end of this week.
+Original STAR: 9000788017- Intel ICF - Request modular grid be more tightly integrated with Helix engine
+Spin-off STAR: 9000812194- Make evolutionary engine aware of grid rules
+Two new STARs to support modular grid based cell placement: 
+    STAR: 9000828623- New mode in CustomSpacing to enforce design rules
+    STAR: 9000828626- CustomSpacing EnforceDesignRules option to support Include/ExcludeLayers
+
+- row 7: Pattern aware placement: 
+The following has been delivered already: Device-Tile Configuration support (using stack of rows/patterns). Mayank has been testing this including the new pattern editor for row-stack inline template. Various bugs/enhancements (including off-grid halo issue, missing text pattern, and SDL-flow issue) have been reported and fixed. 
+
+A new enh request came in last week: Support dummies with different master LCVs. In progress.
+
+- row 8: Access to Helix callback
+This is covered by work for row 7. Related STARs:
+STAR: 9000788061- Intel ICF - Request callbacks on forms
+STAR: 9000796612- Graphical Constraint Options Editor for InlineTemplates
+
+- row 9: Making Helix template parametric and scalable
+m-factor support (bundle parallel) is now ready for use in "Auto Apply Templates" cmd. It does not support "Load Template" cmd yet.
+STAR: 9000788062- Intel ICF - Request Helix templates to be made parametric and more scalable: 
+
+- row 10: Pattern Editor GUI. 
+Delivered and under testing by Mayank already.
+STAR: 9000788063- Intel ICF - Request standalone pattern editor GUI to use when applying templates
+
+-row 14: Ability to fold transistors into multiple fingers 9000813052 
+Fixed.
+
+-row 15: Ability to abut transistors with different widths 9000793718
+Fixed.
+
+I have no update on the remaining rows:
+-row 2: Enable Helix to work directly on OA libraries with no recurring Pcell Xtreme/Wrapper setup requirements 
+STAR 9000788011- Intel ICF - Enable Helix to work on OA libraries with no recurring setup
+
+-row 3: Fix floorplanning features like soft cluster and cell selection filter to always give correct solutions to the user
+
+-row 11: Hierarchical browsing through results	9000810761 Newly filed STAR		
+
+-row 12: Usability enhancements - continue on netlist failure	9000810804 Newly filed STAR 
+
+-row 13: Track Aware Pin Optimization should be native to Helix 9000810807 Newly filed STAR 

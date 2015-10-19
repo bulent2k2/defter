@@ -1,0 +1,231 @@
+* NEW STAR: 9000828623- New mode in CustomSpacing to enforce design rules
+Title: New mode in CustomSpacing to enforce design rules
+
+Please enhance Helix so that CustomSpacing supports a new mode to satisfy design rules and (modular) gridding rules.
+
+Please note: 
+1) CustomSpacing is supported by Partition/Row/Column/*Matrix/*Pattern constraints.
+2) When CustomSpacing is used, OverlapLayers param is not applicable (and ignored).
+3) CustomSpacing currently supports Value,PRBoundary,Include/ExcludeLayers,Function,Params.
+
+Please add a new CustomSpacing option called "EnforceDesignRules:"
+
+            CustomSpacing: &customSpacingType
+              mapping:
+                Value:
+                  type: number
+                  optional: yes
+                ...
+		EnforceDesignRules:
+                  oneof: ['true', 'false']
+                  optional:
+                    default: 'false'
+		...
+                PRBoundary:
+                  oneof: ['true', 'false']
+                  optional: yes
+		...
+
+When EnforceDesignRules is not set, CustomSpacing works as before. Note that, the tool currently supports a mode of placement where components are abutted such that their boundaries may touch but do not overlap each other. This is achieved using the following settings:
+  Value      <- 0,
+  PRBoundary <- 'true'
+Let us denote such a placement as "boundary tile abutment."
+
+When EnforceDesignRules is set to 'true', Helix will first abut the components using PRBoundary: the boundary of the moving component will be stacked up against the boundary of the fixed component such that the adjacent edges will concide. Next, Helix uses fg-api to push the moving component away, if necessary, so that it is on the first available (modular) grid point and there are no design rule violations between the two components.
+
+Note that another STAR to be filed soon will address an enhancement to support Include/ExcludeLayers to compute a custom boundary. 
+
+For the sake of description and further discussion, let us assume the following "pseudo-code" for implementation of EnforceDesignRules:
+
+Step 1- Create a placement with boundary tile abutment.
+Step 2- If EnforceDesignRules is set to 'false', we are done. Return.
+Step 3- Otherwise, if there are no spacing or gridding errors, we are done. Return.
+Step 4- Otherwise, run basic fg-APIs in 2D (level 1/2 spacing, and gridding) to move the "moving" component, which dissolves the abutment, in order that:
+a) the moving component is snapped to a modular grid point, and,
+b) spacing rules between the fixed and the moving component are met.
+
+Note that after initial placement (step 1), geometries of two components may touch (abut) or overlap. This is expected behavior and it is OK. If this causes illegal overlaps or merges, the responsibility falls on the user, not the tool. This is similar to auto-place and route of cells without proper PRBoundaries. We don't expect this to be a problem for Altera or any coherent cell-placement methodology.
+
+Please note that, based on discussions with Siarhei, we take the following to be true:
+1- fg-APIs (level 1/2 spacing, and gridding) already provide a flag to turn off the following behavior which is used in Partition today:
+  To prevent illegal merges, the two components are separated by 1 unit (which breaks the abutment) before running DR checks.
+2- if the aforementioned flag does not exist today, it can be easily added by Oleg or Siarhei.
+
+To re-iterate, for EnforceDesignRules, we do not expect Helix to create any bridges (neither for OverlapLayers, which are already ignored, if any, when CustomSpacing is used, nor for merge-able layers).
+
+* ENH STAR: 9000828626- CustomSpacing EnforceDesignRules option to support Include/ExcludeLayers
+* OLD FULL: STAR: 9000826586- Two new options for Partition constraint: TileAbutment and AbutmentBoundary
+This STAR is to support Altera's cell-based placement methodology based on use of (modular) gridding rules.
+
+Please note that Altera uses Helix not for device placement, but for cell placement. As such they rely heavily on StructuredPartition to create clusters of std-lib cells (let's denote them as "blocks"), and then use Partition/Row/Column to come up with a good placement of blocks and other macros.
+
+The following request is meant for the above context only.
+
+Please enhance the Partition constraint to support two new params:
+
+            TileAbutment:
+              oneof: ['basic', 'DRCheck']
+              optional:
+                default: 'DRCheck'
+            AbutmentBoundary:
+              type: str
+              optional: yes
+
+When TileAbutment is not set, AbutmentBoundary is ignored and Partition works as before.
+
+When TileAbutment is set to 'basic', Partition works just as Row(AbutmentType <- 'boundaryTile') with the added functionality of "AbutmentBoundary" (AB) param.
+AB is an optional parameter (following the definition in StructuredPartition): It is a string to specify the name of the layer to be used for abutment. If not specified, PRBoundary is used by default.
+
+When TileAbutment is set to 'DRCheck', Partition is expected to improve upon the 'basic' TileAbutment mode by enforcing spacing and (modular) gridding rules.
+
+For the sake of description and further discussion, let us assume the following "pseudo-code" for implementation of TileAbutment:
+
+Step 1- Create placement for 'basic' mode.
+Step 2- If mode is set to 'basic', we are done. Return.
+Step 3- If mode is set to 'boundaryTile', use the result of Step 1 as "initial placement."
+Step 4- If there are no spacing or gridding errors, we are done. Return.
+Step 5- Otherwise, run basic fg-APIs in 2D (level 1/2 spacing, and gridding) to move the "moving" component, which dissolves the abutment, in order that:
+a) the moving component is snapped to a modular grid point, and,
+b) spacing rules between the fixed and the moving component are met.
+
+Note that after initial placement (say, we are in Step 4) geometries of two components may touch (abut) or overlap. This is expected behavior and it is OK. If this causes illegal overlaps or merges, the responsibility falls on the user, not the tool. This is similar to auto-place and route of cells without proper PRBoundaries. We don't expect this to be a problem for Altera or any coherent cell-placement methodology.
+
+Please note that, based on discussions with Siarhei, we take the following to be true:
+1- fg-APIs (level 1/2 spacing, and gridding) already provide a flag to turn off the following behavior which is used in Partition today:
+  To prevent illegal merges, the two components are separated by 1 unit (which breaks the abutment) before running DR checks.
+2- if the aforementioned flag does not exist today, it can be easily added by Oleg or Siarhei.
+
+To re-iterate, in this new mode of TileAbutment='DRCheck', we do not expect Partition to create any bridges (neither for OverlapLayers, nor for merge-able layers).
+Further, when DRCheck mode is used, OverlapLayers and CustomSpacing params are expected not to be set. It would be necessary to catch this as an exception in constraint-compilation and ask the user to revise her settings:
+  error if TileAbutment=='DRCheck' && (OverlapLayers != none || CustomSpacing != none).
+
+Please note: This scheme suggests another new mode that might be useful to other customers: TileAbutment='basic' with CustomSpacing. For the sake of expediency, let's plan to not support this mode for now, if it requires considerable effort. Accordingly, we can make the assertion above stricter by re-defining it as:
+  error if TileAbutment != none && (OverlapLayers != none || CustomSpacing != none)
+
+Finally, we observe that Row and Column (and with less possibility, *Matrix and *Pattern as they are mostly used for devices) constraints would also benefit from the DRCheck and AbutmentBoundary params. We propose to create spin-off STARs, as needed to enhance those constraints, too. Ideally, they will all re-use most of the implementation needed for this STAR. However, the changes to the schema for Row/Column/*Matrix/*Pattern might be slightly different than what is suggested for Partition here.
+
+For reference, let us also record the email where Siarhei summarized Lyndon's request. If what is described above seems to conflict Siarhei's summary below, please add your concerns to this STAR. Thank you!
+
+Overview:
+- initial placement of components by abutting pr-boundaries;
+- if there are spacing or gridding rules violations at the initial location, space the components further apart (snap to next modular grid point) to satisfy the design rules.
+
+In terms of Helix implementation, that means:
+- initial placement of two components is defined by abutting pr-boundaries;
+- if geometries from the two components touch or overlap, it's OK;
+- Helix does not create any bridges on overlap layers because there are no overlap layers to specify at all;
+- Helix does not rely on fgPlace to decide if components can abut or should be spaced apart;
+- fgPlace is called only to fix spacing and gridding violations if they are reported for the initial placement.
+
+** comments :-)
+11/17/2014 02:18:25 PST ROSSA
+
+Will somebody be writing a functional spec for this that we can review formally?  Could we have a conference call to discuss the proposal ?
+
+There are too many questions that I have about what is being proposed here.
+
+Is this the same item that Yakov and I discussed at length via e-mail ?
+
+I am very nervous that we are making a solution for one customer and not considering the wider architecture of Helix - that seems to be the way that R&D are taking things at the moment and I think it is short sighted.
+
+11/14/2014 14:55:11 PST BBASARAN
+
+Thank you, Yakov. This is very helpful clarification, and I like it even better :-).
+
+I think it is sufficient to add DRC-enforcement support only for PRBoundary option in CustomSpacing in the sense that it would satisfy Lyndon's immediate needs. I will check with him. For longer term, it can be enhanced to also support include-layers, etc..
+
+I will create a separate STAR to capture our latest thoughts, link it to this one, and mark this one closed.
+
+I will also pass this on to Lyndon and will wait for his feedback before we go forward.
+
+
+
+11/14/2014 13:31:10 PST YPRAGER
+
+Bulent,
+
+>>> what made Lyndon prefer to use OverlapLayers instead of CustomSpacing (with IncludeLayers) if the latter already solves this problem so well?
+
+Lyndon preferred Overlap Layers over Custom Spacing, because the _existing_ implementation of Custom Spacing doesn't perform any DR corrections.  My suggestion was to enhance its PRBoundary option of Custom Spacing accordingly.
+
+>>> what happens if user combines OverlapLayers and CustomSpacing in a constraint?
+
+Custom Spacing overrides Overlap Layers.  The latter are just ignored by Helix in the corresponding constraint in the presence of Custom Spacing.
+
+>>> As far as I understand, the idea is to encapsulate the new functionality within CustomSpacing (i.e., TileAbutment becomes an option for CustomSpacing and IncludeLayers/ExcludeLayers of CustomSpacing can be re-interpreted to help compute the AbutmentBoundary more generically.
+
+That is not exactly what I've suggested.  To minimize the implementation effort and time, I suggested enabling DR adjustment in Custom Spacing _only_ for its PRBoundary option.  If the management prefers to enable it for _all_ Custom Spacing options, it is OK and can be done, but would require more design and implementation work.
+
+As a note of secondary importance, I wouldn't call the additional settings "TileAbutment".  In Custom Spacing, _everything_ is currently "tile abutment", so the name would be misleading.  Rather, I would introduce a Boolean flag, called something like "EnforceDesignRules".
+
+>>> But, more importantly, so far, we have only received comments on the user interface for this. Any thoughts on the contents, the actual behavior requested by this enhancement? Are we all agreeing that this is the right solution for Lyndon's problem with mod-grids and DRC?
+
+We can hope so, but we don't know for sure.  It depends on the validity of the crucial assumption: the fgMinSpacing function will be able to correctly space out the _overlapping_ cells.  In the examples provided by Lyndon so far, that assumption is likely to hold.  In general, it is yet to be seen.
+
+
+
+11/14/2014 10:36:15 PST BBASARAN
+
+Upon second thought, I like Yakov's suggestion regarding the inteface for this. As far as I understand, the idea is to encapsulate the new functionality within CustomSpacing (i.e., TileAbutment becomes an option for CustomSpacing and IncludeLayers/ExcludeLayers of CustomSpacing can be re-interpreted to help compute the AbutmentBoundary more generically. That would provide one solution with one interface for all constraints of interest.
+
+I think that has quite an appeal. Thanks again Yakov.
+
+Yakov, my other question regarding OverlapLayers still stands. What does it mean if the user combines OverlapLayers with CustomSpacing? Please help enlighten us.
+
+But, more importantly, so far, we have only received comments on the user interface for this. Any thoughts on the contents, the actual behavior requested by this enhancement? Are we all agreeing that this is the right solution for Lyndon's problem with mod-grids and DRC?
+
+11/14/2014 06:35:51 PST BBASARAN
+
+Ross and Yakov, thanks for sharing your thoughts.
+
+Ross, I would love for us to come up with a more "consistent" solution as we go. Please reconsider the "consistency" argument after you have read the whole description. And, let us know if you have any suggestions to nail down consistency.. It is after all a user-interface issue. Whatever interface we come up with to address Lyndon's request can then be re-used for Row/Col/*Matrix/*Pattern as applicable. E.g., do we need directional overlap layers in all constraints for consistency, too?
+
+Yakov,
+
+First obvious question: what made Lyndon prefer to use OverlapLayers instead of CustomSpacing (with IncludeLayers) if the latter already solves this problem so well? I suspect there are some limitations with the latter. Please help point them out.
+
+Second question, what happens if user combines OverlapLayers and CustomSpacing in a constraint? E.g., Partition?
+Is the semantics of such a combination clear? The user guide has very limited description of what exactly CustomSpacing does:
+
+The Row constraint provides for the specification of a custom spacing function
+to be written in Python, and then used by the Row constraint to perform spacing
+operations:
+(.) CustomSpacing - Contains the "Function" and "Params" parameters,
+which specify the name of the Python function and any optional Python
+dictionary of custom parameter names and values. This custom Python
+function returns the calculated bounding box for the element.
+(.) IncludeLayers - List of layers which should be considered when calculating
+spacing.
+(.) ExcludeLayers - List of layers which should not be considered for spacing.
+(.) PRBoundary - When this Boolean parameter is set, then spacing is
+determined using the device PR boundaries.
+
+
+From Partition:
+(.) CustomSpacing - Contains the "Function" and "Params" parameters,
+which specify the name of the Python function and any optional Python
+dictionary of custom parameter names and values. This custom Python
+function returns the calculated bounding box for the element.
+
+
+11/13/2014 10:42:53 PST YPRAGER
+
+I totally agree with Ross.  Moreover, I fail to see a point in introducing those options at all.  We already have CustomSpacing for the stated purpose.  The suggested new options can conflict with the existing ones.  So, the suggestion is that we enforce consistency via rejections thrown in the face of unsuspecting user.  Instead, we can just enhance the CustomSpacing syntax.  It already contains the PRBoundary option, which is currently a Boolean flag.  We can turn it into a group of specifications, which would include the type of requested DR check and the way of calculating the boundary (the latter can be a PRBoundary, a single layer, OR A LIST OF LAYERS -- this last option is missing in the proposal).  With that design, there is no way for the user to specify conflicting constraints and have her input be rejected by the Constraint Compiler and/or Helix.  An additional benefit is that CustomSpacing is _already supported_ in all relevant constraints, so Ross's concern would be addressed automatically.
+
+11/13/2014 10:16:52 PST ROSSA
+
+I have not read the whole description, but an initial thought is one of consistency - if  the new parameter will be have the same as a parameter that exists in row/column, then lets use the same name.
+
+If it adds some new capabilities to that parameter then lets add those capabilities to the row and the column also (and the Matrix/VMatrix/Pattern/VPattern).
+
+Otherwise helix just becomes a muddle of constraints with no uniformity and consistency and then virtually impossible for a user to comprehend.
+
+11/13/2014 00:40:44 PST ROSSA
+
+Bulent,
+
+Please could you at least add a description of the problem and please explain why the partition constraint is an appropriate place to put them.
+
+Ross
+* The end
+

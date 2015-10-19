@@ -1,0 +1,95 @@
+Spec for ALX in titanOA
+=======================
+
+Introduction
+------------
+
+Titan layer and datatype numbers can not be used in titanOA (also known as
+nativeOA, or NOA) as consistent/invariant input to the tool. It seems
+possible to switch instead to OA layer/datatype numbers, but, using this
+opportunity, we will make the tool easier to set up by switching to
+layer/datatype names as input to the tool. 
+
+Note that ALX will convert layer/datatype names to titan numbers internally
+and will continue to use those numbers internally in each session.
+
+
+Details
+-------
+
+1- Various user-level commands will require a different interface in NOA:
+
+        func {alx setup} {liba_name:s libb_name:s ...} { ...}
+        func {alx set lmap} {techid:s lmap:s} { ... } 
+        func {alx set pdk params} {libp_name ...} { ... }
+
+    a- {alx setup} introduces two (mandatory) arguments to specify the
+        names of the input and output libraries. ALX will first attempt to
+        open these libraries and will throw exception if they can not be
+        opened.
+    b- {alx set lmap} expects a layer map from alx layer tags to
+        layer/datatype names, instead of layer/datatype numbers used in
+        titan. (See 2 below) Note that the support for -gds and -dts
+        options are being dropped for titanOA. 
+    c-  Old interface will not work in titanOA. Likewise, new interface
+        won't work in titan. 
+    d-  libb and libp are expected to be provided/created by the user and
+        must be incremental on the same pdk 
+
+2- Layer map files (root/techa|b/lmap.tcl) will use layer/datatype names
+   instead of ids: 
+
+        alx set lmap tsmc45lp_ipdk {
+            od {{OD drawing}} 
+            m1 {{M1 drawing} {M1 pin}}
+            {m1 pin} {{M1 pin}}
+            ... 
+        }
+
+    a- This command will use liba or libb set in {alx setup} earlier to map
+       layer/datatype names to numbers.  
+    b- The layer/datatype numbers obtained from liba and libb are expected
+       to be invariant across all libraries that use the same
+       tech-lib/incremental lib as liba and libb, respectively. 
+    c- We will also provide a script to convert existing lmap files (using
+       layer/datatype numbers)
+
+3- Usage in titanOA:
+
+        alx::boot
+        alx setup kit6_original kit6 -techa starc_ms90g \
+            -techb set tb tsmc45lp_ipdk
+        set lay_a <open a cell from kit6_original>
+        set lay_b [alx migrate -cellId $lay_a]; # lay_b will be a new cell,
+                                              ; # or overwrite existing cell in kit6
+        alx set pdk params <libp_name> <techb> -titan_libname <pdkname> ...
+        set lay_p [alx run pcell -cellId $lay_b] ; # lay_p is a cell in libp
+
+4- pcell flow
+
+        TBD
+
+============
+Alternative?
+============
+
+1- No changes to existing user-level commands. 
+
+2- Layer and datatype numbers in root/techa|b/lmap.tcl files will need to
+   be OA numbers. The tool will internally convert to titan numbers which
+   can vary from session to session. 
+
+3- ALX will require a set of new params to be set appropriately so that
+   nativeOA layer and incremental lib semantics can be honored.  
+
+Here is the usage to clarify context for the new params:
+
+    alx::boot
+    alx::g2 lib_names {<liba_name> <libb_name> <libp_name>}
+    alx setup -techa .. -techb <techb> ...
+    set lay_b [alx migrate -cellId $lay_a] ; # lay_a and lay_b are cells
+                                           ; #  in liba and libb.
+    alx set pdk params <techb> -titan_libname <pdkname> ...
+    set lay_p [alx run pcell -cellId $lay_b] ; # lay_p is a cell in libp
+
+The End

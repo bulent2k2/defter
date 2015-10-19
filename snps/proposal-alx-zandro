@@ -1,0 +1,40 @@
+* Proposal to integrate ALX into Zandro Platform
+
+* Motivation
+
+Laker LE is the best-of-class in the industry. There is a significant opportunity to solidify and extend this lead by incorporating ALX technology into Laker.
+
+* What can LE do with ALX?
+
+Our customers have three pain points that ALX technology helps alleviate. In reverse order in the design cycle: 
+1- Implementation of ECOs in layout (latest stages, prior to tape-out)
+2- Design iterations (mid-cycle, design convergence)
+3- Re-use of existing layout to solve new problems (early-on, design planning/tech readiness)
+
+Today, ECOs in AMSG/custom layout are mostly implemented manually. The following are a few examples of costly, and sometimes even prohibitive changes:
+- Increasing size of a driver, 
+- Reducing the current density on a signal node, 
+- Improving signal integrity of a bus with shield or space insertion
+
+Today, re-use of analog/custom layout is mostly manual. State-of-the-art (i.e., existing tools) suffers from two major issues:
+x- subcell proliferation
+y- costly rule/pdk setup
+
+Design iterations are too many and too slow. This is primarily due to the cost of creating and changing quality interconnect. Analog routers are still in infancy.
+
+* How?
+
+ALX will:
+a- maximize re-use of layout, and
+b- minimize time to good layout.
+
+It does this by:
+1- re-use what is valuable to the user, leave the rest to the router
+2- rely on PDK to produce good device layout (pcells)
+3- focusing on design intent, and leave complex DRC to auto-fix
+4- heavy abstraction to enable fast chip-level re-use
+
+* x is addressed with 4
+* y is addressed with combo of 1,2 and 3
+* a is addressed with combo of 1,2 and 4
+* b is addressed with combo of 1,3 and 4

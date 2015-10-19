@@ -1,0 +1,36 @@
+We want ALX to read in a sizing file which supports any combination of the following three constructs:
+
+S: CellName TypeOld WidthOld LengthOld TypeNew WidthNew LengthNew [Based on w/l Signature]
+I: HierarchicalInstName DeviceTypeNew WidthNew LengthNew FingersNew [Based on pcell Inst names]
+C: CellName DeviceType LocalXOld LocalYOld WidthNew LengthNew  { {FingerNum Finger_to_add_before Finger_to_add_after} ... } [Based on local cell Coordinates]
+
+E.g., 
+S ASW NMOS 400 80 NMOS 200 60
+I BIAS/AOP_AMP_II_CORE/NENHT33_0 NMOS 400 80 4
+C ASW NMOS 12.0 3.0 400 80
+
+Notes:
+a) Going forward, we don't want to support finger removal, so only finger addition is supported above. We want to support detailed indexing (how many fingers to insert where exactly) to help preserve good routes.
+
+b) I suggest we switch to type names instead of type ids, because they are much easier to read and change.
+
+c) If the user provides conflicting sizing directives for a given variant, the tool will automatically create a clone. E.g.,
+
+  I BIAS/AOP_AMP_II_CORE/NENHT33_0 NMOS 400 80 4
+  I SC_AMP_CORE/NENHT33_0 NMOS 600 80 4
+
+d) ALX will also dump out this info (before sizing) so we can use it as a template like before.
+
+e) If FingersNew is smaller than existing number of fingers in lay-a, the tool will write out a warning (to sizing warnings file) and keep the number of fingers unchanged. Finger deletion is to be done by the user in the input (or using abstract flow and cookie-cut of wires).
+
+f) Coordinates (in C) are in microns. W/L sizes (in S, I or C) are in nm.
+
+g) HierarchicalInstName does not have to be full. E.g., the following two are equivalent and the tool should be able to interpret each:
+  I BIAS/AOP_AMP_II_CORE/NENHT33_0 ...
+  I AOP_AMP_II_CORE/NENHT33_0 ...
+
+h) If the user provides a conflict set of sizing directives, we expect the tool to use the largest value and log a warning. E.g.,
+  I NENHT33_0 NMOS 400 60 4
+  C ASW NMOS 12.0 3.0 400 80
+
+Here the device in NENHT33_0 at x:12.0 y:3.0 coordinates will be set to 80 and a warning will be logged for I NENHT33_0 directive.

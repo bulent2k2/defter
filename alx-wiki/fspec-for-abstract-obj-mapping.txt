@@ -1,0 +1,38 @@
+In many cases, the target layout for an abstract is sufficiently different than the source layout so that, we need to
+tell ALX how to map, from source to target, the connections for "wires" that connect to an "abstract-pin".
+Here, "wire" denotes any mol that overlaps a same-layer shape inside the abstract which we denote as an "abstract-pin".
+Note that an abstract-pin is not necessarily an actual pin and can be any shape.
+
+So, whenever mols connect to a particular abstract-pin in the source layout, we need to map that a-pin to
+the new a-pin in the target layout. This will ensure that ALX keeps the mol connected to the new a-pin. 
+The following commands provide various mechanisms to achieve such specific mapping.
+
+1- func {alx map abstract pins} {cell_id:i src_cid:i -names:l(*pin:s)} { ... }
+
+Map the shape corresponding to actual pins (with given names) from src layout to tgt layout 
+for the given abstract cell (src_cid) in top-cell: cell_id. 
+Without -names option, do the mapping for all pins (with matched names in src and tgt)
+Note that this command is now automatically called from {alx add abstract cell} when -targetCellId option is used, and
+it will attempt to map all pins.
+When there is a unique shape in the target layout with a given pin-name, all the input shapes on that pin get automatically mapped.
+However, if there are multiple shapes in the target layout, ALX cannot make a decision to match the shapes from source to target.
+Therefore, such pins are skipped and a informative message is printed to list their names.
+The user can use one of the following options to handle such pins (i.e., one or more source shapes mapping to at least two target shapes):
+   i) Use {alx map abstract shapes} command to specify which target shape to pick for each source shape
+  ii) Rename the pins in the target layout so that only one has the pin name used in the source layout
+
+2- func {alx map abstract shapes} {cell_id:i src_cid:i layer:s -src:point='9.9999 9.9999' -tgt:point='9.9999 9.9999'} { ... }
+
+Map any shape, i.e., a-pin, on layer (alx-tag) at the given coordinates from src to tgt layout.
+If there is only one shape on the given layer in src layout, no need to provide its coordinates. Likewise for tgt layout.
+
+3- func {alx map abstract objs} {cell_id:i src_cid:i src_obj:i tgt_obj:i} { ... }
+
+Map the given shape (using its obj-id) from source to target layout for the abstract. 
+Note that this has limited use in titanOA! Since obj ids are not persistent across
+sessions, please do NOT use this API in run scripts for titanOA.
+
+We plan to persist such mappings by using oaGroup or oaAppDef in the next release.
+
+4- func {alx map get} {cell_id:i} { ... }
+5- func {alx map delete} {cell_id:i} { ... }

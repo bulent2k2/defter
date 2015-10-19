@@ -1,0 +1,104 @@
+This is an example to illustrate the hbond between shapes in a subcell and the shapes inside its children instances.
+
+We have a subcell which contains one shape and one inst.
+                                                         
+     +-------------------------------------------------+ 
+     |                                                 | 
+     |                                                 | 
+     |                                                 | 
+     |                               +--------+        | 
+     |                               |        |        | 
+     |                               |        |        | 
+     |                               |        |        | 
+     |                               |        |        | 
+     |                               |        |        | 
+     |                  +--+         |        |        | 
+     |                  |  |         |        |        | 
+     |                  |  |         |inst    |        | 
+     |                  |  |         +--------+        | 
+     |                  |  |                           | 
+     |                  |  |                           | 
+     |                  +--+ shape                     | 
+     |                                                 | 
+     |subcell                                          | 
+     +-------------------------------------------------+ 
+
+Let's denote the master cell of inst as sub2. 
+
+To simplify the example, we will have only one shape in sub2. We denote that shape as a.
+ 
+         +--------+
+         |        |
+         +----+   |
+         |    |   | 
+         |    |   | 
+         | a  |   | 
+         +----+   |
+         |        | 
+         |sub2    |   
+         +--------+ 
+                                                                   
+Our top cell has two occurrences of subcell: subcell-o1 and subcell-o2.
+
+subcell-o1 contributes two atoms to airdb: shape-o1 and a1
+subcell-o2 contributes two atoms to airdb: shape-o2 and a2
+
+Let x(s1) denote the x coordinate of the left edge of shape-o1
+Let x(s2) denote the x coordinate of the left edge of shape-o2
+Let x(ai) denote the x coordinate of the left edge of ai, where i=1 or 2.
+
+So, we have the following top cell:
+                                                           
+     +-------------------------------------------------+  
+     |                                                 |  
+     |                                                 |  
+     |                                                 |  
+     |                               +--------+        |  
+     |                               |        |        |  
+     |                               +----+   |        |  
+     |                               |    |   |        |  
+     |                               |    |   |        |  
+     |                               | a1 |   |        |  
+     |                  +--+         +----+   |        |  
+     |                  |  |         |        |        |  
+     |                  |  |         |inst-o1 |        |  
+     |                  |  |         +--------+        |           
+     |                  |  |         x(a1)             |           
+     |                  |  |                           |           
+     |                  +--+ shape-o1                  |           
+     |                  x(s1)                          |           
+     |subcell-o1                                       |           
+     +-------------------------------------------------+           
+                                                                   
+           
+                                 +-------------------------------------------------+  
+                                 |                                                 |  
+                                 |                                                 |  
+                                 |                                                 |  
+                                 |                               +--------+        |  
+                                 |                               |        |        |  
+                                 |                               +----+   |        |  
+                                 |                               |    |   |        |  
+                                 |                               |    |   |        |  
+                                 |                               | a2 |   |        |  
+                                 |                  +--+         +----+   |        |  
+                                 |                  |  |         |        |        |  
+                                 |                  |  |         |inst-o2 |        |  
+                                 |                  |  |         +--------+        |  
+                                 |                  |  |         x(a2)             |  
+                                 |                  |  |                           |  
+                                 |                  +--+ shape-o2                  |  
+                                 |                  x(s2)                          |  
+                                 |subcell-o2                                       |  
+                                 +-------------------------------------------------+  
+                                                                                      
+Now, we need an hbond to ensure the following hierarchical property:
+
+   x(a1) - x(s1) = x(a2) - x(s2)
+
+So, in general, we need to promote up the anchor of each child inst into the parent and
+write hbonds for it along with all other shapes inside the parent.
+
+E.g., if a cell C has 10 wires and 5 children instances (with their own wires in them), 
+we would get 15 mols for which we need to write hbonds for this cell.
+If we do this for all the cells in the design, hierarchy does get preserved.

@@ -1,0 +1,523 @@
+* see: ./nvidia-star
+
+CLEAN: nd3x1, invx2, r2k, bias_dec
+
+amp_2x: 8k 6 kinds of errors. Pattern -> Vpattern -> Vmatrix. Improved the floorplan and placement. DRC: Down to 2h from 4+. 15k 2 kinds:
+  M0_PO.L1 (w=40nm -> max-length: 300nm 8600) and OD.W.1.1 (OD width in ENDCAP directon = 0.010+0.048*n; Universal FIN Grid is 48nm vertical grid with 24nm offset from cell boundary)
+
+bias3: Down to only 2 errors (1 kind)! >9000 errors 10 kinds of DRC. NP, NW, OD, OD2 (Ignore: ~200 M1.A.1) -> Guard ring around (NMOS CAP) needs fill layers (OD18, etc.) and 86nm instead of 36nm min dummy poly width
+   MO_PO.L.1 (min/max length 102nm to 312nm)
+core_amp3_2: 13 kinds of DRC..
+
+bias_dec: only M1.A.1
+invx2: Fixed with od2 fill layer!
+  PO.R.22: {{ALL_PO NOT CPO} CUT {OD2 OR {{{BJTDMY OR IBJTDMY} OR DIODMY} OR VAR}}} is not allowed
+r2k: No DRC anylonger (3/13/15). What changed??
+
+* MS3 TABLE 11 circuits (+1 layout only):
+0  bg_gm2xx     8m   -> core_gm2xx vauxc_cref3
+1  core_gm2xx   220m -> startup2 snps_master1 bias3 amp_2x r2k
+2  vauxc_cref3  46m  -> amp3 r2k
+3  startup2     12m
+4  bias3        90m  -> bias_dec r2k (PARALLEL TO snps_master1 :-)
+5  amp3         25m
+6  amp_2x       255m -> invx2       (PARALLEL TO snps_master1 :-)
+7  bias_dec     1m   -> invx2 nd3x1
+8  r2k          0m 
+9  invx2        0m
+10 nd3x1        1m
+11 snps_master1 150m
+TOTAL EST (~4 machines) top-down: 8m (c0) + 220m (c1) + 255m (c6) = 480m (8 hours!)
+* TABLE
+
+TOP g5_bg_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_gm2xx 
+Start time: Wed Mar 11 06:49:42 2015
+vauxcref contains an internal violation of the pitch rule OD.W.1.1.
+bg contains an internal violation of the pitch rule OD.W.1.1.
+End time: Wed Mar 11 06:57:03 2015
+
+** 0x g5_bg_core_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_core_gm2xx 
+Start time: Tue Mar 10 15:50:49 2015
+vm_NFEC-TG18_C0 contains an internal violation of the pitch rule OD.W.1.1.
+vm_PNP22_Q3-Q2 contains an internal violation of the pitch rule OD.W.1.1.
+cr_AVSS_C0-Q3 contains an internal pitch rule violation.
+bias contains an internal violation of the pitch rule OD.W.1.1.
+End time: Tue Mar 10 19:31:47 2015
+
+*** 1x g5_snps_master1 Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_snps_master1 
+Start time: Tue Mar 10 13:22:28 2015
+End time: Tue Mar 10 15:50:14 2015
+
+** 0x g5_bg_vauxc_cref3_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_vauxc_cref3_gm2xx 
+Start time: Tue Mar 10 13:22:28 2015
+vm_NFEC-TG18_Cdum contains an internal violation of the pitch rule OD.W.1.1.
+cr_NET036_Cdum-Ndum contains an internal pitch rule violation.
+cr_VAUXC_C0-C1 contains an internal pitch rule violation.
+amp contains an internal violation of the pitch rule OD.W.1.1.
+End time: Tue Mar 10 14:08:26 2015
+
+*** 1x g5_bg_core_amp3_2_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_core_amp3_2_gm2xx 
+Start time: Mon Mar  9 09:32:59 2015
+vm_NFEC-TG18_C0-C1 contains an internal violation of the pitch rule OD.W.1.1.
+cr_AVSS_-C0 contains an internal pitch rule violation.
+cr_AVSS_-C0 contains an internal violation of the pitch rule OD.W.1.1.
+cr_VAUXC_C2 contains an internal violation of the pitch rule OD.W.1.1.
+End time: Mon Mar  9 09:56:36 2015
+
+*** 3x g5_bg_core_r2k_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_core_r2k_gm2xx 
+Start time: Fri Mar  6 18:55:31 2015
+End time: Fri Mar  6 18:55:37 2015
+
+*** 2x g5_bg_core_amp_2x_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_core_amp_2x_gm2xx 
+Start time: Fri Mar  6 21:27:19 2015
+End time: Sat Mar  7 01:40:29 2015
+
+g5_bg_core_startup2_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_core_startup2_gm2xx 
+Start time: Fri Mar  6 21:27:19 2015
+End time: Fri Mar  6 21:37:43 2015
+
+g5_bg_core_bias3_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_core_bias3_gm2xx 
+Start time: Fri Mar  6 19:09:42 2015
+cr_VDDP_C1 contains an internal pitch rule violation.
+cr_VDDP_C1 contains an internal violation of the pitch rule FIN.GRID.
+End time: Fri Mar  6 20:26:16 2015
+
+g5_bg_core_bias_dec_gm2xx Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals g5_bg_core_bias_dec_gm2xx 
+Start time: Thu Mar  5 10:23:34 2015
+End time: Thu Mar  5 10:24:34 2015
+
+rw_g5_nd3x1 Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals rw_g5_nd3x1 
+Start time: Thu Mar  5 10:22:39 2015
+End time: Thu Mar  5 10:23:25 2015
+
+rw_g5_invx2 Program Arguments: --quiet --forceRewrite --multiCore=8 --silentLicense --ignoreSignals rw_g5_invx2 
+Start time: Thu Mar  5 09:39:11 2015
+End time: Thu Mar  5 09:39:31 2015
+
+
+
+* NEW TERM MISMATCH ISSUE:
+THIS FILE: ~/bulent/fresh/ms3/TERM_MISMATCH_ISSUE
+
+<TO REPRODUCE>
+bba
+setup_tsmc
+cd /home/scratch.dgradin/users/fresh/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+Helix.exe -D -f g5_bg_core_r2k_gm2xx
+<ERROR>
+IN: synopsys-chamber-02
+cd /tmp/bulent/sow3/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+<WORKS!>
+
+ERROR LOG:
+Start time: Fri Mar  6 08:30:22 2015
+Helix(tm) -> Version:(J-2014.09-SP1) License version:(2014.09) build:(Feb 26 2015@00:45:45 LINUX 64BIT)
+Copyright (c) 1999-2014 Synopsys, Inc. All rights reserved.
+
+Source: 
+0...Instance: submaster has 2 Term(s), NodeDict has 3 InstTerm(s).
+Instance: submaster has no corresponding Terms for these InstTerms in NodeDict: Sub
+Version:(J-2014.09-SP1) License version:(2014.09) build:(Feb 26 2015@00:45:45 LINUX 64BIT)
+CN Error: /remote/helix01/user/amrishm/release/nonQSC/2014.09-2-PRE-141128/amrish_rel_nonQSC_141128/santana/dloBase/src/dloInstance.cpp(364): setConnectivity() -  Instance 'I__0' has invalid connectivity.
+Exception in helix while creating the instance 'R0'.
+gfk_gddr_tsmc16ff_g5_bg_gm2xx> 
+
+
+    after update netlist (from script):
+    R0 -> rph_tn (layout) -> rtn (symbol)  lib: nvTsmc16
+
+g5_bg_core_r2k_gm2xx.hxnet
+
+[Action #1: Save and Compile Current Constraints]
+[Action #2: Run Helix]
+Error running circuit g5_bg_core_r2k_gm2xx, Instance: submaster has 2 Term(s), NodeDict has 3 InstTerm(s).
+Instance: submaster has no corresponding Terms for these InstTerms in NodeDict: Sub
+Version:(J-2014.09-SP1) License version:(2014.09) build:(Feb 26 2015@00:45:45 LINUX 64BIT)
+CN Error: Instance 'I__0' has invalid connectivity.
+Exception in helix while creating the instance 'R0'.
+
+* transfer
+
+Hi Nishath,
+ 
+Here is the list:
+ 
+/home/scratch.dgradin/users/mohitm/1202/14flow_1015.tgz test_apr/test_apr_rev1/layout 
+
+/home/scratch.dgradin/users/mohitm/1202/gfk_gddr_tsmc16ff_lz_gdr5_rx_diffamp_wd2s.tar.gz gfk_gddr_tsmc16ff_HLX/ lz_gdr5_rx_diffamp/ layout000 
+
+/home/scratch.dgradin/users/mohitm/1202/helix_route_1202_master.tar.gz g5_tx_inputstage_pe2_gm2xx_route_test1/ gfk_gddr_tsmc16ff/layout 
+
+/home/scratch.dgradin/users/mohitm/1202/ gfk_gddr_tsmc16ff_HLX.tgz            Shipped version of SOW#2 
+
+/home/scratch.dgradin/users/bbasaran/all.tgz Contains:
+      ms4.tgz  contains:  /home/scratch.dgradin/users/rossa/sams14 
+      transfer2.tgz  contains:  /home/scratch.dgradin/users/girishv/TRANSFERS/[tech.tar.gz|sow2.tar.gz] 
+      transfer.tgz contains:
+        pdk_v3.tgz               contains /home/scratch.dgradin/users/rossa/tsmc16/pdk_v3
+        design_libs.tgz          contains /home/scratch.dgradin/users/rossa/tsmc16/design/[gfk_gddr_tsmc16ff|msdip_tsmc16ff|ra_test|gfk_helix]
+        tech_helper_libs.tgz   contains /home/scratch.dgradin/users/rossa/tsmc16/tech
+ 
+Thanks
+Ashish
+
+users/girishv/TRANSFERS/
+tech.tar.gz
+sow2.tar.gz
+
+I expect you to bring over 
+gfk_gddr_tsmc16ff
+msdip_tsmc16ff
+$CNI_PDK_DIR (/home/scratch.dgradin/users/rossa/tsmc16/pdk_v3)
+
+
+ll /home/scratch.dgradin/users/rossa/tsmc16/design/tarfiles/
+-rw-rw-r--  1 ykwon hardware  7006747 May 18  2014 msdip_tsmc16ff_20131114.tgz
+-rw-rw-r--  1 ykwon hardware  6994516 May 18  2014 msdip_tsmc16ff_dgradin_1113.tgz
+-rw-rw-r--  1 ykwon hardware  2326386 May 18  2014 gfk_gddr_tsmc16ff.old.tgz
+-rw-r--r--  1 ykwon hardware    58647 May 28  2014 lz_gdr5_rx_diffamp_vdr.tgz
+-rw-r--r--  1 ykwon hardware    58356 Jun 23  2014 20140620_lz_gdr5_rx_diffamp_vdr.tgz
+-rw-r--r--  1 ykwon hardware    59606 Jul  1  2014 20140701_lz_gdr5_rx_diffamp_vdr.tar.gz
+-rw-r--r--  1 ykwon hardware 10622885 Jul  2  2014 gfk_dp_lib_pll_mod_div.tar.gz
+
+MS4: /home/scratch.dgradin/users/rossa/sams14:
+  drwxrwxr-x  7 ykwon       hardware 4096 May 25  2014 pdk
+  drwxrwxr-x  8 ykwon       hardware 4096 May 26  2014 tech
+
+* /remote/us01home36/bbasaran/helix/TOP/NVIDIA
+
+** from Girish to Mirko
+I have setup a vnc synopsys-chamber-08:23.
+Username: ykwon
+ 
+Steps that I did so far in the vnc
+source  /home/scratch.dgradin/users/rossa/env/setupenv girishv tsmc16
+cd helix/test-1
+cnhxgui &
+
+
+* sams14: santana /home/scratch.dgradin/users/siarhei/sams14/outgoing/2014_03_24
+Girish,
+Could you update me on the status of our work for nVidia on Samsung 14.
+R&D provided a techfile to Ross a long time ago.
+You can find it under /home/scratch.dgradin/users/siarhei/sams14/outgoing/2014_03_24.
+Did you try to use it?
+
+* From $RA:
+design/
+
+This is the directory where all of the Cadence schematic design data from
+nVidia is stored, as well as a testing library that I have created and used
+(ra_test). This should all be in git version control. 
+
+** Milestone 1 testcase: msdip_tsmc16ff/g5_tx_inputstage_pe2_gm2xx
+** Milestone 2 testcase: gfk_gddr_tsmc16ff/lz_gdr5_rx_diffamp_wd2s
+** Milestone 3 testcase: gfk_gddr_tsmc16ff/g5_bg_gm2xx
+
+** helix
+
+This is the directory that contains the Helix working directories. Most of
+these subdirectories should be in git version control and have been for
+some time so you can see the history. The latest versions of 
+**  milestone 2 (gfk_gddr_tsmc16ff_lz_gdr5_rx_diffamp_wd2s) and
+**  milestone 3 (gfk_gddr_tsmc16ff_g5_bg_gm2xx) are there along with a number of testcases
+for various issues that have been seen by nVidia.
+
+** NEW
+*** user ID - ykwon  
+*** passwd  - AC@nvda3
+
+
+Hi Bulent,
+
+You can find general instructions on nVidia chamber at http://sp-gts/sites/nvsupport/Shared%20Documents/Snps_chamber_access_instructions.txt
+
+My vnc is running at - synopsys-chamber-04:06   
+user ID - ykwon  
+passwd -   AC@nvda3
+
+Thanks,
+Prashant
+
+
+*** FULL synopsys-chamber-13:24
+synopsys-chamber-13:~> vncserver -geometry 1680x1050
+VNC(R) Server 5.1.1 (r117550)
+Built on Apr  1 2014 15:29:39
+Copyright (C) 2002-2014 RealVNC Ltd.
+VNC is a registered trademark of RealVNC Ltd. in the U.S. and in other
+countries.
+Protected by UK patent 2481870.
+See http://www.realvnc.com for information on VNC.
+For third party acknowledgements see:
+http://www.realvnc.com/products/vnc/documentation/5.1/acknowledgements.txt
+
+Running applications in /home/ykwon/.vnc/xstartup
+
+VNC Server catchphrase: "Locate next capital. Giro bucket Betty."
+             signature: c7-d4-cb-10-a3-9a-85-c9
+
+Log file is /home/ykwon/.vnc/synopsys-chamber-13:24.log
+New desktop is synopsys-chamber-13:24 (172.17.72.213:24)
+synopsys-chamber-13:~>
+
+*** LAPTOP synopsys-chamber-04:9 1366x768
+synopsys-chamber-04:users/prajoshi/tsmc16/helix/ra_test_all_abutment_cases> vncserver -geometry 1366x768 &
+[1] 7324
+synopsys-chamber-04:users/prajoshi/tsmc16/helix/ra_test_all_abutment_cases> VNC(R) Server 5.1.1 (r117550) 
+Built on Apr  1 2014 15:29:39
+Copyright (C) 2002-2014 RealVNC Ltd.
+VNC is a registered trademark of RealVNC Ltd. in the U.S. and in other
+countries.
+Protected by UK patent 2481870.
+See http://www.realvnc.com for information on VNC.
+For third party acknowledgements see:
+http://www.realvnc.com/products/vnc/documentation/5.1/acknowledgements.txt
+
+Running applications in /home/ykwon/.vnc/xstartup
+
+VNC Server catchphrase: "Locate next capital. Giro bucket Betty."
+             signature: c7-d4-cb-10-a3-9a-85-c9
+
+Log file is /home/ykwon/.vnc/synopsys-chamber-04:9.log
+New desktop is synopsys-chamber-04:9 (172.17.72.104:9)
+
+[1]    Done                          vncserver -geometry 1366x768
+synopsys-chamber-04:users/prajoshi/tsmc16/helix/ra_test_all_abutment_cases> 
+*** FULL   synopsys-chamber-04:8 1680x1050
+ synopsys-chamber-04:users/prajoshi/tsmc16/helix/ra_test_all_abutment_cases> VNC(R) Server 5.1.1 (r117550) 
+Built on Apr  1 2014 15:29:39
+Copyright (C) 2002-2014 RealVNC Ltd.
+VNC is a registered trademark of RealVNC Ltd. in the U.S. and in other
+countries.
+Protected by UK patent 2481870.
+See http://www.realvnc.com for information on VNC.
+For third party acknowledgements see:
+http://www.realvnc.com/products/vnc/documentation/5.1/acknowledgements.txt
+
+Running applications in /home/ykwon/.vnc/xstartup
+
+VNC Server catchphrase: "Locate next capital. Giro bucket Betty."
+             signature: c7-d4-cb-10-a3-9a-85-c9
+
+Log file is /home/ykwon/.vnc/synopsys-chamber-04:8.log
+New desktop is synopsys-chamber-04:8 (172.17.72.104:8)
+
+[1]    Done                          vncserver -geometry 1680x1050
+** OLD - From: Naren Amerneny <amerneny@synopsys.com>
+synopsys-chamber-xterm1:39
+user: namerneny
+Pass: P@ssword10
+
+
+* abutment!
+3b- self-contained with libs
+** cd /slowfs/cdes1/bulent/helix/test/intel/to_intel/dec2013/test/Lab2a
+** H3Runner.exe -d REF_PLL.hxdpnd -n 4 -t ADFF -f -m 4 --checkForLocks
+cd <mynewdir>
+set src=/slowfs/cdes1/bulent/helix/test/intel/to_intel/dec2013
+gtar -zxf $src/libs-for-intel.tgz
+gtar -zxf $src/Lab2a-for-intel.tgz
+cd Lab2a
+setenv PYTHONPATH .:$PYTHONPATH
+
+
+* http://sp-gts/sites/nvsupport/Shared%20Documents/Snps_chamber_access_instructions.txt
+
+** NEW
+## SYNOPSYS CHAMBER LOGIN INSTRUCTIONS
+###################################################
+
+--> Please contact nvidia_ac@synopsys.com if you need help or if you have any questions <--
+
+## Chamber login website
+----------------------
+Please use IE8 or a newer version to log in
+https://nvgate1.nvidia.com/partner
+
+## VPN username/password pairs to be used
+--------------------------------------
+ID              Password
+seanl           AC@nvda3
+sallyc          AC@nvda3
+chiminc         AC@nvda3
+atakata         AC@nvda3
+johnc           AC@nvda3
+nmoore          AC@nvda3
+vsingaram       AC@nvda3
+ykwon           AC@nvda3
+achuanchang     AC@nvda3
+craigc          AC@nvda3
+
+--> you may be asked to download/execute/run software from nvgate1.nvidia.com.
+    click yes and continue to next step
+--> each username/passwd can accommodate only 3 users at a time. 
+    so if you get kicked out, please use the next one.
+--> to connect to any vnc sessions, please use realvnc version 5.0.5 or greater. 
+    you can download it from here (http://www.realvnc.com/download/viewer/)
+--> if you do not have a vnc session, please send an email to nvidia_ac@synopsys.com
+--> if vnc gets frozen, try the below commands
+    metacity -replace &
+    kwin -replace &
+
+# Facing problems connecting to Chamber
+-----------------------------------------
+If you have previously connected to Chamber and already have the software needed installed
+try using the VPN client directly without a browser
+1. click start
+2. type "Network COnnect". One with a Yellow lock will be listed
+3. Click on the program and enter the website in the bar "https://nvgate1.nvidia.com/partner"
+4. Enter username/password and click connect
+
+If you dont see the program listed, then you are connecting first time. Please contact 
+nvidia_ac@synopsys.com for help. If we cannot resolve it, then you will have to file a CCT
+
+
+## Starting Jobs in Chamber
+------------------------
+Please use bsub to launch your jobs. Here are some examples of bsub. Use the one which
+suits your memory requirements
+
+low and high are non interactive queues
+ 
+/usr/local/lsf/bin/bsub -q interactive -M 134217728 -R 'rusage[mem=120000] select[model!=E78837]' -Is tcsh
+/usr/local/lsf/bin/bsub -q interactive -M 67108864 -R 'rusage[mem=62000] select[model!=E78837]' -Is tcsh
+/usr/local/lsf/bin/bsub -q interactive -M 47185920 -R 'rusage[mem=45000] select[model!=E78837]' -Is tcsh
+/usr/local/lsf/bin/bsub -q interactive -M 33554432 -R 'rusage[mem=31000] select[model!=E78837]' -Is tcsh
+/usr/local/lsf/bin/bsub -q interactive -M 20971520 -R 'rusage[mem=20000] select[model!=E78837]' -Is tcsh
+/usr/local/lsf/bin/bsub -q interactive -M 15728640 -R 'rusage[mem=15000] select[model!=E78837]' -Is tcsh
+/usr/local/lsf/bin/bsub -q interactive -M 10485760 -R 'rusage[mem=10000] select[model!=E78837]' -Is tcsh
+/usr/local/lsf/bin/bsub -q interactive -M 5242880 -R 'rusage[mem=5000] select[model!=E78837]' -Is tcsh
+ 
+/usr/local/lsf/bin/bsub -q low -M 134217728 -R 'rusage[mem=120000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q low -M 67108864 -R 'rusage[mem=62000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q low -M 47185920 -R 'rusage[mem=45000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q low -M 33554432 -R 'rusage[mem=31000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q low -M 20971520 -R 'rusage[mem=20000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q low -M 15728640 -R 'rusage[mem=15000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q low -M 10485760 -R 'rusage[mem=10000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q low -M 5242880 -R 'rusage[mem=5000] select[model!=E78837]' <CMD>
+ 
+/usr/local/lsf/bin/bsub -q high -M 134217728 -R 'rusage[mem=120000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q high -M 67108864 -R 'rusage[mem=62000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q high -M 47185920 -R 'rusage[mem=45000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q high -M 33554432 -R 'rusage[mem=31000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q high -M 20971520 -R 'rusage[mem=20000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q high -M 15728640 -R 'rusage[mem=15000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q high -M 10485760 -R 'rusage[mem=10000] select[model!=E78837]' <CMD>
+/usr/local/lsf/bin/bsub -q high -M 5242880 -R 'rusage[mem=5000] select[model!=E78837]' <CMD>
+
+
+## Transferring data/builds to Chamber
+-----------------------------------
+## FOR INSTALLING DAILY BUILDS, PLEASE TRANSFER ONLY *amd* AND *common* FILES. 
+## OTHERS ARE NOT NEEDED.
+
+   1.   Create a tar/gzip version of the build you want to transfer (gtar -zcvf filename.tar.gz files_to_be_transferred)
+   2.   Open up all permissions (chmod 777 filename.tar.gz)
+   3.   Move the file to the following directory
+        a.   /global/gtsnaw/nvidia2/nvtransfer/2nvidia
+   4.   The file should show up in the following directory in synopsys_chamber
+        a.   /home/scratch.achuanchang_vgupta/to_chamber
+   6.   Depending on when you copy, it will get transferred within 15-30 minutes
+        a. Uploads happen at the 1'st, 16'th, 31'st and 46'th minute of every hour
+        b. Corrosponding Downloads happen at the 14'th, 29'th, 44'th and 59'th minute of every hour
+
+## Please make sure to delete your tar/gzip files after installation
+## We need to conserve disk space
+
+## Installing Daily builds in Chamber
+-----------------------------------
+The procedure is same for any tool. Below is an example for ICC daily builds
+   1.   Untar the build in the to_chamber directory (tar -zxvf H-2013.03-SP-DEV_20130922.tar.gz)
+   2.   All tools are installed under /home/scratch.achuanchang_vgupta/tools
+   3.   CD into the proper sub directory and a create a new directory ex: mkdir H-2013.03-SP-DEV_20130922
+   4.   CD into the newly created directory and call the installer
+        /home/scratch.achuanchang_vgupta/tools/installer_v3.1/installer --> for 14.09 builds with tar files
+        /home/scratch.achuanchang_vgupta/tools/installer_v3.2/installer/installer --> for 1409 biulds with spf files
+   5.   Site ID is 2203 if asked
+   6.   Point to the untarred files in to_chamber (from #1) when asked
+   7.   Point to the directory created in #3 when asked
+   8.   Exit the installer
+   9.   Please delete the directory/tmp_files in #1 to save disk space
+
+
+
+** OLD
+
+## Transferring data/builds to Chamber
+-----------------------------------
+## FOR INSTALLING DAILY BUILDS, PLEASE TRANSFER ONLY *amd* AND *common* FILES. 
+## OTHERS ARE NOT NEEDED.
+
+   1.   Create a tar/gzip version of the build you want to transfer (gtar -zcvf filename.tar.gz files_to_be_transferred)
+   2.   Open up all permissions (chmod 777 filename.tar.gz)
+   3.   Move the file to the following directory
+        a.   /global/gtsnaw/nvidia2/nvtransfer/2nvidia
+   4.   The file should show up in the following directory in synopsys_chamber
+        a.   /home/scratch.achuanchang_vgupta/to_chamber
+   6.   Depending on when you copy, it will get transferred within 15-30 minutes
+        a. Uploads happen at the 1'st, 16'th, 31'st and 46'th minute of every hour
+        b. Corrosponding Downloads happen at the 14'th, 29'th, 44'th and 59'th minute of every hour
+
+## Please make sure to delete your tar/gzip files after installation
+## We need to conserve disk space
+
+## Installing Daily builds in Chamber
+-----------------------------------
+The procedure is same for any tool. Below is an example for ICC daily builds
+   1.   Untar the build in the to_chamber directory (tar -zxvf H-2013.03-SP-DEV_20130922.tar.gz)
+   2.   All tools are installed under /home/scratch.achuanchang_vgupta/tools
+   3.   CD into the proper sub directory and a create a new directory ex: mkdir H-2013.03-SP-DEV_20130922
+   4.   CD into the newly created directory and call the installer
+        /home/scratch.achuanchang_vgupta/tools/installer_v3.1/installer)
+   5.   Site ID is 2203 if asked
+   6.   Point to the untarred files in to_chamber (from #1) when asked
+   7.   Point to the directory created in #3 when asked
+   8.   Exit the installer
+   9.   Please delete the directory/tmp_files in #1 to save disk space
+
+
+
+set name=synopsys_helix_installer_linux_rhel40_gcc44x_64_2013.12-Eng5_py262.tar.gz
+set path=
+set build=$path/$name
+cp $build /tmp/bulent
+chmod 777 /tmp/bulent/$name
+cp /tmp/bulent/$name /global/gtsnaw/nvidia2/nvtransfer/2nvidia
+
+/home/scratch.achuanchang_vgupta/to_chamber
+
+/home/scratch.dgradin
+
+/home/scratch.dgradin/users/rossa/g5_tx_inputstage_pe2_gm2xx/helix/gfk_gddr_tsmc16ff_lz_gdr5_rx_diffamp_wd2s
+
+Jan 29, synopsys_helix_intaller_linux_rhle40_gcc44x_64_Py262_40021.tgz
+
+* seg fault in partition:
+time Helix.exe -f lz_gdr5_rx_diffamp
+Start time: Wed Feb 26 10:46:04 2014
+
+>>>>>>>>>>
+@...@...@...@...@...@...@...@...@...@...@...
+@...@...@...@...@...@...@...@...@...@...
+@...@...@...@...@...@...@...@...@...@...
+@...@...@...@...@...@...@...@...@...@...
+@...@...@...@...@...@...@...@...@...@...
+@...@...*****************************************
+Signal: Segmentation Fault
+Backtrace:
+/lib64/libc.so.6 [0x323aa302d0]
+utl::Box::set(utl::Box const&)
+Helix::StdPartitionRenderer::ComputeConnectivityDistanceMetricDetail()
+Helix::StdPartitionRenderer::RenderSingleHeight(Seeker::PermJaggedArray const&)
+Seeker::Population<Seeker::PermJaggedArray>::Evaluate(Seeker::IRenderer<Seeker::PermJaggedArray>*)
+Seeker::IslandThreader<Seeker::PermJaggedArray>::run()
+/home/scratch.achuanchang_vgupta/tools/helix/eng5/plat_linux_gcc44x_64/3rd/lib/libQtCore.so.4 [0x7ffff536a555]
+/lib64/libpthread.so.0 [0x323b60673d]
+clone
+*****************************************
+Error : Helix engine was terminated unexpectedly. Try running again with Diagnostic Mode turned on in the Advanced tab of the Run window. Please contact Synopsys support for further assistance.111.976u 1.563s 1:59.39 95.0%  0+0k 0+0io 0pf+0w
+[namerneny@synopsys-chamber-11 gfk_gddr_tsmc16ff_lz_gdr5_rx_diffamp_wd2s]$ 
+
+* The end

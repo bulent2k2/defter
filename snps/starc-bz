@@ -1,0 +1,142 @@
+* R&D review and release planning work
+I suggest we start with STARC commitments, check where we are, and then tie them into the release plan:
+
+•	2012-11-23
+1.	2727	mohit		alx! generate path produces strange result on pcell library	
+2.	2632	mohit		path generation in tutorial is reporting various invalid (?) warnings and not all paths…	
+3.	2762	bulent		PCell params not getting re-evaluated when DFM options are 
+4.	2772	shakir		make sure power rails do not overlap 
+5.	2690	bulent		pcell result has duplicate nets
+6.	2741	shakir		keep power lines (vdd/vss) same width as input 
+
+•	2012-11-30
+7.	2770	sunil		Loss of gate contacts and m1 on poly straps for 
+
+•	2012-12-07
+8.	2764	shakir		shielded signal wire no longer shielded in 
+9.	2771	shakir		Replace current abstracts with STARC provided cap 
+10.	2773	shakir		long overlapping m5/m6 wires no longer overlapping in lay-
+11.	2774	shakir		use pcell resistor contacts instead of leaving original ones 
+12.	2766	sunil		symmetry loss in matched device wire 
+
+•	2012-12-14
+13.	2742	bulent		create separate instances for dummy fingers with specific 
+14.	2752	shakir		auto instance correspondence between sch and lay does not work in 
+15.	2768	sunil		Fat m2 straps on source/drain connections of matched 
+
+•	2013-01-11
+16.	2747	mohit		Covert MPP to fig-group and preserve fig-group in ALX output	
+17.	2708	mohit		symmetry loss in matched 
+
+•	2013-01-31 
+18.	2761	mohit		symmetry needs to be maintained for abstracts
+
+•	2013-02-18
+19.	2744	sunil		new mode checked in [new Chem_A in Hierarchical…]
+
+And here is the release plans from Sumit to remind us 
+
+Specs Complete	Feature Freeze		Code Freeze	Release to Ops	
+11/29 			1/5			2/5  		3/5	
+
+Synopsys Feature freeze actually is Titan (development style) code-freeze. Between feature freeze and code-freeze in Synopsys one is supposed to be doing QA, adding regressions and fixing QA reported issues. Between Code-freeze and Release to Ops code goes to CAEs for Beta testing and fixing of issues reported by them. 
+
+So when someone asks for a commitment on release please take end of nov date for specs and early Jan for code-completion. Please clearly state/clarify the assumption you are making on what time frame (for coding) you have in mind for the commitment.
+
+Let us avoid any confusion on this account.
+
+Let’s discuss our tentative release plan in order to:
+1-	clarify the spec (the problem we want to solve, NOT how to solve it)
+2-	come up with effort/time estimates
+
+• PCell migration
+o	preserve/map pcells in the input, ensure SDL compliance, splitting of dummy fingers, pcell abutment, finger symmetry, nets
+• Wiring QoR
+o	eliminate antennas, hashed rectangles, smart hbonds, jog re-ordering, inter-layer ordering/alignment, power-rail specs (fixed pitch, device avoidance)
+• Auto symmetry preservation under non-uniform sizing
+• Path/MPP preservation
+• Performance improvements
+• Stretch goals
+o 	Usability (CRs: 2686, 2694, 2754, 2721, 2726, 2719, 2720, 2722)
+o 	Hflow QoR
+o 	ALX on TitanOA
+o 	tsmc28 (phase 3)
+• Risks or dependencies?
+
+* 23 bugs found. 10/11/2012
+* By ID:
+IDâ¼	Sev	Pri	OS	Assignee	Status	Resolution	Summary
+2737	nor	P3	Linu	bulent@magma-da.com	ASSI	---	via array creation sometimes generates multiple and partially overlapping via arrays
+2731	maj	P2	Linu	bulent@magma-da.com	ASSI	---	"hashed" rectangles in pcell result due to GSP operations
+2729	nor	P2	Linu	sunilk@magma-da.com	NEW	---	MOSEK Update to 6.0 Version
+2728	nor	P3	Linu	sunilk@magma-da.com	ASSI	---	air_via_extend=1 makes wide metal straps width non-uniform
+2727	maj	P2	Linu	bulent@magma-da.com	NEW	---	alx! generate path produces strange result on pcell library
+2726	maj	P3	Linu	hspandey@magma-da.com	NEW	---	Provide full solution for cell_bbox workaround script
+2723	nor	P3	Linu	bulent@magma-da.com	ASSI	---	dummy mos fingers sometimes get cut partially
+2722	nor	P4	Linu	bulent@magma-da.com	NEW	---	some rpo shapes remain on top of resistor pcells
+2721	nor	P3	Linu	bulent@magma-da.com	NEW	---	duplicate contacts when 2 adjacent pcell inst containers have overlapping OD
+2720	nor	P4	Linu	bulent@magma-da.com	NEW	---	named instance containers for resistors contain partial coverage of RPO over poly finger
+2719	nor	P4	Linu	bulent@magma-da.com	NEW	---	named instances for resistors contain RPDMY for all fingers
+2713	nor	P4	Linu	sunilk@magma-da.com	NEW	---	zero width paths result in core dump from VF
+2708	nor	P3	Linu	sunilk@magma-da.com	NEW	---	symmetry loss in matched devices
+2704	maj	P4	Linu	bulent@magma-da.com	NEW	---	add support for multi-finger resistors
+2703	nor	P2	Linu	bulent@magma-da.com	ASSI	---	sizing file issues using STARC CCI db
+2702	cri	P2	Linu	hspandey@magma-da.com	ASSI	---	diffusion sharing hflow boundary computation problem
+2698	nor	P2	Linu	hspandey@magma-da.com	NEW	---	m3 rail shapes deleted in subcell due to shapes merged in liba
+2694	nor	P2	Linu	bulent@magma-da.com	NEW	---	pcell flow loses the net info
+2692	enh	P2	Linu	hspandey@magma-da.com	NEW	---	automate port creation and mapping in abstract flow
+2690	nor	P3	Linu	bulent@magma-da.com	NEW	---	pcell result has duplicate shapes
+2686	maj	P2	Linu	hspandey@magma-da.com	NEW	---	RH shapes appear in incorrect level of hierarchy for STARC test case
+2634	nor	P2	Linu	hspandey@magma-da.com	REOP	---	extra / missing nets in tutorial test case run
+2632	maj	P2	Linu	hspandey@magma-da.com	NEW	---	path generation in tutorial is reporting various invalid(?) warnings and not all paths are converted
+* By priority
+2737	nor	P2	Linu	bulent@magma-da.com	NEW	---	via array creation sometimes generates multiple and partially overlapping via arrays
+2731	maj	P2	Linu	bulent@magma-da.com	ASSI	---	"hashed" rectangles in pcell result due to GSP operations
+2727	maj	P2	Linu	bulent@magma-da.com	NEW	---	alx! generate path produces strange result on pcell library
+2703	nor	P2	Linu	bulent@magma-da.com	ASSI	---	sizing file issues using STARC CCI db
+2694	nor	P2	Linu	bulent@magma-da.com	NEW	---	pcell flow loses the net info
+2723	nor	P3	Linu	bulent@magma-da.com	ASSI	---	dummy mos fingers sometimes get cut partially
+2721	nor	P3	Linu	bulent@magma-da.com	NEW	---	duplicate contacts when 2 adjacent pcell inst containers have overlapping OD
+2690	nor	P3	Linu	bulent@magma-da.com	NEW	---	pcell result has duplicate shapes
+2722	nor	P4	Linu	bulent@magma-da.com	NEW	---	some rpo shapes remain on top of resistor pcells
+2720	nor	P4	Linu	bulent@magma-da.com	NEW	---	named instance containers for resistors contain partial coverage of RPO over poly finger
+2719	nor	P4	Linu	bulent@magma-da.com	NEW	---	named instances for resistors contain RPDMY for all fingers
+2704	maj	P4	Linu	bulent@magma-da.com	NEW	---	add support for multi-finger resistors
+2702	cri	P2	Linu	hspandey@magma-da.com	ASSI	---	diffusion sharing hflow boundary computation problem
+2698	nor	P2	Linu	hspandey@magma-da.com	NEW	---	m3 rail shapes deleted in subcell due to shapes merged in liba
+2692	enh	P2	Linu	hspandey@magma-da.com	NEW	---	automate port creation and mapping in abstract flow
+2686	maj	P2	Linu	hspandey@magma-da.com	NEW	---	RH shapes appear in incorrect level of hierarchy for STARC test case
+2634	nor	P2	Linu	hspandey@magma-da.com	REOP	---	extra / missing nets in tutorial test case run
+2632	maj	P2	Linu	hspandey@magma-da.com	NEW	---	path generation in tutorial is reporting various invalid(?) warnings and not all paths are converted
+2726	maj	P3	Linu	hspandey@magma-da.com	NEW	---	Provide full solution for cell_bbox workaround script
+2729	nor	P2	Linu	sunilk@magma-da.com	NEW	---	MOSEK Update to 6.0 Version
+2728	nor	P3	Linu	sunilk@magma-da.com	ASSI	---	air_via_extend=1 makes wide metal straps width non-uniform
+2708	nor	P3	Linu	sunilk@magma-da.com	NEW	---	symmetry loss in matched devices
+2713	nor	P4	Linu	sunilk@magma-da.com	NEW	---	zero width paths result in core dump from VF
+
+* By owner
+IDâ¼	Sev	Priâ²	OS	Assigneeâ²	Status	Resolution	Summary
+2737	nor	P2	Linu	bulent@magma-da.com	NEW	---	via array creation sometimes generates multiple and partially overlapping via arrays
+2731	maj	P2	Linu	bulent@magma-da.com	ASSI	---	"hashed" rectangles in pcell result due to GSP operations
+2727	maj	P2	Linu	bulent@magma-da.com	NEW	---	alx! generate path produces strange result on pcell library
+2703	nor	P2	Linu	bulent@magma-da.com	ASSI	---	sizing file issues using STARC CCI db
+2694	nor	P2	Linu	bulent@magma-da.com	NEW	---	pcell flow loses the net info
+2702	cri	P2	Linu	hspandey@magma-da.com	ASSI	---	diffusion sharing hflow boundary computation problem
+2698	nor	P2	Linu	hspandey@magma-da.com	NEW	---	m3 rail shapes deleted in subcell due to shapes merged in liba
+2692	enh	P2	Linu	hspandey@magma-da.com	NEW	---	automate port creation and mapping in abstract flow
+2686	maj	P2	Linu	hspandey@magma-da.com	NEW	---	RH shapes appear in incorrect level of hierarchy for STARC test case
+2634	nor	P2	Linu	hspandey@magma-da.com	REOP	---	extra / missing nets in tutorial test case run
+2632	maj	P2	Linu	hspandey@magma-da.com	NEW	---	path generation in tutorial is reporting various invalid(?) warnings and not all paths are converted
+2729	nor	P2	Linu	sunilk@magma-da.com	NEW	---	MOSEK Update to 6.0 Version
+2723	nor	P3	Linu	bulent@magma-da.com	ASSI	---	dummy mos fingers sometimes get cut partially
+2721	nor	P3	Linu	bulent@magma-da.com	NEW	---	duplicate contacts when 2 adjacent pcell inst containers have overlapping OD
+2690	nor	P3	Linu	bulent@magma-da.com	NEW	---	pcell result has duplicate shapes
+2726	maj	P3	Linu	hspandey@magma-da.com	NEW	---	Provide full solution for cell_bbox workaround script
+2728	nor	P3	Linu	sunilk@magma-da.com	ASSI	---	air_via_extend=1 makes wide metal straps width non-uniform
+2708	nor	P3	Linu	sunilk@magma-da.com	NEW	---	symmetry loss in matched devices
+2722	nor	P4	Linu	bulent@magma-da.com	NEW	---	some rpo shapes remain on top of resistor pcells
+2720	nor	P4	Linu	bulent@magma-da.com	NEW	---	named instance containers for resistors contain partial coverage of RPO over poly finger
+2719	nor	P4	Linu	bulent@magma-da.com	NEW	---	named instances for resistors contain RPDMY for all fingers
+2704	maj	P4	Linu	bulent@magma-da.com	NEW	---	add support for multi-finger resistors
+2713	nor	P4	Linu	sunilk@magma-da.com	NEW	---	zero width paths result in core dump from VF
+* the end

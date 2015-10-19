@@ -1,0 +1,38 @@
+input: OA lib + topcell
+  abstractify all pcells under topcell hierarchy. each container knows -> (parent cell, pcell inst name))
+  generate abutment, alignment and proximity constraints on abstracts
+  generate layer/ndr constraints for nets
+  data mine for symmetry constraints (use half-cell instead!)
+  map constraints to pcells
+output: constraints on pcells and constraints on nets
+
+
+
+
+			 +---------+
+			 |         | 						+-------+
+			 |         | 						|       |
+			 |         | 						|       |
+			 |         | 						|       |
+			 |         |  +----------------+--+-----------------+	|       |
+			 |         |  |                |  |                 |	|       |
++-----------+		 |         |  |                |  |                 |	|       |
+|           |		 |         |  |                |  |                 |	|       |		    +----------------+
+|           |		 |         |  |                |  |                 |	|       |		    |                |
+|           |		 |         |  |                |  |                 |	|       |		    |                |
+|           |		 +---------+  |                |  |                 |	+-------+		    |                |
+|           |		              |                |  |                 |				    |                |
+|           |			      |                |  |                 |				    |                |
+|           |			      |                |  |                 |				    |                |
++-----------+			      +----------------+--+-----------------+				    +----------------+
+
+
+
+
+
+		       +--------------+					    +------------------+
+		       |              |					    |                  |
+		       |              |					    |                  |
+		       |              |					    |                  |
+		       |              |					    |                  |
+		       +--------------+					    +------------------+

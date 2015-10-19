@@ -1,0 +1,37 @@
+* Layout Migration
+
+* Abstract
+
+
+
+* Outline
+
+Stuff, concepts, objectives
+
+- Design, like Life itself, is a sequence of changes
+  Figure out what change we want (Book: "Goal")
+  Evaluate candidate changes (or else no optimization/synthesis)
+  Implement those changes
+- Change happens in:
+  Circuit
+  Layout
+  Manufacturing
+- Design objects
+  Levels of abstraction..
+  Sand, Dopants, Insulator, Openings, Cuts, Thin film, tunsten filling, ...
+  "Shapes" in mask layout
+  Device/pcell/subcell/block/IP/Chip/SOC
+
+Migration := Reuse, recycle with a major twist
+
+VLSI/ASIC revolution happened thanks to an ingenious (and in hindsight obvious)
+combination of synthesis (Design Compiler) and reuse (Std cell libraries).
+
+In custom or analog, same thing happens, alas with engineering labor. Intel
+employs a team of mask designers as big as SNPS.
+
+Qualcom declared 30x increase in layout labor for tsmc28 (or 20?)
+
+* Summary
+
+* The happy end of the beginning and beginning of the end (:-)

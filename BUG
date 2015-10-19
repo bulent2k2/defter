@@ -1,0 +1,57 @@
+Bug in: [titanrd] Titan test build 20121011 for linux26_x86_64
+
+New Titan build is available now. Please test and report issues.
+
+Thanks,
+Sumit
+
+Summary of changes in the build
+===============================
+2012-10-11
+
+	* gemini/R1.0.0/local/src/modules/air/doc/cbond (1.2):
+
+	samples..
+
+	* gemini/R1.0.0/local/src/modules/air/bin/qdrc.tcl (1.2):
+
+	unit test..
+
+	* gemini/R1.0.0/local/src/modules/air/src/core/: alxHVia.cpp (1.1),
+	  alxHVia.h (1.1):
+
+	CR      :
+	Testcase:
+	Description of Changes:
+	- code to handle vias in hflow
+
+	* gemini/R1.0.0/local/src/modules/verf/src/sdrc/vfBasic.c (1.16):
+
+	CR      : 2713
+	Testcase:
+	Description of Changes: crash fix; zero width path/ rect ignored.
+
+	* gemini/R1.0.0/local/src/modules/air/src/: api/air_mtcl.cpp
+	  (1.196), core/alxAirDBBool.cpp (1.16), core/alxAirDBBool.h
+	  (1.12), core/alxVisitor.cpp (1.15), core/alxVisitor.h (1.11),
+	  tcl/n.tcl (1.12):
+
+	CR      :2702
+	Testcase:
+	Description of Changes:
+	a) alx read cell update for taking ignore layer list for merging and expand mol
+	b) Added required check in tcl for air_resize_resistor to stop for RPO layer
+
+	* gemini/R1.0.0/local/src/modules/air/src/api/airLayout.cpp
+	  (1.117):
+
+	CR      :2702
+	Testcase:
+	Description of Changes:
+	a) Fixing of the refine overlap for new interface
+
+	* gemini/R1.0.0/local/src/modules/air/src/tcl/: aflow.tcl (1.106),
+	  bb.tcl (1.93), n.tcl (1.11), analyze/write.tcl (1.90):
+
+	new_airdb2 flag to use airdb in chema and molcell only
+

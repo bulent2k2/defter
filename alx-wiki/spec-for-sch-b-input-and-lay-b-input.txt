@@ -1,0 +1,173 @@
+Rev 1.
+Rev 2: Includes Shakir's and Mohit's questions and some answers.
+
+Enhancements to ALX for target schematic (sch-b) and target layout input (lay-b)
+
+Summary:
+
+  The following commands will be added to ALX:
+
+   (i)   alx add abstract insts $lay_a_top $sdl_lay_cellid -select {<pcell_inst_name1> <pcell_inst_name2> ...} -view <name> -lib <name> -hook:b -cut:b
+   (ii)  alx add abstract cells $lay_a_top $sdl_lay_cellid -view <name> -lib <name> -hook:b -cut:b
+   (iii) alx read device sizes for cell $cellid <list_of_triples>
+   (iv)  alx read device sizes from sch cellId:i schLibName:s -flat:b -verbose:b
+
+  The existing command for basic abstract creation {alx add abstract cell} will be modified as follows:
+   o Two new options will be added:
+     -hook:b
+     -cut:b
+   o The following options are not supported any more (only works with old flow, alx::ref) and will be disabled:
+     -cutBox:b -cutCellLayers:b -flip:b -cutLayers:l(*layer:s)=''
+
+
+Command definitions:
+
+
+(i)  alx add abstract insts $lay_a_top $sdl_lay_cellid -select {<pcell_inst_name1> <pcell_inst_name2> ...} -view <name> -lib <name> -hook:b -cut:b
+
+This command will find the subcell of $lay_a_top corresponding to $sdl_lay_cellid (denote it as $subcell), and it will add an abstract to each of the pcell_inst selected by the -select option. 
+
+a) For finding correspondence, the tool will check to see if there is a sub-cell under $lay_a_top with the same name as $subcell. If no such $subcell exists, it will give an error message and quit. If there are multiple such cells with different views, it will pick the one with the same view as $subcell. -view option can be used to specify a different viewname. If there are multiple cells with the same cell name and view name (in different libraries), the tool will throw an error. -lib <name> option can be used to specify which subcell to pick.
+
+b) By default (without -select option), the command will attempt to abstractify all the pcell insts in it. 
+
+c) If $subcell does not have a pcell inst with the same name, the tool will warn the user and skip that inst. 
+
+d) If there are multiple pcell insts which share the same pcell variant in $sdl_lay_cellid, they will all be abstracted in $subcell. 
+
+e) With the -hook option, the tool will assume that the target layout is topologically similar to the source layout (e.g., pins on the same layer) and will attemp to keep wires connected (using hook bonds) to the abstract pins and will avoid obstacles in the abstract. Otherwise (no -hook option), no hook bonds will be created and the relationship of wires over the abstract will be free to move. 
+
+f) -cut option will automate the call to {alx cookie cut abstract} command. If both -cut and -hook option are used, -cut will override and no hook bonds will be created. This applies to other commands that support them, too.
+
+Note: This command can be used multiple times to apply on multiple cells in S and to select which abstracts will have -hook or -cut options on.
+
+
+
+(ii)  alx add abstract cells $lay_a_top $sdl_lay_cellid -view <name> -lib <name> -hook:b -cut:b
+
+This command will find the subcell in $lay_a_top corresponding to $sdl_lay_cellid (denote is as $subcell) and will make it an abstract. 
+
+It can be call multiple times to apply on multiple sdl layout cells and to select the appropriate options for -cut and -hook. 
+
+For the meaning of -view, -lib, -hook and -cut options, please see (i) above.
+
+
+
+(iii) alx read device sizes for cell $cellid <list_of_triples>
+
+This command is used to apply sizing directives (new W and new L) to each finger of the specified pcell instances of a subcell or the top-cell in lib-a ($cellid).
+
+List of triples will have the following format:
+  { {<inst_name> <new_w> <new_l>} ... }
+E.g., 
+set list {
+  {M1       400 60}
+  {M2       600 80}
+  {M3.1     200 80}
+  {M3.2     200 80}
+  {M3.1.left_dummy  200 40}
+  {M3.2.right_dummy 200 40}
+}
+alx read device sizes for cell 11 $list
+
+This command can be used by the user (or a run script) and is also to be used to help implement the following command (iv).
+
+
+(iv) alx read device sizes from sch cellId:i schLibName:s -flat:b -verbose:b
+
+This command will internally use {alx sdl map} to map the layout given by $cellId (generally, the top cell in lay-a) to the schematic given by $schLibName (generally, the target schematic library). Any mismatch (subcell or pcell inst) will be reported. Use -verbose to list the mapping. Use -flat to run mapping and sizing for only the devices (pcell insts) in $cellId. Otherwise, all matched cells will be sized.
+
+Param names ($param_names} will provide mapping from alx-name to pcell param name. E.g., if the PDK uses Wf and Lf as channel width and length for each finger, we will have:
+   set params_names {w Wf l Lf}
+
+In this case Wf will be used as the param name to fetch the appropriate value from the schematic (using {db get inst params}) and will be set as the new channel width for the given inst.
+
+This command will call {alx read device sizes} for each matched subcell as well as the top-cell to set new sizes for the devices in them.
+
+
+
+Terminology and Motivation:
+
+Given a source layout db (in one or more lib-a) with a top-cell (lay-a), let's define S to be the set of lay-a and all of its subcells, both immediate and lower down in the hierarhcy (S1, S2, ..., Sn):
+  S0 := lay-a
+  S  := (S0, S1, S2, ..., Sn)
+
+Any cell in S can also have one ore more instances of pcells from a PDK (pdk-a).
+
+Given S, ALX can generate a layout in a target technology (pdk-b) for all cells in S (in a lib-b) using pcell instances from the pdk-b. 
+
+For most pcells in the input layout (e.g., transistors, resistors), ALX can identify a pcell in pdk-b and automatically compute all the parameters needed to instantiate it correctly. This is achieved in two steps:
+    set lay_b [alx migrate -cellId <lay-a>]
+    set lay_p [alx run pcell -cellId $lay_p]
+
+In this flow, proper sizing of pcells (by modifying channel width and length parameters) requires mapping of lay-a to sch-b (which can be done using LVS-CCI, CDL mapping or manual inspection) so that W-total for each pcell instance in sch-b can be split into the number of fingers corresponding to it in lay-a (all will have the same L).
+
+The sizing directives (new W and L for each finger) in general can be be provided as input to the tool (before running {alx migrate}) using a combination of two tables:
+    alx set param size_by_coordinate <filename> ; # this can be auto generated from LVS-CCI
+    alx set param size_by_signature <filename>  ; # this can be auto generated using CDL mapping when sch-b is auto-generated by migrating from sch-a
+
+The limitations of this flow are:
+1- Finger changes need to be input manually to the tool (table for size_by_coordinate can specify finger insertion/deletion)
+2- Complex pcells, or device modules are supported manually (e.g., row/col counts and row/col spacings in an array of NMOSCAP pcells) and the following command needs to be called on each by the user before running {alx migrate}:
+   alx add abstract cell $lay_a_top <lay_a_pcell_inst_variant_id> -targetCellId <lay_b_pcell_inst_variant_id>
+3- LVS-CCI setup/run is needed beforehand to compute sizing directives for transistors and resistors. Further, complex pcells (some CAPs, etc.) are not handled by the ALX CCI flow and require manual input.
+
+The two new commands (i and ii) will help resolve limitations (1) and (2) above.   
+
+We expect the user to use Device Module Generation and SDL functionality (in CD, Laker or any other tool) to generate target layout in a the target abstract lib (in the above commands, the top cell is denoted as $sdl_lay_top and any of its subcells as $sdl_lay_cellid). They will use the sch-b as the input and create an SDL layout for each cell as needed (Any sub-set of S and any selection of pcell insts in each cell). The combination of these two commands can be used to abstractify any pcell inst as well as any subcell in S. 
+
+Command (iv) will resolve limitation (3) above, i.e., generation of sizing directives (and eliminate the need for LVS-CCI when lay-a is SDL-compliant with sch-b).
+
+This is needed for any device which is not generated in the target abstract lib by the user (using DevModGen and SDL). Others will go in and be resized as abstracts and will not need explicit resizing input.
+
+
+
+Q&A:
+
+Q1: Where is the library that contains the target abstracts specified for the abstracts that correspond to the pcell instances found by ‘alx add abstract insts’? 
+A1: The library of $sdl_lay_cellid
+
+Q2: Will these target abstracts for pcells will be created automatically (by using ‘alx sdl map’ results). 
+A2: Yes and No. [Please see the paragraph starting with: "We expect the user ...")]. The user can use an existing (SDL-like) tool to automatically create them.
+
+Q3: I guess pin names for the pcells will be mapped the same way or can we use ‘alx map abstract pins’ command?
+A3: This step should be automated and nothing is expected from the user. 
+
+Q4: For fingering changes, this would get complicated due to additional pins when s/d are not auto-routed (using the pcells auto-routing params, or using device level router). How would this be handled, if at all? For now, I assume for fingering changes, this would be manual and the user assures that there are same number of pins and provides a map, or does not map pins at all and handles it manually in lay-b.
+A4: We expect that the Source-Drain and Gate connections are done inside the target layout. Some PDK's have this functionality. Otherwise, the plan is to use the router to hook them up (the right way to do this is to call the router on one pcell at a time. I hear Helix recently started to do this successfully.)
+
+Q5: Command (i) section b) will this abstractify promote the pin shapes into the container?  As we discussed yesterday, we cannot open the pcell variant cell container as a normal cell so it appears we cannot use it as the target abstract. Maybe Sumit can shed some light on how that works and what the limitations of what we can do with that cell variant.
+A5: Yes, that will be needed especially when the abstract has new wires for internal routing [Please see: Q/A4].
+
+Q6: Section (i) d) do you mean that it will check for multiple insts automatically? Ie, M0.1 M0.2 M0.3… this naming convention will need to be user configurable.  We will create a single abstract for multiple insts of the single device found in sch-b, or do we keep it split up? 
+A6: Yes, it will check for the multiple insts automatically. The tool won't need as input the naming convention for this purpose. It knows, internally, that they share the variant.
+
+Q7: Will we detect abutted pcells?
+A7: Yes, in a future enhancement, the tool will automatically detect pcell inst abutments and preserve them in the output if possible (unless target layouts prevent abutment). In the meantime, we will have two new commands (alx abut abstract insts/coord) [Please see abstract-spec].
+
+Q8: I am trying to understand the flow; sch-b, lay-a are available?
+a-   alx will create sized lay-b?
+b-   Or initial lay-b created by SDL? Followed by something like place as sch-b or place as lay-a?
+c-   device modules to be preserved? ALX will abstract device modules?
+d-   pcells also abstracted? Ex. pcells will have less shapes but lots of connections (and instantiations, x/y/reflected?)
+
+A8:  Yes, this is for when sch-b and lay-a are available. 
+A8a: Yes and No. The user will provide layout for some of the sub-cells and pcells. E.g., for auto P&R blocks, ESD cells, complex pcells, etc. ALX is supposed to use them as input and create the layout for all other sub-cells (and the topcell) in lay-b.
+A8b: The user will use ModGen & SDL to create some of the sub-cells. ALX will use the pcell-insts for each sub-cell as target layout.
+A8c: They can be migrated (and get converted into regular sub-cells) or can be abstracted. The user will decide.
+A8d: Most pcells (basic transistors, etc) are rather NOT abstracted. As you hint, abstracting them is not very valuable.
+
+Q9: alx add abstract insts: Such a command should run hierarchally to ensure a top level subcell abstraction does not obscure other subcell candidates for abstraction? Or abstraction only wrt $lay_a_top level?
+A9: It is intended to be run for each sub-cell under $lay_a_top as well as the top-cell itself. If an inst is already abstracted, its master should be skipped.
+
+Q10: alx add abstract cells: Functionality looks identical to ‘alx add abstract insts’. Former is for pcells?
+A10: Yes, one is to abstract pcell insts, the other is to abstract non-parameterized sub-cells.
+
+Q11: alx read device sizes for cell
+a-	This is to put sizing info for pcells not abstracted?
+b-	Finger count issue addressed only for abstracted pcells?
+
+A11:    Yes and yes. Thanks for helping to clarify. It will also address any custom/flat devices (shapes of poly over diffusion in a non-param cell).
+
+
+The end for now :-)

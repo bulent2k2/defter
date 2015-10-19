@@ -1,0 +1,18 @@
+# This: /remote/starc/alx/BMJul2012/cdl/doc/run.tcl
+# Use as:
+#   time gtcl ./run.tcl > sample_run.out
+alx::boot
+# First, provide the primitive mapping from cdl-a to cdl-b:
+# <one-letter-identifier> <prim-a> <prim-b>
+# The identifier can be any unique letter.
+alx::cdl::setup {
+    {P    PENHT33       pch_25od33}
+    {N    NENHT33       nch_25od33}
+    {R    $[RSPOLYP]    rppolywo_m}
+    {C    $[CM123]      nmoscap_25}
+    {B    PNPV          pnp5}
+} 0
+set a /remote/starc/alx/BMJul2012/cdl/data/a_copy.cdl
+set b /remote/starc/alx/BMJul2012/cdl/data/b_copy.cdl
+set table [alx::cdl::extract_map $a $b ./starc_auto_resize_file_with_RCB_[bb::utag].txt]
+tclExit

@@ -1,0 +1,43 @@
+# Showing only constraint groups. The rest did not change.
+#
+# Hierarchical Constraint Groups
+#
+constraintGroups:
+  - Name: uc2
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: bottom}
+    Contains: [P8,P9,P5,P4]
+
+  - Name: uc0
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: bottom}
+    Contains: [P1,P6,P7,P3,P2]
+
+  - Name: uc0uc2
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: center}
+    Contains: [uc0,uc2]
+
+  - Name: uc3
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: bottom}
+    Contains: [N8,N9,N5,N4]
+
+  - Name: uc1
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: bottom}
+    Contains: [N6,N7,N3,N2,N1]
+
+  - Name: uc1uc3
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: center}
+    Contains: [uc1,uc3]
+
+  - Name: Column1
+    Type: Column
+    Param: {YFlip: [], AbutmentType: none, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], BoundaryAssociation: [], Alignment: left}
+    Contains: [uc1uc3,uc0uc2]
+
+#
+# End
+#

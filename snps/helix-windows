@@ -1,0 +1,754 @@
+* TODO: study CMAKE tutorial first! instead of emailing folks!
+email to Lilit? Kumar? Rajiv? Prashant? GUI guy in India?
+
+cd %CNI_HELIX_ROOT%
+cmake -G %VS% %HELIX%
+
+...
+-- * End   Gui/plugins/helix
+-- * End   helix/Gui/plugins
+-- Configuring done
+CMake Error in Gui2/hui/CMakeLists.txt:
+  Cannot find source file "IAction.h".  Tried extensions .c .C .c++ .cc .cpp
+  .cxx .m .M .mm .h .hh .h++ .hm .hpp .hxx .in .txx
+
+
+CMake Error in Gui2/hui/CMakeLists.txt:
+  Cannot find source file "IApp.h".  Tried extensions .c .C .c++ .cc .cpp
+  .cxx .m .M .mm .h .hh .h++ .hm .hpp .hxx .in .txx
+...
+
+* Seven steps :-)
+c:\cni_bin
+1- %P4%\build\env\buildenv.bat
+c:/Users/bbasaran/p4/code/depot/build/env/buildenv.bat
+NEW: :: set PATH=c:\cmake\cmake-2.8.12.2-win32-x86\bin;%PATH%
+NEW: :: call "%USEX86%\Microsoft Visual Studio 10.0\Common7\Tools\vsvars32.bat"
+c:/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/Tools/vsvars32.bat
+2- cd %CNI_ROOT%
+dir
+# erase CMakeCache.txt
+cd ..
+rmdir /S /Q cni_bin
+mkdir cni_bin
+cd %CNI_ROOT%
+dir
+echo %VS%
+echo %SANTANA%
+3- cmake -G %VS% %SANTANA%
+NEW: "Visual Studio 10"
+NEW: "Visual Studio 12"
+4- %VSEXE%
+OLD:  "C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE\devenv.exe"
+NEW:  "c:/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE/devenv.exe"
+NEW:  "c:/Program Files (x86)/Microsoft Visual Studio 12.0/Common7/IDE/devenv.exe"
+5- <Ctrl-Shift-O to load project file from, %CNI_ROOT%\santana.sln>
+6- <F7 to build>
+7- <F5 to debug: browse to pyros2.exe under %CNI_ROOT%\santana\plat_win_32\>
+C:\cni_bin\plat_win_32\bin\pyros2.exe
+8- cd ..
+rmdir /S /Q cni_helix_bin
+mkdir cni_helix_bin
+cd %CNI_HELIX_ROOT%
+dir
+cmake -G %VS% %HELIX%
+%VSEXE%
+* my laptop new:
+# Code:
+P4 = C:\Users\bbasaran\p4\code\depot
+HELIX %P4%\helix
+SANTANA %P4%\santana
+# Build:
+CNI_ROOT = C:\cni_bin
+CNI_HELIX_ROOT = C:\cni_helix_bin
+OPTMODE = opt
+VS = "Visual Studio 8 2005"
+VSEXE = "C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE\devenv.exe"
+* lilit's machine new setup/build
+** Goto: System Properties->Advanced->Environment Variables
+** Edit: User variables for <userid>:
+HOME = C:\Users\<userid>
+# Code:
+P4 = %HOME%\p4\code\depot
+HELIX %P4%\helix
+SANTANA %P4%\santana
+# Build:
+CNI_ROOT = %HOME%\cni_bin
+CNI_HELIX_ROOT = %HOME%\cni_helix_bin
+OPTMODE = opt
+VS = "Visual Studio 8 2005"
+** Create new folders %CNI_HELIX_ROOT% and %CNI_ROOT%
+
+%P4%\build\env\buildenv.bat
+cd %CNI_ROOT%
+# erase CMakeCache.txt
+cd ..
+rmdir /S /Q cni_bin
+mkdir cni_bin
+cd %CNI_ROOT%
+cmake -G %VS% %SANTANA%
+cmake -G "Visual Studio 8 2005" %SANTANA%
+** Log: expect the following tail at the end:
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/cni_bin
+** End-Log
+"C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE\devenv.exe"
+<Ctrl-Shift-O to load project file from, %CNI_ROOT%\santana.sln>
+<F7 to build>
+<F5 to debug: browse to pyros2.exe under %CNI_ROOT%\santana\plat_win_32\>
+C:\Users\bbasaran\cni_bin\plat_win_32\bin\pyros2.exe
+
+
+cd %CNI_HELIX_ROOT%
+cmake -G "Visual Studio 8 2005" %HELIX%
+
+
+** old
+cmake -G "NMake Makefiles" %SANTANA%
+nmake install
+cd %CNI_HELIX_ROOT%
+cmake -G "NMake Makefiles" %HELIX%
+nmake install
+** test
+cd %HOME%
+echo %OPTMODE%
+cd %SANTANA%
+cd %HELIX%
+cd %CNI_HELIX_ROOT% 
+cd %CNI_ROOT%
+* windows log
+# INFO(AVP-152){MST 16.058}{HPWL 50.780}{HPWLSQ 575.122}{CROSS 0.000}
+# INFO(AVP-187)dplace run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:56 2014
+# INFO(AVP-14)Write placement result to db.
+# INFO(AVP-111)Done with db write.
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-44)Compact...
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:56 2014
+# INFO(AVP-123)Read 21 layers.
+# INFO(AVP-124)Found 0 ports.
+# INFO(AVP-177)instType: ContactRingUCell id(9).
+# INFO(AVP-188)allowedGroup: n-group id(10).
+# INFO(AVP-188)allowedGroup: p-group id(11).
+spacing ContactRingUCell ContactRingUCell 660 660
+# INFO(AVP-132)Found 21 valid layers.
+# INFO(AVP-123)Read 1 process rules.
+# INFO(AVP-123)Read 4 instance masters.
+# INFO(AVP-123)Read 2 instancess.
+# INFO(AVP-123)Read 0 extra instancess.
+# INFO(AVP-123)Read 8 nets.
+# INFO(AVP-123)Read 24 pins.
+# INFO(AVP-2)1 CMOS pairs created
+# INFO(AVP-123)Read 1 groups.
+# INFO(AVP-123)Read 2 movable instances.
+# INFO(AVP-123)Read 0 placement keepoputs.
+# INFO(AVP-151)Cell bounding box {{0 0}{8.36 16.87}}
+# INFO(AVP-123)Read 1 regions.
+# INFO(AVP-126)Instances not in user regions : 2.
+# INFO(AVP-123)Read 2 user-created rows.
+# INFO(AVP-16)Create 5 horizontal area rows.
+# INFO(AVP-16)Create 0 vertical area rows.
+# INFO(AVP-16)Create 0 I/O rows.
+# INFO(AVP-16)Create 0 region rows.
+# INFO(AVP-131)Prepared 6 rows
+# INFO(AVP-186)Build abutment graph...
+# INFO(AVP-187)Build abut graph run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-187)Placer build run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-152){MST 16.058}{HPWL 50.780}{HPWLSQ 575.122}{CROSS 0.000}
+# INFO(AVP-5)(Xdisp=0.000 Ydisp=0.000)
+
+# INFO(AVP-152){MST 16.058}{HPWL 50.780}{HPWLSQ 575.122}{CROSS 0.000}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.15}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.15}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-110)Compaction iteration
+# INFO(AVP-152){MST 18.038}{HPWL 52.760}{HPWLSQ 623.404}{CROSS 0.000}
+# INFO(AVP-152){MST 18.038}{HPWL 52.760}{HPWLSQ 623.404}{CROSS 0.000}
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:56 2014
+# INFO(AVP-14)Write placement result to db.
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-111)Done with db write.
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-189)Layout1(Target=1.000 Aspect=0.285 Util=0.942 EffUtil=0.942 WL=283
+900.000)
+# INFO(AVP-44)Compact...
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:56 2014
+# INFO(AVP-123)Read 21 layers.
+# INFO(AVP-124)Found 0 ports.
+# INFO(AVP-177)instType: ContactRingUCell id(9).
+# INFO(AVP-188)allowedGroup: n-group id(10).
+# INFO(AVP-188)allowedGroup: p-group id(11).
+spacing ContactRingUCell ContactRingUCell 660 660
+# INFO(AVP-132)Found 21 valid layers.
+# INFO(AVP-123)Read 1 process rules.
+# INFO(AVP-123)Read 4 instance masters.
+# INFO(AVP-123)Read 2 instancess.
+# INFO(AVP-123)Read 0 extra instancess.
+# INFO(AVP-123)Read 8 nets.
+# INFO(AVP-123)Read 24 pins.
+# INFO(AVP-2)1 CMOS pairs created
+# INFO(AVP-123)Read 1 groups.
+# INFO(AVP-123)Read 2 movable instances.
+# INFO(AVP-123)Read 0 placement keepoputs.
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.885}}
+# INFO(AVP-123)Read 1 regions.
+# INFO(AVP-126)Instances not in user regions : 2.
+# INFO(AVP-123)Read 2 user-created rows.
+# INFO(AVP-16)Create 5 horizontal area rows.
+# INFO(AVP-16)Create 0 vertical area rows.
+# INFO(AVP-16)Create 0 I/O rows.
+# INFO(AVP-16)Create 0 region rows.
+# INFO(AVP-131)Prepared 9 rows
+# INFO(AVP-186)Build abutment graph...
+# INFO(AVP-187)Build abut graph run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-187)Placer build run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-152){MST 17.211}{HPWL 38.130}{HPWLSQ 255.948}{CROSS 0.000}
+# INFO(AVP-5)(Xdisp=0.000 Ydisp=0.000)
+
+# INFO(AVP-152){MST 17.211}{HPWL 38.130}{HPWLSQ 255.948}{CROSS 0.000}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.885}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.885}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-110)Compaction iteration
+# INFO(AVP-152){MST 14.310}{HPWL 35.230}{HPWLSQ 213.391}{CROSS 0.000}
+# INFO(AVP-152){MST 14.310}{HPWL 35.230}{HPWLSQ 213.391}{CROSS 0.000}
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:57 2014
+# INFO(AVP-14)Write placement result to db.
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-111)Done with db write.
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-189)Layout0(Target=1.000 Aspect=0.747 Util=0.920 EffUtil=0.920 WL=230
+120.000)
+# INFO(AVP-44)Compact...
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:57 2014
+# INFO(AVP-123)Read 21 layers.
+# INFO(AVP-124)Found 0 ports.
+# INFO(AVP-177)instType: ContactRingUCell id(9).
+# INFO(AVP-188)allowedGroup: n-group id(10).
+# INFO(AVP-188)allowedGroup: p-group id(11).
+spacing ContactRingUCell ContactRingUCell 660 660
+# INFO(AVP-132)Found 21 valid layers.
+# INFO(AVP-123)Read 1 process rules.
+# INFO(AVP-123)Read 4 instance masters.
+# INFO(AVP-123)Read 2 instancess.
+# INFO(AVP-123)Read 0 extra instancess.
+# INFO(AVP-123)Read 8 nets.
+# INFO(AVP-123)Read 24 pins.
+# INFO(AVP-2)1 CMOS pairs created
+# INFO(AVP-123)Read 1 groups.
+# INFO(AVP-123)Read 2 movable instances.
+# INFO(AVP-123)Read 0 placement keepoputs.
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-123)Read 1 regions.
+# INFO(AVP-126)Instances not in user regions : 2.
+# INFO(AVP-123)Read 2 user-created rows.
+# INFO(AVP-16)Create 4 horizontal area rows.
+# INFO(AVP-16)Create 0 vertical area rows.
+# INFO(AVP-16)Create 0 I/O rows.
+# INFO(AVP-16)Create 0 region rows.
+# INFO(AVP-131)Prepared 9 rows
+# INFO(AVP-186)Build abutment graph...
+# INFO(AVP-187)Build abut graph run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-187)Placer build run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-152){MST 14.310}{HPWL 35.230}{HPWLSQ 213.391}{CROSS 0.000}
+# INFO(AVP-5)(Xdisp=0.000 Ydisp=0.000)
+
+# INFO(AVP-152){MST 14.310}{HPWL 35.230}{HPWLSQ 213.391}{CROSS 0.000}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-110)Compaction iteration
+# INFO(AVP-152){MST 14.310}{HPWL 35.230}{HPWLSQ 213.391}{CROSS 0.000}
+# INFO(AVP-152){MST 14.310}{HPWL 35.230}{HPWLSQ 213.391}{CROSS 0.000}
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:58 2014
+# INFO(AVP-14)Write placement result to db.
+# INFO(AVP-151)Cell bounding box {{0 0}{6.84 9.16}}
+# INFO(AVP-111)Done with db write.
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-189)Layout0(Target=1.000 Aspect=0.747 Util=0.920 EffUtil=0.920 WL=230
+120.000)
+# INFO(AVP-44)Compact...
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:58 2014
+# INFO(AVP-123)Read 21 layers.
+# INFO(AVP-124)Found 0 ports.
+# INFO(AVP-177)instType: ContactRingUCell id(9).
+# INFO(AVP-188)allowedGroup: n-group id(10).
+# INFO(AVP-188)allowedGroup: p-group id(11).
+spacing ContactRingUCell ContactRingUCell 660 660
+# INFO(AVP-132)Found 21 valid layers.
+# INFO(AVP-123)Read 1 process rules.
+# INFO(AVP-123)Read 4 instance masters.
+# INFO(AVP-123)Read 2 instancess.
+# INFO(AVP-123)Read 0 extra instancess.
+# INFO(AVP-123)Read 8 nets.
+# INFO(AVP-123)Read 24 pins.
+# INFO(AVP-2)1 CMOS pairs created
+# INFO(AVP-123)Read 1 groups.
+# INFO(AVP-123)Read 2 movable instances.
+# INFO(AVP-123)Read 0 placement keepoputs.
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-123)Read 1 regions.
+# INFO(AVP-126)Instances not in user regions : 2.
+# INFO(AVP-123)Read 2 user-created rows.
+# INFO(AVP-16)Create 5 horizontal area rows.
+# INFO(AVP-16)Create 0 vertical area rows.
+# INFO(AVP-16)Create 0 I/O rows.
+# INFO(AVP-16)Create 0 region rows.
+# INFO(AVP-131)Prepared 9 rows
+# INFO(AVP-186)Build abutment graph...
+# INFO(AVP-187)Build abut graph run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-187)Placer build run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-152){MST 18.038}{HPWL 52.760}{HPWLSQ 623.404}{CROSS 0.000}
+# INFO(AVP-5)(Xdisp=0.000 Ydisp=0.000)
+
+# INFO(AVP-152){MST 18.038}{HPWL 52.760}{HPWLSQ 623.404}{CROSS 0.000}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 14.645}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-110)Compaction iteration
+# INFO(AVP-152){MST 15.137}{HPWL 49.860}{HPWLSQ 553.355}{CROSS 0.000}
+# INFO(AVP-152){MST 15.137}{HPWL 49.860}{HPWLSQ 553.355}{CROSS 0.000}
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:59 2014
+# INFO(AVP-14)Write placement result to db.
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-111)Done with db write.
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-189)Layout1(Target=1.000 Aspect=0.300 Util=0.991 EffUtil=0.991 WL=269
+400.000)
+# INFO(AVP-44)Compact...
+# INFO(CTL-142)Current time : Wed Apr 30 18:50:59 2014
+# INFO(AVP-123)Read 21 layers.
+# INFO(AVP-124)Found 0 ports.
+# INFO(AVP-177)instType: ContactRingUCell id(9).
+# INFO(AVP-188)allowedGroup: n-group id(10).
+# INFO(AVP-188)allowedGroup: p-group id(11).
+spacing ContactRingUCell ContactRingUCell 660 660
+# INFO(AVP-132)Found 21 valid layers.
+# INFO(AVP-123)Read 1 process rules.
+# INFO(AVP-123)Read 4 instance masters.
+# INFO(AVP-123)Read 2 instancess.
+# INFO(AVP-123)Read 0 extra instancess.
+# INFO(AVP-123)Read 8 nets.
+# INFO(AVP-123)Read 24 pins.
+# INFO(AVP-2)1 CMOS pairs created
+# INFO(AVP-123)Read 1 groups.
+# INFO(AVP-123)Read 2 movable instances.
+# INFO(AVP-123)Read 0 placement keepoputs.
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-123)Read 1 regions.
+# INFO(AVP-126)Instances not in user regions : 2.
+# INFO(AVP-123)Read 2 user-created rows.
+# INFO(AVP-16)Create 4 horizontal area rows.
+# INFO(AVP-16)Create 0 vertical area rows.
+# INFO(AVP-16)Create 0 I/O rows.
+# INFO(AVP-16)Create 0 region rows.
+# INFO(AVP-131)Prepared 9 rows
+# INFO(AVP-186)Build abutment graph...
+# INFO(AVP-187)Build abut graph run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-187)Placer build run time...
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-152){MST 15.137}{HPWL 49.860}{HPWLSQ 553.355}{CROSS 0.000}
+# INFO(AVP-5)(Xdisp=0.000 Ydisp=0.000)
+
+# INFO(AVP-152){MST 15.137}{HPWL 49.860}{HPWLSQ 553.355}{CROSS 0.000}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-110)Compaction iteration
+# INFO(AVP-152){MST 15.137}{HPWL 49.860}{HPWLSQ 553.355}{CROSS 0.000}
+# INFO(AVP-152){MST 15.137}{HPWL 49.860}{HPWLSQ 553.355}{CROSS 0.000}
+# INFO(CTL-142)Current time : Wed Apr 30 18:51:00 2014
+# INFO(AVP-14)Write placement result to db.
+# INFO(AVP-151)Cell bounding box {{0 0}{4.18 13.92}}
+# INFO(AVP-111)Done with db write.
+# INFO(CTL-11)CPU time :0:00:00 Elapsed Time : 0:00:00
+# INFO(AVP-189)Layout1(Target=1.000 Aspect=0.300 Util=0.991 EffUtil=0.991 WL=269
+400.000)
+# INFO(AVP-23)Ending placement session ...
+The current date is: Wed 04/30/2014
+Enter the new date: (mm-dd-yy)
+# INFO(AVP-26)Placement session ended, all memory pools freed.
+
+
+Init time:  Wed Apr 30 18:51:04 2014
+
+
+Solver time: Wed Apr 30 18:51:04 2014
+
+Solver completed.  Analyzing...
+
+Generating OA library...
+
+Generating Layout layout000
+
+0...
+Generating Layout layout001
+1...
+
+
+2 layout views generated for cell pnstack1.
+End time: Wed Apr 30 18:51:04 2014
+Job Completed!
+CPU time self: 0:0:10.296
+CPU time children: 0:0:0.000
+PS C:\cni_bin\logs\helix\fullCycle\multi4\cni130L\pnstack1\pnstack1_0>
+* lilit's machine debugger output:
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\Helix.exe', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\Windows\System32\ntdll.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\kernel32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\KernelBase.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\cnHelix.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\Util.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtil.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\psapi.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\shell32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\msvcrt.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\shlwapi.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\gdi32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\user32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\advapi32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\sechost.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\rpcrt4.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\sspicli.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\cryptbase.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\lpk.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\usp10.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.6195_none_d09154e044272b9a\msvcp80.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.6195_none_d09154e044272b9a\msvcr80.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnTech.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDloInterfaces.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaBase.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\ws2_32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\nsi.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaCommon.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.762_none_24c8a196583ff03b\msvcp80d.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.762_none_24c8a196583ff03b\msvcr80d.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtilOa.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaDM.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaTech.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaDesign.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDrcScript.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_3rd\qt\4.6.3\win32\bin\QtCore4.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\ole32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\HxExport.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\cnMcpApi.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDloBase.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnPcellProxy.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_3rd\python\2.6.2\win32\python26.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtilOaBase.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDloXtra.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnGeoEngine.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDrcConstruct.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnPyDloGpi.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtilSr.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtilPy.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnRouteSearch.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnRouteUtil.dll', Binary was not built with debug information.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\imm32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\msctf.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\QIPCAP.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\oleaut32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\winmm.dll', No symbols loaded.
+First-chance exception at 0x76c8c41f in Helix.exe: Microsoft C++ exception: UtilLib::UserException at memory location 0x00d9f1e8..
+The program '[6576] Helix.exe: Native' has exited with code -1 (0xffffffff).
+* ref:
+c:/Users/bbasaran/p4/bbasaran_E6230_201403/bbasaran_E6230_201403/depot/santana/
+c:/Users/bbasaran/p4/bbasaran_E6230_201403/bbasaran_E6230_201403/depot/helix/
+
+c:/Users/bbasaran/p4/bbasaran_E6230_201403/bbasaran_E6230_201403/depot/santana/tools/functions/functions.ps1
+c:/Users/bbasaran/p4/bbasaran_E6230_201403/bbasaran_E6230_201403/depot/build/env
+/buildenv.bat
+* summary:
+** debug
+cmd
+set OPTMODE=dbg
+c:\build\env\buildenv.bat
+PowerShell
+cd "C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE"
+devenv.exe
+** debug capture
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Users\bbasaran>cd %CNI_ROOT%
+
+C:\cni_bin>cd %CNI_HELIX_ROOT%
+
+C:\cni_helix_bin>set OPTMODE=dbg
+
+C:\cni_helix_bin>c:\build\env\buildenv.bat
+Setting environment for using Microsoft Visual Studio 2005 x86 tools.
+Welcome to dbg mode
+C:\cni_helix_bin> powershell
+Windows PowerShell
+Copyright (C) 2009 Microsoft Corporation. All rights reserved.
+
+PS C:\cni_helix_bin> cnpy
+PS C:\cni_helix_bin> Helix.exe
+PS C:\cni_helix_bin> cd "C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE"
+PS C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE> devenv.exe
+PS C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE>
+
+<In VS, I load the exe file and run it through debugger, but it does not even get to the first line of HelixMain(...)>
+
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\Helix.exe', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\System32\ntdll.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\kernel32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\KernelBase.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\cnHelix.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\Util.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtil.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\psapi.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\shell32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\msvcrt.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\shlwapi.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\gdi32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\user32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\advapi32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\sechost.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\rpcrt4.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\sspicli.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\cryptbase.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\lpk.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\usp10.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.42_none_ef74ff32550b5bf0\msvcp80d.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.42_none_ef74ff32550b5bf0\msvcr80d.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnTech.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDloInterfaces.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaBase.dll', Symbols loaded.
+
+** In lilit's machine, it next loads:
+c:/Windows/SysWOW64/ws2_32.dll
+*** In my machine, it is there, and identical to what's in lilit's:
+  -rw-rw-rw-  2 TrustedInstaller TrustedInstaller   206848 2010-11-20  ws2_32.dll
+** in my machine it does not:
+The program '[7272] Helix.exe: Native' has exited with code -1072365566 (0xc0150002).
+*** logs from VS:
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\Helix.exe', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\System32\ntdll.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\kernel32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\KernelBase.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\cnHelix.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\Util.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtil.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\psapi.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\shell32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\msvcrt.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\shlwapi.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\gdi32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\user32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\advapi32.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\sechost.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\rpcrt4.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\sspicli.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\cryptbase.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\lpk.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\SysWOW64\usp10.dll', No symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.42_none_ef74ff32550b5bf0\msvcp80d.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.42_none_ef74ff32550b5bf0\msvcr80d.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnTech.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDloInterfaces.dll', Symbols loaded.
+'Helix.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaBase.dll', Symbols loaded.
+The program '[1312] Helix.exe: Native' has exited with code -1072365566 (0xc0150002).
+*** hgui.exe:
+'hgui.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\hgui.exe', Symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\System32\ntdll.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\kernel32.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\KernelBase.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtilSr.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnUtil.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\psapi.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\shell32.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\msvcrt.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\shlwapi.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\gdi32.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\user32.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\advapi32.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\sechost.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\rpcrt4.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\sspicli.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\cryptbase.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\lpk.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\SysWOW64\usp10.dll', No symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.42_none_ef74ff32550b5bf0\msvcp80d.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\Windows\winsxs\x86_microsoft.vc80.debugcrt_1fc8b3b9a1e18e3b_8.0.50727.42_none_ef74ff32550b5bf0\msvcr80d.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\HxExport.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\cni_helix_bin\plat_win_32\bin\Util.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnTech.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\cni_bin\plat_win_32\bin\cnDloInterfaces.dll', Symbols loaded.
+'hgui.exe': Loaded 'C:\cni_3rd\OpenAccess\22.41.04\bin\win32\dbg\oaBase.dll', Symbols loaded.
+The program '[6584] hgui.exe: Native' has exited with code -1072365566 (0xc0150002).
+** run
+(for lilit's machine: 
+set CNI_ROOT=c:\cni_bin
+set CNI_HELIX_ROOT=c:\cni_helix\bin
+c:\p4\build\env\buildenv.bat
+)
+cd %CNI_HELIX_ROOT%
+set OPTMODE=dbg
+c:\build\env\buildenv.bat
+PowerShell
+c:\build\env\buildenv.bat
+Note: (cnpy won't work in cmd!)
+Helix.exe in windows: cnUtil.dll is missing
+c:/cni_bin/plat_win_32/bin/cnUtil.dll
+** build
+(for lilit's machine:
+set CNI_ROOT=c:\cni_bin
+set CNI_HELIX_ROOT=c:\cni_helix\bin
+set OPTMODE=dbg
+c:\p4\build\env\buildenv.bat
+set SANTANA=C:\Users\bbasaran\bbasaran_lilitb-T3500_2988\bbasaran_lilitb-T3500_2988\depot\santana
+set HELIX=C:\Users\bbasaran\bbasaran_lilitb-T3500_2988\bbasaran_lilitb-T3500_2988\depot\helix
+)
+*** in my machine (
+c:\build\env\buildenv.bat
+set SANTANA=c:\Users\bbasaran\p4\bbasaran_E6230_201403\bbasaran_E6230_201403\depot\santana
+set HELIX=c:\Users\bbasaran\p4\bbasaran_E6230_201403\bbasaran_E6230_201403\depot\helix
+)
+echo %CNI_ROOT% %CNI_HELIX_ROOT% %OPTMODE%
+cd %CNI_ROOT%
+cmake -G "NMake Makefiles" %SANTANA%
+nmake install
+cd %CNI_HELIX_ROOT%
+cmake -G "NMake Makefiles" %HELIX%
+nmake install
+* windows
+In our Sharepoint- helix- fromWiki- BuildAndTests -HowTo there is a page called SetupAndBuildOnWindows, use that one.
+
+http://sp-amsg/sites/CustomDesigner/analogaccelerators/Placement/From%20Wiki/Forms/AllItems.aspx?RootFolder=%2Fsites%2FCustomDesigner%2Fanalogaccelerators%2FPlacement%2FFrom%20Wiki%2FBuild%20and%20Test%2FHowTo&InitialTabId=Ribbon%2EDocument&VisibilityContext=WSSTabPersistence
+
+No ready project files are checked in, they all will be created by running cmake, almost similar to unix, except on windows you have to pass -G option and to specify which project files to use, run cmake to see the options. I use only cmake -G "NMake Makefiles" c:\p4\santana from $CNI_ROOT.
+Hope this helps,
+
+Lilit
+
+
+http://sp-amsg/sites/CustomDesigner/analogaccelerators/Placement/From%20Wiki/Forms/AllItems.aspx?RootFolder=%2Fsites%2FCustomDesigner%2Fanalogaccelerators%2FPlacement%2FFrom%20Wiki%2FBuild%20and%20Test%2FHowTo&InitialTabId=Ribbon%2EDocument&VisibilityContext=WSSTabPersistence
+
+http://sp-amsg/sites/CustomDesigner/analogaccelerators/Placement/_layouts/WordViewer.aspx?id=/sites/CustomDesigner/analogaccelerators/Placement/From%20Wiki/Build%20and%20Test/HowTo/Setup%20and%20build%20on%20Windows.docx&Source=http%3A%2F%2Fsp-amsg%2Fsites%2FCustomDesigner%2Fanalogaccelerators%2FPlacement%2FFrom%2520Wiki%2FForms%2FAllItems%2Easpx%3FRootFolder%3D%252Fsites%252FCustomDesigner%252Fanalogaccelerators%252FPlacement%252FFrom%2520Wiki%252FBuild%2520and%2520Test%252FHowTo%26InitialTabId%3DRibbon%252EDocument%26VisibilityContext%3DWSSTabPersistence&DefaultItemOpen=1&DefaultItemOpen=1
+
+How to Set up your third party software and build Helix and santana.
+
+** 1 - Third party software should be located on drive C:\cni_3rd. Copy the zip file from the nightly build machine called "horse" c:\pub directory (cni_3rd_v28.zip) and unzip it in your C drive (can't login to horse. Instead Lilit provided a zip for me!)
+from: /slowfs/amsgcn3/home/lilitb/Windows_cni_3rd/cni_3rd.zip
+to: c:/cni_3rd_unpack/cni_3rd.zip
+** 2 - install perforce and Visual Studio. Make sure you have latest service packs installed
+
+** 3 - sync //depot/build, //depot/deviceKits, //depot/santana, //depot/helix - 
+p4 sync //depot/build/...#head //depot/deviceKits/...#head //depot/helix/...#head //depot/santana/...#head //depot/route/...#head
+
+*** 3b -- double click on the files in the c:\cni_3rd: "python 2.6.2 Wow6432Node.reg" and "python 2.6.2.reg". These files register python 2.6.2. You will be using python from c:\cni_3rd\python
+
+** 4 - create directory for your santana and helix binaries. The default is C:\cni_bin and C:\cni_helix_bin.
+
+** 5 - open a terminal and set the values of your %CNI_ROOT and %CNI_HELIX_ROOT environment variables to point to the above directories. If you want different locations, call set command and set them prior to running the batch file below.
+
+*** 5b: to check, run 'cmd' and do:
+cd %CNI_ROOT%
+echo %CNI_HELIX_ROOT%
+echo %OPTMODE%
+
+Also set the %OPTMODE to either opt of dbg.
+*** 5c: set OPTMODE=dbg
+
+** 6 - run the c:\build\env\buildenv.bat file. This will set your paths for this open terminal (only).
+*** do this: c:\build\env\buildenv.bat
+
+(p4\build.lnk LINK DOES NOT WORK!) c:\p4\build\env\buildenv.bat (in lilitb-t3500)
+
+C:\cni_bin> c:\Users\bbasaran\p4\bbasaran_E6230_201403\bbasaran_E6230_201403\depot\build\env\buildenv.bat
+
+'"C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\Tools\vsvars32.bat"' is not recognized as an internal or external command, operable program or batch file.
+Welcome to dbg mode
+C:\cni_bin>
+
+Used instead: C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\vsvars32.bat
+copied build from p4 to c:\build
+
+** 7 - cd c:\cni_bin
+
+** 8 - run cmake: cmake -G "NMake Makefiles" %SANTANA%
+set SANTANA=c:\Users\bbasaran\p4\bbasaran_E6230_201403\bbasaran_E6230_201403\depot\santana"
+set HELIX=c:\Users\bbasaran\p4\bbasaran_E6230_201403\bbasaran_E6230_201403\depot\helix
+dir %SANTANA%
+dir %HELIX%
+
+instead of command "cmake -G "NMake Makefiles" c:\p4\santana..
+
+** 9 - nmake install
+C:\Users\bbasaran\p4\bbasaran_E6230_201403\bbasaran_E6230_201403\depot\santana\drcConstruct\src\dccEnclosing.cpp(1108) :
+ error C2664: 'std::pair<std::pair<const dsc::Layer *,const dsc::Layer *>,const dsc::DerivationNode *> std::make_pair<ds
+c::LayerPair,const dsc::DerivationNode*>(_Ty1 &&,_Ty2 &&)' : cannot convert argument 2 from 'const dsc::DerivationNode *
+' to 'const dsc::DerivationNode *&&'
+        with
+        [
+            _Ty1=dsc::LayerPair
+,            _Ty2=const dsc::DerivationNode *
+        ]
+        You cannot bind an lvalue to an rvalue reference
+NMAKE : fatal error U1077: 'C:\PROGRA~2\MICROS~1.0\VC\bin\cl.exe' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\BIN\nmake.exe"' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\BIN\nmake.exe"' : return code '0x2'
+Stop.
+
+C:\cni_bin>
+
+** - cd C:\cni_helix_bin
+
+** - cmake -G "NMake Makefiles" c:\p4\helix
+
+** - nmake install
+
+** - Powershell ( this will start Powershell from your current terminal)
+
+** - from the Powershell terminal after completing the build you can start running helix.
+
+You have to run helix from Powershell because of the way our run scripts are set up now, from cmd, executables will just exit the shell upon completion.
+* Run in lilit's machine:
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Users\bbasaran>set CNI_ROOT=c:\cni_bin
+C:\Users\bbasaran>set CNI_HELIX_ROOT=c:\cni_helix_bin
+C:\Users\bbasaran>cd %CNI_HELIX_ROOT%
+c:\cni_helix_bin>c:\p4\build\env\buildenv.bat
+Setting environment for using Microsoft Visual Studio 2005 x86 tools.
+Welcome to dbg mode
+c:\cni_helix_bin>PowerShell
+Windows PowerShell
+Copyright (C) 2009 Microsoft Corporation. All rights reserved.
+
+PS C:\cni_helix_bin> cnpy
+Directory not found - c:\cni_bin\plat_win_64.
+    PyCell Studio is not installed for this platform.
+PS C:\cni_helix_bin>
+* The end

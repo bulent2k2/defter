@@ -1,0 +1,57 @@
+# This: /remote/starc/alx/BMJul2012/cci/doc/doc.tcl
+#
+# Auto sizing file generation for STARC.
+# This uses LVS/CCI data and outputs device sizing directives per x,y coordinate
+# 
+# We have also used a CDL parser based table generation to give us device sizing directives per type/W/L signature
+# For details, please see /remote/starc/alx/BMJul2012/cdl/doc/run.tcl
+# 
+alx::boot
+# Originally from /remote/starc/alx/BMJul2012/cci/lay_a/src/run.tcl
+
+set cname TOP_SCF_5TH
+# Specify the path to LVS run dir which should have query_output/ subdir with CCI dump.
+set lvs /remote/starc/alx/BMJul2012/cci/lay_a/data/flat/TOP_SCF_5TH
+# This LVS/CCI run (at: /remote/starc/alx/BMJul2012/cci/lay_a/data/Calibre_results_20120913) used layout hier
+# Note that I had to make some minor updates to the files in the CCI dump dir to get the Titan parser to work:
+#   /remote/starc/alx/BMJul2012/cci/lay_a/data/flat/TOP_SCF_5TH/query_output
+
+# Read in the netlist
+set sch_b /remote/starc/alx/BMJul2012/cci/lay_a/data/Calibre_results_20120913/TOP_SCF_5TH.cdl
+lassign [alx cci import spice $sch_b $cname -dir $lvs -returnTwo] fhdl hier_hdl ; # use the hier_hdl to eliminate duplicates
+
+# cell from cdl has inst: xi0/xi0/xrs3/rr1, but inst_xref has: xi0/xi0/xrs3. So, drop the rr1 at the end.. similarly for the caps (cc1)
+y::fix_RC_names $fhdl {rr1 cc1}
+
+# cell from CDL has names like: xi0/xi4/mmn1, but, inst_xref file has only I0/I4/MMN1. So, drop those x's
+y::fix_inst_names $fhdl x
+
+# No need to read in lay-a, as CCI already has all that info extracted.
+#set lay_a /remote/starc/alx/BMJul2012/cci/lay_a/data/Calibre_results_20120913/query_output/TOP_SCF_5TH.agf
+#set l [alx cci import gds   $lay_a $cname -dir $lvs]
+
+# Dump out sizing directives using the CCI data
+alx cci dump $fhdl [set l 0] [set file starc.sizing.txt] -dir $lvs -notOnlyMos -unit 0.001 -hierHDL $hier_hdl -skip {C}
+alx cci convert $file
+# Detailed output in ./starc.sizing.txt
+# Compiled output in ./starc.sizing.txt.o
+
+comments Info on mismatch between lay-a and sch-b {
+    # This is from  ./sample_run.log
+    -alx-cci-warning- -W-y2 Missing device INFO: 46 missed devices from source netlist< top_scf_5th mhexp >
+    -alx-cci-warning- -W-y3 Missing device INFO: 1 unique parent: <top_scf_5th>
+    -alx-cci-warning- -W-y3 Missing device INFO: 2 unique masters: <CAP RES>
+    -alx-cci-warning- -W-y3 Missing device INFO: 46 unique device_insts: <I0/I2/RS14_DUMMY I0/I2/RS18_DUMMY I0/I2/RS1_DUMMY I0/I2/RS21_DUMMY I0/I2/RS24_DUMMY I0/I2/RS28_DUMMY I0/I2/RS2_DUMMY I0/I2/RS8_DUMMY I2/C10_1_DUMMY I2/C10_2_DUMMY I2/C5_1_DUMMY I2/C5_2_DUMMY I2/C6_1_DUMMY I2/C6_2_DUMMY I2/C7_1_DUMMY I2/C7_2_DUMMY I2/C8_1_DUMMY I2/C8_2_DUMMY I2/C9_1_DUMMY I2/C9_2_DUMMY...>
+    -alx-cci-warning- -W-y4 Missing device INFO: To get the full lists, do <y::diff>
+    -alx-cci-warning- -W-y5 Missing device INFO: number of insts in CCI                	: 710
+    -alx-cci-warning- -W-y6 Missing device INFO: number of insts in (flattened) netlist	: 756
+    -alx-cci-info-Wrote 946 sizing directives to starc.sizing.txt.
+} Listing of all missing devices {
+    Full y::diff-list: {{4 9838 I2/C1_1_DUMMY} {4 9877 I2/C1_2_DUMMY} {4 9878 I2/C2_1_DUMMY} {4 9879 I2/C2_2_DUMMY} {4 9880 I2/C3_1_DUMMY} {4 9881 I2/C3_2_DUMMY} {4 9882 I2/C4_1_DUMMY} {4 9883 I2/C4_2_DUMMY} {4 9884 I2/C5_1_DUMMY} {4 9885 I2/C5_2_DUMMY} {4 9886 I2/C6_1_DUMMY} {4 9887 I2/C6_2_DUMMY} {4 9888 I2/C7_1_DUMMY} {4 9889 I2/C7_2_DUMMY} {4 9890 I2/C8_1_DUMMY} {4 9891 I2/C8_2_DUMMY} {4 9892 I2/C9_1_DUMMY} {4 9893 I2/C9_2_DUMMY} {4 9894 I2/C10_1_DUMMY} {4 9895 I2/C10_2_DUMMY} {4 9896 I2/C11_1_DUMMY} {4 9897 I2/C11_2_DUMMY} {4 9898 I2/C12_1_DUMMY} {4 9899 I2/C12_2_DUMMY} {4 9900 I2/C13_1_DUMMY} {4 9901 I2/C13_2_DUMMY} {4 9902 I2/C14_1_DUMMY} {4 9903 I2/C14_2_DUMMY} {4 9904 I2/C15_1_DUMMY} {4 9905 I2/C15_2_DUMMY} {4 9906 I2/C16_1_DUMMY} {4 9907 I2/C16_2_DUMMY} {4 9908 I2/C17_1_DUMMY} {4 9909 I2/C17_2_DUMMY} {4 9910 I2/C18_1_DUMMY} {4 9911 I2/C18_2_DUMMY} {4 9912 I2/C19_1_DUMMY} {4 9913 I2/C19_2_DUMMY} {4 15050 I0/I2/RS28_DUMMY} {4 15051 I0/I2/RS24_DUMMY} {4 15052 I0/I2/RS21_DUMMY} {4 15053 I0/I2/RS18_DUMMY} {4 15054 I0/I2/RS1_DUMMY} {4 15055 I0/I2/RS8_DUMMY} {4 15056 I0/I2/RS14_DUMMY} {4 15057 I0/I2/RS2_DUMMY}}.
+}
+
+# dump diagnostic info for investigation of problems
+bb::dump [::y::inst_table::_table $fhdl]  sch_inst_names_in_table.txt
+set l2 $::y::layout_netlist_top_cellid ; # this is from pin_xy netlist
+bb::dump [::y::inst_table::_table $l2]    lay_fing_names_in_table.txt
+puts "Full y::diff-list: [y::diff]."

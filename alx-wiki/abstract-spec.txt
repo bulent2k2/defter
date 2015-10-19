@@ -1,0 +1,126 @@
+Rev 1.
+Rev 2.0: Includes Mohit's questions and some answers.
+
+We would like to enhance cell abstraction functionality in ALX in order to:
+
+    a- provide a fast migration mode (to migrate a chip or a large IP block)
+    b- prevent subcell variant proliferation in libb due to multiple runs of {alx migrate}
+    c- use of native LVS/DRC bonds to eliminate LVS issues and reduce complex DRC errors on abstracts 
+    d- enable integration with router thru abstract interface clean-up and virtual pin creation
+    e- handle complex abutment scenarios by providing a control for users to input abutment offets
+
+In order to achieve the above, we propose to enhance the tcl interface of ALX as follows:
+
+1) New options for {alx migrate -cellId $top}:
+     -fast <size_threshold>         (-fast:i)
+     -lib <name1 name2 ...>         (-lib:l(*name:s)='')
+
+-fast: any immediate subcell ($subcell) of the top cell ($top) which is larger than the given threshold will be abstracted. The target layout for it will be generated first by using {alx migrate -cellId $subcell -fast <size_threshold>}. As such, -fast option provides a recursive routine to migrate the whole design in a bottom-up fashion. The size of the subcell is to be measured as follows:
+    Size(cell, topcell) := N * O,
+where, N is the total number of shapes under cell (after flattenning the whole hierarchy under cell), and O is the number of occurrences of cell within the whole hierarchy of topcell.
+
+Number of shapes will exclude the number of contacts/vias.
+
+-lib: Any subcell (under the hierarchy of $top) which already has a solution in any of the libs provided will be automatically abstracted. With this option, the tool will guarantee to provide only one variant for each subcell in the design.
+
+2) New commands so that abutment of abstracts can easily be controlled by the user:
+    alx abut abstract insts <topcell> <parentcell> <inst_name> <inst_name2> <x|y> <offset_in_nm> -parent2 <name>
+
+Given two abstracts, this command sets the offset between their placements for the given orientation (offset in x or y).
+The two abstracts are selected using their inst names (under the same parent cell if -parent2 is omitted. O.w., under two different parents). 
+
+    alx abut abstract coord <topcell> <point1> <point2> <x|y> <offset_in_nm>
+
+Like the previous command, this command sets the offset of two abstracts. In this case, the abstracts are selected using global coordinates of the abstracts in lay-a. 
+
+When this command is used, we expect the custom abutment bonds on abstracts (if any) to be turned off.
+
+3) New command to clean up the inteface of abstracts and help prepare layb to be routed afterwards:
+
+    alx cookie cut abstract <topcell> <parent> <subcell> -cutCellLayers:b -cutLayers:l(*layers:s)='' -halo <value_in_nm>
+
+Use this command to "cookie cut" all layout objects that interact with an abstract (subcell) on selected layers.
+
+Without this command, all molecules interacting with the "interface" of the abstract are kept as they are. In cases when the target abstract layout is significantly different than the source layout (in laya), it is possible to have LVS and DRC issues on the interface of the abstract in layb.
+
+This command will be used in such cases to modify the layout (before or after {alx migrate} ?).
+
+It should also create a set of virtual pins for <parent> so that the user (or the router) will know what needs to be routed to resolve all opens created by "cookie cut". 
+
+For each cut point, we would like the following info:
+    <parent_cell_name> <inst_name> <net_name> <layer> <x> <y>
+
+For feedthrus (with two cuts across the abstract), we expect to see two such entries.
+
+When this command is used, we expect the following custom bonds on abstracts to be turned off:
+   a) hook bonds between mols and abstract pins
+   b) drc bonds between mols and abstract objects
+
+4) We would like to have all the pins on each abstract to be promoted up into the molcell. This will help:
+   a) eliminate LVS opens by using native hook bonds
+   b) improve DRC quality by using native DRC bonds
+   c) debug abstract bonds thanks to visible pins in the molcell
+
+We expect the pins to be identified automatically using laya (if the connection to an abstract object is not through a pin, we expect the input layout to be modified in advance to mark such objects as pins) and to be promoted to the molcell. However, they will have bonds to fix their offset from abstract mol as well as their size. These new bonds will be automatically generated using the target layout (layb) for the abstract. 
+
+To eliminate DRC between mols over the interface and other obstacles inside the abstract, it may also be required to promote non-pin objects to the molcell. Please see figure below:
+
+          +--+
+          |  |
+          |M |
+ +--------+--+-----------+
+ |        |  |           |
+ |        |  |   +--+    |
+ |        |  |   |  |    |
+ |        |  |   |  |    |
+ |        |  |   |  |    |
+ |        |  |   |O |    |
+ |        |  |   |  |    |
+ |        |  |   +--+    |
+ |        |  |           |
+ |     +--+--+--------+  |
+ |     |  +--+  PIN   |  |
+ |     +--------------+  |
+ |                       |
+ |A                      |
+ +-----------------------+
+
+Here, A is an abstract, PIN, O and M are three shapes on the same layer. M is a molecule in molcell, PIN and O are shapes inside the abstract (subcell).
+
+Currently, we have only A and M in the molcell, and we create custom bonds to ensure that:
+  i) M is stayed hooked to PIN,
+ ii) M does not have a min-spacing error to O.
+
+By promoting PIN and O to the molcell, the spacing bond to O will be more accurate (using run-length/wide-wire dependent rule).
+
+We expect the tool to automatically identify which shapes need to be promoted up as obstacles (as in O in this figure). As another example, given a pcell with 10 fingers, and a M1 mol (M) connecting to the 5th m1 strap (PIN), we would expect to see only two metal1 objects corresponding to the two neighboring m1 straps to be promoted up to molcell (as O1 and O2).
+
+
+Q&A:
+
+Q1: section 4, where shape promotion is discussed:
+a:      Shape promotion will also be needed for objects on abstract boundary? Ex say for M1 on abstract/subcell boundary, drcs wrt top cell need to be addressed?
+b:      For shapes (ex PIN and O) promoted, there will be size/offset bonds. 
+  i:    Still, can these shapes potentially change or move? 
+  ii:   Such a change will be regional, that is potentially different shapes for same promoted shape? 
+  iii:  All promoted shapes will be eventually perfectly absorbed by subcell in output?
+c:      Since shape promotion will be regional, for an abstract/subcell different shapes can get promoted?
+
+A1a:    Yes! Thanks for helping clarify. Any internal shape that interacts with mols in the molcell need to be promoted.
+A1bi:   The promoted shapes (PIN or O) will get the size/offset bonds based on the target layout, so, yes, in many cases they will change and move. In cases where ALX is used to create the target layout, their transformation will not change the "topology" of the molcell so a feasible solution would exists. However, in general, they can move out of order and in such cases, we would need to use the cookie cut command.
+A1bii:  Yes, a rect could change into an L-shape polygon, or, vice versa, but, to first order we can just use the bbox. This would be rare. But, what do you mean by regional? 
+A1biii: Yes, they will be unnecessary and can be deleted once the target layout is inserted.
+
+Q2: Section 1:
+a:      Variant proliferation; x, y created currently (for hierarchal) also controlled?
+b:      -fast option; in general, bottom up migration will always be non-optimal compared to flat migration?
+
+A2a:    Do you mean the clone for rotated insts? Please clarify the question.
+A2b:    In general, yes, but, in practice, for many designs, it should be close enough.
+
+Q3: Section 3; for cuts/feedthrus, space needs to be considered for router?
+
+A3: The target layout should be created with enough space. If ALX is used to create the target layout, it needs to leave enough space. This is in general the case. We don't expect a chip-level migration run where sub-cell runs are used to compact the target layout abstracts without considering the top-down constraints. If that's required, we can add support for top-down constraints (to create spacing bonds in a sub-cell according to the wiring going over it) in a future release.
+
+
+The end of the beginning

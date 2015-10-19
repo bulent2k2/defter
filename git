@@ -1,0 +1,11 @@
+http://gitref.org/basic/
+
+Next:
+  git reset
+
+Learned:
+  git init . (or * for recursive)
+  <edit>
+  git add <file to stage>
+  git commit -m "comment"
+

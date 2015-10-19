@@ -1,0 +1,142 @@
+* yeni bilgisayar TODO: to gdocs
+bulent2k2@gmail.com bizimBirPetimiz (Microsoft account)
+evrenbasaran427@gmail.com Evren sifre: Soyadimiz, ama a yerine One. En sonda da O.
+kayra (local account) sifre 123098
+* "The best time to plant a tree is twenty years ago.  The second best time is now" -Chinese proverb
+* vnc ext berry term april 29, 2014 
+us01term20 (emacs on osmium -> build on adams)
+us01term23 (has emacs on huxley)
+berry.synopsys.com: 7 (2014/04/22)
+husker:1
+elephant:7
+** NVIDIA VNC
+IE. nvgate -> Network Connect. atakata P@ssword10
+synopsys-chamber-xterm1:39 -> CREATED :42 to fit laptop.. -> CREATED :44 for Joe
+vnc user: namerneny
+Pass: P@ssword10
+* TODO: amerikan yuzyil pkeskinocak pinar69K A45TY26W
+* Look up! 16505844811
+* OFF FTO :-) Now 160hours (40*4, 4 weeks, 20 days :-) {197.44 by 8/15 4 more days}
+Planned fto request: 112 hours (* 14 8) Will have 8 days on 8/15 (/ (- 197 112) 10) 
+3 gun: Ucus Haziran 23-25
+5 gun: Gezi Temmuz 7-11
+3 gun: Bayram Temmuz 28-29-30
+3 gun: Ucus Agustos 6-7-8
+** Approved
+FTO                 06/23/2014          Approved
+FTO                 06/24/2014          Approved
+FTO                 06/25/2014          Approved
+FTO                 07/07/2014          Approved
+FTO                 07/08/2014          Approved
+FTO                 07/09/2014          Approved
+FTO                 07/10/2014          Approved
+FTO                 07/11/2014          Approved
+FTO                 07/28/2014          Approved
+FTO                 07/29/2014          Approved
+FTO                 07/30/2014          Approved
+FTO                 08/06/2014          Approved
+FTO                 08/07/2014          Approved
+FTO                 08/08/2014          Approved 
+* pp updates:
+** Nishath's input
+** Yakov: bbox definition
+** Joe/Ross: Ignored global params: Objectives (e.g., LayoutArea: 0.5, Connectivity: 0.5, SoftCluster: 1.0, Density: 0).
+* Internal meeting: (before or after meeting w/ Lyndon? On Friday?)
+Attendees: Ross,  Mirko, Yakov, opt: Ming and Jon Bendicksen <jonben@synopsys.com>
+- define behavior for custom function
+- gate terminal name(s)
+- match flip
+- pin permutation
+
+* 2014 12 22
+** TODO!!!!!!!!!!!!!!!
+-> Picture/corner case to Lyndon, Mirko, Ming..
+-> Meeting on ICF STARs with Girish
+-> (Tue Dec 2nd) For Altera, we are waiting for Lyndon's input. If, as he mentioned yesterday, he provides his input by Monday, I can get the draft ready by Tuesday
+-> (Thu Dec 4th) For Intel DTS, symmetry, I hope to get it done by next Thursday.
+-> (Mon Dec 8th) For incremental placement (freeze layout), two days afterwards . 
+-> (Wed Dec 10th) For Intel ICF, re-use topology, please add two more days .
+TODO: Kumar's code! Girish's demo!
+** mon
+- support hierarchical freeze topology
+- auto-cloning: support multiple view
+- slicing structure for the circuit
+- instance (sub-master) for the primitives
+* 2014 10 27
+1:1
+  -- Glen's proposal.. Add all "Sub" nets! Can the user add a new $NET mapping? Same problem as in IT Params or custom params.
+  -- ICF ww48/50
+  -- Altera: Response to Lyndon's doc
+  -- Maxwell?
+  -- Joe's check-ins..
+
+* 2014 10 13
+- SNPS Stock
+- Rafael
+TODO: read TSMC PDF from Nishath/Girish..
+  chi-foon chan?
+  http://sp-fin/sites/IT/Pages/MobileComputing.aspx
+  http://synopsysworld/policy/Policy%20Library/Information%20Security%20Policy.pdf
+  http://sp-fin/sites/SDV/Training_and_Documentation/i410800w-Customer%20Data%20Protection%20Standard.pdf
+
+  http://synopsysworld/policy/Policy%20Library/Work%20Rules.pdf
+  http://sp-fin/sites/ChiefFinOfficer/Legal/FCPA/Documents/Chapter%202%20-%20Global%20Expense%20Guidelines.pdf
+  http://sp-fin/sites/ChiefFinOfficer/Operations/Distribution/Traffic%20and%20Export/default.aspx
+  http://synopsysworld/policy/Policy%20Library/Document%20Retention%20Policy.pdf
+(- 680.82 (* 2 18.41)) 
+(+ 16.08 (* 2 17.08) (* 3 (+ 179 18.8 0.12)))
+* 2014 10 06
+TODO: how to enable the wizard (new helix project) gui in main and new rel branch
+TODO: GET HELP! (:-) look into expanding inline template from hxtmpl file..
+* 2014 09 01
+~/defter/snps/yakov
+* Plan
+  [+] Updates to packed partition fspec (it is referenced by the new prop)
+  [-] Incr placement proposal
+  [-] Ethics & Compliance Training
+  [-] Work on detailed plan for the new pattern editor enhancements for Intel ICF
+  [-] Work on detailed plans for symmetry and incremental placement functionalities
+  [-] Investigate STARs on PackedPartition
+  [-] Test PackedPartition GriddingBox option with custom function
+  [-] Course on Essential Project Management
+* DETAILS
+  [-] STAR Number: 9000796612 Title: Graphical Constraint Options Editor for InlineTemplates.
+A sample InlineTemplate with GUI plugin is at /remote/helix01/user/ksarth/data/xgen_inline.
+This UI file is also present at helix/Gui2/test/testHelixGUI in the build area.
+  [-] Study docs on PyCell api..
+  [-] Updates to the f-specs on PNStack and PackedPartition
+  [-] STAR for auto assignment of p and n rows.
+  [-] Course requirements from SNPS University
+  [-] Continue to work on the GTO test-case for template automation!
+  [-] Re-test PNStack using Prashant's test-case after disabling wrappers.
+  [-] Study santana python tutorial and some finish scripts
+  [-] Long term: Template based flow
+  [-] Updates to the packed partition spec to incorporate more feedback
+  [-] Investigate PP for general usage with DRC support (support grid thru Santana.tech?)
+** NEW ALTERA DATA /berry/secure18/m1119/siarhei/incoming/2014_06_12_Helix_bugs
+** NIGHTLY
+  Built from:      /export/builds/p4/santana/santana
+  CNI_ROOT:        /export/builds/output/santana/opt/linux_rhel40_64
+  PartnerData:     /export/builds/p4/santana/partnerData
+  PDT_LOG_DIR:     /slowfs/amsgcn3/home/integ-cn/builds/logs/helix/opt/linux_rhel40_64/pdt_hxnightly_logs
+  Helix Built from:      /export/builds/p4/helix/helix
+  Logs are:        /slowfs/amsgcn3/home/integ-cn/builds/logs/helix/opt/linux_rhel40_64/testopt_hxnightly_logs
+
+TODO: Coverity errors on main branch only!
+TODO: Site ext star
+Planning for next release... early August...
+
+* 2014 06 21 (Fri)
+[!] Row -> AVP-Mode !
+[!] Automation
+  PN -> NPPN -> PNNPPN
+  PN -> PPN -> NPN -> 
+  PN -> P or N
+TODO: /remote/stars/testcases/9000760036/9000760036.tar.gz
+TODO: PNStack to generate alternative solutions by default (tried multiple
+nrows/prows and hit a bug!) numMinRows/MaxRows. E.g., 1->NP, 2->NPPN 3->
+NPPNNP, etc..
+TODO:       FixDimension: {Direction: width, Value: 4.0}, does not work..
+/remote/helix01/user/bulent/star/9000752525/9000758017/SPP_with_taps/test/tests/SPP NANDX2
+
+* The end

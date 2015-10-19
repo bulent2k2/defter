@@ -1,0 +1,34 @@
+* Monday:
+9000667199- The created bbox in PNstack constraint do not consider contact Ring. Joe waiting for more info
+9000681445- The cell high of created PNstack is expanded
+9000681396- PRow/NRow group items should be keeping show in graphic editor 
+9000681284- The behavior of contactType in PNstack should be similar as in topContactRing
+9000681282- When the width of PNStack is fixed 
+9000680868- a case when enabling twell in PNstack
+* On to helix!
+9000680501 45 degree path issue not preserved                                       Mohit (from Rahul)
+9000680505 issue in 'alx convert complex od'.                                       Mohit (from Rahul)
+9000673909 Wrong fingers addition with new resize files                             Sunil (alx.exe)
+FROM SHING-TE: 9000586706- Template base constraint of routing to migration
+9000673253- error when source and target abstract is the same and scale factor != 1 Bulent
+9000671424- enhance abstractify.tcl to maintain connectivity (nets/ports)           Shakir
+9000670566- segmentation fault on GUC45                                             Bulent -> Sunil?
+9000668472- Add support to allow PCells in lay-a to be used as abstracts            Bulent
+9000667574- Missing vias/contacts are reported                                      Sunil from Sato
+9000664551- via/via-arrays should be flattenned in lib-a                            Sunil
+9000664438- titanOA: libraries not found get deleted from lib.defs                  Rajiv
+9000663349- not enough vias sometimes                                               Shakir/Bulent
+9000661773 'alx pin crop' creating an lvs open                                      Bulent
+9000661546- Crash in DAC Demo                                                       Sunil
+9000658370- Support for 45 deg polygon                                              Mohit
+9000656358- GR's objects can not be grouped with "alx set param guard_ring 1"       Mohit
+9000653991- polygon does not carry net name after Rect2poly conversion              Mohit
+9000653343- polyDiffEndCap param in pcell_pre_create_api is not being set correctly Sankalp
+9000653342- Incorrect spacing bonds between two m1 mols on the same net             Rahul
+9000650282- alx restore does not work in titanOA*                                   Rajiv
+9000649009- use_tech_vias=1 in titanOA works but loses the vias on titanOA restart  Rajiv Fixed Two Bugs
+9000647893- Bug 2965 - titanOA - during inst expand via objects are removed         Rajiv
+9000647891- Bug 2958 - titanOA: crash in edbUnlockLibrary              	            Rajiv
+9000647890- Bug 2957 - titanOA: crash in "db get cell children" command	            Rajiv Fixed/Validated
+9000646533- Bug 2956 - in titanOA {alx migrate} fails with tcl error   	            Rajiv Fixed/Validated
+9000645649- Bug 2967 - multi seg path preservation.                                 Mohit

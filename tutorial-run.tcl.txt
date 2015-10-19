@@ -1,0 +1,59 @@
+# STEP 5a: open the input design
+set lib my_library
+set cell decode_mux_top
+set view layout
+# open the library
+set libid [db open lib $lib r]
+# open the cell database
+set cellid [db open cell $libid $cell $view -mode r]
+# display the cell in titan window
+win open cellId $cellid
+
+# STEP 5b : Load Titan ALX
+alx::boot
+
+# STEP 5c: Set the ALX technology root (location where all the ALX tech files are stored)
+alx set root ./project/root
+
+# STEP 5d: Setup the ALX migration (scale all geometry by 50%)
+alx setup -techa fabx90gs -techb faby45lp -sf 0.5
+
+# STEP 5e: Source the ALX project specific migration settings
+source ./project/project.tcl
+
+# STEP 5f: run the migration (result in cell layout version 1)
+set resultid [alx run solver -cellId $cellid -hflow]  ; # (result will be in cell layout version 1)
+
+# STEP 6: Get scaling information
+puts [get_scaling_info]
+
+# STEP 7: restore the layer purpose to match the input layout
+alx! update layer datatypes $resultid {{62 41} {63 42}} -run
+
+# STEP 8: make pins fit in a small area on the rectangle similar to input layout 
+alx! pin crop $resultid -laya $cellid -verbose
+
+# STEP 9: change all single vias to symbolic via arrays
+alx generate via arrays $resultid
+
+# STEP 10: generate PPLUS/NPLUS for any area that does not have them
+alx generate implant layers $resultid
+
+# STEP 11 A) Uniformly scale device sizes same as wires
+alx set param fix_device_sizes 0
+alx set param air_resize {}
+set resultid [alx run solver -cellId $cellid -hflow]  ; # (result will be in cell layout version 2)
+
+# STEP 11 B) Uniformly Scale Devices by Width/Length signature table
+alx set param air_resize_table [alx get root]/../tutorial_result/origsizet_mod.txt
+set resultid [alx run solver -cellId $cellid -hflow]  ; # (result will be in cell layout version 3)
+
+# STEP 11 C) Device specific scaling
+alx set param air_resize [alx get root]/../tutorial_result/origsize_mod.txt
+set resultid [alx run solver -cellId $cellid -hflow]  ; # (result will be in cell layout version 4)
+
+# Verification
+#    Run DRC
+#    Run LVS
+
+

@@ -1,0 +1,131 @@
+* TODO: 
+- Read new docs emailed by Mirko
+- Read ug: top-level constraints
+* SEE: ./proposal-template ./symmetry ./OLD ./NEW ./helix-STACK ./helix-windows (SEE!) ./pnstack-spec ./cd
+** also See: ~/defter/helix/. ./mv-trip
+* Expense (Note from 2014 January)
+did oct, sep, aug, jul (on 25th, withdrawal date)
+* Plan:
+Intel DTS:
+- Plans on eng build?
+- Cell-boundary in Helix output? Preserve the original? Compact, expand, convert to box? Jose will confirm the need.
+- Blockages read only from 0x. Only area blockages. No support needed for layer. Intel will write out area (blanket KORs)
+
+  [-] (Nvidia) MS3: collect devices with m=999 into new master.. try cnnet2hx without expansion
+  [-] PNStack failure in berry regressions..
+  [-] (Nvidia) Update dashboard and send out
+  [-] (Altera) File STAR on santana support for prBoundary
+  [-] Prepare test-cases on cell-boundary/blockage support
+  [-] STARs from triage meeting
+* test.bash
+test () {
+    src_path=$1
+    src_dirs=$2
+    tgt_path=$3
+    tgt_name=$4
+
+    cd $src_path
+    pwd
+    ls $src_dirs
+    mkdir -p $tgt_path
+    gtar -zcf $tgt_path/$tgt_name.tgz $src_dirs
+    cd $tgt_path
+    gtar -zxf $tgt_name.tgz
+    pwd
+    ls -l
+}
+
+* vnc
+  -rw-rw-rw-  1 Administrators Domain Users 1856 02-17 19:40 nvda-chamber-14-6.vnc
+  -rw-rw-rw-  1 Administrators Domain Users 1857 02-17 19:19 nvda-chamber-13-24.vnc
+  -rw-rw-rw-  1 Administrators Domain Users  806 02-13 11:35 francium3-HOME-ECO.vnc
+  -rw-rw-rw-  1 Administrators Domain Users  806 02-13 11:34 francium2-LAPTOP-EMACS-ONLY.vnc
+  -rw-rw-rw-  1 Administrators Domain Users  807 02-13 11:31 potassium3-LAPTOP.vnc
+  -rw-rw-rw-  1 Administrators Domain Users  807 02-13 11:29 potassium4-HOME.vnc
+  -rw-rw-rw-  1 Administrators Domain Users  803 02-12 20:54 adams1.vnc
+  -rw-rw-rw-  1 Administrators Domain Users  804 02-12 20:49 adams11.vnc
+
+
+* .emacs
+(message "Here")
+
+;; It is bound to C-x C-f, C-x c.
+;; C-x C-f
+(global-set-key [24 6] (quote find-file-at-point))
+;; C-x c
+(global-set-key [24 99] (quote find-file-at-point))
+
+(find-file "c:/Users/bbasaran/Documents/NOW" t)
+(find-file "c:/Users/bbasaran/Documents/weekly-report-copy" t)
+(put 'suspend-emacs 'disabled t)
+(put 'suspend-frame 'disabled t)
+(put 'save-buffers-kill-emacs 'disabled t)
+(put 'save-buffers-kill-terminal 'disabled t)
+* The end
+
+
+* turkce
+Yazı Karakterleriyle[değiştir | kaynağı değiştir]
+A B C Ç D E F G Ğ H I İ J K L M N O Ö P R S Ş T U Ü V Y Z
+a b c ç d e f g ğ h ı i j k l m n o ö p r s ş t u ü v y z
+
+* nvidia paths
+/home/scratch.dgradin_methodology
+
+synopsys-chamber-02:~> date
+Wed Feb 25 10:08:40 PST 2015
+synopsys-chamber-02:~> cd /home/scratch.dgradin
+synopsys-chamber-02:/home/scratch.dgradin> cd /home/scratch.dgradin_methodology
+/home/scratch.dgradin_methodology: No such file or directory.
+synopsys-chamber-02:/home/scratch.dgradin> ls /home/
+aabdollahian  pnelson                     scratch.shihchiehh
+achuanchang   rickcox                     scratch.sxia
+aseth         scratch.aabdollahian        scratch.vimehta
+avaranasi     scratch.achuanchang         scratch.ybhola
+bwiden        scratch.achuanchang_vgupta  scratch.ykwon
+craigc        scratch.amitg_timing        shihchiehh
+gnu           scratch.asic_pd             ssivasubrama
+hnshah        scratch.avaranasi           sxia
+jcolburn      scratch.craigc              synopsys_binary_drop
+lsf_linux     scratch.dgradin             tools
+mbonnelycke   scratch.gcr-regression      utils
+mrutledge     scratch.hnshah              vbaragali
+nagios        scratch.jcolburn            vimehta
+namerneny     scratch.namerneny           ykwon
+nv            scratch.pnelson
+synopsys-chamber-02:/home/scratch.dgradin> date
+Wed Feb 25 10:10:18 PST 2015
+synopsys-chamber-02:/home/scratch.dgradin> whoami
+ykwon
+synopsys-chamber-02:/home/scratch.dgradin> groups
+hardware gpu-fermi-70 gpu-tesla-59 gpu-kepler mobile-73 kepler-silo mobile-info-74
+synopsys-chamber-02:/home/scratch.dgradin> 
+* The end
+* 2015 02 02
+/slowfs/amsgcn3/home/integ-cn/2014.09-2-T0128_releasePackages/Helix/regressionResults 
+
+Plan
+  [-] prep demo for Intel DTS.
+  [+] create tar files for SOW data/work transfer
+  [-] run DRC on Ross's latest MS2 result
+  [.] PNP22 issue in ms3
+  [+] Questions from Jun on fspec..
+  [-] setup pcx xtreme for ms#3?
+  [+] Look into regression failures
+  [.] Investigate issues on ms3 and new test-case (nVidia)
+* 2015 01 26 (two weeks)
+Plan
+  [-] Fspec on incr placement support (Intel DTS)
+  [-] Investigate the problems with HFL constraints on ms3 and provide a timeline to address them (nVidia)
+  [-] Berry, check tests /berry/secure18/m1119/rajivr/incoming/2014-07-
+17_AutoMap_and_Matrix/2014-07-17.synopsys.tgz and 2014-10-22 in m1119/siarhei/incoming.
+  [-] File STARs on nVidia issues (preview pattern failure)
+  [-] Update Fspec on modular grid/DR support based on latest discussion (Altera)
+  [-] Update fspec on symmetry based on review input
+  [-] Fspec on re-using topology from selected helix layout (Intel ICF)
+  [-] Document pattern & template enhancements (Intel ICF)
+* ********* *
+* OLDER OLD *
+* ********* *
+* 2015 01 12
+* The end

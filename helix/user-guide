@@ -1,0 +1,6 @@
+Helix User Guide > 
+      Top-Level and Attribute-Related Constraints >
+      		instanceSpecificRuleValues
+(WellProx of gate, OxideSpacing of gate to nearby oxide)
+(Pattern constraint does not support WPE/OSE per child. But has support for
+      the whole ucell)

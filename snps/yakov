@@ -1,0 +1,207 @@
+* README from Lyndon:
+
+Here is the complete README:
+
+# Last edited by lynlim@altera.com on 2014-08-07T14:32:37
+
+Test cases for StructuredPartition, Partition, and top-level,
+with Terminals/Pins constraint.
+
+===========================================================================
+Case    Topological    Terminal       Pin             Comment
+Name    constraint     constraint     constraint
+                       w/position
+===========================================================================
+case1   Structured     No             No              Reasonable
+        Partition                                     results
+---------------------------------------------------------------------------
+case2   Structured     No             Yes             ** Poor **
+        Partition                                     results
+---------------------------------------------------------------------------
+case3   Structured     Yes            No              Reasonable
+        Partition                                     results
+---------------------------------------------------------------------------
+
+---------------------------------------------------------------------------
+case4   regular        No             No              Reasonable
+        Partition                                     results
+---------------------------------------------------------------------------
+case5   regular        No             Yes             Reasonable
+        Partition                                     results
+---------------------------------------------------------------------------
+case6   regular        Yes            No              ** Questionable **
+        Partition                                     results
+---------------------------------------------------------------------------
+
+---------------------------------------------------------------------------
+case7   top-level      No             No              Reasonable
+                                                      results
+---------------------------------------------------------------------------
+case8   top-level      No             Yes             Reasonable
+                                                      results
+---------------------------------------------------------------------------
+case9   top-level      Yes            No              Reasonable
+                                                      results
+---------------------------------------------------------------------------
+
+Questions:
+[1] Why does case7 run faster than case 4?
+    Why are the number of solutions different?
+
+[2] Why does case8 run faster than case 5?
+    Why are the number of solutions different?
+
+[3] Why does case9 run faster than case 6?
+    Why are the number of solutions different?
+
+[4] Why does case9 have better looking results
+    than case 6?  Can case6 be improved?
+
+[5] Request enhancement for case2.
+
+# end
+
+* STAR: 9000787234- Discrepancies between partition and top level
+Priority: 3-High
+** Created On: 08/11/2014 19:31:45     
+Internal Priority: 8 - High
+** Last Changed On: 08/22/2014 17:22:13 
+** Description
+I received the following report from Lyndon@Altera.
+
+The testcases related to this request are case4, case5, case6, case7, case8 and case9 from berry farm under:
+
+/berry/secure18/m1119/siarhei/incoming/2014_08_07_Terminal_Pin/2014-08-06.synopsys.tgz
+
+The customer has requested answeres to the following questions:
+
+[1] Why does case7 run faster than case 4?
+    Why are the number of solutions different?
+
+[2] Why does case8 run faster than case 5?
+    Why are the number of solutions different?
+
+[3] Why does case9 run faster than case 6?
+    Why are the number of solutions different?
+
+[4] Why does case9 have better looking results
+    than case 6?  Can case6 be improved?
+
+
+In addition the customer has pointed out that case6 has a result with questionalble quality.
+
+** Worklog
+*** 08/22/2014 14:22:13 PST YPRAGER
+
+At Ming's directive, I switched from this STAR to STAR 9000789840 earlier in the week, and correspondingly I had practically no time for completing my investigation.  However, I do have a preliminary diagnosis, about which I am 99% certain.
+
+On the top level, parallel processing of resulting layout is implemented.  In the Partition cell, the results are processed sequentially.  It is almost certainly the only reason for the observed differences in the run-time.  I have to perform additional experiments, but so far I have not observed any differences in the solver run-times on the top level vs. the Partition constraint.
+
+The differences observed by Lyndon are so pronounced, most probably, due to his heavy use of overlap layers (>400 of them), for which Helix is not optimized.  That skews the relative time spent in the solver and the final layout generation towards the final layout generation.  Hence, the lack of parallel processing becomes very influential.
+
+My previous message on this STAR, together with the current one, underscore the same thing: the top level and Partition constraint are _not_ the same, even though both use the evolutionary solver.  The Partition constraint is optimized for small sets of sub-cells (about ten or so), and is not supposed to be used as a replacement to the top-level processing.
+
+Again, as earlier in STAR 9000789840, a note _not_ for Lyndon.  We have no idea why we are working on that STAR.  Why does Lyndon need to replace top level with a Partition?  Which way does it help him to enable his workflow?
+
+*** 08/13/2014 13:55:39 PST MSU
+
+The major issue is big (about 4x) runtime difference. Please continue investigate.
+
+*** 08/12/2014 16:30:44 PST YPRAGER
+
+The answer to one of the posed questions:
+
+"Why are the number of solutions different?"
+
+In general, there is no reason to expect that the top-level setting and the Partition setting would produce identical results.  The evolutionary solver parameters are set differently in those two cases.  There are at least two reasons for that.
+
+The first reason is that historically, the Partition constraint was optimized for relatively small sets of sub-cells (around ten or less).  That doesn't mean that one cannot use the Partition constraint for a larger set of cells, but the constraint has never been optimized for such inputs.  I am going to look into that and see if something can be quickly improved there.
+
+The second reason is that the Partition constraint balances the heuristics differently from the top level.  Since the Partition constraint is expected to become only a part of the total layout, Helix cannot know where exactly it is going to be placed as a whole.  In contrast, when working at the top level, Helix has full knowledge about where each sub-cell is going to be located in the final design.  For that reason, the relative weight of the connectivity heuristic in the Partition constraint is artificially reduced with respect to the top-level placement.  In other words, when placing the sub-cells of the Partition constraint, Helix pays outsized attention to the used area, at the expense of the connectivity quality.
+
+Hence, the layouts in cases 7 vs. 4, etc., are _expected_ to be different.
+
+I do not have the answers to the other questions yet.  They require experimenting and debugging, which are slow in the chamber.  I will keep you posted.
+
+*** 08/12/2014 10:04:48 PST MIRKO
+
+The original test has only a section from the README file in the attached tar ball and I edited the parts relevant to this star only.
+
+*** 08/11/2014 23:16:40 PST YPRAGER
+
+What are the titles of the columns in the table?
+
+* STAR: 9000789840- Helix test cases on grid alignment and AlignBoundaryLayersToAxes()
+Priority: 3-High
+** Created On: 08/18/2014 17:41:03     
+Internal Priority: 8 - High
+** Last Changed On: 08/22/2014 19:45:50 
+** Description
+Lyndon@ALtera sent the testcase located at: /berry/secure18/m1119/siarhei/incoming/2014_08_13_Grid_Alignment
+
+The testcases should contain README with a description.
+
+Lyndon@Altera writes on Aug-08-2013:
+
+case1
+    Design:  semi_custom_training_HLX/train_16ph_gray_dec
+
+    Why isn't left PRBoundary edge aligned on x=0,
+    with geometries extending into x<0.
+
+    How is this affected by use of m3_placeGrid?
+
+case2
+    Design:  semi_custom_training_HLX/train_16ph_gray_dec
+
+    Expected result, with left PRBoundary edge aligned on x=0,
+    with geometries extending into x<0.
+
+
+
+case3
+    Design:  semi_custom_training_HLX/train_16ph_gray_dec
+
+    Why isn't bottom PRBoundary edge aligned on y=0,
+    with geometries extending into y<0.
+
+    How is this affected by use of m3_placeGrid?
+
+    layout002 - Why is there also a gap?
+
+case4
+    Design:  semi_custom_training_HLX/train_16ph_gray_dec
+
+    Expected result, with bottom PRBoundary edge aligned on x=0,
+    with geometries extending into y<0.
+
+** Worklog
+*** 08/22/2014 16:45:49 PST YPRAGER
+
+A further update:  I have implemented a prototype of the enhancement, and it works.  I will need to productize it, run the tests, and then I will check it in.
+
+*** 08/22/2014 14:30:16 PST MIRKO
+
+Yakov,
+Thank you for the investigation.
+
+Do you think it would be possible for you to try and prepare some answers the questions that Lyndon asked in case1 and case3?
+
+I am not disagreeing with anything in your message, I am just looking for a shorter version to be bale and answer the two questions that Lyndon asked.
+
+*** 08/22/2014 14:08:11 PST YPRAGER
+
+I have identified the root cause.  It is peculiar and not easy to explain.
+
+Lyndon is using the AlignBoundaryLayersToAxes configuration setting.  The support for that functionality has been implemented only on the top level, but Lyndon's examples require that it is implemented also in all the constraints.  In particular, it has to be implemented in the Row constraint.  The latter is non-trivial because the Row constraint can have end caps, which require special handling in conjunction with the AlignBoundaryLayersToAxes setting.
+
+I am working on the corresponding enhancements right now, but it will take some time.
+
+Now, some more general comments, which are _not_ intended for Lyndon.
+
+The AlignBoundaryLayersToAxes functionality was introduced at Intel's insistence, and it fundamentally contradicts the premises on which Helix workflow had been built.  It doesn't sit well with other pieces of Helix functionality.  Since then, I have implemented a different part of automatic functionality, which should have completely eliminated any need in using AlignBoundaryLayersToAxes.  In fact, if not for Intel's backward compatibility, that functionality should have been deprecated.  I strongly advise anyone from using it.  Hence, Lyndon needs some exceptional justification for using that setting.  I want to know what that justification is.
+
+That STAR underscores another time that we are potentially extinguishing wrong fires.  I am spending time on debugging and enhancing the functionality that fully deserves elimination, instead of doing something that would really enable a convenient workflow for Lyndon.  We should have first figured out Lyndon's reasons and motivations, and only then rushed into fixing bugs.  Unfortunately, we've done the opposite.
+* STAR: 9000765017- Case 1 - Partition with OverlaLayers Option
+** TBD..
+* The end

@@ -1,0 +1,3 @@
+To handle LDE:
+1) call fgNoOverlap on auxLayers before fgMinSpace
+2) insert an enclosing layer shape as needed

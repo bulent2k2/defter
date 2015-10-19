@@ -1,0 +1,1969 @@
+Hi Bulent,
+Can you please take a look at the regression? Thank you
+
+--
+Mirko
+
+-----Original Message-----
+From: integ-cn@synopsys.com [mailto:integ-cn@synopsys.com] 
+Sent: Wednesday, July 01, 2015 6:33 AM
+To: Amrish Ganesh Mogaveer; Mirko Spasojevic
+Subject: Linux64:barium:hxnightly:FAILED
+
+
+**************************************************
+            Summary of run
+
+  Time:            Wed Jul  1 06:32:24 2015
+  Run time:        16946.24 s
+  Number of tests: 228
+  User Name:       integ-cn
+  Host name:       barium
+  Platform:        Linux64
+  OPTMODE:         opt
+  Harness Option:  hxnightly
+  OA version:      22.50.011
+  Python version:  2.6.2
+  Santana version: K-2015.09
+  Changelist:      2877770
+  Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck/santana
+  CNI_ROOT:        /remote/helix01/integ-cn/builds/output/santana_qsck/opt/linux_rhel40_64
+  PartnerData:     /remote/helix01/integ-cn/builds/p4/santana_qsck/partnerData
+  PDT_LOG_DIR:     /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/pdt_hxnightly_logs
+  Helix Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck/helix
+  Logs are:        /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs
+  Results:    REGRESSION             
+
+--------------------------------------------------
+           Results for pyHelix
+--------------------------------------------------
+
+Tech setting: tsmc250
+Test runtime: 100.69 s
+OK
+
+--------------------------------------------------
+           Results for seeker
+--------------------------------------------------
+
+Tech setting: tsmc250
+Test runtime: 7.20 s
+OK
+
+--------------------------------------------------
+           Results for helixIntegTest
+--------------------------------------------------
+
+Tech setting: umc65L
+Test runtime: 155.80 s
+OK
+
+Tech setting: tsmc90L
+Test runtime: 109.91 s
+OK
+
+Tech setting: umc90L
+Test runtime: 102.86 s
+OK
+
+Tech setting: cni130L
+Test runtime: 130.50 s
+OK
+
+--------------------------------------------------
+           Results for hx_TermClass
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 28.28 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nor3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 110.11 s
+OK
+
+--------------------------------------------------
+           Results for fcm_nor3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 121.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vco_lc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 35.50 s
+OK
+
+--------------------------------------------------
+           Results for fcm_vco_lc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 35.19 s
+OK
+
+--------------------------------------------------
+           Results for fcm_bandgap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 380.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_bandgap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 169.83 s
+OK
+
+--------------------------------------------------
+           Results for fcm_nor2rotate
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nor2rotate
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.07 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nor2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm_nor2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.56 s
+OK
+
+--------------------------------------------------
+           Results for fcm_dist_trkhold_cr2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 130.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_dist_trkhold_cr2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 65.24 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 167.97 s
+OK
+
+--------------------------------------------------
+           Results for fc_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 642.86 s
+OK
+
+--------------------------------------------------
+           Results for fcm_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 547.15 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 779.93 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 678.25 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_multi_lib
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 16.28 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_multi_lib_pattern
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 44.88 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_multi_lib_macro
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.11 s
+OK
+
+--------------------------------------------------
+           Results for fcm_multi_lib
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.08 s
+OK
+
+--------------------------------------------------
+           Results for fcm_multi_lib_pattern
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 32.33 s
+OK
+
+--------------------------------------------------
+           Results for fcm_multi_lib_macro
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.90 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_resistor_chain
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 16.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm_resistor_chain
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 23.86 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 106.26 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vpatternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 446.18 s
+OK
+
+--------------------------------------------------
+           Results for fcm_vpatternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 325.33 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_islandSnap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.72 s
+OK
+
+--------------------------------------------------
+           Results for fcm_islandSnap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.44 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rdr_1
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 20.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm_rdr_1
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 11.01 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rdr_2
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 28.01 s
+OK
+
+--------------------------------------------------
+           Results for fcm_rdr_2
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 55.51 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrix7x7
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 75.12 s
+OK
+
+--------------------------------------------------
+           Results for fcm_matrix7x7
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 78.45 s
+OK
+
+--------------------------------------------------
+           Results for fcm_matrix36
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 235.98 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrix36
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 83.24 s
+OK
+
+--------------------------------------------------
+           Results for fcm_soft_cluster_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 23.11 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_soft_cluster_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 24.14 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_soft_cluster_test1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 67.14 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_flips
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.95 s
+OK
+
+--------------------------------------------------
+           Results for fcm_flips
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.80 s
+OK
+
+--------------------------------------------------
+           Results for fcm_gaps
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 36.96 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gaps
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 39.15 s
+OK
+
+--------------------------------------------------
+           Results for fcm_clones
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 57.78 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_clones
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 69.83 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.63 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.40 s
+OK
+
+--------------------------------------------------
+           Results for fcm_terminalLocTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 36.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vpatternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 63.39 s
+OK
+
+--------------------------------------------------
+           Results for fcm_vpatternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 37.64 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 51.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 39.90 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrix_holes
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 12.33 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_auto_abutment_overlap
+--------------------------------------------------
+
+Tech setting: ibm32L
+Test runtime: 11.99 s
+OK
+
+--------------------------------------------------
+           Results for fcm_proximity_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 40.17 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_proximity_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 21.92 s
+OK
+
+--------------------------------------------------
+           Results for fcm_proximity_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 55.07 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_proximity_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 26.99 s
+OK
+
+--------------------------------------------------
+           Results for fcm_matchShapes
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 52.02 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matchShapes
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 37.79 s
+OK
+
+--------------------------------------------------
+           Results for fcm_twell
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 23.13 s
+OK
+
+Tech setting: tsmc65L
+Test runtime: 22.03 s
+OK
+
+Tech setting: tsmc45L
+Test runtime: 28.37 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_big_partition
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 280.20 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 30.81 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix_2
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 12.54 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix_3
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 18.78 s
+OK
+
+--------------------------------------------------
+           Results for fcm_bracketTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.60 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.75 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_2
+--------------------------------------------------
+
+Tech setting: tsmc45L
+Test runtime: 13.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_3
+--------------------------------------------------
+
+Tech setting: tsmc45L
+Test runtime: 14.73 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_4
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 12.70 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_auto_abutment_grid_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 16.95 s
+OK
+
+--------------------------------------------------
+           Results for fcm_griddedContactRing
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 38.87 s
+OK
+
+--------------------------------------------------
+           Results for fcm_isrContactRing_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.67 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gridded_rings_0
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 19.55 s
+OK
+
+--------------------------------------------------
+           Results for fcm_isrContactRing
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.45 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_contactRing_island_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 16.67 s
+OK
+
+--------------------------------------------------
+           Results for fcm_customContactRing
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.41 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gridded_rings_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 22.58 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_vmatrix_3
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 15.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_design_builder_2
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 13.64 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_design_builder_1
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 10.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_runopts_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 296.21 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_evenW_evenL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 164.27 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_evenW_oddL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 167.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_oddW_evenL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 167.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_oddW_oddL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 167.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_test_brackets
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 73.71 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.01 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay2
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 17.72 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_instances_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 39.83 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nwell_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 14.08 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellGridTest
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 31.33 s
+OK
+
+--------------------------------------------------
+           Results for fz_ref_pll_0
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 228.12 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_twellabut1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 24.64 s
+OK
+
+--------------------------------------------------
+           Results for prune_ref_pll_0
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 55.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellHelixTest
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 42.98 s
+OK
+
+Tech setting: tsmc45rfL
+Test runtime: 40.52 s
+OK
+
+Tech setting: cni130L
+Test runtime: 38.56 s
+OK
+
+--------------------------------------------------
+           Results for fcm_vpatternCellHelixTest
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 68.38 s
+OK
+
+Tech setting: tsmc45rfL
+Test runtime: 61.85 s
+OK
+
+Tech setting: cni130L
+Test runtime: 111.34 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_twellabut2
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 50.39 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellHelixMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.02 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_twellabutH
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 56.45 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_thin_thick
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 19.05 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ref_pll_abut
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 578.70 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_floor_plan_h
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 26.27 s
+OK
+
+Tech setting: tsmc90L
+Test runtime: 16.35 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gridded_rings_2
+--------------------------------------------------
+
+Tech setting: st20L
+Test runtime: 13.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 15.99 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.13 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 23.46 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.03 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 15.44 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 15.95 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 20.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 15.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 13.70 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 13.87 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 15.81 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 14.07 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 16.94 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.26 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 22.18 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 14.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix_4
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 14.82 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_halo
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 19.76 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_blackBox_1
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 28.00 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_blackBox_2
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 23.16 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.14 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.98 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 29.13 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 16.77 s
+OK
+
+--------------------------------------------------
+           Results for xgen
+--------------------------------------------------
+
+Tech setting: tsmc250
+Test runtime: 34.59 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_frame
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.99 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_column
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 11.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_matrix
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 14.22 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_pattern
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 14.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_row
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 16.59 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_top
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 17.58 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_vmatrix
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 13.59 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_construction_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.71 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_branchClone_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.64 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ignoreLayers
+--------------------------------------------------
+
+Tech setting: cni130TestL
+Test runtime: 17.56 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ref_pllTest
+--------------------------------------------------
+
+Tech setting: cni130TestL
+Test runtime: 107.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternContext
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.69 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeColumnOfRows
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.15 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeColumnOfRows_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.76 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeMatrixEnc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.26 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeMatrixSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.27 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldePartition
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.32 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldePatternEncAll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldePatternEncSelected
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldePatternSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.50 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeRow
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.79 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeVMatrixEnc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeVMatrixSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.97 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_filter1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 33.28 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 14.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 14.16 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay3
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 15.22 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_demo_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 159.44 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_filter2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 241.20 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternAlign
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 18.59 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ordering1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.52 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ordering2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 16.46 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ordering3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 20.53 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ordering4
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.35 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_filter3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 35.90 s
+OK
+
+--------------------------------------------------
+           Results for cleanup_ldeVMatrixSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 3.88 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_alignment_column
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 9.39 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_alignment_row
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 9.35 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_stripeRouteGroup2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.93 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_stripeRouteGroup3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.51 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_autoAbutmentRowVsPattern
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.13 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_multiplePatterns
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 21.91 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixAlignPrbRowsColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 9.89 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixAlignPrbRows
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 9.86 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixAlignPrbColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.23 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixSpacingPrbRowsColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.40 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixSpacingPrbRows
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 9.87 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixSpacingPrbColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.03 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrixSpacingPrbRowsColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.83 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_columnSpacingPrb
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 9.90 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_row
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay4
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.26 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_matrix
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.98 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_vmatrix
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.63 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align4
+--------------------------------------------------
+
+Tech setting: tsmc28
+Test runtime: 10.76 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ref_pll_live
+--------------------------------------------------
+
+Tech setting: cni130
+Test runtime: 653.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_netext1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.87 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_stack1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.62 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_alignedArray1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 20.53 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_stack2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.05 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_branchClone_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.57 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_branchClone_aggressive_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.45 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_layerBoundary_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 21.13 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_doubleHeight_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 21.96 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_doubleHeight_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 18.12 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.20 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack2
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 22.93 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_firm
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 650.87 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_frozen
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 119.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_symm
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 640.00 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack3
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 60.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack4
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 31.17 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack5
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 22.63 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_lde
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.95 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_nor
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 20.18 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_topLevelSpacingPrb_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.98 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_partitionSpacingPrb_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.16 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_nand
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 18.92 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_inv
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 361.97 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_packedPartition
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 213.18 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_packedPartition1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 254.37 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_pnstack_packedPartition1/cni130L/multi_4_fullCycle_pnstack_packedPartition1_cni130L.log
+fcm4_pnstack_packedPartition1 FAILED
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_single
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 411.34 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_prBoundary
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 135.69 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_shapes
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 224.65 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rectilinearPartition_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 19.65 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rectilinearPartition_2
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 14.92 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_gridding
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 273.28 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_top
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.64 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_end_caps
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 15.37 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_end_caps
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 13.72 s
+OK
+
+--------------------------------------------------
+           Results for pdt_tsmc_ref_pll_DFM_9U_8K_m4
+--------------------------------------------------
+
+pdt_tsmc_ref_pll_DFM_9U_8K_m4 will not run with python 2.6.2
+
+--------------------------------------------------
+           Results for pdt_tsmc_ref_pll_m4
+--------------------------------------------------
+
+pdt_tsmc_ref_pll_m4 will not run with python 2.6.2
+
+--------------------------------------------------
+           Results for TSMC
+--------------------------------------------------
+
+TSMC will not run with python 2.6.2
+
+--------------------------------------------------
+           Results for local_st20PyCellCode_cmos20lp
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitA
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitB
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_cnTestDlo
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitRDR
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitTest
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_appleKit
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_csrPyCellCode
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKit
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for baseKit
+--------------------------------------------------
+OK

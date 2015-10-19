@@ -1,0 +1,1784 @@
+* Class 2
+Due Dates
+Quiz 1 November 18
+Homework 1-1 November 25
+Homework 1-2 December 2
+Quiz 2 December 9
+Quiz 3 December 16
+Homework 2 December 16
+** Slides from first class
+
+Beginning at 11:00PM, Saturday November 24 Boston time (4 AM November 25 th GMT) and lasting for 90 minutes, edX engineers will be performing system maintenance. During this period, all edX services will be unavailable. We apologize for this inconvenience.
+
+BerkeleyX: CS169.1x Software as a Service bulent ▾
+Courseware
+Course Info
+Syllabus
+Textbook & VM
+Tutorials & Resources
+Discussion
+Wiki
+Progress
+Syllabus
+
+GRADING
+
+By the end of this course, you will have completed 4 homework assignments, all of which involve a substantial amount of programming. Each assignment can be submitted multiple times without penalty, so you can use feedback from the automatic grader to revise your code. Note that your most recent score will be recorded as your grade.
+Homework assignments turned in between one minute and one week late will receive a penalty of 25%. An assignment that would have scored 100 points would only receive 75 points if it is submitted 2 days late. Assignments turned in more than a week late will receive no points, but will still receive feedback from the autograder.
+In addition to the homework assignments, there will be 4 quizzes. You will have only one chance to take each quiz, with the exception of Quiz 0 (the diagnostic quiz). You may take Quiz 0 as many times as you want. All quizzes must be turned in by the end of the day on the due date (midnight of your local time). Late quizzes will receive 0 points.
+Each of the 4 homework assignments will be worth 10% of the final grade.
+The diagnostic quiz (Quiz 0) is worth 10% of the final grade.
+Quiz 1, Quiz 2, and Quiz 3 are worth 20%, 20% and 10% of the final grade, respectively.
+To earn a certificate for this class you must achieve a score of at least 50% overall.
+
+
+WORKLOAD
+
+In a previous version of the course,
+50% of the students spent 6 hours or less per week on the course
+40% spent 6 to 12 hours a week
+10% spent more than 12 hours a week.
+
+
+COURSE SCHEDULE:
+
+You can view the Fall 2012 schedule for CS169.1x as a PDF, or as a Google Calendar.
+Release schedule:
+All lecture sequences are released on Mondays.
+All homework assignments are released on Wednesdays, and are due on Sunday of the following week.
+All quizzes are released on Fridays and due on Sunday of the following week (9 days later).
+Week of	 Topic	 Reading	 Slides	 Lecture Sequence	 Assignment	 Due
+Mo 9/24	Software Engineering and SaaS Architecture	Ch. 1	Lecture 1	Lecture 1: Course Introduction	Quiz 0	10/7
+Ch. 2	Lecture 2	Lecture 2: SOA and Cloud Computing		
+Mo 10/1	Ruby	Ch. 3	Lecture 3	Lecture 3: Introduction to Ruby	HW 1	10/16
+Lecture 4	Lecture 4: Ruby Continued	Quiz 1	10/14
+Mo 10/8	Rails	Ch. 4	Lecture 5	Lecture 5: SaaS Architecture & intro to Rails	HW 2	 10/21
+Lecture 6	Lecture 6: Basic Rails		
+Lecture 7	Lecture 7: Rails continued		
+Mo 10/15	Behavior Driven Development	Ch. 5	Lecture 8	Lecture 8: Behavior Driven Design	HW 3	 10/28
+Lecture 9	Lecture 9: Behavior Driven Design Part 2	Quiz 2	10/28
+Mo 10/22	Test Driven Development	Ch. 6	Lecture 10	Lecture 10: Test Driven Development	HW 4	 11/7
+Lecture 11	Lecture 11: Test Driven Development Part 2	Quiz 3	11/7
+Mo 10/29	Conclusion	N/A	 N/A	Farewell Video	 N/A	
+ Find Courses About Blog Jobs Contact       
+© 2012 edX, some rights reserved. terms of service privacy policy honor code help
+** Slides
+Week of	 Topic	 Reading	 Slides	 Lecture Sequence	 Assignment	 Due
+Mo 11/5	Advanced Rails	Ch. 7	Lecture 1	Lecture 1: Advanced Rails	Quiz 1	11/18
+Lecture 2	Lecture 2: Advanced Associations		
+Mo 11/12	Legacy	Ch. 8	Lecture 3	Lecture 3: Legacy Code	HW 1-1	11/25
+Lecture 4	Lecture 4: Legacy Code continued		
+Mo 11/19	Teams	Ch. 9	Lecture 5	Lecture 5: Teams	HW 1-2	12/2
+Lecture 6	Lecture 6: Version Control			
+Mo 11/26	Design Patterns	Ch. 10	Lecture 7	Lecture 7: TOPIC	Quiz 2	 12/9
+Lecture 8	Lecture 8: TOPIC		
+Mo 12/3	JavaScript	Ch. 11			Quiz 3	 12/16
+Mo 12/10	Dev/ops	Ch. 12	 -	 -	HW 2	12/16 
+(Hard Deadline)
+** Syllabus
+
+HOMEWORK
+
+In this course, you will complete 2 programming homework assignments. Each assignment can be submitted multiple times without penalty, so you can use feedback from the automatic grader to revise your code. Note that your most recent score will be recorded as your grade.
+
+CERTIFICATES
+
+To earn a certificate for this class you must achieve a score of at least 50% overall.
+
+GRADING BREAKDOWN
+
+Quiz 1 is worth 10% of the overall grade.
+Quiz 2 is worth 20% of the overall grade.
+Quiz 3 is worth 20% of the overall grade.
+Homework 1 Part 1 is worth 20% of the overall grade.
+Homework 1 Part 2 is worth 20% of the overall grade.
+Homework 2 is worth 10% of the overall grade.
+LATE POLICY
+
+Homework 2 will not be accepted late. A late submission will receive a
+score of 0.
+
+Homework assignments 1-1 and 1-2 may be turned in late for reduced
+credit. Assignments turned in between one minute and one week late will
+receive a penalty of 25%. An assignment that would have scored 100 points
+would only receive 75 points if it is submitted 2 days late. Assignments
+turned in more than a week late will receive no points, but will still
+receive feedback from the autograder. 
+
+All quizzes must be turned in by the end of the day on the due date
+(midnight of your local time). Late quizzes will receive 0 points. 
+
+WORKLOAD
+
+In 169.1x, the prequel to this the course,
+50% of the students spent 6 hours or less per week on the course
+40% spent 6 to 12 hours a week
+10% spent more than 12 hours a week.
+
+COURSE SCHEDULE
+
+Here is a Google Calendar for the course.
+
+Release schedule:
+All lecture sequences are released on Mondays.
+
+All homework assignments are released on Wednesdays, and are due on Sunday
+of the following week. 
+
+All quizzes are released on Fridays and due on Sunday of the following week
+(9 days later). 
+
+Week of	 Topic	 Reading	 Slides	 Lecture Sequence	 Assignment	 Due
+Mo 11/5	Advanced Rails	Ch. 7	Lecture 1	Lecture 1: Advanced Rails	Quiz 1	11/18
+Lecture 2	Lecture 2: Advanced Associations		
+Mo 11/12	Legacy	Ch. 8	Lecture 3	Lecture 3: Legacy Code	HW 1-1	11/25
+Lecture 4	Lecture 4: Legacy Code continued		
+Mo 11/19	Teams	Ch. 9	Lecture 5	Lecture 5: Teams	HW 1-2	12/2
+Lecture 6	Lecture 6: Version Control			
+Mo 11/26	Design Patterns	Ch. 10	Lecture 7	Lecture 7: TOPIC	Quiz 2	 12/9
+Lecture 8	Lecture 8: TOPIC		
+Mo 12/3	JavaScript	Ch. 11			Quiz 3	 12/16
+Mo 12/10	Dev/ops	Ch. 12	 -	 -	HW 2	12/16 
+(Hard Deadline)
+ Find Courses About Blog Jobs Contact       
+© 2012 edX, some rights reserved. terms of service privacy policy honor code help
+* c2-h1
+bulent-typo.herokuapp.com
+
+Congratulation!
+You have successfully signed up
+
+Login: admin
+
+Password (heroku): abc-123- (old u5lknYR)
+Password (vm):  bi2hFe2
+Don't lose the mail sent at bulent2k2@gmail.com or you won't be able to login anymore
+
+Proceed to admin
+* hw1
+** intro
+
+Beginning at 11:00PM, Saturday November 24 Boston time (4 AM November 25 th GMT) and lasting for 90 minutes, edX engineers will be performing system maintenance. During this period, all edX services will be unavailable. We apologize for this inconvenience.
+
+BerkeleyX: CS169.2x Software as a Service bulent ▾
+Courseware
+Course Info
+Syllabus
+Textbook & VM
+Tutorials & Resources
+Discussion
+Wiki
+Progress
+Week 1
+Week 2
+Lecture 3: Legacy Code
+Lecture 4: Legacy Code Continued
+Homework 1 part 1
+Homework due November 25
+Week 3
+Previous
+Next
+Homework 1: Refactoring and Legacy Code
+
+Part 1 (steps 0-2) Due Sunday, November 25th
+Part 2 (step 4) Due Sunday, December 2nd
+
+
+Overview: Extending and Fixing Typo
+Typo is a blogging engine written in Rails to allow people to set up a blog easily. Typo consists of about 30,000 lines of code (30 KLOC) and comes with a ton of features, including authentication to post to the blog, attaching files to articles, adding special markup, creating custom themes, building user profiles, and allowing guests and/or users to comment on posts. It also supports more advanced features like trackbacks (allowing other blogs to "track back" to yours and mention you in their blog article).
+
+From your perspective, Typo is legacy code since you didn't write it yourself :-) In this assignment you'll go through the steps of adapting the BDD+TDD cycle to enhance and fix a bug in a piece of legacy code.
+
+Preview of structure of assignment:
+
+Part 1
+Get the legacy software running and play around with Typo to familiarize yourself with it.
+Create cucumber stories based on mockup that we will provide for a new Typo feature: article merging. These stories will serve as high-level integration/acceptance tests.
+Use stories to drive the process of identifying necessary modifications to Typo for the new feature.
+Write the new feature code so that it passes the cucumber stories you have created as well as all existing rspec tests.
+Part 2
+Examine the bug in typo.
+Write cucumber stories to test the behavior of the bug.
+Write a bugfix that passes the cucumber stories you created to test the bug.
+Show Discussion New Post
+Previous
+Next
+ Find Courses About Blog Jobs Contact       
+© 2012 edX, some rights reserved. terms of service privacy policy honor code help
+** part1
+
+Beginning at 11:00PM, Saturday November 24 Boston time (4 AM November 25 th GMT) and lasting for 90 minutes, edX engineers will be performing system maintenance. During this period, all edX services will be unavailable. We apologize for this inconvenience.
+
+BerkeleyX: CS169.2x Software as a Service bulent ▾
+Courseware
+Course Info
+Syllabus
+Textbook & VM
+Tutorials & Resources
+Discussion
+Wiki
+Progress
+Week 1
+Week 2
+Lecture 3: Legacy Code
+Lecture 4: Legacy Code Continued
+Homework 1 part 1
+Homework due November 25
+Week 3
+Previous
+Next
+Part 1
+
+Due Sunday, November 25th
+0. GETTING SET UP
+
+In these steps you'll download Typo, get it running on your local system, verify that its test suite passes, and do a test deployment to Heroku.
+
+Install Typo locally
+Fork the Typo repository: https://github.com/saasbook/typo (Typo is open source, but we have snapshotted the repo including fixing some failing tests and using a stable revision for Ruby 1.9.2)
+Clone your forked Typo repository into a folder on your local machine.
+Run bundle install --without production in the Typo directory.
+Run the database migration in the Typo directory (
+rake db:migrate
+).
+Load the seed data into the database (
+rake db:seed
+).
+Get the Typo test suite and make sure all specs pass green. Pending specs are fine.
+Run
+rake spec
+and
+rake cucumber
+in the Typo directory.
+Make sure Typo can be deployed to Heroku. Typo wasn't built with Heroku in mind, but the changes needed to deploy to Heroku have already been made in our fork of the Typo repository. 
+From within your copy of the Typo repository, run:
+        heroku create
+        git push heroku master
+        heroku run rake db:migrate
+        heroku run rake db:seed
+1. Specify features
+
+We want to add a useful feature called article merging. When there are multiple bloggers on one site, the authors may write more than one article on the same topic and say similar things. The user will be able to visit the article view, and, if they are an admin, there should be a form on that article's edit page that allows an administrator to enter in the ID of another article to merge the current article with. When this happens, we want to preserve both articles' content, but merge them together into one article. You should verify that both specified articles exist, and that they are not the same article.
+
+Specifications:
+A non-admin cannot merge articles.
+When articles are merged, the merged article should contain the text of both previous articles.
+When articles are merged, the merged article should have one author (either one of the authors of the two original articles).
+Comments on each of the two original articles need to all carry over and point to the new, merged article.
+The title of the new article should be the title from either one of the merged articles.
+The form field containing the ID of the article to merge with must have the HTML attribute name set to merge_with. This requirement is present for the sole purpose of allowing the autograder to identify the merge functionality in your deployed application and is not something you would normally do in Rails. There should be exactly one input element with the name merge_with on the edit article page.
+Start by writing cucumber scenarios for the above behaviors. You will probably want to put them in separate feature files but you may add them to the existing feature files. Over the rest of part 1 and all of part 2 we will make these go green.
+
+Below is a mockup for the merge articles interface [hi-res]. The form for merging articles should be on the edit page for an article and it should let the user input the id of the article to be merged with. The merge interface should not be presented for new articles nor to non-administrators, but it is fine for the merge articles functionality to be present for drafts (we will not conduct any tests using draft articles).
+
+
+Tip: Nesting <tags> is invalid in HTML. Most browsers will only accept the outermost form tag. Be careful of which views you edit: a view partial may be rendered while inside of another form tag, so creating another form inside of it would be invalid.
+
+2. Start driving changes through specs
+
+Starting with scenarios 1 and 2 above, you will create the Cucumber tests to drive the code changes for each scenario. The second one will be toughest, because you will have to create the basic functionality that allows merging to happen. Subsequent specs will be easier as they will require only incremental code.
+
+
+For Scenarios 1 and 2:
+Start by implementing the step definitions that will show an admin (but not a regular user) a "Merge With This Article" button which, when clicked, will dispatch to a controller action that does the merge.
+Let those step definitions drive the creation of controller specs, as we did in the example in ELLS chapter 5. Obviously the merging functionality itself should go in the model, not the controller, so feel free to assume an instance method of the
+Article
+model
+merge_with(other_article_id)
+. Eventually, this method will return an article object that is the merged article, and also handles all of the considerations above. Get these specs to pass green. Commit.
+Warning:Recall that Rails models can have :has_many and :belongs_to relationships. Recall also that :dependent => :destroy is an option that sometimes is used in the
+
+:has_many
+relationship. When this is used, if the main object is destroyed, all of the associated objects that belong to the main object are also destroyed. If you were to load an article and assign its comments to a second article, and then destroy the first article, be aware that you may inadvertently destroy all of the comments, because these associations are cached. You should check the article model to see if the :dependent => :destroy option is included, and if so, you will need to account for it, either by reloading the first article prior to destroying it, or by some other approach. 
+When you are finished, you should have the following:
+Typo passing all tests, both Cucumber and Rspec.
+Specs to verify that the controller behaves correctly when non-admins attempt to merge articles passing green.
+Specs to verify that the model's merge method combines the given articles correctly passing green.
+Modifications to the models, views, and controllers necessary to merge articles
+Cucumber scenarios "A non-admin cannot merge two articles" and "When articles are merged, the merged article should contain the text of both previous articles" passing green
+Good job! At this point you are ready to submit part 1 of homework 1.
+Show Discussion New Post
+Previous
+Next
+ Find Courses About Blog Jobs Contact       
+© 2012 edX, some rights reserved. terms of service privacy policy honor code help
+** grade
+
+Beginning at 11:00PM, Saturday November 24 Boston time (4 AM November 25 th GMT) and lasting for 90 minutes, edX engineers will be performing system maintenance. During this period, all edX services will be unavailable. We apologize for this inconvenience.
+
+BerkeleyX: CS169.2x Software as a Service bulent ▾
+Courseware
+Course Info
+Syllabus
+Textbook & VM
+Tutorials & Resources
+Discussion
+Wiki
+Progress
+Week 1
+Week 2
+Lecture 3: Legacy Code
+Lecture 4: Legacy Code Continued
+Homework 1 part 1
+Homework due November 25
+Week 3
+Previous
+Next
+HOMEWORK 1 PART 1 SUBMISSION
+
+Submission Logistics
+You will submit a file containing the following information on one line:
+
+heroku-uri admin-name admin-password
+for example:
+myname.herokuapp.com admin abc123
+Correct
+On Time 
+Typo
+  should respond to a simple request [0 points]
+  should authenticate the supplied user as an administrator [0 points]
+  should post new articles [0 points]
+  should post comments on articles [0 points]
+  create blog publisher users [0 points]
+
+The article merge feature
+  should be shown on the article edit page [15 points] (FAILED)
+  should create a single merged article [15 points] (FAILED)
+  should create an article with the text of both original articles [20 points] (FAILED)
+  should carry over the comments from both merged articles [20 points] (FAILED)
+  should only show the merge button to administrators [15 points] (FAILED)
+  should only allow administrators to merge articles [15 points]
+
+Failures:
+
+  1) The article merge feature should be shown on the article edit page [15 points]
+     Failure/Error: page.body.should include 'Merge Articles'
+       expected "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />\n  <title>Better be There Now instead of Reading This :-) \xE2\x80\x93 content</title>\n  <meta http-equiv=\"imagetoolbar\" content=\"no\" />\n  <link href=\"/stylesheets/growler.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/bootstrap.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/administration_structure.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/lightbox.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/javascripts/prototype.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/effects.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/builder.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/dragdrop.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/controls.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/typo.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/lightbox.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/growler.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/typo_carousel.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/administration.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/ckeditor/ckeditor.js?1353129687\" type=\"text/javascript\"></script>\n  <script src=\"/javascripts/calendar_date_select/calendar_date_select.js?1353129687\" type=\"text/javascript\"></script>\n<link href=\"/stylesheets/calendar_date_select/default.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n\n  <style type=\"text/css\">\n    #carousel-content .slide { width: 125; }\n  </style>\n</head>\n<body>\n  <div class='topbar'>\n    <div class='topbar-inner'>\n      <div class='container-fluid'>\n        <a href=\"http://bulent-typo.herokuapp.com\" class=\"brand\">Better be There Now instead of Reading This :-)</a>\n        <ul class=\"nav secondary-nav\">\n          <li class=\"dropdown\" onmouseover='$(\"user_menu\").style.display = \"block\"' onmouseout='$(\"user_menu\").style.display = \"none\"'>\n            <a class=\"dropdown-toggle\" href=\"#\">Logged in as Ben</a>\n            <ul class=\"dropdown-menu\" id=\"user_menu\" style='display: none'>\n              <li><a href=\"/admin/content/new\">New Article</a></li>\n              <li><a href=\"/admin/profiles\">Profile</a></li>\n              <li><a href=\"/accounts/logout\">Log out &raquo;</a></li>\n            </ul>\n          </li>\n        </ul>\n        <ul class=\"nav secondary-nav\">\n          <li class=\"dropdown\" onmouseover='$(\"help_menu\").style.display = \"block\"' onmouseout='$(\"help_menu\").style.display = \"none\"'>\n            <a class=\"dropdown-toggle\" href=\"#\">Help</a>\n            <ul class=\"dropdown-menu\" id=\"help_menu\" style=\"display: none;\">\n              <li><a href=\"https://github.com/fdv/typo/wiki\">Documentation</a></li>\n              <li><a href=\"https://github.com/fdv/typo/issues\">Report a bug</a></li>\n              <li><a href=\"https://github.com/fdv/typo/wiki/In-Page-Plugins\">In page plugins</a></li>\n              <li><a href=\"https://github.com/fdv/typo/wiki/Sidebar-plugins\">Sidebar plugins</a></li>\n            </ul>\n          </li>\n        </ul>\n\t\t\t\t\n      </div>\n    </div>\n  </div>\n  <div class='container-fluid'>\n    <div class='sidebar'>\n      <div class='well'>\n        <h5><a href=\"/admin\">Dashboard</a></h5>\n        <h5 class=\"active\"><a href=\"/admin/content\">Articles</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/content\">All Articles</a></li>\n<li><a href=\"/admin/content/new\">New Article</a></li>\n<li><a href=\"/admin/feedback\">Comments</a></li>\n<li><a href=\"/admin/categories/new\">Categories</a></li>\n<li><a href=\"/admin/tags\">Tags</a></li>\n<li><a href=\"/admin/post_types/new\">Article Types</a></li>\n<li><a href=\"/admin/redirects\">Redirects</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/pages\">Pages</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/pages\">All Pages</a></li>\n<li><a href=\"/admin/pages/new\">New Page</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/resources\">Media Library</a></h5>\n        <ul id='subtabs'>\n          \n        </ul>\n        <h5 class=\"\"><a href=\"/admin/themes\">Design</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/themes\">Choose theme</a></li>\n<li><a href=\"/admin/sidebar\">Customize sidebar</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/settings\">Settings</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/settings/write\">Write</a></li>\n<li><a href=\"/admin/settings/feedback\">Feedback</a></li>\n<li><a href=\"/admin/cache\">Cache</a></li>\n<li><a href=\"/admin/users\">Users</a></li>\n<li><a href=\"/admin/settings/errors\">Error messages</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/seo\">SEO</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/seo\">Global SEO settings</a></li>\n<li><a href=\"/admin/seo/permalinks\">Permalinks</a></li>\n<li><a href=\"/admin/seo/titles\">Titles</a></li>\n        </ul>\n      </div>\n    </div>\n    <div class='content'>\n      <div class=''>\n        \n        <div class='page-header'><h2>New article</h2></div>\n        \n<form accept-charset=\"UTF-8\" action=\"/admin/content/new/9\" class=\"autosave\" enctype=\"multipart/form-data\" id=\"article_form\" method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /><input name=\"authenticity_token\" type=\"hidden\" value=\"+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=\" /></div>\n\n  <input type=\"hidden\" name=\"current_editor\" id=\"current_editor\" value=\"visual\" />\n<input type=\"hidden\" name=\"user_textfilter\" id=\"user_textfilter\" value=\"none\" />\n<div id=\"autosave\"></div>\n<div id=\"article_keywords_auto_complete\" class=\"auto_complete\"></div>\n\n\n\n<div class='editor-right'>\n  <div class='well'>\n    <h4>Publish settings</h4>\n    <div class='actions'>\n      <a href=\"/admin/content/destroy/9\" class=\"btn danger\" data-confirm=\"Are you sure?\" data-method=\"post\" rel=\"nofollow\" title=\"Delete content\">delete</a>\n\t  <span id='destroy_link'></span>\n      <span id='preview_link'><a href=\"/previews/9\" class=\"btn info\" target=\"new\">Preview</a></span>\n    </div>\n    <div class='clearfix'>\n        Status: <strong>published</strong> <a href=\"#\" onclick=\"Element.toggle('status'); return false\">Change</a>\n      <ul class='inputs-list'>\n        <li id='status' style='display: none;'>        \n          <label for=\"article_published\">\n            <input name=\"article[published]\" type=\"hidden\" value=\"0\" /><input checked=\"checked\" id=\"article_published\" name=\"article[published]\" type=\"checkbox\" value=\"1\" />\n            Published\n          </label>\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Comments are <strong>enabled</strong> and trackbacks are <strong>disabled</strong> <a href=\"#\" onclick=\"Element.toggle('conversation'); return false\">Change</a>\n      <ul class='inputs-list' id='conversation' style='display: none'>\n        <li>\n          <label for=\"article_allow_pings\">\n            <input name=\"article[allow_pings]\" type=\"hidden\" value=\"0\" /><input id=\"article_allow_pings\" name=\"article[allow_pings]\" type=\"checkbox\" value=\"1\" />\n            Allow trackbacks\n          </label>\n        </li>\n        <li>\n          <label for=\"article_allow_comments\">\n            <input name=\"article[allow_comments]\" type=\"hidden\" value=\"0\" /><input checked=\"checked\" id=\"article_allow_comments\" name=\"article[allow_comments]\" type=\"checkbox\" value=\"1\" />\n            Allow comments\n          </label>\n        </li>\n      </ul>\n    </div>\n\t  <div class='clearfix'>\n      Publish <strong>now</strong> <a href=\"#\" onclick=\"Element.toggle('publish'); return false\">Change</a>\n      <ul class='inputs-list'>\n        <li id='publish' style='display: none;'>\n          <input class=\"span3\" id=\"article_published_at\" name=\"article[published_at]\" size=\"30\" type=\"text\" value=\"November 17, 2012 06:06 AM GMT+0000 (UTC)\" /> <img alt=\"Calendar\" class=\"calendar_date_select_popup_icon\" onclick=\"new CalendarDateSelect( $(this).previous(), {time:true, year_range:10} );\" src=\"/images/calendar_date_select/calendar.gif?1353129687\" style=\"border:0px; cursor:pointer;\" />\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Visibility: <strong>public</strong> <a href=\"#\" onclick=\"Element.toggle('visibility'); return false\">Change</a>\n      <ul class='inputs-list' id='visibility' style='display: none'>\n        <li>\n          <label for=\"article_password\">Password:\n            <input class=\"span3\" id=\"article_password\" name=\"article[password]\" size=\"30\" type=\"password\" value=\"\" />\n          </label>\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Permalink: <a href=\"#\" onclick=\"Element.toggle('permalink'); return false\">Change</a>\n      <ul class='inputs-list' id='permalink' style='display: none'>\n        <li>\n            <input class=\"span4\" id=\"article_permalink\" name=\"article[permalink]\" size=\"30\" type=\"text\" value=\"cs169-autograder-blag-post-1234\" />\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Article filter: <strong>Markdown with SmartyPants</strong> <a href=\"#\" onclick=\"Element.toggle('text_filter'); return false\">Change</a>\n      <ul id='text_filter' class='inputs-list' style='display: none'>\n        <li>\n          <select name=\"article[text_filter]\" id=\"text_filter\">\n            <option value=\"none\">None</option>\n<option value=\"markdown\">Markdown</option>\n<option value=\"smartypants\">SmartyPants</option>\n<option value=\"markdown smartypants\" selected=\"selected\">Markdown with SmartyPants</option>\n<option value=\"textile\">Textile</option>\n<option value=\"none\">None</option>\n<option value=\"markdown\">Markdown</option>\n<option value=\"smartypants\">SmartyPants</option>\n<option value=\"markdown smartypants\" selected=\"selected\">Markdown with SmartyPants</option>\n<option value=\"textile\">Textile</option>\n          </select>\n        </li>\n      </ul>\n    </div>\n\n    <div class='actions'>\n      <input id='save_draft' type=\"submit\" value=\"Save as draft\" name=\"article[draft]\" class='btn info' />\n      <input type=\"submit\" value=\"Publish\" class=\"btn primary\" />\n    </div>\n  </div>\n\n  <div class='well'>\n    <h4>Categories</h4>\n    <ul class='inputs-list'>\n\t<li>\n\t    <label for=\"category_1\"><input id=\"category_1\" name=\"categories[]\" type=\"checkbox\" value=\"1\" />General</label>\n\t</li>\n</ul>\n<a href=\"/admin/categories/new\" class=\"btn info\">New Category</a>\n\n  </div>\n  <input id=\"article_post_type\" name=\"article[post_type]\" type=\"hidden\" value=\"read\" />\n</div>\n\n<div class='editor-left'>\n  <div>\n    <div>\n      <input class=\"span1\" id=\"article_title\" name=\"article[title]\" placeholder=\"Title\" size=\"30\" style=\" width: 99%\" type=\"text\" value=\"[CS169 Autograder] Blag Post 1234\" />\n    </div>\n\n    \n\n    <div id='editor-menu'>\n\t\t<ul class=\"tabs\">\n\t\t\t<li id=\"f\" class='active'>\n\t\t\t\t<a href=\"#\" onclick=\"new Ajax.Updater(&#x27;visual_editor&#x27;, &#x27;/admin/content/insert_editor?editor=visual&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_fck&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_fck&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=&#x27;)}); return false;\">Visual</a><img alt=\"Spinner-blue\" id=\"update_spinner_fck\" src=\"/images/spinner-blue.gif?1353129687\" style=\"display:none;\" />\n\t\t\t</li>\n\t\t\t<li id=\"s\" class=' '>\n\t\t\t\t<a href=\"#\" onclick=\"new Ajax.Updater(&#x27;simple_editor&#x27;, &#x27;/admin/content/insert_editor?editor=simple&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_simple&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_simple&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=&#x27;)}); return false;\">HTML</a><img alt=\"Spinner-blue\" id=\"update_spinner_simple\" src=\"/images/spinner-blue.gif?1353129687\" style=\"display:none;\" />\n\t\t\t</li>\n\t\t</ul>\n    </div>\n\n    <div id=\"editor\">\n      <div id='quicktags' style='display: none;'>\n        <script type=\"text/javascript\">edToolbar('article_body_and_extended');</script>\n      </div>\n\n      <div id ='visual_editor'  >\n        <textarea id='article__body_and_extended_editor' style='width:100%;height:300px' cols='20' rows='20' class='large' name='article[body_and_extended]'>Lorem ipsum</textarea>\n<script type=\"text/javascript\">\n//<![CDATA[\nCKEDITOR.replace('article[body_and_extended]', {\n    filebrowserBrowseUrl : '/fm/filemanager',\n    filebrowserUploadUrl : '/ckeditor/upload'\n\n});\n\n//]]>\n</script>\n      </div>\n\n      <div id='simple_editor' class='input_text' style='display: none;' >\n        \n        \n      </div>\n    </div>\n\n\t\t<h4>Tags</h4>\n    <div class='class'>\n      <input autocomplete=\"off\" id=\"article_keywords\" name=\"article[keywords]\" size=\"30\" style=\"width: 100%\" type=\"text\" value=\"\" />\n    </div>\n    <script type=\"text/javascript\">\n//<![CDATA[\nvar article_keywords_auto_completer = new Ajax.Autocompleter('article_keywords', 'article_keywords_auto_complete', '/admin/content/auto_complete_for_article_keywords', {tokens:','})\n//]]>\n</script>\t\t\n  </div>\n\n  <div class='separator'>\n    <h4>Excerpt</h4>\n    <div class=''>\n      <textarea cols=\"40\" height=\"150\" id=\"article_excerpt\" name=\"article[excerpt]\" rows=\"5\" style=\"width: 100%\"></textarea>\n      <span class='help-block'>Excerpts are posts summaries that are shown on your blog homepage only but won\xE2\x80\x99t appear on the post itself</span>\n    </div>\n  </div>\n\n  <div class=''>\n    <h4>Uploads</h4>\n    <p class='help-block'>Uploads will be displayed as attachments in your RSS feed, but won't appear in your articles.</p>\n    <ul id='attachments' class='inputs-list'>\n      <li id=\"attachment_1\">\n  <input id=\"attachments_filename_1\" name=\"attachments[filename_1]\" type=\"file\" />  <a href=\"#\" onclick=\"if (confirm(_(&#x27;Really delete attachment&#x27;) +&#x27; 1?&#x27;)){\nEffect.toggle(&quot;attachment_1&quot;,&#x27;appear&#x27;,{afterFinish:function(obj){Element.remove(obj.element);}});\n}; return false;\">Remove</a></li>\n<li id=\"attachment_add_2\">\n  <a href=\"#\" onclick=\"new Ajax.Request(&#x27;/admin/content/attachment_box_add/2&#x27;, {asynchronous:true, evalScripts:true, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=&#x27;)}); return false;\">Add Another Attachment</a></li>\n\n<li id=\"resources\">\n\n  <h3>You can associate the following resources</h3>\n</li>\n    </ul>\n  </div>    \n  </div>\n\n</div>\n\n\n\n</form>\n\n      </div>\n    </div>\n  </div>\n\n  <footer>\n    <a href=\"http://bulent-typo.herokuapp.com\">Better be There Now instead of Reading This :-)</a> is proudly powered by Typo 6.1.0\n  </footer>\n</body>\n</html>\n" to include "Merge Articles"
+       Diff:
+       @@ -1,2 +1,316 @@
+       -Merge Articles
+       +<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       +  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+       +<html xmlns="http://www.w3.org/1999/xhtml">
+       +<head>
+       +  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+       +  <title>Better be There Now instead of Reading This :-) – content</title>
+       +  <meta http-equiv="imagetoolbar" content="no" />
+       +  <link href="/stylesheets/growler.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/bootstrap.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/administration_structure.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/lightbox.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +  <script src="/javascripts/prototype.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/effects.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/builder.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/dragdrop.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/controls.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/typo.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/lightbox.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/growler.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/typo_carousel.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/administration.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/ckeditor/ckeditor.js?1353129687" type="text/javascript"></script>
+       +  <script src="/javascripts/calendar_date_select/calendar_date_select.js?1353129687" type="text/javascript"></script>
+       +<link href="/stylesheets/calendar_date_select/default.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +
+       +  <style type="text/css">
+       +    #carousel-content .slide { width: 125; }
+       +  </style>
+       +</head>
+       +<body>
+       +  <div class='topbar'>
+       +    <div class='topbar-inner'>
+       +      <div class='container-fluid'>
+       +        <a href="http://bulent-typo.herokuapp.com" class="brand">Better be There Now instead of Reading This :-)</a>
+       +        <ul class="nav secondary-nav">
+       +          <li class="dropdown" onmouseover='$("user_menu").style.display = "block"' onmouseout='$("user_menu").style.display = "none"'>
+       +            <a class="dropdown-toggle" href="#">Logged in as Ben</a>
+       +            <ul class="dropdown-menu" id="user_menu" style='display: none'>
+       +              <li><a href="/admin/content/new">New Article</a></li>
+       +              <li><a href="/admin/profiles">Profile</a></li>
+       +              <li><a href="/accounts/logout">Log out &raquo;</a></li>
+       +            </ul>
+       +          </li>
+       +        </ul>
+       +        <ul class="nav secondary-nav">
+       +          <li class="dropdown" onmouseover='$("help_menu").style.display = "block"' onmouseout='$("help_menu").style.display = "none"'>
+       +            <a class="dropdown-toggle" href="#">Help</a>
+       +            <ul class="dropdown-menu" id="help_menu" style="display: none;">
+       +              <li><a href="https://github.com/fdv/typo/wiki">Documentation</a></li>
+       +              <li><a href="https://github.com/fdv/typo/issues">Report a bug</a></li>
+       +              <li><a href="https://github.com/fdv/typo/wiki/In-Page-Plugins">In page plugins</a></li>
+       +              <li><a href="https://github.com/fdv/typo/wiki/Sidebar-plugins">Sidebar plugins</a></li>
+       +            </ul>
+       +          </li>
+       +        </ul>
+       +				
+       +      </div>
+       +    </div>
+       +  </div>
+       +  <div class='container-fluid'>
+       +    <div class='sidebar'>
+       +      <div class='well'>
+       +        <h5><a href="/admin">Dashboard</a></h5>
+       +        <h5 class="active"><a href="/admin/content">Articles</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/content">All Articles</a></li>
+       +<li><a href="/admin/content/new">New Article</a></li>
+       +<li><a href="/admin/feedback">Comments</a></li>
+       +<li><a href="/admin/categories/new">Categories</a></li>
+       +<li><a href="/admin/tags">Tags</a></li>
+       +<li><a href="/admin/post_types/new">Article Types</a></li>
+       +<li><a href="/admin/redirects">Redirects</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/pages">Pages</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/pages">All Pages</a></li>
+       +<li><a href="/admin/pages/new">New Page</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/resources">Media Library</a></h5>
+       +        <ul id='subtabs'>
+       +          
+       +        </ul>
+       +        <h5 class=""><a href="/admin/themes">Design</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/themes">Choose theme</a></li>
+       +<li><a href="/admin/sidebar">Customize sidebar</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/settings">Settings</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/settings/write">Write</a></li>
+       +<li><a href="/admin/settings/feedback">Feedback</a></li>
+       +<li><a href="/admin/cache">Cache</a></li>
+       +<li><a href="/admin/users">Users</a></li>
+       +<li><a href="/admin/settings/errors">Error messages</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/seo">SEO</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/seo">Global SEO settings</a></li>
+       +<li><a href="/admin/seo/permalinks">Permalinks</a></li>
+       +<li><a href="/admin/seo/titles">Titles</a></li>
+       +        </ul>
+       +      </div>
+       +    </div>
+       +    <div class='content'>
+       +      <div class=''>
+       +        
+       +        <div class='page-header'><h2>New article</h2></div>
+       +        
+       +<form accept-charset="UTF-8" action="/admin/content/new/9" class="autosave" enctype="multipart/form-data" id="article_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=" /></div>
+       +
+       +  <input type="hidden" name="current_editor" id="current_editor" value="visual" />
+       +<input type="hidden" name="user_textfilter" id="user_textfilter" value="none" />
+       +<div id="autosave"></div>
+       +<div id="article_keywords_auto_complete" class="auto_complete"></div>
+       +
+       +
+       +
+       +<div class='editor-right'>
+       +  <div class='well'>
+       +    <h4>Publish settings</h4>
+       +    <div class='actions'>
+       +      <a href="/admin/content/destroy/9" class="btn danger" data-confirm="Are you sure?" data-method="post" rel="nofollow" title="Delete content">delete</a>
+       +	  <span id='destroy_link'></span>
+       +      <span id='preview_link'><a href="/previews/9" class="btn info" target="new">Preview</a></span>
+       +    </div>
+       +    <div class='clearfix'>
+       +        Status: <strong>published</strong> <a href="#" onclick="Element.toggle('status'); return false">Change</a>
+       +      <ul class='inputs-list'>
+       +        <li id='status' style='display: none;'>        
+       +          <label for="article_published">
+       +            <input name="article[published]" type="hidden" value="0" /><input checked="checked" id="article_published" name="article[published]" type="checkbox" value="1" />
+       +            Published
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Comments are <strong>enabled</strong> and trackbacks are <strong>disabled</strong> <a href="#" onclick="Element.toggle('conversation'); return false">Change</a>
+       +      <ul class='inputs-list' id='conversation' style='display: none'>
+       +        <li>
+       +          <label for="article_allow_pings">
+       +            <input name="article[allow_pings]" type="hidden" value="0" /><input id="article_allow_pings" name="article[allow_pings]" type="checkbox" value="1" />
+       +            Allow trackbacks
+       +          </label>
+       +        </li>
+       +        <li>
+       +          <label for="article_allow_comments">
+       +            <input name="article[allow_comments]" type="hidden" value="0" /><input checked="checked" id="article_allow_comments" name="article[allow_comments]" type="checkbox" value="1" />
+       +            Allow comments
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +	  <div class='clearfix'>
+       +      Publish <strong>now</strong> <a href="#" onclick="Element.toggle('publish'); return false">Change</a>
+       +      <ul class='inputs-list'>
+       +        <li id='publish' style='display: none;'>
+       +          <input class="span3" id="article_published_at" name="article[published_at]" size="30" type="text" value="November 17, 2012 06:06 AM GMT+0000 (UTC)" /> <img alt="Calendar" class="calendar_date_select_popup_icon" onclick="new CalendarDateSelect( $(this).previous(), {time:true, year_range:10} );" src="/images/calendar_date_select/calendar.gif?1353129687" style="border:0px; cursor:pointer;" />
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Visibility: <strong>public</strong> <a href="#" onclick="Element.toggle('visibility'); return false">Change</a>
+       +      <ul class='inputs-list' id='visibility' style='display: none'>
+       +        <li>
+       +          <label for="article_password">Password:
+       +            <input class="span3" id="article_password" name="article[password]" size="30" type="password" value="" />
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Permalink: <a href="#" onclick="Element.toggle('permalink'); return false">Change</a>
+       +      <ul class='inputs-list' id='permalink' style='display: none'>
+       +        <li>
+       +            <input class="span4" id="article_permalink" name="article[permalink]" size="30" type="text" value="cs169-autograder-blag-post-1234" />
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Article filter: <strong>Markdown with SmartyPants</strong> <a href="#" onclick="Element.toggle('text_filter'); return false">Change</a>
+       +      <ul id='text_filter' class='inputs-list' style='display: none'>
+       +        <li>
+       +          <select name="article[text_filter]" id="text_filter">
+       +            <option value="none">None</option>
+       +<option value="markdown">Markdown</option>
+       +<option value="smartypants">SmartyPants</option>
+       +<option value="markdown smartypants" selected="selected">Markdown with SmartyPants</option>
+       +<option value="textile">Textile</option>
+       +<option value="none">None</option>
+       +<option value="markdown">Markdown</option>
+       +<option value="smartypants">SmartyPants</option>
+       +<option value="markdown smartypants" selected="selected">Markdown with SmartyPants</option>
+       +<option value="textile">Textile</option>
+       +          </select>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +
+       +    <div class='actions'>
+       +      <input id='save_draft' type="submit" value="Save as draft" name="article[draft]" class='btn info' />
+       +      <input type="submit" value="Publish" class="btn primary" />
+       +    </div>
+       +  </div>
+       +
+       +  <div class='well'>
+       +    <h4>Categories</h4>
+       +    <ul class='inputs-list'>
+       +	<li>
+       +	    <label for="category_1"><input id="category_1" name="categories[]" type="checkbox" value="1" />General</label>
+       +	</li>
+       +</ul>
+       +<a href="/admin/categories/new" class="btn info">New Category</a>
+       +
+       +  </div>
+       +  <input id="article_post_type" name="article[post_type]" type="hidden" value="read" />
+       +</div>
+       +
+       +<div class='editor-left'>
+       +  <div>
+       +    <div>
+       +      <input class="span1" id="article_title" name="article[title]" placeholder="Title" size="30" style=" width: 99%" type="text" value="[CS169 Autograder] Blag Post 1234" />
+       +    </div>
+       +
+       +    
+       +
+       +    <div id='editor-menu'>
+       +		<ul class="tabs">
+       +			<li id="f" class='active'>
+       +				<a href="#" onclick="new Ajax.Updater(&#x27;visual_editor&#x27;, &#x27;/admin/content/insert_editor?editor=visual&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_fck&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_fck&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=&#x27;)}); return false;">Visual</a><img alt="Spinner-blue" id="update_spinner_fck" src="/images/spinner-blue.gif?1353129687" style="display:none;" />
+       +			</li>
+       +			<li id="s" class=' '>
+       +				<a href="#" onclick="new Ajax.Updater(&#x27;simple_editor&#x27;, &#x27;/admin/content/insert_editor?editor=simple&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_simple&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_simple&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=&#x27;)}); return false;">HTML</a><img alt="Spinner-blue" id="update_spinner_simple" src="/images/spinner-blue.gif?1353129687" style="display:none;" />
+       +			</li>
+       +		</ul>
+       +    </div>
+       +
+       +    <div id="editor">
+       +      <div id='quicktags' style='display: none;'>
+       +        <script type="text/javascript">edToolbar('article_body_and_extended');</script>
+       +      </div>
+       +
+       +      <div id ='visual_editor'  >
+       +        <textarea id='article__body_and_extended_editor' style='width:100%;height:300px' cols='20' rows='20' class='large' name='article[body_and_extended]'>Lorem ipsum</textarea>
+       +<script type="text/javascript">
+       +//<![CDATA[
+       +CKEDITOR.replace('article[body_and_extended]', {
+       +    filebrowserBrowseUrl : '/fm/filemanager',
+       +    filebrowserUploadUrl : '/ckeditor/upload'
+       +
+       +});
+       +
+       +//]]>
+       +</script>
+       +      </div>
+       +
+       +      <div id='simple_editor' class='input_text' style='display: none;' >
+       +        
+       +        
+       +      </div>
+       +    </div>
+       +
+       +		<h4>Tags</h4>
+       +    <div class='class'>
+       +      <input autocomplete="off" id="article_keywords" name="article[keywords]" size="30" style="width: 100%" type="text" value="" />
+       +    </div>
+       +    <script type="text/javascript">
+       +//<![CDATA[
+       +var article_keywords_auto_completer = new Ajax.Autocompleter('article_keywords', 'article_keywords_auto_complete', '/admin/content/auto_complete_for_article_keywords', {tokens:','})
+       +//]]>
+       +</script>		
+       +  </div>
+       +
+       +  <div class='separator'>
+       +    <h4>Excerpt</h4>
+       +    <div class=''>
+       +      <textarea cols="40" height="150" id="article_excerpt" name="article[excerpt]" rows="5" style="width: 100%"></textarea>
+       +      <span class='help-block'>Excerpts are posts summaries that are shown on your blog homepage only but won’t appear on the post itself</span>
+       +    </div>
+       +  </div>
+       +
+       +  <div class=''>
+       +    <h4>Uploads</h4>
+       +    <p class='help-block'>Uploads will be displayed as attachments in your RSS feed, but won't appear in your articles.</p>
+       +    <ul id='attachments' class='inputs-list'>
+       +      <li id="attachment_1">
+       +  <input id="attachments_filename_1" name="attachments[filename_1]" type="file" />  <a href="#" onclick="if (confirm(_(&#x27;Really delete attachment&#x27;) +&#x27; 1?&#x27;)){
+       +Effect.toggle(&quot;attachment_1&quot;,&#x27;appear&#x27;,{afterFinish:function(obj){Element.remove(obj.element);}});
+       +}; return false;">Remove</a></li>
+       +<li id="attachment_add_2">
+       +  <a href="#" onclick="new Ajax.Request(&#x27;/admin/content/attachment_box_add/2&#x27;, {asynchronous:true, evalScripts:true, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;+DcAqxj15dpQzi00Eo5Eyhp5u+uxZsPmfljOmYi9p3M=&#x27;)}); return false;">Add Another Attachment</a></li>
+       +
+       +<li id="resources">
+       +
+       +  <h3>You can associate the following resources</h3>
+       +</li>
+       +    </ul>
+       +  </div>    
+       +  </div>
+       +
+       +</div>
+       +
+       +
+       +
+       +</form>
+       +
+       +      </div>
+       +    </div>
+       +  </div>
+       +
+       +  <footer>
+       +    <a href="http://bulent-typo.herokuapp.com">Better be There Now instead of Reading This :-)</a> is proudly powered by Typo 6.1.0
+       +  </footer>
+       +</body>
+       +</html>
+     # /tmp/rspec20121117-6236-vi7edx.rb:251:in `block (2 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:9:in `block (3 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:9:in `block (3 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_runner.rb:42:in `block in run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:33:in `run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:24:in `run'
+     # lib/graders/rspec_grader/weighted_rspec_grader.rb:6:in `grade!'
+     # ./lib/graders/rspec_grader/heroku_rspec_grader.rb:11:in `grade!'
+     # lib/graders/rspec_grader/hw5_grader.rb:13:in `grade!'
+     # ./grade5:37:in `<main>'
+
+  2) The article merge feature should create a single merged article [15 points]
+     Failure/Error: page.links_with(:text => /\[CS169 Autograder\]/).size.should == 1
+       expected: 1
+            got: 2 (using ==)
+     # /tmp/rspec20121117-6236-vi7edx.rb:272:in `block (2 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:9:in `block (3 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:9:in `block (3 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_runner.rb:42:in `block in run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:33:in `run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:24:in `run'
+     # lib/graders/rspec_grader/weighted_rspec_grader.rb:6:in `grade!'
+     # ./lib/graders/rspec_grader/heroku_rspec_grader.rb:11:in `grade!'
+     # lib/graders/rspec_grader/hw5_grader.rb:13:in `grade!'
+     # ./grade5:37:in `<main>'
+
+  3) The article merge feature should create an article with the text of both original articles [20 points]
+     Failure/Error: page.body.should include 'Lorem ipsum dolor sit amet'
+       expected "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />\n  <title>Better be There Now instead of Reading This :-) \xE2\x80\x93 content</title>\n  <meta http-equiv=\"imagetoolbar\" content=\"no\" />\n  <link href=\"/stylesheets/growler.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/bootstrap.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/administration_structure.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/lightbox.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/javascripts/prototype.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/effects.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/builder.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/dragdrop.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/controls.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/typo.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/lightbox.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/growler.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/typo_carousel.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/administration.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/ckeditor/ckeditor.js?1353129687\" type=\"text/javascript\"></script>\n  <script src=\"/javascripts/calendar_date_select/calendar_date_select.js?1353129687\" type=\"text/javascript\"></script>\n<link href=\"/stylesheets/calendar_date_select/default.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n\n  <style type=\"text/css\">\n    #carousel-content .slide { width: 125; }\n  </style>\n</head>\n<body>\n  <div class='topbar'>\n    <div class='topbar-inner'>\n      <div class='container-fluid'>\n        <a href=\"http://bulent-typo.herokuapp.com\" class=\"brand\">Better be There Now instead of Reading This :-)</a>\n        <ul class=\"nav secondary-nav\">\n          <li class=\"dropdown\" onmouseover='$(\"user_menu\").style.display = \"block\"' onmouseout='$(\"user_menu\").style.display = \"none\"'>\n            <a class=\"dropdown-toggle\" href=\"#\">Logged in as Ben</a>\n            <ul class=\"dropdown-menu\" id=\"user_menu\" style='display: none'>\n              <li><a href=\"/admin/content/new\">New Article</a></li>\n              <li><a href=\"/admin/profiles\">Profile</a></li>\n              <li><a href=\"/accounts/logout\">Log out &raquo;</a></li>\n            </ul>\n          </li>\n        </ul>\n        <ul class=\"nav secondary-nav\">\n          <li class=\"dropdown\" onmouseover='$(\"help_menu\").style.display = \"block\"' onmouseout='$(\"help_menu\").style.display = \"none\"'>\n            <a class=\"dropdown-toggle\" href=\"#\">Help</a>\n            <ul class=\"dropdown-menu\" id=\"help_menu\" style=\"display: none;\">\n              <li><a href=\"https://github.com/fdv/typo/wiki\">Documentation</a></li>\n              <li><a href=\"https://github.com/fdv/typo/issues\">Report a bug</a></li>\n              <li><a href=\"https://github.com/fdv/typo/wiki/In-Page-Plugins\">In page plugins</a></li>\n              <li><a href=\"https://github.com/fdv/typo/wiki/Sidebar-plugins\">Sidebar plugins</a></li>\n            </ul>\n          </li>\n        </ul>\n\t\t\t\t\n      </div>\n    </div>\n  </div>\n  <div class='container-fluid'>\n    <div class='sidebar'>\n      <div class='well'>\n        <h5><a href=\"/admin\">Dashboard</a></h5>\n        <h5 class=\"active\"><a href=\"/admin/content\">Articles</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/content\">All Articles</a></li>\n<li><a href=\"/admin/content/new\">New Article</a></li>\n<li><a href=\"/admin/feedback\">Comments</a></li>\n<li><a href=\"/admin/categories/new\">Categories</a></li>\n<li><a href=\"/admin/tags\">Tags</a></li>\n<li><a href=\"/admin/post_types/new\">Article Types</a></li>\n<li><a href=\"/admin/redirects\">Redirects</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/pages\">Pages</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/pages\">All Pages</a></li>\n<li><a href=\"/admin/pages/new\">New Page</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/resources\">Media Library</a></h5>\n        <ul id='subtabs'>\n          \n        </ul>\n        <h5 class=\"\"><a href=\"/admin/themes\">Design</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/themes\">Choose theme</a></li>\n<li><a href=\"/admin/sidebar\">Customize sidebar</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/settings\">Settings</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/settings/write\">Write</a></li>\n<li><a href=\"/admin/settings/feedback\">Feedback</a></li>\n<li><a href=\"/admin/cache\">Cache</a></li>\n<li><a href=\"/admin/users\">Users</a></li>\n<li><a href=\"/admin/settings/errors\">Error messages</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/seo\">SEO</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/seo\">Global SEO settings</a></li>\n<li><a href=\"/admin/seo/permalinks\">Permalinks</a></li>\n<li><a href=\"/admin/seo/titles\">Titles</a></li>\n        </ul>\n      </div>\n    </div>\n    <div class='content'>\n      <div class=''>\n        \n        <div class='page-header'><h2>New article</h2></div>\n        \n<form accept-charset=\"UTF-8\" action=\"/admin/content/new/12\" class=\"autosave\" enctype=\"multipart/form-data\" id=\"article_form\" method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /><input name=\"authenticity_token\" type=\"hidden\" value=\"74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=\" /></div>\n\n  <input type=\"hidden\" name=\"current_editor\" id=\"current_editor\" value=\"visual\" />\n<input type=\"hidden\" name=\"user_textfilter\" id=\"user_textfilter\" value=\"none\" />\n<div id=\"autosave\"></div>\n<div id=\"article_keywords_auto_complete\" class=\"auto_complete\"></div>\n\n\n\n<div class='editor-right'>\n  <div class='well'>\n    <h4>Publish settings</h4>\n    <div class='actions'>\n      <a href=\"/admin/content/destroy/12\" class=\"btn danger\" data-confirm=\"Are you sure?\" data-method=\"post\" rel=\"nofollow\" title=\"Delete content\">delete</a>\n\t  <span id='destroy_link'></span>\n      <span id='preview_link'><a href=\"/previews/12\" class=\"btn info\" target=\"new\">Preview</a></span>\n    </div>\n    <div class='clearfix'>\n        Status: <strong>published</strong> <a href=\"#\" onclick=\"Element.toggle('status'); return false\">Change</a>\n      <ul class='inputs-list'>\n        <li id='status' style='display: none;'>        \n          <label for=\"article_published\">\n            <input name=\"article[published]\" type=\"hidden\" value=\"0\" /><input checked=\"checked\" id=\"article_published\" name=\"article[published]\" type=\"checkbox\" value=\"1\" />\n            Published\n          </label>\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Comments are <strong>enabled</strong> and trackbacks are <strong>disabled</strong> <a href=\"#\" onclick=\"Element.toggle('conversation'); return false\">Change</a>\n      <ul class='inputs-list' id='conversation' style='display: none'>\n        <li>\n          <label for=\"article_allow_pings\">\n            <input name=\"article[allow_pings]\" type=\"hidden\" value=\"0\" /><input id=\"article_allow_pings\" name=\"article[allow_pings]\" type=\"checkbox\" value=\"1\" />\n            Allow trackbacks\n          </label>\n        </li>\n        <li>\n          <label for=\"article_allow_comments\">\n            <input name=\"article[allow_comments]\" type=\"hidden\" value=\"0\" /><input checked=\"checked\" id=\"article_allow_comments\" name=\"article[allow_comments]\" type=\"checkbox\" value=\"1\" />\n            Allow comments\n          </label>\n        </li>\n      </ul>\n    </div>\n\t  <div class='clearfix'>\n      Publish <strong>now</strong> <a href=\"#\" onclick=\"Element.toggle('publish'); return false\">Change</a>\n      <ul class='inputs-list'>\n        <li id='publish' style='display: none;'>\n          <input class=\"span3\" id=\"article_published_at\" name=\"article[published_at]\" size=\"30\" type=\"text\" value=\"November 17, 2012 06:06 AM GMT+0000 (UTC)\" /> <img alt=\"Calendar\" class=\"calendar_date_select_popup_icon\" onclick=\"new CalendarDateSelect( $(this).previous(), {time:true, year_range:10} );\" src=\"/images/calendar_date_select/calendar.gif?1353129687\" style=\"border:0px; cursor:pointer;\" />\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Visibility: <strong>public</strong> <a href=\"#\" onclick=\"Element.toggle('visibility'); return false\">Change</a>\n      <ul class='inputs-list' id='visibility' style='display: none'>\n        <li>\n          <label for=\"article_password\">Password:\n            <input class=\"span3\" id=\"article_password\" name=\"article[password]\" size=\"30\" type=\"password\" value=\"\" />\n          </label>\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Permalink: <a href=\"#\" onclick=\"Element.toggle('permalink'); return false\">Change</a>\n      <ul class='inputs-list' id='permalink' style='display: none'>\n        <li>\n            <input class=\"span4\" id=\"article_permalink\" name=\"article[permalink]\" size=\"30\" type=\"text\" value=\"cs169-autograder-blag-post-a\" />\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Article filter: <strong>Markdown with SmartyPants</strong> <a href=\"#\" onclick=\"Element.toggle('text_filter'); return false\">Change</a>\n      <ul id='text_filter' class='inputs-list' style='display: none'>\n        <li>\n          <select name=\"article[text_filter]\" id=\"text_filter\">\n            <option value=\"none\">None</option>\n<option value=\"markdown\">Markdown</option>\n<option value=\"smartypants\">SmartyPants</option>\n<option value=\"markdown smartypants\" selected=\"selected\">Markdown with SmartyPants</option>\n<option value=\"textile\">Textile</option>\n<option value=\"none\">None</option>\n<option value=\"markdown\">Markdown</option>\n<option value=\"smartypants\">SmartyPants</option>\n<option value=\"markdown smartypants\" selected=\"selected\">Markdown with SmartyPants</option>\n<option value=\"textile\">Textile</option>\n          </select>\n        </li>\n      </ul>\n    </div>\n\n    <div class='actions'>\n      <input id='save_draft' type=\"submit\" value=\"Save as draft\" name=\"article[draft]\" class='btn info' />\n      <input type=\"submit\" value=\"Publish\" class=\"btn primary\" />\n    </div>\n  </div>\n\n  <div class='well'>\n    <h4>Categories</h4>\n    <ul class='inputs-list'>\n\t<li>\n\t    <label for=\"category_1\"><input id=\"category_1\" name=\"categories[]\" type=\"checkbox\" value=\"1\" />General</label>\n\t</li>\n</ul>\n<a href=\"/admin/categories/new\" class=\"btn info\">New Category</a>\n\n  </div>\n  <input id=\"article_post_type\" name=\"article[post_type]\" type=\"hidden\" value=\"read\" />\n</div>\n\n<div class='editor-left'>\n  <div>\n    <div>\n      <input class=\"span1\" id=\"article_title\" name=\"article[title]\" placeholder=\"Title\" size=\"30\" style=\" width: 99%\" type=\"text\" value=\"[CS169 Autograder] Blag Post A\" />\n    </div>\n\n    \n\n    <div id='editor-menu'>\n\t\t<ul class=\"tabs\">\n\t\t\t<li id=\"f\" class='active'>\n\t\t\t\t<a href=\"#\" onclick=\"new Ajax.Updater(&#x27;visual_editor&#x27;, &#x27;/admin/content/insert_editor?editor=visual&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_fck&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_fck&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=&#x27;)}); return false;\">Visual</a><img alt=\"Spinner-blue\" id=\"update_spinner_fck\" src=\"/images/spinner-blue.gif?1353129687\" style=\"display:none;\" />\n\t\t\t</li>\n\t\t\t<li id=\"s\" class=' '>\n\t\t\t\t<a href=\"#\" onclick=\"new Ajax.Updater(&#x27;simple_editor&#x27;, &#x27;/admin/content/insert_editor?editor=simple&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_simple&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_simple&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=&#x27;)}); return false;\">HTML</a><img alt=\"Spinner-blue\" id=\"update_spinner_simple\" src=\"/images/spinner-blue.gif?1353129687\" style=\"display:none;\" />\n\t\t\t</li>\n\t\t</ul>\n    </div>\n\n    <div id=\"editor\">\n      <div id='quicktags' style='display: none;'>\n        <script type=\"text/javascript\">edToolbar('article_body_and_extended');</script>\n      </div>\n\n      <div id ='visual_editor'  >\n        <textarea id='article__body_and_extended_editor' style='width:100%;height:300px' cols='20' rows='20' class='large' name='article[body_and_extended]'>Derp derp derp derp 12344321</textarea>\n<script type=\"text/javascript\">\n//<![CDATA[\nCKEDITOR.replace('article[body_and_extended]', {\n    filebrowserBrowseUrl : '/fm/filemanager',\n    filebrowserUploadUrl : '/ckeditor/upload'\n\n});\n\n//]]>\n</script>\n      </div>\n\n      <div id='simple_editor' class='input_text' style='display: none;' >\n        \n        \n      </div>\n    </div>\n\n\t\t<h4>Tags</h4>\n    <div class='class'>\n      <input autocomplete=\"off\" id=\"article_keywords\" name=\"article[keywords]\" size=\"30\" style=\"width: 100%\" type=\"text\" value=\"\" />\n    </div>\n    <script type=\"text/javascript\">\n//<![CDATA[\nvar article_keywords_auto_completer = new Ajax.Autocompleter('article_keywords', 'article_keywords_auto_complete', '/admin/content/auto_complete_for_article_keywords', {tokens:','})\n//]]>\n</script>\t\t\n  </div>\n\n  <div class='separator'>\n    <h4>Excerpt</h4>\n    <div class=''>\n      <textarea cols=\"40\" height=\"150\" id=\"article_excerpt\" name=\"article[excerpt]\" rows=\"5\" style=\"width: 100%\"></textarea>\n      <span class='help-block'>Excerpts are posts summaries that are shown on your blog homepage only but won\xE2\x80\x99t appear on the post itself</span>\n    </div>\n  </div>\n\n  <div class=''>\n    <h4>Uploads</h4>\n    <p class='help-block'>Uploads will be displayed as attachments in your RSS feed, but won't appear in your articles.</p>\n    <ul id='attachments' class='inputs-list'>\n      <li id=\"attachment_1\">\n  <input id=\"attachments_filename_1\" name=\"attachments[filename_1]\" type=\"file\" />  <a href=\"#\" onclick=\"if (confirm(_(&#x27;Really delete attachment&#x27;) +&#x27; 1?&#x27;)){\nEffect.toggle(&quot;attachment_1&quot;,&#x27;appear&#x27;,{afterFinish:function(obj){Element.remove(obj.element);}});\n}; return false;\">Remove</a></li>\n<li id=\"attachment_add_2\">\n  <a href=\"#\" onclick=\"new Ajax.Request(&#x27;/admin/content/attachment_box_add/2&#x27;, {asynchronous:true, evalScripts:true, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=&#x27;)}); return false;\">Add Another Attachment</a></li>\n\n<li id=\"resources\">\n\n  <h3>You can associate the following resources</h3>\n</li>\n    </ul>\n  </div>    \n  </div>\n\n</div>\n\n\n\n</form>\n\n      </div>\n    </div>\n  </div>\n\n  <footer>\n    <a href=\"http://bulent-typo.herokuapp.com\">Better be There Now instead of Reading This :-)</a> is proudly powered by Typo 6.1.0\n  </footer>\n</body>\n</html>\n" to include "Lorem ipsum dolor sit amet"
+       Diff:
+       @@ -1,2 +1,316 @@
+       -Lorem ipsum dolor sit amet
+       +<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       +  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+       +<html xmlns="http://www.w3.org/1999/xhtml">
+       +<head>
+       +  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+       +  <title>Better be There Now instead of Reading This :-) – content</title>
+       +  <meta http-equiv="imagetoolbar" content="no" />
+       +  <link href="/stylesheets/growler.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/bootstrap.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/administration_structure.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/lightbox.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +  <script src="/javascripts/prototype.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/effects.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/builder.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/dragdrop.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/controls.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/typo.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/lightbox.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/growler.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/typo_carousel.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/administration.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/ckeditor/ckeditor.js?1353129687" type="text/javascript"></script>
+       +  <script src="/javascripts/calendar_date_select/calendar_date_select.js?1353129687" type="text/javascript"></script>
+       +<link href="/stylesheets/calendar_date_select/default.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +
+       +  <style type="text/css">
+       +    #carousel-content .slide { width: 125; }
+       +  </style>
+       +</head>
+       +<body>
+       +  <div class='topbar'>
+       +    <div class='topbar-inner'>
+       +      <div class='container-fluid'>
+       +        <a href="http://bulent-typo.herokuapp.com" class="brand">Better be There Now instead of Reading This :-)</a>
+       +        <ul class="nav secondary-nav">
+       +          <li class="dropdown" onmouseover='$("user_menu").style.display = "block"' onmouseout='$("user_menu").style.display = "none"'>
+       +            <a class="dropdown-toggle" href="#">Logged in as Ben</a>
+       +            <ul class="dropdown-menu" id="user_menu" style='display: none'>
+       +              <li><a href="/admin/content/new">New Article</a></li>
+       +              <li><a href="/admin/profiles">Profile</a></li>
+       +              <li><a href="/accounts/logout">Log out &raquo;</a></li>
+       +            </ul>
+       +          </li>
+       +        </ul>
+       +        <ul class="nav secondary-nav">
+       +          <li class="dropdown" onmouseover='$("help_menu").style.display = "block"' onmouseout='$("help_menu").style.display = "none"'>
+       +            <a class="dropdown-toggle" href="#">Help</a>
+       +            <ul class="dropdown-menu" id="help_menu" style="display: none;">
+       +              <li><a href="https://github.com/fdv/typo/wiki">Documentation</a></li>
+       +              <li><a href="https://github.com/fdv/typo/issues">Report a bug</a></li>
+       +              <li><a href="https://github.com/fdv/typo/wiki/In-Page-Plugins">In page plugins</a></li>
+       +              <li><a href="https://github.com/fdv/typo/wiki/Sidebar-plugins">Sidebar plugins</a></li>
+       +            </ul>
+       +          </li>
+       +        </ul>
+       +				
+       +      </div>
+       +    </div>
+       +  </div>
+       +  <div class='container-fluid'>
+       +    <div class='sidebar'>
+       +      <div class='well'>
+       +        <h5><a href="/admin">Dashboard</a></h5>
+       +        <h5 class="active"><a href="/admin/content">Articles</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/content">All Articles</a></li>
+       +<li><a href="/admin/content/new">New Article</a></li>
+       +<li><a href="/admin/feedback">Comments</a></li>
+       +<li><a href="/admin/categories/new">Categories</a></li>
+       +<li><a href="/admin/tags">Tags</a></li>
+       +<li><a href="/admin/post_types/new">Article Types</a></li>
+       +<li><a href="/admin/redirects">Redirects</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/pages">Pages</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/pages">All Pages</a></li>
+       +<li><a href="/admin/pages/new">New Page</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/resources">Media Library</a></h5>
+       +        <ul id='subtabs'>
+       +          
+       +        </ul>
+       +        <h5 class=""><a href="/admin/themes">Design</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/themes">Choose theme</a></li>
+       +<li><a href="/admin/sidebar">Customize sidebar</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/settings">Settings</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/settings/write">Write</a></li>
+       +<li><a href="/admin/settings/feedback">Feedback</a></li>
+       +<li><a href="/admin/cache">Cache</a></li>
+       +<li><a href="/admin/users">Users</a></li>
+       +<li><a href="/admin/settings/errors">Error messages</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/seo">SEO</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/seo">Global SEO settings</a></li>
+       +<li><a href="/admin/seo/permalinks">Permalinks</a></li>
+       +<li><a href="/admin/seo/titles">Titles</a></li>
+       +        </ul>
+       +      </div>
+       +    </div>
+       +    <div class='content'>
+       +      <div class=''>
+       +        
+       +        <div class='page-header'><h2>New article</h2></div>
+       +        
+       +<form accept-charset="UTF-8" action="/admin/content/new/12" class="autosave" enctype="multipart/form-data" id="article_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=" /></div>
+       +
+       +  <input type="hidden" name="current_editor" id="current_editor" value="visual" />
+       +<input type="hidden" name="user_textfilter" id="user_textfilter" value="none" />
+       +<div id="autosave"></div>
+       +<div id="article_keywords_auto_complete" class="auto_complete"></div>
+       +
+       +
+       +
+       +<div class='editor-right'>
+       +  <div class='well'>
+       +    <h4>Publish settings</h4>
+       +    <div class='actions'>
+       +      <a href="/admin/content/destroy/12" class="btn danger" data-confirm="Are you sure?" data-method="post" rel="nofollow" title="Delete content">delete</a>
+       +	  <span id='destroy_link'></span>
+       +      <span id='preview_link'><a href="/previews/12" class="btn info" target="new">Preview</a></span>
+       +    </div>
+       +    <div class='clearfix'>
+       +        Status: <strong>published</strong> <a href="#" onclick="Element.toggle('status'); return false">Change</a>
+       +      <ul class='inputs-list'>
+       +        <li id='status' style='display: none;'>        
+       +          <label for="article_published">
+       +            <input name="article[published]" type="hidden" value="0" /><input checked="checked" id="article_published" name="article[published]" type="checkbox" value="1" />
+       +            Published
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Comments are <strong>enabled</strong> and trackbacks are <strong>disabled</strong> <a href="#" onclick="Element.toggle('conversation'); return false">Change</a>
+       +      <ul class='inputs-list' id='conversation' style='display: none'>
+       +        <li>
+       +          <label for="article_allow_pings">
+       +            <input name="article[allow_pings]" type="hidden" value="0" /><input id="article_allow_pings" name="article[allow_pings]" type="checkbox" value="1" />
+       +            Allow trackbacks
+       +          </label>
+       +        </li>
+       +        <li>
+       +          <label for="article_allow_comments">
+       +            <input name="article[allow_comments]" type="hidden" value="0" /><input checked="checked" id="article_allow_comments" name="article[allow_comments]" type="checkbox" value="1" />
+       +            Allow comments
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +	  <div class='clearfix'>
+       +      Publish <strong>now</strong> <a href="#" onclick="Element.toggle('publish'); return false">Change</a>
+       +      <ul class='inputs-list'>
+       +        <li id='publish' style='display: none;'>
+       +          <input class="span3" id="article_published_at" name="article[published_at]" size="30" type="text" value="November 17, 2012 06:06 AM GMT+0000 (UTC)" /> <img alt="Calendar" class="calendar_date_select_popup_icon" onclick="new CalendarDateSelect( $(this).previous(), {time:true, year_range:10} );" src="/images/calendar_date_select/calendar.gif?1353129687" style="border:0px; cursor:pointer;" />
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Visibility: <strong>public</strong> <a href="#" onclick="Element.toggle('visibility'); return false">Change</a>
+       +      <ul class='inputs-list' id='visibility' style='display: none'>
+       +        <li>
+       +          <label for="article_password">Password:
+       +            <input class="span3" id="article_password" name="article[password]" size="30" type="password" value="" />
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Permalink: <a href="#" onclick="Element.toggle('permalink'); return false">Change</a>
+       +      <ul class='inputs-list' id='permalink' style='display: none'>
+       +        <li>
+       +            <input class="span4" id="article_permalink" name="article[permalink]" size="30" type="text" value="cs169-autograder-blag-post-a" />
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Article filter: <strong>Markdown with SmartyPants</strong> <a href="#" onclick="Element.toggle('text_filter'); return false">Change</a>
+       +      <ul id='text_filter' class='inputs-list' style='display: none'>
+       +        <li>
+       +          <select name="article[text_filter]" id="text_filter">
+       +            <option value="none">None</option>
+       +<option value="markdown">Markdown</option>
+       +<option value="smartypants">SmartyPants</option>
+       +<option value="markdown smartypants" selected="selected">Markdown with SmartyPants</option>
+       +<option value="textile">Textile</option>
+       +<option value="none">None</option>
+       +<option value="markdown">Markdown</option>
+       +<option value="smartypants">SmartyPants</option>
+       +<option value="markdown smartypants" selected="selected">Markdown with SmartyPants</option>
+       +<option value="textile">Textile</option>
+       +          </select>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +
+       +    <div class='actions'>
+       +      <input id='save_draft' type="submit" value="Save as draft" name="article[draft]" class='btn info' />
+       +      <input type="submit" value="Publish" class="btn primary" />
+       +    </div>
+       +  </div>
+       +
+       +  <div class='well'>
+       +    <h4>Categories</h4>
+       +    <ul class='inputs-list'>
+       +	<li>
+       +	    <label for="category_1"><input id="category_1" name="categories[]" type="checkbox" value="1" />General</label>
+       +	</li>
+       +</ul>
+       +<a href="/admin/categories/new" class="btn info">New Category</a>
+       +
+       +  </div>
+       +  <input id="article_post_type" name="article[post_type]" type="hidden" value="read" />
+       +</div>
+       +
+       +<div class='editor-left'>
+       +  <div>
+       +    <div>
+       +      <input class="span1" id="article_title" name="article[title]" placeholder="Title" size="30" style=" width: 99%" type="text" value="[CS169 Autograder] Blag Post A" />
+       +    </div>
+       +
+       +    
+       +
+       +    <div id='editor-menu'>
+       +		<ul class="tabs">
+       +			<li id="f" class='active'>
+       +				<a href="#" onclick="new Ajax.Updater(&#x27;visual_editor&#x27;, &#x27;/admin/content/insert_editor?editor=visual&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_fck&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_fck&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=&#x27;)}); return false;">Visual</a><img alt="Spinner-blue" id="update_spinner_fck" src="/images/spinner-blue.gif?1353129687" style="display:none;" />
+       +			</li>
+       +			<li id="s" class=' '>
+       +				<a href="#" onclick="new Ajax.Updater(&#x27;simple_editor&#x27;, &#x27;/admin/content/insert_editor?editor=simple&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_simple&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_simple&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=&#x27;)}); return false;">HTML</a><img alt="Spinner-blue" id="update_spinner_simple" src="/images/spinner-blue.gif?1353129687" style="display:none;" />
+       +			</li>
+       +		</ul>
+       +    </div>
+       +
+       +    <div id="editor">
+       +      <div id='quicktags' style='display: none;'>
+       +        <script type="text/javascript">edToolbar('article_body_and_extended');</script>
+       +      </div>
+       +
+       +      <div id ='visual_editor'  >
+       +        <textarea id='article__body_and_extended_editor' style='width:100%;height:300px' cols='20' rows='20' class='large' name='article[body_and_extended]'>Derp derp derp derp 12344321</textarea>
+       +<script type="text/javascript">
+       +//<![CDATA[
+       +CKEDITOR.replace('article[body_and_extended]', {
+       +    filebrowserBrowseUrl : '/fm/filemanager',
+       +    filebrowserUploadUrl : '/ckeditor/upload'
+       +
+       +});
+       +
+       +//]]>
+       +</script>
+       +      </div>
+       +
+       +      <div id='simple_editor' class='input_text' style='display: none;' >
+       +        
+       +        
+       +      </div>
+       +    </div>
+       +
+       +		<h4>Tags</h4>
+       +    <div class='class'>
+       +      <input autocomplete="off" id="article_keywords" name="article[keywords]" size="30" style="width: 100%" type="text" value="" />
+       +    </div>
+       +    <script type="text/javascript">
+       +//<![CDATA[
+       +var article_keywords_auto_completer = new Ajax.Autocompleter('article_keywords', 'article_keywords_auto_complete', '/admin/content/auto_complete_for_article_keywords', {tokens:','})
+       +//]]>
+       +</script>		
+       +  </div>
+       +
+       +  <div class='separator'>
+       +    <h4>Excerpt</h4>
+       +    <div class=''>
+       +      <textarea cols="40" height="150" id="article_excerpt" name="article[excerpt]" rows="5" style="width: 100%"></textarea>
+       +      <span class='help-block'>Excerpts are posts summaries that are shown on your blog homepage only but won’t appear on the post itself</span>
+       +    </div>
+       +  </div>
+       +
+       +  <div class=''>
+       +    <h4>Uploads</h4>
+       +    <p class='help-block'>Uploads will be displayed as attachments in your RSS feed, but won't appear in your articles.</p>
+       +    <ul id='attachments' class='inputs-list'>
+       +      <li id="attachment_1">
+       +  <input id="attachments_filename_1" name="attachments[filename_1]" type="file" />  <a href="#" onclick="if (confirm(_(&#x27;Really delete attachment&#x27;) +&#x27; 1?&#x27;)){
+       +Effect.toggle(&quot;attachment_1&quot;,&#x27;appear&#x27;,{afterFinish:function(obj){Element.remove(obj.element);}});
+       +}; return false;">Remove</a></li>
+       +<li id="attachment_add_2">
+       +  <a href="#" onclick="new Ajax.Request(&#x27;/admin/content/attachment_box_add/2&#x27;, {asynchronous:true, evalScripts:true, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;74RMcB3e+nzbPJaa3mv65qoRIOCoyY1yIArbm322YC8=&#x27;)}); return false;">Add Another Attachment</a></li>
+       +
+       +<li id="resources">
+       +
+       +  <h3>You can associate the following resources</h3>
+       +</li>
+       +    </ul>
+       +  </div>    
+       +  </div>
+       +
+       +</div>
+       +
+       +
+       +
+       +</form>
+       +
+       +      </div>
+       +    </div>
+       +  </div>
+       +
+       +  <footer>
+       +    <a href="http://bulent-typo.herokuapp.com">Better be There Now instead of Reading This :-)</a> is proudly powered by Typo 6.1.0
+       +  </footer>
+       +</body>
+       +</html>
+     # /tmp/rspec20121117-6236-vi7edx.rb:287:in `block (2 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:9:in `block (3 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:9:in `block (3 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_runner.rb:42:in `block in run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:33:in `run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:24:in `run'
+     # lib/graders/rspec_grader/weighted_rspec_grader.rb:6:in `grade!'
+     # ./lib/graders/rspec_grader/heroku_rspec_grader.rb:11:in `grade!'
+     # lib/graders/rspec_grader/hw5_grader.rb:13:in `grade!'
+     # ./grade5:37:in `<main>'
+
+  4) The article merge feature should carry over the comments from both merged articles [20 points]
+     Failure/Error: page.body.should include 'And one more thing..'
+       expected "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"fr\">\n<head profile=\"http://gmpg.org/xfn/11\">\n  <title>[CS169 Autograder] Blag Post A | Better be There Now instead of Reading This :-)</title>\n  <link href=\"/stylesheets/theme/bootstrap.min.css?1353129687\" media=\"all\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/theme/style.css?1353129687\" media=\"all\" rel=\"stylesheet\" type=\"text/css\" />\n    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />\n  \n  <meta content=\"Derp derp derp derp 12344321\" name=\"description\" />\n  \n  \n  <meta name=\"generator\" content=\"Typo 6.1.0\" />\n  \n  <link rel=\"EditURI\" type=\"application/rsd+xml\" title=\"RSD\" href=\"/xml/rsd\" />\n  <link rel=\"alternate\" type=\"application/atom+xml\" title=\"Atom\" href=\"http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a.atom\" />\n  <link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a.rss\" />\n  <script src=\"/javascripts/cookies.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/prototype.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/effects.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/builder.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/typo.js?1353129687\" type=\"text/javascript\"></script>\n  <link href=\"/stylesheets/coderay.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/user-styles.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  \n  <script type=\"text/javascript\">\n//<![CDATA[\nwindow._token = 'dYybkDmXt78jaly8G8/yPxTDQUSXyQ4WSpiu1ATr0eU='\n//]]>\n</script>\n  \n  \n  <script type=\"text/javascript\"></script>\n  \n  \n</head>\n<body>\n\t<div id='main'>\n  \t  <div class='container'>\n        <p id='title'><a href=\"http://bulent-typo.herokuapp.com\">Better be There Now instead of Reading This :-)</a></p>\n        <p class='subtitle'></p>\n     </div>\n     <div id='logo'></div>\n     <div class='navbar'>\n       <div class='navbar-inner'>\n         <div class='container'>\n           <ul class='nav'>\n             <li><a href=\"http://bulent-typo.herokuapp.com\" class=\"active\">Home</a></li>\n             <li><a href=\"/categories\">Articles</a></li>\n             <li><a href=\"http://bulent-typo.herokuapp.com/pages/about\">about</a></li>\n           </ul>\n         </div>\n       </div>\n     </div>\n\t\n     <div id='page' class='container'>\n       <div class='row'>\n         <div class='span8'>\n           <div class=\"article\" id=\"article-14\">\n  <h1 class='page-header'><a href=\"http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a\">[CS169 Autograder] Blag Post A</a></h1>\n  <p>Derp derp derp derp 12344321</p>\n  \n\n  <div class='meta'>\n    <p>\n      <small>Published on\n        17/11/2012 at 06h06\n        .\n        </small>\n      </p>\n    </div>\n\n\n    <h3 class=\"feedback\" id=\"commentaires\">\n      <a href=\"http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a\">2 comments</a>\n      <a href=\"#commentform\" ref=\"nofollow\"> &raquo;</a>\n    </h3>\n    <ul id=\"commentList\" class=\"unstyled\">\n  <li id=\"comment-2\">\n  \n  <h4>\n    By Joe Snow\n    17/11/2012 at 06h06\n  </h4>\n    <p>A long time ago in a galaxy far, far away..</p>\n  <hr />\n</li>\n<li id=\"comment-3\">\n  \n  <h4>\n    By Joe Snow\n    17/11/2012 at 06h06\n  </h4>\n    <p>imma dinosaur  -Barack Obama</p>\n  <hr />\n</li>\n\n</ul>\n\n    <form accept-charset=\"UTF-8\" action=\"http://bulent-typo.herokuapp.com/comments?article_id=14\" method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /><input name=\"authenticity_token\" type=\"hidden\" value=\"dYybkDmXt78jaly8G8/yPxTDQUSXyQ4WSpiu1ATr0eU=\" /></div>\n<div id='commentform'>\n\t<h3>Comment <em>[CS169 Autograder] Blag Post A</em></h3>\n\t<div class='control-group'>\n\t\t<input class=\"span4\" id=\"comment_author\" name=\"comment[author]\" placeholder=\"Your name\" size=\"30\" type=\"text\" />  \t\n\t</div>\n\t<div class='control-group'>\n\t\t<input class=\"span4\" id=\"comment_email\" name=\"comment[email]\" placeholder=\"Email address\" size=\"30\" type=\"text\" />\n\t</div>\n\t<div class='control-group'>\n\t\t<input class=\"span4\" id=\"comment_url\" name=\"comment[url]\" placeholder=\"Your website\" size=\"30\" type=\"text\" />\n\t</div>\n\t<div class='control-group'>\n\t\t<textarea class=\"span8\" cols=\"40\" id=\"comment_body\" name=\"comment[body]\" rows=\"8\"></textarea>\n\t</div>\n\n\t<div class='form-actions'>\n\t\t<input type='submit' id='form-submit-button' class='btn btn-info' value=\"comment\" />\n\t</div>\n</div>\n</form>\n\n  </div>\n\n         </div>\n         <div id='sidebar' class='span4'>\n           It seems something went wrong. Maybe some of your sidebars are actually missing and you should either reinstall them or remove them manually\n        \n         </div>\n\t\t\t</div>\n    </div>\n  <p style='text-align: center'><small>Powered by <a href='http://typosphere.org'>Typo</a> \xE2\x80\x93 Th\xC3\xA8me <a href='http://t37.net'>Fr\xC3\xA9d\xC3\xA9ric de Villamil</a> | Photo <a href='http://www.flickr.com/photos/blmiers2/6167391543/sizes/l/in/photostream/'>L. Lemos</a></small></p>\n  </div>\n</div>\n</body>\n</html>\n" to include "And one more thing.."
+       Diff:
+       @@ -1,2 +1,136 @@
+       -And one more thing..
+       +<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       +    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+       +<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+       +<head profile="http://gmpg.org/xfn/11">
+       +  <title>[CS169 Autograder] Blag Post A | Better be There Now instead of Reading This :-)</title>
+       +  <link href="/stylesheets/theme/bootstrap.min.css?1353129687" media="all" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/theme/style.css?1353129687" media="all" rel="stylesheet" type="text/css" />
+       +    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+       +  
+       +  <meta content="Derp derp derp derp 12344321" name="description" />
+       +  
+       +  
+       +  <meta name="generator" content="Typo 6.1.0" />
+       +  
+       +  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xml/rsd" />
+       +  <link rel="alternate" type="application/atom+xml" title="Atom" href="http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a.atom" />
+       +  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a.rss" />
+       +  <script src="/javascripts/cookies.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/prototype.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/effects.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/builder.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/typo.js?1353129687" type="text/javascript"></script>
+       +  <link href="/stylesheets/coderay.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/user-styles.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +  
+       +  <script type="text/javascript">
+       +//<![CDATA[
+       +window._token = 'dYybkDmXt78jaly8G8/yPxTDQUSXyQ4WSpiu1ATr0eU='
+       +//]]>
+       +</script>
+       +  
+       +  
+       +  <script type="text/javascript"></script>
+       +  
+       +  
+       +</head>
+       +<body>
+       +	<div id='main'>
+       +  	  <div class='container'>
+       +        <p id='title'><a href="http://bulent-typo.herokuapp.com">Better be There Now instead of Reading This :-)</a></p>
+       +        <p class='subtitle'></p>
+       +     </div>
+       +     <div id='logo'></div>
+       +     <div class='navbar'>
+       +       <div class='navbar-inner'>
+       +         <div class='container'>
+       +           <ul class='nav'>
+       +             <li><a href="http://bulent-typo.herokuapp.com" class="active">Home</a></li>
+       +             <li><a href="/categories">Articles</a></li>
+       +             <li><a href="http://bulent-typo.herokuapp.com/pages/about">about</a></li>
+       +           </ul>
+       +         </div>
+       +       </div>
+       +     </div>
+       +	
+       +     <div id='page' class='container'>
+       +       <div class='row'>
+       +         <div class='span8'>
+       +           <div class="article" id="article-14">
+       +  <h1 class='page-header'><a href="http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a">[CS169 Autograder] Blag Post A</a></h1>
+       +  <p>Derp derp derp derp 12344321</p>
+       +  
+       +
+       +  <div class='meta'>
+       +    <p>
+       +      <small>Published on
+       +        17/11/2012 at 06h06
+       +        .
+       +        </small>
+       +      </p>
+       +    </div>
+       +
+       +
+       +    <h3 class="feedback" id="commentaires">
+       +      <a href="http://bulent-typo.herokuapp.com/2012/11/17/cs169-autograder-blag-post-a">2 comments</a>
+       +      <a href="#commentform" ref="nofollow"> &raquo;</a>
+       +    </h3>
+       +    <ul id="commentList" class="unstyled">
+       +  <li id="comment-2">
+       +  
+       +  <h4>
+       +    By Joe Snow
+       +    17/11/2012 at 06h06
+       +  </h4>
+       +    <p>A long time ago in a galaxy far, far away..</p>
+       +  <hr />
+       +</li>
+       +<li id="comment-3">
+       +  
+       +  <h4>
+       +    By Joe Snow
+       +    17/11/2012 at 06h06
+       +  </h4>
+       +    <p>imma dinosaur  -Barack Obama</p>
+       +  <hr />
+       +</li>
+       +
+       +</ul>
+       +
+       +    <form accept-charset="UTF-8" action="http://bulent-typo.herokuapp.com/comments?article_id=14" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="dYybkDmXt78jaly8G8/yPxTDQUSXyQ4WSpiu1ATr0eU=" /></div>
+       +<div id='commentform'>
+       +	<h3>Comment <em>[CS169 Autograder] Blag Post A</em></h3>
+       +	<div class='control-group'>
+       +		<input class="span4" id="comment_author" name="comment[author]" placeholder="Your name" size="30" type="text" />  	
+       +	</div>
+       +	<div class='control-group'>
+       +		<input class="span4" id="comment_email" name="comment[email]" placeholder="Email address" size="30" type="text" />
+       +	</div>
+       +	<div class='control-group'>
+       +		<input class="span4" id="comment_url" name="comment[url]" placeholder="Your website" size="30" type="text" />
+       +	</div>
+       +	<div class='control-group'>
+       +		<textarea class="span8" cols="40" id="comment_body" name="comment[body]" rows="8"></textarea>
+       +	</div>
+       +
+       +	<div class='form-actions'>
+       +		<input type='submit' id='form-submit-button' class='btn btn-info' value="comment" />
+       +	</div>
+       +</div>
+       +</form>
+       +
+       +  </div>
+       +
+       +         </div>
+       +         <div id='sidebar' class='span4'>
+       +           It seems something went wrong. Maybe some of your sidebars are actually missing and you should either reinstall them or remove them manually
+       +        
+       +         </div>
+       +			</div>
+       +    </div>
+       +  <p style='text-align: center'><small>Powered by <a href='http://typosphere.org'>Typo</a> – Thème <a href='http://t37.net'>Frédéric de Villamil</a> | Photo <a href='http://www.flickr.com/photos/blmiers2/6167391543/sizes/l/in/photostream/'>L. Lemos</a></small></p>
+       +  </div>
+       +</div>
+       +</body>
+       +</html>
+     # /tmp/rspec20121117-6236-vi7edx.rb:304:in `block (2 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:9:in `block (3 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:9:in `block (3 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_runner.rb:42:in `block in run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:33:in `run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:24:in `run'
+     # lib/graders/rspec_grader/weighted_rspec_grader.rb:6:in `grade!'
+     # ./lib/graders/rspec_grader/heroku_rspec_grader.rb:11:in `grade!'
+     # lib/graders/rspec_grader/hw5_grader.rb:13:in `grade!'
+     # ./grade5:37:in `<main>'
+
+  5) The article merge feature should only show the merge button to administrators [15 points]
+     Failure/Error: page.body.should include 'Merge Articles'
+       expected "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />\n  <title>Better be There Now instead of Reading This :-) \xE2\x80\x93 content</title>\n  <meta http-equiv=\"imagetoolbar\" content=\"no\" />\n  <link href=\"/stylesheets/growler.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/bootstrap.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/administration_structure.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n<link href=\"/stylesheets/lightbox.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n  <script src=\"/javascripts/prototype.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/effects.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/builder.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/dragdrop.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/controls.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/typo.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/lightbox.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/growler.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/typo_carousel.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/administration.js?1353129687\" type=\"text/javascript\"></script>\n<script src=\"/javascripts/ckeditor/ckeditor.js?1353129687\" type=\"text/javascript\"></script>\n  <script src=\"/javascripts/calendar_date_select/calendar_date_select.js?1353129687\" type=\"text/javascript\"></script>\n<link href=\"/stylesheets/calendar_date_select/default.css?1353129687\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n\n  <style type=\"text/css\">\n    #carousel-content .slide { width: 125; }\n  </style>\n</head>\n<body>\n  <div class='topbar'>\n    <div class='topbar-inner'>\n      <div class='container-fluid'>\n        <a href=\"http://bulent-typo.herokuapp.com\" class=\"brand\">Better be There Now instead of Reading This :-)</a>\n        <ul class=\"nav secondary-nav\">\n          <li class=\"dropdown\" onmouseover='$(\"user_menu\").style.display = \"block\"' onmouseout='$(\"user_menu\").style.display = \"none\"'>\n            <a class=\"dropdown-toggle\" href=\"#\">Logged in as Ben</a>\n            <ul class=\"dropdown-menu\" id=\"user_menu\" style='display: none'>\n              <li><a href=\"/admin/content/new\">New Article</a></li>\n              <li><a href=\"/admin/profiles\">Profile</a></li>\n              <li><a href=\"/accounts/logout\">Log out &raquo;</a></li>\n            </ul>\n          </li>\n        </ul>\n        <ul class=\"nav secondary-nav\">\n          <li class=\"dropdown\" onmouseover='$(\"help_menu\").style.display = \"block\"' onmouseout='$(\"help_menu\").style.display = \"none\"'>\n            <a class=\"dropdown-toggle\" href=\"#\">Help</a>\n            <ul class=\"dropdown-menu\" id=\"help_menu\" style=\"display: none;\">\n              <li><a href=\"https://github.com/fdv/typo/wiki\">Documentation</a></li>\n              <li><a href=\"https://github.com/fdv/typo/issues\">Report a bug</a></li>\n              <li><a href=\"https://github.com/fdv/typo/wiki/In-Page-Plugins\">In page plugins</a></li>\n              <li><a href=\"https://github.com/fdv/typo/wiki/Sidebar-plugins\">Sidebar plugins</a></li>\n            </ul>\n          </li>\n        </ul>\n\t\t\t\t\n      </div>\n    </div>\n  </div>\n  <div class='container-fluid'>\n    <div class='sidebar'>\n      <div class='well'>\n        <h5><a href=\"/admin\">Dashboard</a></h5>\n        <h5 class=\"active\"><a href=\"/admin/content\">Articles</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/content\">All Articles</a></li>\n<li><a href=\"/admin/content/new\">New Article</a></li>\n<li><a href=\"/admin/feedback\">Comments</a></li>\n<li><a href=\"/admin/categories/new\">Categories</a></li>\n<li><a href=\"/admin/tags\">Tags</a></li>\n<li><a href=\"/admin/post_types/new\">Article Types</a></li>\n<li><a href=\"/admin/redirects\">Redirects</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/pages\">Pages</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/pages\">All Pages</a></li>\n<li><a href=\"/admin/pages/new\">New Page</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/resources\">Media Library</a></h5>\n        <ul id='subtabs'>\n          \n        </ul>\n        <h5 class=\"\"><a href=\"/admin/themes\">Design</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/themes\">Choose theme</a></li>\n<li><a href=\"/admin/sidebar\">Customize sidebar</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/settings\">Settings</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/settings/write\">Write</a></li>\n<li><a href=\"/admin/settings/feedback\">Feedback</a></li>\n<li><a href=\"/admin/cache\">Cache</a></li>\n<li><a href=\"/admin/users\">Users</a></li>\n<li><a href=\"/admin/settings/errors\">Error messages</a></li>\n        </ul>\n        <h5 class=\"\"><a href=\"/admin/seo\">SEO</a></h5>\n        <ul id='subtabs'>\n          <li><a href=\"/admin/seo\">Global SEO settings</a></li>\n<li><a href=\"/admin/seo/permalinks\">Permalinks</a></li>\n<li><a href=\"/admin/seo/titles\">Titles</a></li>\n        </ul>\n      </div>\n    </div>\n    <div class='content'>\n      <div class=''>\n        \n        <div class='page-header'><h2>New article</h2></div>\n        \n<form accept-charset=\"UTF-8\" action=\"/admin/content/new/16\" class=\"autosave\" enctype=\"multipart/form-data\" id=\"article_form\" method=\"post\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /><input name=\"authenticity_token\" type=\"hidden\" value=\"y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=\" /></div>\n\n  <input type=\"hidden\" name=\"current_editor\" id=\"current_editor\" value=\"visual\" />\n<input type=\"hidden\" name=\"user_textfilter\" id=\"user_textfilter\" value=\"none\" />\n<div id=\"autosave\"></div>\n<div id=\"article_keywords_auto_complete\" class=\"auto_complete\"></div>\n\n\n\n<div class='editor-right'>\n  <div class='well'>\n    <h4>Publish settings</h4>\n    <div class='actions'>\n      <a href=\"/admin/content/destroy/16\" class=\"btn danger\" data-confirm=\"Are you sure?\" data-method=\"post\" rel=\"nofollow\" title=\"Delete content\">delete</a>\n\t  <span id='destroy_link'></span>\n      <span id='preview_link'><a href=\"/previews/16\" class=\"btn info\" target=\"new\">Preview</a></span>\n    </div>\n    <div class='clearfix'>\n        Status: <strong>published</strong> <a href=\"#\" onclick=\"Element.toggle('status'); return false\">Change</a>\n      <ul class='inputs-list'>\n        <li id='status' style='display: none;'>        \n          <label for=\"article_published\">\n            <input name=\"article[published]\" type=\"hidden\" value=\"0\" /><input checked=\"checked\" id=\"article_published\" name=\"article[published]\" type=\"checkbox\" value=\"1\" />\n            Published\n          </label>\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Comments are <strong>enabled</strong> and trackbacks are <strong>disabled</strong> <a href=\"#\" onclick=\"Element.toggle('conversation'); return false\">Change</a>\n      <ul class='inputs-list' id='conversation' style='display: none'>\n        <li>\n          <label for=\"article_allow_pings\">\n            <input name=\"article[allow_pings]\" type=\"hidden\" value=\"0\" /><input id=\"article_allow_pings\" name=\"article[allow_pings]\" type=\"checkbox\" value=\"1\" />\n            Allow trackbacks\n          </label>\n        </li>\n        <li>\n          <label for=\"article_allow_comments\">\n            <input name=\"article[allow_comments]\" type=\"hidden\" value=\"0\" /><input checked=\"checked\" id=\"article_allow_comments\" name=\"article[allow_comments]\" type=\"checkbox\" value=\"1\" />\n            Allow comments\n          </label>\n        </li>\n      </ul>\n    </div>\n\t  <div class='clearfix'>\n      Publish <strong>now</strong> <a href=\"#\" onclick=\"Element.toggle('publish'); return false\">Change</a>\n      <ul class='inputs-list'>\n        <li id='publish' style='display: none;'>\n          <input class=\"span3\" id=\"article_published_at\" name=\"article[published_at]\" size=\"30\" type=\"text\" value=\"November 17, 2012 06:06 AM GMT+0000 (UTC)\" /> <img alt=\"Calendar\" class=\"calendar_date_select_popup_icon\" onclick=\"new CalendarDateSelect( $(this).previous(), {time:true, year_range:10} );\" src=\"/images/calendar_date_select/calendar.gif?1353129687\" style=\"border:0px; cursor:pointer;\" />\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Visibility: <strong>public</strong> <a href=\"#\" onclick=\"Element.toggle('visibility'); return false\">Change</a>\n      <ul class='inputs-list' id='visibility' style='display: none'>\n        <li>\n          <label for=\"article_password\">Password:\n            <input class=\"span3\" id=\"article_password\" name=\"article[password]\" size=\"30\" type=\"password\" value=\"\" />\n          </label>\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Permalink: <a href=\"#\" onclick=\"Element.toggle('permalink'); return false\">Change</a>\n      <ul class='inputs-list' id='permalink' style='display: none'>\n        <li>\n            <input class=\"span4\" id=\"article_permalink\" name=\"article[permalink]\" size=\"30\" type=\"text\" value=\"cs169-autograder-pub-blag\" />\n        </li>\n      </ul>\n    </div>\n    <div class='clearfix'>\n      Article filter: <strong>Markdown with SmartyPants</strong> <a href=\"#\" onclick=\"Element.toggle('text_filter'); return false\">Change</a>\n      <ul id='text_filter' class='inputs-list' style='display: none'>\n        <li>\n          <select name=\"article[text_filter]\" id=\"text_filter\">\n            <option value=\"none\">None</option>\n<option value=\"markdown\">Markdown</option>\n<option value=\"smartypants\">SmartyPants</option>\n<option value=\"markdown smartypants\" selected=\"selected\">Markdown with SmartyPants</option>\n<option value=\"textile\">Textile</option>\n<option value=\"none\">None</option>\n<option value=\"markdown\">Markdown</option>\n<option value=\"smartypants\">SmartyPants</option>\n<option value=\"markdown smartypants\" selected=\"selected\">Markdown with SmartyPants</option>\n<option value=\"textile\">Textile</option>\n          </select>\n        </li>\n      </ul>\n    </div>\n\n    <div class='actions'>\n      <input id='save_draft' type=\"submit\" value=\"Save as draft\" name=\"article[draft]\" class='btn info' />\n      <input type=\"submit\" value=\"Publish\" class=\"btn primary\" />\n    </div>\n  </div>\n\n  <div class='well'>\n    <h4>Categories</h4>\n    <ul class='inputs-list'>\n\t<li>\n\t    <label for=\"category_1\"><input id=\"category_1\" name=\"categories[]\" type=\"checkbox\" value=\"1\" />General</label>\n\t</li>\n</ul>\n<a href=\"/admin/categories/new\" class=\"btn info\">New Category</a>\n\n  </div>\n  <input id=\"article_post_type\" name=\"article[post_type]\" type=\"hidden\" value=\"read\" />\n</div>\n\n<div class='editor-left'>\n  <div>\n    <div>\n      <input class=\"span1\" id=\"article_title\" name=\"article[title]\" placeholder=\"Title\" size=\"30\" style=\" width: 99%\" type=\"text\" value=\"[CS169 Autograder] Pub Blag\" />\n    </div>\n\n    \n\n    <div id='editor-menu'>\n\t\t<ul class=\"tabs\">\n\t\t\t<li id=\"f\" class='active'>\n\t\t\t\t<a href=\"#\" onclick=\"new Ajax.Updater(&#x27;visual_editor&#x27;, &#x27;/admin/content/insert_editor?editor=visual&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_fck&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_fck&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=&#x27;)}); return false;\">Visual</a><img alt=\"Spinner-blue\" id=\"update_spinner_fck\" src=\"/images/spinner-blue.gif?1353129687\" style=\"display:none;\" />\n\t\t\t</li>\n\t\t\t<li id=\"s\" class=' '>\n\t\t\t\t<a href=\"#\" onclick=\"new Ajax.Updater(&#x27;simple_editor&#x27;, &#x27;/admin/content/insert_editor?editor=simple&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_simple&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_simple&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=&#x27;)}); return false;\">HTML</a><img alt=\"Spinner-blue\" id=\"update_spinner_simple\" src=\"/images/spinner-blue.gif?1353129687\" style=\"display:none;\" />\n\t\t\t</li>\n\t\t</ul>\n    </div>\n\n    <div id=\"editor\">\n      <div id='quicktags' style='display: none;'>\n        <script type=\"text/javascript\">edToolbar('article_body_and_extended');</script>\n      </div>\n\n      <div id ='visual_editor'  >\n        <textarea id='article__body_and_extended_editor' style='width:100%;height:300px' cols='20' rows='20' class='large' name='article[body_and_extended]'>derp derp derp</textarea>\n<script type=\"text/javascript\">\n//<![CDATA[\nCKEDITOR.replace('article[body_and_extended]', {\n    filebrowserBrowseUrl : '/fm/filemanager',\n    filebrowserUploadUrl : '/ckeditor/upload'\n\n});\n\n//]]>\n</script>\n      </div>\n\n      <div id='simple_editor' class='input_text' style='display: none;' >\n        \n        \n      </div>\n    </div>\n\n\t\t<h4>Tags</h4>\n    <div class='class'>\n      <input autocomplete=\"off\" id=\"article_keywords\" name=\"article[keywords]\" size=\"30\" style=\"width: 100%\" type=\"text\" value=\"\" />\n    </div>\n    <script type=\"text/javascript\">\n//<![CDATA[\nvar article_keywords_auto_completer = new Ajax.Autocompleter('article_keywords', 'article_keywords_auto_complete', '/admin/content/auto_complete_for_article_keywords', {tokens:','})\n//]]>\n</script>\t\t\n  </div>\n\n  <div class='separator'>\n    <h4>Excerpt</h4>\n    <div class=''>\n      <textarea cols=\"40\" height=\"150\" id=\"article_excerpt\" name=\"article[excerpt]\" rows=\"5\" style=\"width: 100%\"></textarea>\n      <span class='help-block'>Excerpts are posts summaries that are shown on your blog homepage only but won\xE2\x80\x99t appear on the post itself</span>\n    </div>\n  </div>\n\n  <div class=''>\n    <h4>Uploads</h4>\n    <p class='help-block'>Uploads will be displayed as attachments in your RSS feed, but won't appear in your articles.</p>\n    <ul id='attachments' class='inputs-list'>\n      <li id=\"attachment_1\">\n  <input id=\"attachments_filename_1\" name=\"attachments[filename_1]\" type=\"file\" />  <a href=\"#\" onclick=\"if (confirm(_(&#x27;Really delete attachment&#x27;) +&#x27; 1?&#x27;)){\nEffect.toggle(&quot;attachment_1&quot;,&#x27;appear&#x27;,{afterFinish:function(obj){Element.remove(obj.element);}});\n}; return false;\">Remove</a></li>\n<li id=\"attachment_add_2\">\n  <a href=\"#\" onclick=\"new Ajax.Request(&#x27;/admin/content/attachment_box_add/2&#x27;, {asynchronous:true, evalScripts:true, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=&#x27;)}); return false;\">Add Another Attachment</a></li>\n\n<li id=\"resources\">\n\n  <h3>You can associate the following resources</h3>\n</li>\n    </ul>\n  </div>    \n  </div>\n\n</div>\n\n\n\n</form>\n\n      </div>\n    </div>\n  </div>\n\n  <footer>\n    <a href=\"http://bulent-typo.herokuapp.com\">Better be There Now instead of Reading This :-)</a> is proudly powered by Typo 6.1.0\n  </footer>\n</body>\n</html>\n" to include "Merge Articles"
+       Diff:
+       @@ -1,2 +1,316 @@
+       -Merge Articles
+       +<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       +  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+       +<html xmlns="http://www.w3.org/1999/xhtml">
+       +<head>
+       +  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+       +  <title>Better be There Now instead of Reading This :-) – content</title>
+       +  <meta http-equiv="imagetoolbar" content="no" />
+       +  <link href="/stylesheets/growler.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/bootstrap.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/administration_structure.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +<link href="/stylesheets/lightbox.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +  <script src="/javascripts/prototype.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/effects.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/builder.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/dragdrop.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/controls.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/typo.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/lightbox.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/growler.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/typo_carousel.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/administration.js?1353129687" type="text/javascript"></script>
+       +<script src="/javascripts/ckeditor/ckeditor.js?1353129687" type="text/javascript"></script>
+       +  <script src="/javascripts/calendar_date_select/calendar_date_select.js?1353129687" type="text/javascript"></script>
+       +<link href="/stylesheets/calendar_date_select/default.css?1353129687" media="screen" rel="stylesheet" type="text/css" />
+       +
+       +  <style type="text/css">
+       +    #carousel-content .slide { width: 125; }
+       +  </style>
+       +</head>
+       +<body>
+       +  <div class='topbar'>
+       +    <div class='topbar-inner'>
+       +      <div class='container-fluid'>
+       +        <a href="http://bulent-typo.herokuapp.com" class="brand">Better be There Now instead of Reading This :-)</a>
+       +        <ul class="nav secondary-nav">
+       +          <li class="dropdown" onmouseover='$("user_menu").style.display = "block"' onmouseout='$("user_menu").style.display = "none"'>
+       +            <a class="dropdown-toggle" href="#">Logged in as Ben</a>
+       +            <ul class="dropdown-menu" id="user_menu" style='display: none'>
+       +              <li><a href="/admin/content/new">New Article</a></li>
+       +              <li><a href="/admin/profiles">Profile</a></li>
+       +              <li><a href="/accounts/logout">Log out &raquo;</a></li>
+       +            </ul>
+       +          </li>
+       +        </ul>
+       +        <ul class="nav secondary-nav">
+       +          <li class="dropdown" onmouseover='$("help_menu").style.display = "block"' onmouseout='$("help_menu").style.display = "none"'>
+       +            <a class="dropdown-toggle" href="#">Help</a>
+       +            <ul class="dropdown-menu" id="help_menu" style="display: none;">
+       +              <li><a href="https://github.com/fdv/typo/wiki">Documentation</a></li>
+       +              <li><a href="https://github.com/fdv/typo/issues">Report a bug</a></li>
+       +              <li><a href="https://github.com/fdv/typo/wiki/In-Page-Plugins">In page plugins</a></li>
+       +              <li><a href="https://github.com/fdv/typo/wiki/Sidebar-plugins">Sidebar plugins</a></li>
+       +            </ul>
+       +          </li>
+       +        </ul>
+       +				
+       +      </div>
+       +    </div>
+       +  </div>
+       +  <div class='container-fluid'>
+       +    <div class='sidebar'>
+       +      <div class='well'>
+       +        <h5><a href="/admin">Dashboard</a></h5>
+       +        <h5 class="active"><a href="/admin/content">Articles</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/content">All Articles</a></li>
+       +<li><a href="/admin/content/new">New Article</a></li>
+       +<li><a href="/admin/feedback">Comments</a></li>
+       +<li><a href="/admin/categories/new">Categories</a></li>
+       +<li><a href="/admin/tags">Tags</a></li>
+       +<li><a href="/admin/post_types/new">Article Types</a></li>
+       +<li><a href="/admin/redirects">Redirects</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/pages">Pages</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/pages">All Pages</a></li>
+       +<li><a href="/admin/pages/new">New Page</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/resources">Media Library</a></h5>
+       +        <ul id='subtabs'>
+       +          
+       +        </ul>
+       +        <h5 class=""><a href="/admin/themes">Design</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/themes">Choose theme</a></li>
+       +<li><a href="/admin/sidebar">Customize sidebar</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/settings">Settings</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/settings/write">Write</a></li>
+       +<li><a href="/admin/settings/feedback">Feedback</a></li>
+       +<li><a href="/admin/cache">Cache</a></li>
+       +<li><a href="/admin/users">Users</a></li>
+       +<li><a href="/admin/settings/errors">Error messages</a></li>
+       +        </ul>
+       +        <h5 class=""><a href="/admin/seo">SEO</a></h5>
+       +        <ul id='subtabs'>
+       +          <li><a href="/admin/seo">Global SEO settings</a></li>
+       +<li><a href="/admin/seo/permalinks">Permalinks</a></li>
+       +<li><a href="/admin/seo/titles">Titles</a></li>
+       +        </ul>
+       +      </div>
+       +    </div>
+       +    <div class='content'>
+       +      <div class=''>
+       +        
+       +        <div class='page-header'><h2>New article</h2></div>
+       +        
+       +<form accept-charset="UTF-8" action="/admin/content/new/16" class="autosave" enctype="multipart/form-data" id="article_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=" /></div>
+       +
+       +  <input type="hidden" name="current_editor" id="current_editor" value="visual" />
+       +<input type="hidden" name="user_textfilter" id="user_textfilter" value="none" />
+       +<div id="autosave"></div>
+       +<div id="article_keywords_auto_complete" class="auto_complete"></div>
+       +
+       +
+       +
+       +<div class='editor-right'>
+       +  <div class='well'>
+       +    <h4>Publish settings</h4>
+       +    <div class='actions'>
+       +      <a href="/admin/content/destroy/16" class="btn danger" data-confirm="Are you sure?" data-method="post" rel="nofollow" title="Delete content">delete</a>
+       +	  <span id='destroy_link'></span>
+       +      <span id='preview_link'><a href="/previews/16" class="btn info" target="new">Preview</a></span>
+       +    </div>
+       +    <div class='clearfix'>
+       +        Status: <strong>published</strong> <a href="#" onclick="Element.toggle('status'); return false">Change</a>
+       +      <ul class='inputs-list'>
+       +        <li id='status' style='display: none;'>        
+       +          <label for="article_published">
+       +            <input name="article[published]" type="hidden" value="0" /><input checked="checked" id="article_published" name="article[published]" type="checkbox" value="1" />
+       +            Published
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Comments are <strong>enabled</strong> and trackbacks are <strong>disabled</strong> <a href="#" onclick="Element.toggle('conversation'); return false">Change</a>
+       +      <ul class='inputs-list' id='conversation' style='display: none'>
+       +        <li>
+       +          <label for="article_allow_pings">
+       +            <input name="article[allow_pings]" type="hidden" value="0" /><input id="article_allow_pings" name="article[allow_pings]" type="checkbox" value="1" />
+       +            Allow trackbacks
+       +          </label>
+       +        </li>
+       +        <li>
+       +          <label for="article_allow_comments">
+       +            <input name="article[allow_comments]" type="hidden" value="0" /><input checked="checked" id="article_allow_comments" name="article[allow_comments]" type="checkbox" value="1" />
+       +            Allow comments
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +	  <div class='clearfix'>
+       +      Publish <strong>now</strong> <a href="#" onclick="Element.toggle('publish'); return false">Change</a>
+       +      <ul class='inputs-list'>
+       +        <li id='publish' style='display: none;'>
+       +          <input class="span3" id="article_published_at" name="article[published_at]" size="30" type="text" value="November 17, 2012 06:06 AM GMT+0000 (UTC)" /> <img alt="Calendar" class="calendar_date_select_popup_icon" onclick="new CalendarDateSelect( $(this).previous(), {time:true, year_range:10} );" src="/images/calendar_date_select/calendar.gif?1353129687" style="border:0px; cursor:pointer;" />
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Visibility: <strong>public</strong> <a href="#" onclick="Element.toggle('visibility'); return false">Change</a>
+       +      <ul class='inputs-list' id='visibility' style='display: none'>
+       +        <li>
+       +          <label for="article_password">Password:
+       +            <input class="span3" id="article_password" name="article[password]" size="30" type="password" value="" />
+       +          </label>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Permalink: <a href="#" onclick="Element.toggle('permalink'); return false">Change</a>
+       +      <ul class='inputs-list' id='permalink' style='display: none'>
+       +        <li>
+       +            <input class="span4" id="article_permalink" name="article[permalink]" size="30" type="text" value="cs169-autograder-pub-blag" />
+       +        </li>
+       +      </ul>
+       +    </div>
+       +    <div class='clearfix'>
+       +      Article filter: <strong>Markdown with SmartyPants</strong> <a href="#" onclick="Element.toggle('text_filter'); return false">Change</a>
+       +      <ul id='text_filter' class='inputs-list' style='display: none'>
+       +        <li>
+       +          <select name="article[text_filter]" id="text_filter">
+       +            <option value="none">None</option>
+       +<option value="markdown">Markdown</option>
+       +<option value="smartypants">SmartyPants</option>
+       +<option value="markdown smartypants" selected="selected">Markdown with SmartyPants</option>
+       +<option value="textile">Textile</option>
+       +<option value="none">None</option>
+       +<option value="markdown">Markdown</option>
+       +<option value="smartypants">SmartyPants</option>
+       +<option value="markdown smartypants" selected="selected">Markdown with SmartyPants</option>
+       +<option value="textile">Textile</option>
+       +          </select>
+       +        </li>
+       +      </ul>
+       +    </div>
+       +
+       +    <div class='actions'>
+       +      <input id='save_draft' type="submit" value="Save as draft" name="article[draft]" class='btn info' />
+       +      <input type="submit" value="Publish" class="btn primary" />
+       +    </div>
+       +  </div>
+       +
+       +  <div class='well'>
+       +    <h4>Categories</h4>
+       +    <ul class='inputs-list'>
+       +	<li>
+       +	    <label for="category_1"><input id="category_1" name="categories[]" type="checkbox" value="1" />General</label>
+       +	</li>
+       +</ul>
+       +<a href="/admin/categories/new" class="btn info">New Category</a>
+       +
+       +  </div>
+       +  <input id="article_post_type" name="article[post_type]" type="hidden" value="read" />
+       +</div>
+       +
+       +<div class='editor-left'>
+       +  <div>
+       +    <div>
+       +      <input class="span1" id="article_title" name="article[title]" placeholder="Title" size="30" style=" width: 99%" type="text" value="[CS169 Autograder] Pub Blag" />
+       +    </div>
+       +
+       +    
+       +
+       +    <div id='editor-menu'>
+       +		<ul class="tabs">
+       +			<li id="f" class='active'>
+       +				<a href="#" onclick="new Ajax.Updater(&#x27;visual_editor&#x27;, &#x27;/admin/content/insert_editor?editor=visual&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_fck&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_fck&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=&#x27;)}); return false;">Visual</a><img alt="Spinner-blue" id="update_spinner_fck" src="/images/spinner-blue.gif?1353129687" style="display:none;" />
+       +			</li>
+       +			<li id="s" class=' '>
+       +				<a href="#" onclick="new Ajax.Updater(&#x27;simple_editor&#x27;, &#x27;/admin/content/insert_editor?editor=simple&#x27;, {asynchronous:true, evalScripts:true, onLoading:function(request){new Element.show(&#x27;update_spinner_simple&#x27;)}, onSuccess:function(request){new Element.toggle(&#x27;update_spinner_simple&#x27;)}, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=&#x27;)}); return false;">HTML</a><img alt="Spinner-blue" id="update_spinner_simple" src="/images/spinner-blue.gif?1353129687" style="display:none;" />
+       +			</li>
+       +		</ul>
+       +    </div>
+       +
+       +    <div id="editor">
+       +      <div id='quicktags' style='display: none;'>
+       +        <script type="text/javascript">edToolbar('article_body_and_extended');</script>
+       +      </div>
+       +
+       +      <div id ='visual_editor'  >
+       +        <textarea id='article__body_and_extended_editor' style='width:100%;height:300px' cols='20' rows='20' class='large' name='article[body_and_extended]'>derp derp derp</textarea>
+       +<script type="text/javascript">
+       +//<![CDATA[
+       +CKEDITOR.replace('article[body_and_extended]', {
+       +    filebrowserBrowseUrl : '/fm/filemanager',
+       +    filebrowserUploadUrl : '/ckeditor/upload'
+       +
+       +});
+       +
+       +//]]>
+       +</script>
+       +      </div>
+       +
+       +      <div id='simple_editor' class='input_text' style='display: none;' >
+       +        
+       +        
+       +      </div>
+       +    </div>
+       +
+       +		<h4>Tags</h4>
+       +    <div class='class'>
+       +      <input autocomplete="off" id="article_keywords" name="article[keywords]" size="30" style="width: 100%" type="text" value="" />
+       +    </div>
+       +    <script type="text/javascript">
+       +//<![CDATA[
+       +var article_keywords_auto_completer = new Ajax.Autocompleter('article_keywords', 'article_keywords_auto_complete', '/admin/content/auto_complete_for_article_keywords', {tokens:','})
+       +//]]>
+       +</script>		
+       +  </div>
+       +
+       +  <div class='separator'>
+       +    <h4>Excerpt</h4>
+       +    <div class=''>
+       +      <textarea cols="40" height="150" id="article_excerpt" name="article[excerpt]" rows="5" style="width: 100%"></textarea>
+       +      <span class='help-block'>Excerpts are posts summaries that are shown on your blog homepage only but won’t appear on the post itself</span>
+       +    </div>
+       +  </div>
+       +
+       +  <div class=''>
+       +    <h4>Uploads</h4>
+       +    <p class='help-block'>Uploads will be displayed as attachments in your RSS feed, but won't appear in your articles.</p>
+       +    <ul id='attachments' class='inputs-list'>
+       +      <li id="attachment_1">
+       +  <input id="attachments_filename_1" name="attachments[filename_1]" type="file" />  <a href="#" onclick="if (confirm(_(&#x27;Really delete attachment&#x27;) +&#x27; 1?&#x27;)){
+       +Effect.toggle(&quot;attachment_1&quot;,&#x27;appear&#x27;,{afterFinish:function(obj){Element.remove(obj.element);}});
+       +}; return false;">Remove</a></li>
+       +<li id="attachment_add_2">
+       +  <a href="#" onclick="new Ajax.Request(&#x27;/admin/content/attachment_box_add/2&#x27;, {asynchronous:true, evalScripts:true, parameters:&#x27;authenticity_token=&#x27; + encodeURIComponent(&#x27;y7DjAxcx7oqEcRQz6mZVmIWN8tmw3E0g+sj6fkFR8HI=&#x27;)}); return false;">Add Another Attachment</a></li>
+       +
+       +<li id="resources">
+       +
+       +  <h3>You can associate the following resources</h3>
+       +</li>
+       +    </ul>
+       +  </div>    
+       +  </div>
+       +
+       +</div>
+       +
+       +
+       +
+       +</form>
+       +
+       +      </div>
+       +    </div>
+       +  </div>
+       +
+       +  <footer>
+       +    <a href="http://bulent-typo.herokuapp.com">Better be There Now instead of Reading This :-)</a> is proudly powered by Typo 6.1.0
+       +  </footer>
+       +</body>
+       +</html>
+     # /tmp/rspec20121117-6236-vi7edx.rb:319:in `block (2 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:9:in `block (3 levels) in <top (required)>'
+     # /tmp/rspec20121117-6236-vi7edx.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:9:in `block (3 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_sandbox.rb:8:in `block (2 levels) in <top (required)>'
+     # lib/graders/rspec_grader/rspec_runner.rb:42:in `block in run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:33:in `run_rspec'
+     # lib/graders/rspec_grader/rspec_runner.rb:24:in `run'
+     # lib/graders/rspec_grader/weighted_rspec_grader.rb:6:in `grade!'
+     # ./lib/graders/rspec_grader/heroku_rspec_grader.rb:11:in `grade!'
+     # lib/graders/rspec_grader/hw5_grader.rb:13:in `grade!'
+     # ./grade5:37:in `<main>'
+
+Finished in 32.24 seconds
+11 examples, 5 failures
+
+Failed examples:
+
+rspec /tmp/rspec20121117-6236-vi7edx.rb:245 # The article merge feature should be shown on the article edit page [15 points]
+rspec /tmp/rspec20121117-6236-vi7edx.rb:255 # The article merge feature should create a single merged article [15 points]
+rspec /tmp/rspec20121117-6236-vi7edx.rb:276 # The article merge feature should create an article with the text of both original articles [20 points]
+rspec /tmp/rspec20121117-6236-vi7edx.rb:290 # The article merge feature should carry over the comments from both merged articles [20 points]
+rspec /tmp/rspec20121117-6236-vi7edx.rb:307 # The article merge feature should only show the merge button to administrators [15 points]
+
+Show Discussion New Post
+Previous
+Next
+ Find Courses About Blog Jobs Contact       
+© 2012 edX, some rights reserved. terms of service privacy policy honor code help
+** part2
+
+Beginning at 11:00PM, Saturday November 24 Boston time (4 AM November 25 th GMT) and lasting for 90 minutes, edX engineers will be performing system maintenance. During this period, all edX services will be unavailable. We apologize for this inconvenience.
+
+BerkeleyX: CS169.2x Software as a Service bulent ▾
+Courseware
+Course Info
+Syllabus
+Textbook & VM
+Tutorials & Resources
+Discussion
+Wiki
+Progress
+Week 1
+Week 2
+Week 3
+Lecture 5: Teams
+Lecture 6: Version Control and Debugging
+Homework 1 part 2
+Homework due December 2
+Previous
+Next
+Part 2
+
+Due Sunday, December 2nd
+
+3. FIXING A BUG IN TYPO
+
+The version of typo you have checked out contains a bug that prevents categories from being created or edited. To see this bug, make sure you are logged in as an administrator and click on the "categories" link on the left hand side of the admin page. The page is intended to look as follows:
+
+
+This page is intended to allow you to add and edit blogging categories. Fix this bug by writing cucumber tests that fail when this bug is present and pass when you can successfully edit existing categories and create new categories.
+
+
+Congratulations! You are all done with the legacy code assignment.
+Show Discussion New Post
+Previous
+Next
+ Find Courses About Blog Jobs Contact       
+© 2012 edX, some rights reserved. terms of service privacy policy honor code help
+* c2-w1-l2
+"thunks", or "proxy methods"
+delayed/lazy eval of queries from the db..
+an object that quacks like an array, but evaluated only when we really want
+to see its elements.. (use of polymorphism, the interface is the same as
+Enumerable, but implementation is "lazy". Not passing around the long
+result of the query, but the intention to do the query when really needed.. ). 
+@movie.for_kids.with_good_rating
+* class2-week1-lesson1
+relational databases!
+in general, abstractions are leaky!
+associations thru: has_many (@movie.reviews), belongs_to (@review.movie)
+   implemented with Modules (gets mixed into models)
+
+* hw2
+** into app/assets/stylesheets/application.css file:
+table#movies th.hilite {
+  background-color: yellow;
+}
+
+** public rsa key
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDP6EuspF9GAnhfz0uDUJnOh+vRnz19c5ymbBFdIjHfuyb9KHJTTm3MExEfD/znRuXMP1sO/hd+YTk0EhMOye9CjNfkTrVGPjiTHJDdS8JPrZA6uvXBi5pZOsRdhLmmWaAjjxdYWXPmF6zPfovmnMvL9acLI7TVYBZLiAbIs3qO8exbNI0hChSBFIsKtZ43e08bJV2i9H1WJQKdENAnhLvV63DjM1TjEkagV7K2puSKzKk/8UyzPNh6MbEFWjnaivlwVMNaQtA8jMq3tW5PFdgYNGA6P6Sv5IQJi78rxP7iKFFustKvrFL7HXr1td4/afWqoWF2feJ/grp27sgFaMSz bulent2k2@gmail.com
+
+clip < ~/.ssh/id_rsa.pub
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDP6EuspF9GAnhfz0uDUJnOh+vRnz19c5ymbBFdIjHfuyb9KHJTTm3MExEfD/znRuXMP1sO/hd+YTk0EhMOye9CjNfkTrVGPjiTHJDdS8JPrZA6uvXBi5pZOsRdhLmmWaAjjxdYWXPmF6zPfovmnMvL9acLI7TVYBZLiAbIs3qO8exbNI0hChSBFIsKtZ43e08bJV2i9H1WJQKdENAnhLvV63DjM1TjEkagV7K2puSKzKk/8UyzPNh6MbEFWjnaivlwVMNaQtA8jMq3tW5PFdgYNGA6P6Sv5IQJi78rxP7iKFFustKvrFL7HXr1td4/afWqoWF2feJ/grp27sgFaMSz bulent2k2@gmail.com
+
+git remote add origin git@github.com:myusername/myreponame.git
+git push origin master
+
+git remote add origin git@github.com:bulent2k2/test1.git
+git push origin master
+
+# for Heroku, replace "gem 'sqlite3'" in your Gemfile with this:
+group :development, :test do
+  # if you already have a 'group :development,:test' block in your
+  # Gemfile, you can just move the line "gem 'sqlite3'" into it.
+  gem 'sqlite3' # use SQLite only in development and testing
+end 
+group :production do
+  gem 'pg' # use PostgreSQL in production (Heroku)
+end
+
+* hw1 part 5
+HW 1-5: ADVANCED OOP, METAPROGRAMMING, OPEN CLASSES AND DUCK TYPING
+
+In lecture, we saw how attr_accessor uses metaprogramming to create getters
+and setters for object attributes on the fly. 
+
+Define a method attr_accessor_with_history that provides the same
+functionality as attr_accessor but also tracks every value the attribute
+has ever taken. The following example shows the basic behavior of the new
+accessor: 
+
+class Foo
+    attr_accessor_with_history :bar
+end
+
+f = Foo.new     # => #<Foo:0x127e678>
+f.bar = 3       # => 3
+f.bar = :wowzo  # => :wowzo
+f.bar = 'boo!'  # => 'boo!'
+f.bar_history   # => [nil, 3, :wowzo, 'boo!']
+Here are some hints and guidelines to get you rolling:
+
+The first thing to notice is that if we define attr_accessor_with_history
+in class Class, we can use it as in the snippet above. This is because, as
+ELLS mentions, a class in Ruby is simply an object of class Class. (If that
+makes your brain hurt, don't worry about it for now. It'll come
+eventually.) 
+
+The second thing to notice is that Ruby provides a method class_eval that
+takes a string and evaluates it in the context of the current class, that
+is, the class from which you're calling attr_accessor_with_history. This
+string will need to contain a method definition that implements a
+setter-with-history for the desired attribute attr_name. 
+
+#bar_history should always return an Array of elements, even if no values
+ have been assigned yet. 
+
+Don't forget that the very first time the attribute receives a value, its
+history array will have to be initialized. 
+
+Don't forget that instance variables are referred to as @bar within getters
+and setters, as explained in Section 3.4 of ELLS. 
+
+Although the existing attr_accessor can handle multiple arguments
+(e.g. attr_accessor :foo, :bar), your version just needs to handle a single
+argument. However, it should be able to track multiple instance variables
+per class, with any legal class names or variable names, so it should work
+if used this way: 
+
+class SomeOtherClass
+    attr_accessor_with_history :foo
+    attr_accessor_with_history :bar
+end
+History of instance variables should be maintained separately for each object instance. That is, if you do
+
+f = Foo.new
+f.bar = 1
+f.bar = 2
+f = Foo.new
+f.bar = 4
+f.bar_history
+then the last line should return [nil, 4] rather than [nil, 1, 2, 4].
+Here is the skeleton to get you started:
+
+class Class
+    def attr_accessor_with_history(attr_name)
+        attr_name = attr_name.to_s       # make sure it's a string
+        attr_reader attr_name            # create the attribute's getter
+        attr_reader attr_name+"_history" # create bar_history getter
+        class_eval "your code here, use %Q for multiline strings"
+    end
+end
+
+class Foo
+    attr_accessor_with_history :bar
+end
+Example test case:
+
+f = Foo.new
+f.bar = 1
+f.bar = 2
+f.bar_history # => if your code works, should be [nil, 1, 2]
+* hw1 part 4
+BerkeleyX: CS169.1x Software as a Service bulent â¾
+Courseware Course Info Syllabus Textbook & VM Tutorials & Resources
+Discussion Wiki Progress Overview Week 1 Week 2 
+Lecture 3: Introduction to Ruby 
+Lecture 4: Ruby continued Homework 1
+Homework due October 14 Quiz 1 Quiz due October 14 Week 3 Previous Next
+HW 1-4: BASIC OBJECT ORIENTED PROGRAMMING
+
+Part A: Create a class Dessert with getters and setters for name and
+calories. Define instance methods healthy?, which returns true if a dessert
+has less than 200 calories, and delicious? which returns true for all
+desserts. 
+
+Here is the framework:
+
+class Dessert
+    def initialize(name, calories)
+        # Your code here
+    end
+
+    def healthy?
+        # Your code here
+    end
+
+    def delicious?
+        # Your code here
+    end
+end
+Note: You may define additional helper methods.
+
+Part B: Create a class JellyBean that extends Dessert, and add a getter and
+setter for flavor. Modify delicious? to return false if the flavor is
+"black licorice" (but delicious? should still return true for all other
+flavors and for all non-JellyBean desserts). 
+
+The JellyBean class should look like this:
+
+class JellyBean < Dessert
+    def initialize(name, calories, flavor)
+        # Your code here
+    end
+
+    def delicious?
+        # Your code here
+    end
+end
+Note: As before, you may define additional helper methods.
+
+Correct
+On Time 
+dessert
+  should be able to set and get a dessert's name and calories [20 points]
+  should return true if a dessert has fewer than 200 calories [10 points]
+  should return true for any dessert [20 points]
+
+jellybean
+  should be a subclass of Dessert [10 points]
+  should be able to set and get a jellybean's flavor [20 points]
+  should return true unless the flavor is black licorice [20 points]
+
+Finished in 0.00137 seconds
+6 examples, 0 failures
+
+Show Discussion New Post
+Previous
+Next
+ Find Courses About Blog Jobs Contact    
+Â© 2012 edX, some rights reserved. terms of service privacy policy honor code help
+* ec2
+0- aws.amazon.com ec2 start the instance
+1- start putty with tunnel
+2- cd hw*
+3- rails server
+4- chrome: localhost:3000
+* virtualbox oracle vm
+* the end

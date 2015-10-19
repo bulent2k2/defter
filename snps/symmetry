@@ -1,0 +1,232 @@
+
+
+
+
+
+      Partition: 
+        Param:
+          mapping:
+            CustomSpacing: *customSpacingType 
+            OverlapLayers: *overlapLayersType
+            BoundaryAssociation: *boundaryAssociationType
+          optional: yes 
+
+
+- !Schema
+  name: PlaceGroup
+  desc: PlaceGroup parameters 
+  mapping:
+    Name:
+      type: str
+    Type:
+      type: str
+      oneof: [group, symmetry, ...]
+      optional:
+        default: 'group'
+    Contains:
+      sequence:
+        type: str
+    Low:
+      optional: yes
+      sequence:
+        type: str
+    High:
+      optional: yes
+      sequence:
+        type: str
+    Pair:
+      optional: yes
+      sequence:
+        type: str
+    AxisType:
+      optional: yes
+      oneof: ['horizontal', 'vertical', 'either']
+    MirrorOrientation:
+      optional: yes
+      oneof: ['true', 'false']
+    Match:
+      optional:
+        default: 'false'
+      oneof: ['true', 'false']
+    ...
+
+      PackedPartition:
+        Param:
+          mapping:
+            Xgrid:
+              type: number
+              range: {min: 0}
+              optional:
+                default: 0
+            Ygrid:
+              type: number
+              range: {min: 0}
+              optional:
+                default: 0
+            GriddingBox:
+              type: BoundingBoxType
+              optional: yes
+            OverlapLayers: *overlapLayersType
+            OverlapPRBoundary:
+              oneof: ['true', 'false']
+              optional:
+                default: 'true'
+            BoundaryAssociation:
+              sequence: 
+                type: NetPosition
+              optional: yes 
+            Groups:
+              optional: yes 
+              sequence: 
+                type: PlaceGroup
+            StartLayout:
+              optional: yes
+              type: LayoutView
+            AbutmentType: 
+              oneof: ['none', 'auto1', 'auto2']
+              optional:
+                default: 'none'
+            AbutDiffWidth:
+              oneof: ['true', 'false']
+              optional: yes
+
+          optional: yes                         
+
+#-------------------------------------------------------------------------
+- !Schema
+  name: LayoutView
+  desc: LayoutView parameters 
+  mapping:
+    Lib:
+      type: str
+    Cell:
+      type: str
+    View:
+      type: str
+
+#-------------------------------------------------------------------------
+- !Schema
+  name: PlaceGroup
+  desc: PlaceGroup parameters 
+  mapping:
+    Name:
+      type: str
+    Type:
+      type: str
+      oneof: [group, stack, symmetry, clone, align, firm]
+      optional:
+        default: 'group'
+    Contains:
+      sequence:
+        type: str
+    Low:
+      optional: yes
+      sequence:
+        type: str
+    High:
+      optional: yes
+      sequence:
+        type: str
+    Pair:
+      optional: yes
+      sequence:
+        type: str
+    AxisType:
+      optional: yes
+      oneof: ['horizontal', 'vertical', 'either']
+    MirrorOrientation:
+      optional: yes
+      oneof: ['true', 'false']
+    ReferenceBox:
+      type: BoundingBoxType
+      optional: yes
+    AlignAt:
+      optional: yes
+      type: str
+      oneof: [low, high, top, bottom, center, left, right, inner]              
+    Offsets:
+      optional: yes
+      type: str
+    BoundingBox:
+      optional: yes
+      type: BoundingBoxType
+    StartLayout:
+      optional: yes
+      type: LayoutView
+    StartLayout:
+      optional: yes
+      type: LayoutView
+    Halo:
+      optional: yes
+      mapping:
+        LeftOffset: *offsetType
+        RightOffset: *offsetType
+        BottomOffset: *offsetType
+        TopOffset: *offsetType
+    Match:
+      optional:
+        default: 'false'
+      oneof: ['true', 'false']
+    Firmnness:
+      type: number
+      optional:
+        default: '-1'
+
+
+37   - Name: SymmtrySample
+38     Type: PackedPartition
+39     Param: {
+40       Groups: [
+41         { Name: PN, Contains: [N0, P0] },
+42         { Name: Sym1, Type: Symmetry, # By default, we use a vertical sym axis
+43           Contains: [PN,P1,P2,P3,N1,N2,N3],
+44           Low:  [P1,N1],  #  Left hand side of symmetry line
+45           High: [P2,N2],  #  Right hand side of sym line
+46           # PN, P3 and N3 will be "self-symmetric", because they are not included in Low or High.
+47           # i.e., they will be center aligned on the vertical symmetry line
+48         }
+49        { Name: Al1, Type: Align, AxisType: horizontal, AlignAt: center, Contains: [PN,X0,X1] }
+48       ]    
+48     }
+49     Contains: [N0,N1,N2,N3,P0,P1,P2,P3,X0,X1]
+50
+
+1112 - !Schema
+1113   name: Group
+1114   desc: Groups a sub-set of elements in a PackedPartition or PNStack UCell with symmetry and alignment options, etc.
+1115   mapping:
+1116     Name:
+1117       type: str
+1121     Contains:
+1122       sequence:
+1123         type: str
+1118     Type:
+           optional: yes
+1120       oneof: [Align, Clone, Pack, Stack, Symmetry]
+1124     Low:
+1125       optional: yes
+1126       sequence:
+1127         type: str
+1128     High:
+1129       optional: yes
+1130       sequence:
+1131         type: str
+1132     MirrorOrientations:
+1134       optional:
+1133       oneof: ['true', 'false']
+1135         default: 'true'
+         AxisType:
+           optional:
+           oneof: [horizontal, vertical]
+             default: vertical
+1136     ReferenceLayer:
+1137       optional: yes
+1138       type: str
+1139     AlignAt:
+1140       optional: yes
+1141       type: str
+1142       oneof: [low, center, high]
+1143     Association:
+1144       optional: yes
+1145       type: str
+1146

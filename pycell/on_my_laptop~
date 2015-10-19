@@ -1,0 +1,37 @@
+* pycell studio in my laptop!
+** pyros/cnexp/cndbg
+** copied tutorial files
+from:
+c:/Program Files (x86)/Synopsys/PyCellStudio/tutorial/MyTutorialPyCells
+to: c:/pycell_studio/cndbg
+** lib.defs: (find-file "c:/Program Files (x86)/Synopsys/PyCellStudio/bin/lib.defs")
+Added: DEFINE MyTutorialLib c:/pycell_studio/cndbg/MyTutorialLib
+** Edit User Variable (PYTHONPATH):
+C:\Program Files (x86)\Synopsys\PyCellStudio\pylib;C:\Program Files (x86)\Synopsys\PyCellStudio\plat_win_64\bin;C:\Program Files (x86)\Synopsys\PyCellStudio\bin;C:\Program Files (x86)\Synopsys\PyCellStudio\\plat_win_64\3rd\python266\DLLs;c:\pycell_studio\cndbg
+** cndbg: (find-file "c:/Program Files (x86)/Synopsys/PyCellStudio/bin/" t)
+PyCell Studio > Debug Existing Code
+OA Library Dir          := C:/pycell_studio/cndbg/MyTutorialLib
+[Create New Library]
+PyCell Code Package     := C:/pycell_studio/cndbg/MyTutorialPyCells
+TechFile                := C:/Program Files (x86)/Synopsys/PyCellStudio/tech/cni130/santanaTech/Santana.tech
+Layer Display Directory := C:/Program Files (x86)/Synopsys/PyCellStudio/tech/cni130/santanaDisplay
+*** log
+cnpy> 
+ ** Creating library 'MyTutorialLib' under 'C:\\pycell_studio\\cndbg\\MyTutorialLib'
+cnpy> 
+
+cnpy> 
+ ** Binding techfile
+cnpy> 
+
+cnpy> 
+ C:\Program Files (x86)\Synopsys\PyCellStudio\tech\cni130\santanaTech\Santana.tech
+cnpy> 
+
+cnpy> 
+
+cnpy> 
+ Please close the GUI window to terminate the program.
+cnpy> 
+
+cnpy> 

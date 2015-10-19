@@ -1,0 +1,278 @@
+* license
+> cnhxgui
+> CNI_SITE_EXTENSIONS is defined to /home/scratch.dgradin/users/rossa/site/helix/extensions
+Licensing failure: helix_gui : 2014.09  Please contact Synopsys support.
+[1]    Exit 1                        cnhxgui
+> which cnhxgui 
+/home/scratch.dgradin/users/rajivr/build/2014.09-2/bin/cnhxgui
+> printenv | grep LICENSE
+LM_LICENSE_FILE=5280@lic-9:5280@lic-8:5280@lic-10:5280@lic-15:5280@lic-16:/home/tools/admin/license_files:1819@lic-9:1819@lic-8:1819@lic-10:1711@lic-7:1711@lic-5:1711@lic-6:27000@nt-license1
+SNPSLMD_LICENSE_FILE=5280@synopsys-chamber-01:1711@lic-22:1711@sc-lic-21:1711@sc-lic-24:1711@lic-23:1711@lic-14
+NOVAS_IDLE_LICENSE_CHECKBACK=15
+NOVAS_IDLE_LICENSE_CHECKBACK_SILENCE=1
+> pwd
+pwd
+/home/scratch.dgradin/users/freshc/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+> 
+* TODO: new star: std::exception in Pattern preview (due to large # of devices?)
+* PNP22
+unsetenv PYTHONPATH ; unsetenv OA_PLUGIN_PATH
+cd /home/scratch.dgradin/users/<YOUR_UNIQUE_USER_ID>
+source /home/scratch.dgradin/users/rossa/env/setupenv <YOUR_UNIQUE_USER_ID> tsmc16
+cd helix
+gtar -zxf /home/scratch.dgradin/users/fresh/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx.tgz
+#git clone $RA/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+<fix lib.defs to point to the correct path for INCLUDE:>
+< INCLUDE /home/scratch.dgradin/users/girishv/tsmc16/design/cds.lib >
+<select cell: g5_bg_core_gm2xx>
+<preview pattern>
+Gives error: Preview Pattern - Exception, Invalid parameterized design
+
+* run info
+(+ 11 52 4 308 8 1 2 16 182 20 120)
+(+ 56 4 70 8 48 84 3 45 46)
+
+* STAR2
+1- source /home/scratch.dgradin/users/rossa/env/setupenv bbasaran tsmc16
+2- cd /home/scratch.dgradin/users/bbasaran/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+3- pyros -ld gfk_gddr_tsmc16ff_HLX/g5_bg_core_bias_dec_gm2xx/layout010
+
+
+pyros -ld gfk_gddr_tsmc16ff_HLX/g5_bg_core_bias_dec_gm2xx/layout010
+
+Design: gfk_gddr_tsmc16ff_HLX/g5_bg_core_bias_dec_gm2xx/layout010
+Status: Finished
+Ruleset: default
+Technology Version:
+Checked Rules: 237
+Total Errors: 2104
+User Time: 0:0:4.127
+System Time: 0:0:0.175
+
+Rule      NumDRV
+FIN.GRID  100
+M1.A.1    50
+PO.L.4.1  160
+PO.S.2.2  1k
+PO.W.2    660
+
+
+Ruleset: DFN
+Technology Version:
+Checked Rules: 241
+< Same result.. >
+
+* STAR1
+Universal FIN Grid: 48 nm vertical grid with 24 nm offset from cell boundary
+
+
+To reproduce, please do (in nVidia chamber):
+
+0- cd /home/scratch.dgradin/users/<yourname>
+1- source /home/scratch.dgradin/users/rossa/env/setupenv <yourname> tsmc16
+2- cd helix
+3- git clone $RA/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+4- cd /home/scratch.dgradin/users/<yourname>/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+5- time Helix.exe -D -f g5_bg_core_bias_dec_gm2xx
+
+
+Start time: Wed Jan  7 10:59:55 2015
+Helix(tm) -> Version:(J-2014.09-2) License version:(2014.09) build:(Dec 11 2014@22:27:20 LINUX 64BIT)
+Copyright (c) 1999-2014 Synopsys, Inc. All rights reserved.
+
+
+Source:
+0...10...20...30...40...50...60...70...80...90...100...
+
+I2 contains an internal pitch rule violation.
+
+vm_REPEATINST_I10-I8 contains an internal pitch rule violation.
+
+I2 contains an internal pitch rule violation.
+
+vm_REPEATINST_I10-I8 contains an internal pitch rule violation.
+
+I2 contains an internal pitch rule violation.
+
+
+Init time:  Wed Jan  7 11:00:31 2015
+
+Source: Top
+0...10...20...30...40...50...60...70...80...90...100...
+110...120...130...140...150...160...170...180...190...
+
+Solver time: Wed Jan  7 11:00:32 2015
+
+Solver completed.  Analyzing...
+
+Generating OA library...
+
+Generating Layout layout000
+
+0...
+.
+.
+.
+16...
+Generating Layout layout017
+17...
+
+Filtering OA library using cell selection filters...
+
+0...1...2...3...4...5...6...7...8...9...
+10...11...12...13...14...
+
+15 layout views generated for cell g5_bg_core_bias_dec_gm2xx.
+End time: Wed Jan  7 11:03:37 2015
+Job Completed!
+CPU time self: 0:2:1.470
+CPU time children: 0:0:0.000
+117.93user 4.55system 3:46.04elapsed 54%CPU (0avgtext+0avgdata 13423680maxresident)k
+0inputs+0outputs (2487major+871978minor)pagefaults 0swaps
+synopsys-chamber-04:scratch.dgradin/users/bbasaran/tsmc16/ms3>
+
+
+* Data
+
+0- cd /home/scratch.dgradin/users/<yourname>
+1- source /home/scratch.dgradin/users/rossa/env/setupenv <yourname> tsmc16
+2- cd helix
+3- git clone $RA/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+4- cd /home/scratch.dgradin/users/<yourname>/tsmc16/helix/gfk_gddr_tsmc16ff_g5_bg_gm2xx
+5- time Helix.exe -D -f g5_bg_core_bias_dec_gm2xx
+
+Start time: Wed Jan  7 10:59:55 2015
+Helix(tm) -> Version:(J-2014.09-2) License version:(2014.09) build:(Dec 11 2014@22:27:20 LINUX 64BIT)
+Copyright (c) 1999-2014 Synopsys, Inc. All rights reserved.
+
+
+Source: 
+0...10...20...30...40...50...60...70...80...90...100...
+
+I2 contains an internal pitch rule violation.
+
+vm_REPEATINST_I10-I8 contains an internal pitch rule violation.
+
+I2 contains an internal pitch rule violation.
+
+vm_REPEATINST_I10-I8 contains an internal pitch rule violation.
+
+I2 contains an internal pitch rule violation.
+
+
+Init time:  Wed Jan  7 11:00:31 2015
+
+Source: Top
+0...10...20...30...40...50...60...70...80...90...100...
+110...120...130...140...150...160...170...180...190...
+
+Solver time: Wed Jan  7 11:00:32 2015
+
+Solver completed.  Analyzing...
+
+Generating OA library...
+
+Generating Layout layout000
+
+0...
+.
+.
+.
+16...
+Generating Layout layout017
+17...
+
+Filtering OA library using cell selection filters...
+
+0...1...2...3...4...5...6...7...8...9...
+10...11...12...13...14...
+
+15 layout views generated for cell g5_bg_core_bias_dec_gm2xx.
+End time: Wed Jan  7 11:03:37 2015
+Job Completed!
+CPU time self: 0:2:1.470
+CPU time children: 0:0:0.000
+117.93user 4.55system 3:46.04elapsed 54%CPU (0avgtext+0avgdata 13423680maxresident)k
+0inputs+0outputs (2487major+871978minor)pagefaults 0swaps
+synopsys-chamber-04:scratch.dgradin/users/bbasaran/tsmc16/ms3> 
+
+
+
+Design: gfk_gddr_tsmc16ff_HLX/g5_bg_core_bias_dec_gm2xx/layout010
+Status: Finished
+Ruleset: default
+Technology Version:
+Checked Rules: 237
+Total Errors: 2104
+User Time: 0:0:4.127
+System Time: 0:0:0.175
+
+Rule      NumDRV
+FIN.GRID  100
+M1.A.1    50
+PO.L.4.1  160
+PO.S.2.2  1k
+PO.W.2    660
+
+
+Ruleset: DFN
+Technology Version:
+Checked Rules: 241
+< Same result.. >
+
+time Helix.exe -D -f g5_bg_core_bias_dec_gm2xx
+
+Start time: Wed Jan  7 10:59:55 2015
+Helix(tm) -> Version:(J-2014.09-2) License version:(2014.09) build:(Dec 11 2014@22:27:20 LINUX 64BIT)
+Copyright (c) 1999-2014 Synopsys, Inc. All rights reserved.
+
+
+Source: 
+0...10...20...30...40...50...60...70...80...90...100...
+
+I2 contains an internal pitch rule violation.
+
+vm_REPEATINST_I10-I8 contains an internal pitch rule violation.
+
+I2 contains an internal pitch rule violation.
+
+vm_REPEATINST_I10-I8 contains an internal pitch rule violation.
+
+I2 contains an internal pitch rule violation.
+
+
+Init time:  Wed Jan  7 11:00:31 2015
+
+Source: Top
+0...10...20...30...40...50...60...70...80...90...100...
+110...120...130...140...150...160...170...180...190...
+
+Solver time: Wed Jan  7 11:00:32 2015
+
+Solver completed.  Analyzing...
+
+Generating OA library...
+
+Generating Layout layout000
+
+0...
+.
+.
+.
+16...
+Generating Layout layout017
+17...
+
+Filtering OA library using cell selection filters...
+
+0...1...2...3...4...5...6...7...8...9...
+10...11...12...13...14...
+
+15 layout views generated for cell g5_bg_core_bias_dec_gm2xx.
+End time: Wed Jan  7 11:03:37 2015
+Job Completed!
+CPU time self: 0:2:1.470
+CPU time children: 0:0:0.000
+117.93user 4.55system 3:46.04elapsed 54%CPU (0avgtext+0avgdata 13423680maxresident)k
+0inputs+0outputs (2487major+871978minor)pagefaults 0swaps
+synopsys-chamber-04:scratch.dgradin/users/bbasaran/tsmc16/ms3> 

@@ -1,0 +1,3452 @@
+* Advanced node requirements
+- Disclaimer  : I assume DRC rule support will be there :-). Focusing on grid/track pattern support here..
+- Flow        : Place blocks/Plan&Assign IO/Place cells/Place devices
+- Device-level: RowStack + PNStack
+- Cell-level  : StdPart with A-B grid support
+- Block-level : Track pattern awareness (transparent "constraints")
+* blue screen again (:-)
+Problem signature:
+  Problem Event Name:	BlueScreen
+  OS Version:	6.1.7601.2.1.0.256.4
+  Locale ID:	1033
+
+Additional information about the problem:
+  BCCode:	1a
+  BCP1:	0000000000041790
+  BCP2:	FFFFFA800296FFD0
+  BCP3:	000000000000FFFF
+  BCP4:	0000000000000000
+  OS Version:	6_1_7601
+  Service Pack:	1_0
+  Product:	256_1
+
+Files that help describe the problem:
+  C:\Windows\Minidump\101915-9391-01.dmp
+  C:\Users\bbasaran\AppData\Local\Temp\WER-67127-0.sysdata.xml
+
+Read our privacy statement online:
+  http://go.microsoft.com/fwlink/?linkid=104288&clcid=0x0409
+
+If the online privacy statement is not available, please read our privacy statement offline:
+  C:\Windows\system32\en-US\erofflps.txt
+
+* decoder
+Gates:
+ InstTerminal(TerminalName(Gate) NetName(a)) 
+ InstTerminal(TerminalName(Gate) NetName(b)) 
+ InstTerminal(TerminalName(Gate) NetName(net44)) 
+ InstTerminal(TerminalName(Gate) NetName(net48)) 
+ InstTerminal(TerminalName(Gate) NetName(net64)) 
+ InstTerminal(TerminalName(Gate) NetName(net65)) 
+ InstTerminal(TerminalName(Gate) NetName(net66)) 
+ InstTerminal(TerminalName(Gate) NetName(net67)) 
+ InstTerminal(TerminalName(Gate) NetName(net68)) 
+ InstTerminal(TerminalName(Gate) NetName(net72)) 
+
+** NMOS:
+1		InstTerminal(TerminalName(Drain) NetName(I3|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+2		InstTerminal(TerminalName(Drain) NetName(net67))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I3|sd))
+5		InstTerminal(TerminalName(Drain) NetName(I2|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+6		InstTerminal(TerminalName(Drain) NetName(net44))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I2|sd))
+9		InstTerminal(TerminalName(Drain) NetName(I1|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+10		InstTerminal(TerminalName(Drain) NetName(net48))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I1|sd))
+13		InstTerminal(TerminalName(Drain) NetName(I0|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+14		InstTerminal(TerminalName(Drain) NetName(net68))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I0|sd))
+17		InstTerminal(TerminalName(Drain) NetName(net72))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+18		InstTerminal(TerminalName(Drain) NetName(net72))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(ss))
+21		InstTerminal(TerminalName(Drain) NetName(net64))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+22		InstTerminal(TerminalName(Drain) NetName(net64))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(ss))
+25		InstTerminal(TerminalName(Drain) NetName(net65))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+26		InstTerminal(TerminalName(Drain) NetName(net65))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(ss))
+29		InstTerminal(TerminalName(Drain) NetName(net66))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(ss))
+30		InstTerminal(TerminalName(Drain) NetName(net66))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(ss))
+33		InstTerminal(TerminalName(Drain) NetName(bit<0>))
+		InstTerminal(TerminalName(Gate) NetName(net72))
+		InstTerminal(TerminalName(Source) NetName(ss))
+35		InstTerminal(TerminalName(Drain) NetName(bit<1>))
+		InstTerminal(TerminalName(Gate) NetName(net64))
+		InstTerminal(TerminalName(Source) NetName(ss))
+37		InstTerminal(TerminalName(Drain) NetName(bit<2>))
+		InstTerminal(TerminalName(Gate) NetName(net65))
+		InstTerminal(TerminalName(Source) NetName(ss))
+39		InstTerminal(TerminalName(Drain) NetName(bit<3>))
+		InstTerminal(TerminalName(Gate) NetName(net66))
+		InstTerminal(TerminalName(Source) NetName(ss))
+41		InstTerminal(TerminalName(Drain) NetName(bit<4>))
+		InstTerminal(TerminalName(Gate) NetName(net67))
+		InstTerminal(TerminalName(Source) NetName(ss))
+43		InstTerminal(TerminalName(Drain) NetName(bit<5>))
+		InstTerminal(TerminalName(Gate) NetName(net68))
+		InstTerminal(TerminalName(Source) NetName(ss))
+45		InstTerminal(TerminalName(Drain) NetName(bit<6>))
+		InstTerminal(TerminalName(Gate) NetName(net48))
+		InstTerminal(TerminalName(Source) NetName(ss))
+47		InstTerminal(TerminalName(Drain) NetName(bit<7>))
+		InstTerminal(TerminalName(Gate) NetName(net44))
+		InstTerminal(TerminalName(Source) NetName(ss))
+
+** degree 1: 4+8 -> 6 chains
+NetName(net44)
+NetName(net48)
+NetName(net67)
+NetName(net68)
+NetName(bit<0>)
+NetName(bit<1>)
+NetName(bit<2>)
+NetName(bit<3>)
+NetName(bit<4>)
+NetName(bit<5>)
+NetName(bit<6>)
+NetName(bit<7>)
+
+degree 2:
+NetName(I0|sd)
+NetName(I1|sd)
+NetName(I2|sd)
+NetName(I3|sd)
+NetName(net64)
+NetName(net65)
+NetName(net66)
+NetName(net72)
+
+ss has degree 20
+
+** PMOS
+*** degree 1 (8 + 4) -> 6 pmos chains 
+net64
+net65
+net66
+net72
+
+bit<0>
+bit<1>
+bit<2>
+bit<3>
+bit<4>
+bit<5>
+bit<6>
+bit<7>
+
+I4|sd
+I4|sd
+
+I5|sd
+I5|sd
+
+I6|sd
+I6|sd
+
+I7|sd
+I7|sd
+
+net44
+net44
+
+net48
+net48
+
+net67
+net67
+
+net68
+net68
+
+degree 22:
+dd
+
+3		InstTerminal(TerminalName(Drain) NetName(net67))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+4		InstTerminal(TerminalName(Drain) NetName(net67))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(dd))
+7		InstTerminal(TerminalName(Drain) NetName(net44))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+8		InstTerminal(TerminalName(Drain) NetName(net44))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(dd))
+11		InstTerminal(TerminalName(Drain) NetName(net48))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+12		InstTerminal(TerminalName(Drain) NetName(net48))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(dd))
+15		InstTerminal(TerminalName(Drain) NetName(net68))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+16		InstTerminal(TerminalName(Drain) NetName(net68))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(dd))
+19		InstTerminal(TerminalName(Drain) NetName(I7|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+20		InstTerminal(TerminalName(Drain) NetName(net72))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I7|sd))
+23		InstTerminal(TerminalName(Drain) NetName(I6|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+24		InstTerminal(TerminalName(Drain) NetName(net64))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I6|sd))
+27		InstTerminal(TerminalName(Drain) NetName(I5|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+28		InstTerminal(TerminalName(Drain) NetName(net65))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I5|sd))
+31		InstTerminal(TerminalName(Drain) NetName(I4|sd))
+		InstTerminal(TerminalName(Gate) NetName(b))
+		InstTerminal(TerminalName(Source) NetName(dd))
+32		InstTerminal(TerminalName(Drain) NetName(net66))
+		InstTerminal(TerminalName(Gate) NetName(a))
+		InstTerminal(TerminalName(Source) NetName(I4|sd))
+34		InstTerminal(TerminalName(Drain) NetName(bit<0>))
+		InstTerminal(TerminalName(Gate) NetName(net72))
+		InstTerminal(TerminalName(Source) NetName(dd))
+		InstTerminal(TerminalName(Sub) NetName(dd))
+36		InstTerminal(TerminalName(Drain) NetName(bit<1>))
+		InstTerminal(TerminalName(Gate) NetName(net64))
+		InstTerminal(TerminalName(Source) NetName(dd))
+38		InstTerminal(TerminalName(Drain) NetName(bit<2>))
+		InstTerminal(TerminalName(Gate) NetName(net65))
+		InstTerminal(TerminalName(Source) NetName(dd))
+40		InstTerminal(TerminalName(Drain) NetName(bit<3>))
+		InstTerminal(TerminalName(Gate) NetName(net66))
+		InstTerminal(TerminalName(Source) NetName(dd))
+42		InstTerminal(TerminalName(Drain) NetName(bit<4>))
+		InstTerminal(TerminalName(Gate) NetName(net67))
+		InstTerminal(TerminalName(Source) NetName(dd))
+44		InstTerminal(TerminalName(Drain) NetName(bit<5>))
+		InstTerminal(TerminalName(Gate) NetName(net68))
+		InstTerminal(TerminalName(Source) NetName(dd))
+46		InstTerminal(TerminalName(Drain) NetName(bit<6>))
+		InstTerminal(TerminalName(Gate) NetName(net48))
+		InstTerminal(TerminalName(Source) NetName(dd))
+48		InstTerminal(TerminalName(Drain) NetName(bit<7>))
+		InstTerminal(TerminalName(Gate) NetName(net44))
+		InstTerminal(TerminalName(Source) NetName(dd))
+		InstTerminal(TerminalName(Sub) NetName(dd))
+* MINUTES:
+
+They liked it overall. 
+
+Attendees: Barry, Fred, John and Bulent
+Barry: Can use the "Origin" field/param of insts/fig-groups. 
+Jon: The platform needs to support origin better for fig-groups.
+Barry/Jon: Track Assistant to have a new tab? Grid Assistant?
+Barry: A selected sub-set per design: Allowed p-grids
+Barry: No track patterns in tech/design, still get a set of default p-grids
+Barry: Auto assignment of decorators to many instances?
+Fred: This is done by bottom up construction.. 
+Bulent: When there is no routing, user intervention is needed now. Based on size and pin count, we might estimate routing complexity and the number of layers to be used..
+Barry: This proposal concerns not only UCM, but also infrastructure and technology groups. They need to be informed. Minutes to be sent to Randy..
+Fred/Jon: Also LE needs to be involved to support p-grids
+Jon: Check with MSIP whether they would be interested in p-grids.
+Fred: Should we go public about it, or keep quiet for now (and leave the other guys behind)?
+Fred: Look into scheduling.. Stan have already stated that the team is overbooked.
+Jon: Pins/tracks have a dimension based tagging, there is request to have a "strength" field and the tool to do a regex on it.. But, could also be a number (from supply lines)
+
+* oa in Maxwell!
+set lcv "reference40nm  nh_4t  layout
+set design [eval oa::DesignOpen $lcv a]
+
+set top [oa::getTopBlock $design]
+
+set shapes [oa::getShapes $top]
+
+while {[set shape [oa::getNext $shapes]] != ""} {
+    set prop [oa::PropFind $shape pycAbutRules]
+    if {$prop != ""} {
+       oa::setName $prop pycADTAbutRules
+    }
+}
+oa::save $design
+
+* Weekly scratch
+** Call it: "weekly report" and kime yollayacagimi biliyom :-)
+** 2015.10.26
+** 2015.10.19
+
+Summary:
+
+[+] Prepared a presentation on Advanced Node Requirements on Layout Automation and presented to Nishath's OPS
+[+] Attended Anoop's presentation on Monday and participated track pattern discussion on Friday
+[+] ETO on Tue/Wed
+[+] Investigated in berry a new issue Girish encountered at Intel and filed a STAR: 9000961819- PNStack does not abut correctly with abutDiffWidth
+[+] Had some email conversations with Jon/Barry/Randy on p-grid requirements on platform. Asked a number of questions and awaiting answers
+[+] Attended triage meeting
+
+Plan:
+    - Read Girish's req doc on apFigGroup
+    - Follow up on p-grid and t-pattern proposals
+    - Investigate 10nm ref PDK from Jimmy
+    - Trunk generation to visualize routing complexity in row-based device placement
+    - Is it possible to get good estimate of maximum abutment and alignment for PNStack?
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+
+** 2015.10.12
+*** Emailed
+Worked on:
+
+[+] SP1      : Demo of fixed figGroup support
+
+    - Also filed 5 STARs observed during the prep work
+
+[+] Intel MIP: PNStack abutment/alignment
+
+    - Investigated decoder results from PNStack; reported findings and expectations
+    - Added new test-case with PermuteRule param to STAR: 9000952651- PNStack support for AbutmentType auto2 (S/D swapping)
+    - Investigated issues with multi-row PNStack and reproduced in SNPS
+    - Updated 5 older STARs on PNStack and prioritized those relevant to MIP
+
+[+] 16.06    : Track pattern/p-grid proposal
+
+    - Conversed with Jon to clarify p-grid definitions in oaTech-extension..
+    - Brief discussion with Yakov, earlier 2:1 with Girish and Yakov
+
+[+] Misc.
+
+    - ETO on Friday
+    - Meeting with Indushekhar
+    - Created STAR on "Pin master missing error" from PNStack on NVDA10nm
+    - Put together a Pyros/Maxwell session for Ming to view cut-poly/cut-diff related params in NVDA10
+
+Plan:
+    - ETO on Tue and Wed
+    - Intel ICF presentation from Anoop
+    - Read the fspec on track regions and p-grids from Jon.
+    - Visualize routing complexity in row-based device placement
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+
+Regards,
+Bulent
+*** Details:
+Updated STARs on PNstack:
+New: STAR: 9000958660- PNStack MinRows param is not honored in one layout (and has illegal overlaps)
+Closed: STAR: 9000758081- Params to globally set various PNStack options
+Updated target. Fwd to Girish. STAR: 9000758019- Enhance constraint compiler to auto create PNStack PRow/NRow
+Added doc. Fwd to Matthew : STAR: 9000861621- Multi Row PNStack constraint cannot be created from Helix GUI
+Fwd to Girish. STAR: 9000757541- Enhance PNStack to improve nwell sharing in StructuredPartition
+
+TODO: UCM constraints to support p-grid type in spacing values
+
+Code a multi-row device "router". Trunk generator really..
+Code a multi-row device placer.. SA based basic decisions.. 
+  Use the trunk generator..
+  Decoder as test..
+
+Ideas from decoder test:
+  1- Penalize heavily when num chains > optimum.
+  2- Find the chromatic number (using both gate and S/D connections) and minimize.. Penalize missed alignments?
+  3- Device-level routing in Maxwell!
+
+Bunch of issues were encountered during demo prep. Filed some:
+STAR: 9000957761- PRBoundary and Blockage shapes in reference LCV to be honored
+STAR: 9000957730- Space between two fixed fig-groups are not utilized
+STAR: 9000957728- Auto check out license for GCP and disable GCP command(s) on read-only designs
+STAR: 9000957726- Implicit top partition is not created
+STAR: 9000957724- Sort the results in GCP Placement Results pane (with fixed fig-groups)
+
+Ideas:
+1- Variants based on pin-pattern
+2- Transparent constraints
+3- Top-down fixes with iteration (compaction)
+4- On the fly flattening
+
+Long 1:1 w/ Girish.. CustomConstruction or not? oaTcl+smartTcl NOT new tcl api for all of santana..
+  Origin in the mixed case requires a new param for p-grid intent: expand bbox to consider
+Investigate the new MIP test-case in berry (nand3_inv)
+Compile test-cases for Joe from recetn ones in SNPS and Berry including the latest nand3_inv from Girish under one tar (two run dirs).
+Discussed with Girish the need to create multiple solutions: maximize abut, maximize align, trade-off.. + filter non-dominant solutions
+Discussion re: patent new GCP features: transparent constraints, t-pattern aware variant generation
+** Weekly scratch 2015.10.05
+*** emailed
+Worked on the following:
+[+] 16.06    : Track pattern/p-grid proposal
+[+] Intel MIP: PNStack abutment/alignment: STARs: 9000947003, 9000952651, 9000956435(new)
+[+] Misc.    : 
+    - STAR: 9000956440- Row has DRCs with abutDiffWidth
+    - Finished required IP/Confidential Info training
+
+Plan:
+[-] Intel MIP: New issues (nand3_inv, decoder1, multi-row)
+[-] SP1      : Demo of fixed figGroup support
+[-] Misc.    :
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+    - Test topology re-use engine
+
+Regards,
+Bulent
+*** details omitted
+Meeting..
+
+As per Ming's request..
+STAR: 9000956440- Row has DRCs with abutDiffWidth
+
+reproduced crash in berry by creating a flat decoder test-case
+STAR: 9000956435- PNStack seg faults with dynamic alignment
+
+Finish required IP/Confidential Info training
+
+Revise the proposal, organize meeting
+
+Discussions with Girish re: StdCell A-B grids
+
+Discussions with Girish and Joe re: STAR: 9000947003 - PNStack does not abut transistors as needed
+
+Two new test-cases: nand and nor..
+
+Revise the proposal slides based on input from Siarhei and Girish
+
+A lot more discussion on details of p-grids and whether/how to mix track patterns and p-grids
+*** scratch
+Worked on the following:
+[+] 16.06    : Track pattern/p-grid proposal
+[+] Intel MIP: PNStack abutment/alignment: STARs: 9000947003, 9000952651, 9000956435
+[+] SP2      : STAR: 9000956440- Row has DRCs with abutDiffWidth
+
+Plan:
+[-] Intel MIP: New issues (nand3_inv, decoder1, multi-row)
+[-] SP1      : Demo of fixed figGroup support
+[-] 16.06    : Track pattern/p-grid proposal
+
+** Weekly scratch 2015.09.28
+
+Worked on the following:
+[+] 16.06    : Track pattern/p-grid proposal
+[+] Intel MIP: PNStack abutment/alignment: STARs: 9000947003 and 9000952651
+[+] SP1      : fixed figGroup support
+[+] SP2      : tested and created STARs on McpPartition
+
+Plan:
+[-] 16.06    : Revise the proposal and present to platform team
+[-] Intel MIP: More testing (basic NAND/NOR)
+[-] Misc     :
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+  - Test topology re-use engine
+
+Details:
+  - STAR: 9000952651- PNStack support for AbutmentType auto2 (S/D swapping)
+  - STAR: 9000954672- PackedPartition with boundary association creates corrupt/empty layout
+  - STAR: 9000954673- Partition (MCP) with boundary association creates duplicate layouts
+  - Discussions and 1:1s w/ Siarhei, Oleg, Joe, Prashant and Mirko
+  - Attended Jimmy's presentation on methodology storyboards
+  - AMS seminar, OPS, Team, 2:1, 1:1
+  - Berry build/env issues
+
+** Weekly scratch 2015.09.21
+[15.09SP1]
+
+Had some discussions with team members to clarify fixed/locked fig-group
+support. Prashant committed to delivering his part this week. Thanks!
+
+
+[16.06]
+
+Coordinated bunch of meetings/discussions to focus on track pattern
+support. Put together some slides to help bring the team on one page. 
+We are not there yet, but, there has been some progress.
+
+Came up with rough task breakdown and even rougher effort estimates for two
+16.06 projects: track pattern support, UCM-GCP mismatch.
+
+
+[Intel MIP] 
+
+Created a suite of test-cases in SNPS to reproduce, investigate and clarify
+how PNStack fails to maximize abutment due to "hard pin-alignment"
+constraints. Encountered an issue and will capture as a new enhancement in
+PNStack to support auto2 type of abutment (to automatically swap
+source/drain terminals).
+
+MIP: Created STAR: 9000950214- Partition with boundary association
+
+
+[StdPart/Altera/Berry]
+
+Inspected and re-goldened six StdPart tests in berry due to Joe's fix for
+StdPart boundary assocication.
+
+
+[Plan]
+
+File STAR on PNStack to support for source/drain terminal swapping
+
+Finalize task breakdown and estimates for top-down planning and nested figGroup support
+
+Review specs on wide-alignment, uniform track patterns and inst snapping
+
+Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+
+Test topology re-use engine
+
+** Weekly scratch 2015.09.14
+*** EMAILED:
+[Intel MIP]
+
+PNStack: Put together a number of slides to summarize recent observations and
+thoughts. Earlier, created and ran more, relevant test-cases in berry using
+14nm data. And earlier before, had some 1:1 discussions with Girish and Joe
+[Ref: 9000947003].
+
+Boundary Association: Had various conversations with Girish, Mirko and
+Joe. Did more testing to root cause issues. Seems that there are many
+inaccuracies in both the documentation and the current implementation. One
+good piece of news is that 9000947007 (on StdPart) is already fixed
+[Ref: 9000947009].
+
+
+[Intel DTS]
+
+Sent info on the new release (2015.09) to Jose. This release might also
+address the crash in symmetry, or shed more light on it..
+
+
+[Intel ICF/Altera]
+
+Have not heard back from Lyndon yet. 
+
+
+[Support for 0x fixed/locked figGroup/symmetry]
+
+Had good discussions with Prashant and Joe to coordinate the efforts.
+Thanks a lot to Prashant for helping with the translator side of things.
+We also discussed and clarified how to handle symmetric groups and
+soft-clusters. 
+
+
+[Maxwell misc.]
+
+Reviewed the updates to the UCM fspec and participated in the review
+meeting with Barry. 
+
+
+[Plan]
+
+Create STAR on "boundary association" support in Partition. 
+
+Work on estimates for four areas of focus for 16.06.
+
+Work on proposal for Track Pattern/Modular Grid support in 16.06.
+
+Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+
+Test topology re-use engine
+
+
+
+Regards,
+Bulent
+
+
+
+*** SCRATCH
+[Intel MIP]
+
+PNStack: Put together a number of slides to summarize recent observations and
+thoughts. Earlier, created and ran more, relevant test-cases in berry using
+14nm data. And earlier before, had some 1:1 discussions with Girish and Joe
+[Ref: 9000947003].
+
+Boundary Association: Had various conversations with Girish, Mirko and
+Joe. Did more testing to root cause issues. Seems that there are many
+inaccuracies in both the documentation and the current implementation. One
+good piece of news is that 9000947007 (on StdPart) is already fixed
+[Ref: 9000947009].
+
+
+[Intel DTS]
+
+Sent info on the new release (2015.09) to Jose. This release might also
+address the crash in symmetry, or shed more light on it..
+
+
+[Intel ICF/Altera]
+
+Have not heard back from Lyndon yet. 
+
+
+[Support for 0x fixed/locked figGroup/symmetry]
+
+Had good discussions with Prashant and Joe to coordinate the efforts.
+Thanks a lot to Prashant for helping with the translator side of things.
+We also discussed and clarified how to handle symmetric groups and
+soft-clusters. 
+
+
+[Maxwell misc]
+
+Reviewed the updates to the UCM fspec and participated in the review
+meeting with Barry. 
+
+
+[Plan]
+
+Create STAR on "boundary association" support in Partition. 
+
+Work on estimates for four areas of focus for 16.06.
+
+Work on proposal for Track Pattern/Modular Grid support in 16.06.
+
+Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+
+Test topology re-use engine
+
+
+** Weekly scratch
+
+[Intel ICF/Altera]
+
+Had conversations with Joe, Girish, Mayank and Ming re: the new requirement
+on gridded StdPartition. Emailed Lyndon to get feedback on our current
+thinking about the problem and the interface to support.
+
+
+[Intel DTS]
+
+Intel DTS reported a crash in Partition with symmetry. Tried to reproduced
+in house using the releae used by Intel (2014.09SP1-3), but failed.
+
+They could not give us the 10nm test-case. So, provided a number of
+suggestions to work around the crash. One of them provided a different
+stack trace. Identified another option and communicated to Intel. Waiting
+for their response.
+
+While trying to reproduce, encountered a problem and filed STAR:
+9000946339- Partition with groups not to abut devices by default.
+
+Earlier provided symmetry and ECO slides to Jose and answered some
+technical questions.
+
+Also filed a STAR on the issue I observed with non-disjoint symmetric
+groups create: STAR: 9000945863- Partition with non-disjoint groups goes
+into infinite loop
+
+
+[Intel MIP]
+
+Tried to clarify for Mirko the request from Girish on boundaryassoc need on
+left/right for Column.
+
+Provide a test case to Girish to demonstrate how to use Partition with
+groups + CustomSpacing with DRC/short-aware and abut devices. This could be
+an alternative to StructuredPartition of PNStacks which had some issues.
+
+Worked on another Intel MIP issue with StdPart of PNStacks, where there is
+one PNStack per row and it hits an infeasibility. Discussed further with
+Girish and Joe. Created STAR: 9000946288- StructuredPartition gives an
+internal error message.
+
+
+[Abutment]
+
+Investigated two abutment related issues in presense of dummy poly. Put
+together a slide to clarify the need to share dummy poly. Thanks to Girish
+for his slide that shows when dummy poly needs to be automatically removed
+to share diffusions.
+
+
+[10nm]
+
+Created a STAR to track issue observed in 10nm ref PDK: 9000945834-
+Incorrect exception thrown in SDL flow -- looking for lib property map.
+
+Created a more complex Helix test case (with both NMOS and PMOS) on nvda10
+PDK. Sent to Siarhei. With latest version of the tech file, DRC result
+looks good.
+
+Also tested PNStack on nvda10. Got a "Pin master missing error". Informed
+Joe. Will file a STAR next.
+
+
+[Support for 0x fixed/locked figGroup/symmetry]
+
+Set up a simpler test-case with locked group and ran GCP to show Joe that
+it is preserved as a group-ucell. Also showed him how to run gcp executable
+from shell directly.
+
+As per Joe's request, pointed out code/entry point to top-level solver
+
+
+[Modular Grid/Track Pattern]
+
+Gave a presentation to Fred and Randy. In preparation for it, reviewed the
+latest communication between Girish and various team mates and Lyndon. And,
+had conversations w/ Girish re: Gridding Decorator Intent (yet to be
+defined in UCM).
+
+
+[Misc]
+
+Helped Siarhei with partial checkouts in CVS and also investigated the data
+in repository and suggested how to reduce the full check out time.
+
+Updated ReadMe in Berry regressions with info on incremental check outs.
+
+Reviewed release notes for Helix and Pycell Studio.
+
+OPS meeting
+
+2:1 sync
+
+
+[Plan]
+
+Labor day holiday
+
+File STAR on "Pin master missing error" from PNStack on NVDA10nm
+
+Review UCM fspec updates
+
+Modular grid discussions
+
+Symmetry and fig group on top-level components
+
+Test topology re-use engine
+
+Review track region spec in Maxwell
+
+
+* berry for joe and more on MIP test-cases
+gtar -zxf /remote/stars/testcases/9000954673/test/pnstack_with_boundary_assoc/flattened_decoder.tgz
+cd flattened_decoder/
+make run
+make p
+
+[us01berryit005][tmp] % gtar -zxf /berry/secure18/m1119/bbasaran/for_joe/mip_tests_for_joe.tgz 
+[us01berryit005][tmp] % cd tests_for_joe/ 
+[us01berryit005][tests_for_joe] % ls 
+decoder  flattened_decoder 
+[us01berryit005][tests_for_joe] % ls decoder/*.hxdsn 
+decoder/2p1nchain.hxdsn  decoder/nand1.hxdsn      decoder/nor1.hxdsn 
+decoder/decoder1.hxdsn   decoder/nand3_inv.hxdsn  decoder/test1.hxdsn 
+[us01berryit005][tests_for_joe] % ls flattened_decoder/decoder.hxdsn 
+flattened_decoder/decoder.hxdsn 
+[us01berryit005][tests_for_joe] % 
+* berry for_joe..
+[Action #1: Save, Compile And Run Current Constraints]
+[Action #2: Run Helix]
+Error: Running Helix:, Error: bb_test1 node does not exist!
+"SystemExit: -1" 
+Error: Could not load /slowfs/amsgcn1/net/apps/ciranova/nightly/helix_qsck_2015.09/opt/linux_rhel40_64/install_helix/pylib/PyHelix/LoadGraph.pyc
+* weekly scratch
+###########################################
+Bulent
+#################
+=== Summary ===
+
+[+] Managing general release activities during Ming's FTO.  
+[+] Maintenance of more than 30 test-cases in Berry-farm.
+[+] Work on various issues observed at Intel by Girish. Details below.
+[+] Work on 10nm NVDA skill PDK and internal reference PDK
+[+] Support Biying on topology re-use project
+[+] Please note that this weekly covers the period since August 3rd. So,
+there are lots of detail below. 
+
+=== Details ===
+
+[2015.09 Release (standalone)]
+
+[+] Inspected the three failures in PNStack in berry using release
+package. They look OK. Thanks to Siarhei for keeping a local copy of
+goldens for these for future runs. 
+[+] Verified that one PNStack test in berry fails release package but
+passes nightly. 
+[+] Inspected the failure in PV regressions due to Oleg's latest fix. Looks
+good. Requested re-goldening. 
+[+] Built main latest and tested 14 failures in harness. Ran tests again
+after Oleg's fix. Observed that DRC spacing is not sufficient. Informed Oleg.
+[+] Re-ran 11 failures reported by Siarhei in berry. Corrected two failures
+due to goldens based on a previous RedHat run. 
+[+] Investigated two failures from Siarhei. One is due to a bad golden
+file. I fixed it. The other is an out of date golden file in Siarhei's
+sandbox. Informed him. 
+[+] Investigated remaining failures in my full run. All are due to
+out-of-date goldens.. Realized that regression script was overriding CVS
+files. Informed Prashant who fixed the issue. 
+[+] Investigated and re-goldened 35 test-cases various times due to changes in
+AVP/MCP (one due to enhancement for smaller test-cases, two due to support
+for layers without min-spacing rule in santana-tech). 
+[+] Confirmed that the remaining 6 regressions in Berry are not due to
+StructuredPartition. Asked Siarhei to roll-back to help identify the
+culprit. Thanks a lot, Siarhei! 
+[+] Provided info to Matthew regarding AlignBoundaryLayersToAxis in
+presence of Frame constraint. Reviewed latest draft from Matthew on
+symmetry in Partition, StructuredPartition, CustomSpacing and provided
+further feedback. 
+
+[Intel]
+
+[+] Reproduced the problem with CustomSpacing with short-awareness reported
+by Girish. Filed a showstopper: STAR: 9000942079- CustomSpacing
+CorrectAfterForDrc creates a short. After getting hints from Oleg,
+tried to work around by updating Santana tech. However, noticed that we
+still get DRCs after short is eliminated. This was also later fixed by
+Oleg. 
+[+] Created a test-case to reproduce a problem Girish observed at Intel
+with a branch-clone of PNStack. Filed STAR: 9000940730- BranchClone does
+not work with PNStack . 
+[+] Tried to reproduce PNStack abutment problem Girish observed at
+Intel on 14nm. Created a similar chain of 5 inverters in house. It worked with
+cni130. Requested a test-case in berry.. After getting the test-case,
+reproduced it and informed Joe how to understand the shorts (STAR:
+9000939940- PNStack creates shorts.) Also suggested a temporary fix to Joe
+after he debugged and informed that ndiff/pdiff spacing info was missing in
+Santana.tech. Had discussions with Siarhei and Mirko, who helped with
+existing API in Helix to compute minimum spacing when Santana.tech does not
+provide an explicit API. Joe later improved his code fix making use of
+Mirko's pointer. Thanks to all!
+[+] While working on the PNStack abutment problem above, observed that with
+the recent AbutDiffWidth option, PNStack abutment has some issues. Created
+new STAR: 9000941136- PNStack AbutDiffWidth option has errors.
+[+] Had some discussions w/ Girish on Intel MIP evaluation the nature of
+the test-case, various options we have, some of which are more experimental
+in nature. Sent him the latest schema for Partition with soft groups. Next,
+planning to put together a sample test-case in house for further piloting.
+[+] Discussions to converge on various technical challenges: 
+  -- Altera cell placement flow requirement (native STD-cell gridding) --
+  with Joe, Girish and Ming 
+  -- Pin placement for ICF and Maxwell (handling pin constraints and
+  terminal constraints with/without edge assignment) with Kumar and
+  Girish. 
+  -- Row-stack automation review, next steps with Kumar and Girish
+[+] Reviewed the pin spec from Girish
+[+] Review Track Pattern slides from Girish
+
+[Maxwell]
+
+[+] After Mirko's report that there needs to be a fixed or locked element
+for a GroupUCell to be create from an figGroup, I updated the STAR data to
+have a locked elem in the figGroup. However, Joe still reports that there
+are no GroupUCell's. Need to debug with Mirko further: (STAR: 9000920785-
+CDPV:: the locked oaFigGroup is treated as normal oaFigGroup.)
+[+] Helped Yakov with purify build of gcp (gcp-pg) from SWE
+[+] Reviewed and provided feedback on Barry's spec to handle dummies. 
+[+] Discussions with Girish, Barry and Ming re: UCM-GCP priorities and
+custom-construction. 
+[+] Discussion w/ Girish/Mirko on SED generated constraints for CMOS and
+its support by PNStack. Earlier, reviewed the req slides Girish forwarded
+to me. 
+[+] Put together a table to manage MLK's based on the last two runs.
+
+[10nm readiness]
+
+[+] Set up Helix to enable a first run on 10nm nvda10 on Samsung secure
+machine. Used Schematic driven (SDL) flow, however, bypassed some of the
+setup details cndfls requires, by manually configuring the hxnet
+files. Observed various DRC errors on a purely NMOS test-case with one Row.
+The DRC seem to be internal to pcells from the PDK. Informed Siarhei. Next,
+planning to create another, slightly more complex test-case with NMOS +
+PMOS. The first had only NMOS..  
+[+] Worked on NVDA10 PCX setup. Got inconsistent versions for PCX, CD and
+Maxwell. Worked with Prashant and Ming to fix the setup using 2014.12-SP2-2 
+version of CD and 2014.09-SP1-1 version of Helix built with GCC 4.72.
+[+] Provided info on 10nm ref pdk to Siarhei. 10nm test-case with one Row
+has four issues. Sent test-case to Siarhei. Siarhei pointed out the problem
+with the usage, and has also fixed one of the issues. I need to file a STAR
+for one of the other minor issues. 
+
+
+[Topology re-use]
+
+[+] Did a detailed code review w/ Biying before she left.
+[+] Provided a test-case with StartLayout option (ECO) to Biying..
+[+] Provided a test-case with non-slicing placement..
+[+] Reviewed Biying's report and respond to her questions.
+[+] Had a 1:1 w/ Girish regarding the topology re-use project and requirements
+[+] Had conversations with Biying regarding handling non-slicing floor-plans..
+
+
+[Misc]
+
+[+] Attended core team meetings during Ming's ETO. 
+[+] Updated STARs as per triage meetings. 
+[+] Compiled modular grid/routing track related docs/specs and sent out to
+Siarhei. 
+[+] Reviewed track region spec in Maxwell. 
+[+] Queried CRM to identify SP1 tasks and informed Siarhei as per his request.
+[+] Studied a presentation on Viper: spatially sorted layout files.
+[+] ETO: Aug 5/6 (feels like ages ago!)
+
+[Plan]
+
+[-] Develop and communicate spec to address ICF's requirement on gridded StdPart.
+[-] 10nm NVIDIA -- Create a more complex test case (with both NMOS and PMOS)
+[-] Fixed/Locked figGroup related STARs
+[-] File a STAR on the issue I observed with non-disjoint symmetric groups
+[-] Symmetry on top-level components
+[-] Internal test-case and piloting for Intel MIP
+[-] Review track region spec in Maxwell
+[-] Update ReadMe in Berry regressions with info on incremental check outs
+
+** scratch **
+
+=== Summary ===
+
+[+] Managing general release activities during Ming's FTO.  
+
+[+] Maintenance of more than 30 test-cases in Berryfarm.
+
+[+] Work on various issues observed at Intel by Girish. Details below.
+
+[+] Work on 10nm NVDA skill PDK and internal reference PDK
+
+[+] Support Biying on topology re-use project
+
+[+] Please note that this weekly covers the period since August 3rd. So,
+there are lots of detail below. 
+
+
+=== Details ===
+
+
+[2015.09 Release (standalone)]
+
+[+] Inspected the three failures in PNStack in berry using release
+package. They look OK. Thanks to Siarhei for keeping a local copy of
+goldens for these for future runs. 
+
+[+] Verified that one PNStack test in berry fails release package but
+passes nightly. 
+
+[+] Inspected the failure in PV regressions due to Oleg's latest fix. Looks
+good. Requested re-goldening. 
+
+[+] Built main latest and tested 14 failures in harness. Ran tests again
+after Oleg's fix. Observed that DRC spacing is not sufficient. Informed Oleg.
+
+[+] Re-ran 11 failures reported by Siarhei in berry. Corrected two failures
+due to goldens based on a previous RedHat run. 
+
+[+] Investigated two failures from Siarhei. One is due to a bad golden
+file. I fixed it. The other is an out of date golden file in Siarhei's
+sandbox. Informed him. 
+
+[+] Investigated remaining failures in my full run. All are due to
+out-of-date goldens.. Realized that regression script was overriding CVS
+files. Informed Prashant who fixed the issue. 
+
+[+] Investigated and re-goldened 35 test-cases various times due to changes in
+AVP/MCP (one due to enhancement for smaller test-cases, two due to support
+for layers without min-spacing rule in santana-tech). 
+
+[+] Confirmed that the remaining 6 regressions in Berry are not due to
+StructuredPartition. Asked Siarhei to roll-back to help identify the
+culprit. Thanks a lot, Siarhei! 
+
+[+] Provided info to Matthew regarding AlignBoundaryLayersToAxis in
+presence of Frame constraint. Reviewed latest draft from Matthew on
+symmetry in Partition, StructuredPartition, CustomSpacing and provided
+further feedback. 
+
+
+
+[Intel]
+
+[+] Reproduced the problem with CustomSpacing with short-awareness reported
+by Girish. Filed a showstopper: STAR: 9000942079- CustomSpacing
+CorrectAfterForDrc creates a short. After getting hints from Oleg,
+tried to work around by updating Santana tech. However, noticed that we
+still get DRCs after short is eliminated. This was also later fixed by
+Oleg. 
+
+[+] Created a test-case to reproduce a problem Girish observed at Intel
+with a branch-clone of PNStack. Filed STAR: 9000940730- BranchClone does
+not work with PNStack . 
+
+[+] Tried to reproduce PNStack abutment problem Girish observed at
+Intel on 14nm. Created a similar chain of 5 inverters in house. It worked with
+cni130. Requested a test-case in berry.. After getting the test-case,
+reproduced it and informed Joe how to understand the shorts (STAR:
+9000939940- PNStack creates shorts.) Also suggested a temporary fix to Joe
+after he debugged and informed that ndiff/pdiff spacing info was missing in
+Santana.tech. Had discussions with Siarhei and Mirko, who helped with
+existing API in Helix to compute minimum spacing when Santana.tech does not
+provide an explicit API. Joe later improved his code fix making use of
+Mirko's pointer. Thanks to all!
+
+[+] While working on the PNStack abutment problem above, observed that with
+the recent AbutDiffWidth option, PNStack abutment has some issues. Created
+new STAR: 9000941136- PNStack AbutDiffWidth option has errors.
+
+[+] Had some discussions w/ Girish on Intel MIP evaluation the nature of
+the test-case, various options we have, some of which are more experimental
+in nature. Sent him the latest schema for Partition with soft groups. Next,
+planning to put together a sample test-case in house for further piloting.
+
+[+] Discussions to converge on various technical challenges: 
+  -- Altera cell placement flow requirement (native STD-cell gridding) --
+  with Joe, Girish and Ming 
+  -- Pin placement for ICF and Maxwell (handling pin constraints and
+  terminal constraints with/without edge assignment) with Kumar and
+  Girish. 
+  -- Row-stack automation review, next steps with Kumar and Girish
+
+[+] Reviewed the pin spec from Girish
+
+[+] Review Track Pattern slides from Girish
+
+
+
+[Maxwell]
+
+[+] After Mirko's report that there needs to be a fixed or locked element
+for a GroupUCell to be create from an figGroup, I updated the STAR data to
+have a locked elem in the figGroup. However, Joe still reports that there
+are no GroupUCell's. Need to debug with Mirko further: (STAR: 9000920785-
+CDPV:: the locked oaFigGroup is treated as normal oaFigGroup.)
+
+[+] Helped Yakov with purify build of gcp (gcp-pg) from SWE
+
+[+] Reviewed and provided feedback on Barry's spec to handle dummies. 
+
+[+] Discussions with Girish, Barry and Ming re: UCM-GCP priorities and
+custom-construction. 
+
+[+] Discussion w/ Girish/Mirko on SED generated constraints for CMOS and
+its support by PNStack. Earlier, reviewed the req slides Girish forwarded
+to me. 
+
+
+[+] Put together a table to manage MLK's based on the last two runs.
+
+
+
+[10nm readiness]
+
+[+] Set up Helix to enable a first run on 10nm nvda10 on Samsung secure
+machine. Used Schematic driven (SDL) flow, however, bypassed some of the
+setup details cndfls requires, by manually configuring the hxnet
+files. Observed various DRC errors on a purely NMOS test-case with one Row.
+The DRC seem to be internal to pcells from the PDK. Informed Siarhei. Next,
+planning to create another, slightly more complex test-case with NMOS +
+PMOS. The first had only NMOS..  
+
+[+] Worked on NVDA10 PCX setup. Got inconsistent versions for PCX, CD and
+Maxwell. Worked with Prashant and Ming to fix the setup using 2014.12-SP2-2 
+version of CD and 2014.09-SP1-1 version of Helix built with GCC 4.72.
+
+[+] Provided info on 10nm ref pdk to Siarhei. 10nm test-case with one Row
+has four issues. Sent test-case to Siarhei. Siarhei pointed out the problem
+with the usage, and has also fixed one of the issues. I need to file a STAR
+for one of the other minor issues. 
+
+
+
+[Topology re-use]
+
+[+] Did a detailed code review w/ Biying before she left.
+
+[+] Provided a test-case with StartLayout option (ECO) to Biying..
+
+[+] Provided a test-case with non-slicing placement..
+
+[+] Reviewed Biying's report and respond to her questions.
+
+[+] Had a 1:1 w/ Girish regarding the topology re-use project and requirements
+
+[+] Had conversations with Biying regarding handling non-slicing floor-plans..
+
+
+
+[Misc]
+
+[+] Attended core team meetings during Ming's ETO. 
+
+[+] Updated STARs as per triage meetings. 
+
+[+] Compiled modular grid/routing track related docs/specs and sent out to
+Siarhei. 
+
+[+] Reviewed track region spec in Maxwell. 
+
+[+] Queried CRM to identify SP1 tasks and informed Siarhei as per his request.
+
+[+] Studied a presentation on Viper: spatially sorted layout files.
+
+[+] ETO: Aug 5/6 (feels like ages ago!)
+
+
+
+[Plan]
+
+[-] Develop and communicate spec to address ICF's requirement on gridded StdPart.
+[-] 10nm NVIDIA -- Create a more complex test case (with both NMOS and PMOS)
+[-] Fixed/Locked figGroup related STARs
+[-] File a STAR on the issue I observed with non-disjoint symmetric groups
+[-] Symmetry on top-level components
+[-] Internal test-case and piloting for Intel MIP
+[-] Review track region spec in Maxwell
+[-] Update ReadMe in Berry regressions with info on incremental check outs
+
+
+* mayank
+
+Hi Mayank,
+
+This was a very helpful write up. Thank you and please continue sending me your summaries.
+
+Specifically, can you please clarify what is meant by “Native Legalizer” below:
+•	> Native Legalizer capability Specs: > Girish to check with Bulent on Native capability
+I have seen the spec on “Native STD-cell gridding in Helix” and we will plan to support that. Our core engine does support instance specific grids. 
+But, is there any other aspect to the “Native Legalizer”? If there are any other slides
+Regards,
+Bulent
+
+From: Varshney, Mayank [mailto:mayank.varshney@intel.com] 
+Sent: Friday, August 21, 2015 1:58 AM
+To: Gradin, DavidX A; Nair, AnoopX; Melinamani, Pooja; Vishwakarma, Bhupendra; K V N, Savan K; Valsaraj, Laya; Kandpal, Harish; Travnikoff, Mark L; David Gradin (David.Gradin@synopsys.com); 'Girish Vaidyanathan'; 'Anoop.Nair@synopsys.com'; Medeiros, Donna; Abramowitz, Larry; Lyndon Lim; 'Siarhei Lekhtsikau'; Padhi, Prayash; Pham, Son T; Taghavi, Mo M; Kumar Sarth (Kumar.Sarth@synopsys.com); Vaidyanathan, GirishX; Dosi, Ankita
+Cc: Benjwal, Indushekhar; Decker, Timothy E; Pradhan, AjayX; Bulent Basaran (Bulent.Basaran@synopsys.com)
+Subject: WW34: Meeting Minutes: Helix Development Weekly Meeting
+
+Hi All, 
+ 
+        Please find the meeting summary below:
+Intel Confidential, 
+Attendees: 
+Intel: Mayank, Harish, Laya, Savan
+SNPS:  Girish 
+                Anafi: Lyndon
+ 
+Agenda:
+1.	Open …… All
+2.	Anafi Issues/Update …….. Lyndon
+3.	Helix Issue update ….. Intel/SNPS
+ 
+Opens:
+•	Girish got a mail on support for 10nm base layer RUNDA. Indu to facilitate in account creation. DONE 
+•	Girish to present minutes of discussions with R&D in WW32 meeting
+•	Maxwell discussions
+•	Helix Constraints use model explained
+•	Pattern Entry using Symbolic Editor (Stick Diagram & Matched Device): Check CD in 1509 from WW37
+ 
+•	Prayash: User Defined Grids (Design CellView specific) support 
+•	Support for cellView has been added. (Can be loaded within Helix flow)
+•	Support for text file to be done if requested
+•	Lyndon: Preference to have non-WSP alternative also (how to choose intermediate format? Can it be file, independent of the platform)
+•	CD: Requesting Anoop/Routing team to help in deciding the final format> In Maxwell it will be supported natively. Before that a conversion script can be supported to yml. 
+•	Ankita: Suggestion to create multiple trackPattern.yml files and support in Finish script
+•	Savan: 1273 Double Guard Rings(np70ring) support:
+•	Pdk733: r2.0 support in Helix
+•	Pdk736: r2.3 support in library. Plan to support in next release r2.4
+•	Girish: Maxwell handling of mod_grid for oaTech
+•	Should be coded in oaTech but refinable using Design specific constraints
+•	Mayank:
+•	Nwell Spacing support> Mayank to pass a testcase to Prayash
+•	New GRs support > Done.  Pdk756: LU ring supported
+•	Auto-order: To ignore Gate nets for maximal abutment. Girish to check with R&D if some extra parameter can be exposed
+•	Ankita: 
+•	CDF parameters not updated (ETA: 1509. When creating hxNet cdfParameters will be read & updated as oaProp in the resulting Layout as CDF). > Mayank to Validate
+•	pinShapeGridding cause 1 pin to be lost when 2 pins try to move to the same track> Known limitation. User responsibility to create pin Constraint with sufficient spacing. Ankita to check an alternate 
+•	Half Period placeGrid Request > Half cells to be flipped for optimal layout 
+•	Adding more templates stackTemplate.yml (customizable DTCs)
+> Use CNI_DTC_CONFIG_FILE
+> None: Can be used for customized values which are not updated in stackTemplate.yml     
+•	Indu: 
+•	Hierarchical Region sharing : Mayank/Girish> Try Marking layer can be used to create Overlay. May have to merge this Mod Grid concept
+•	ADT enablement update
+•	SNPS gave feedback after studying ADT testcases that Abutment protocol needs to rewrite tcl callbacks as native OA callbacks (the values returned by native python callbacks were not in sync with tcl callbacks). Tcl callbacks will be supported in Maxwell
+•	Commitment from library teams to support that. Mayank to schedule a meeting early next week (ww32.1/2). DONE. Mayank to send over the 73 Library to Girish
+•	Krishna can take help from Girish/Bulent to escalate debug. Mayank to provide the latest library to Girish
+•	Pin Placement Issues : DONE
+•	WSP and Helix > DONE
+•	Pooja: A function to extract trackPatterns saved in the design can be used. 
+•	Harish: Design Defaults can also be used. These can be accessed without opening layout
+•	Wiretype is not supported for most trackPatterns. Utility for modify wireType on the fly. 
+•	Prayash is working on this: Explore possibility of using design default or create a dummy layout to load to generate trackPattern.yml on the fly & save in the Helix Working Directory
+•	Resistor placement (sharing regions across hierarchies)
+•	Constraint creation doesn’t support objects from multiple level of hierarchy 
+•	No support for partial flattening of hierarchy across any tools (totally new requirement)
+•	Using overlay may be cumbersome
+•	Partial Halo Ring is not supported right now
+•	Flattening to be tried out before other things
+•	Production build schedule
+•	2015-09 : pdk r1.0 release
+•	Main focus will be automation of Pattern creation for row stack > Auto-ordering support in 1509. 
+•	Build is planned for first week 0f Sep-2015. First kit to be shared by WW34
+•	Expecting initial version of MaxWell to be available in the build > Not for Helix
+•	Usability and Error reporting in standalone helix 
+•	Due to issues in Abutment protocol support from both Library and Helix, we may need to postpone the Abutment protocol to an “Intermediate Helix Kit”. Krishna to get back on ETA
+•	Halo Ring support > Offset in the ring & empty spaces
+•	Pin enhancements support (M1, negative pins etc)
+•	2014-09-SP1-1: pdk r0.5 release
+•	DummyLCV & Tap supported with SP1-3
+•	Open: Logic to choose dummies based on devices in the rowStack>> Apply filter based on device types
+•	Abutment Support issues: Request to provide support for Custom Pcells with Auto1 support from Helix R&D. Workaround to use manual ordering or add instances to abutMaster list in stackTemplate.yml. 
+•	Girish suggested providing a variable in ADT abutment protocol that can return different values when being called from Helix & CDesigner
+ 
+•	2016-06
+•	Helix features will be migrated to Maxwell
+•	Users are expected to migration form Helix to Maxwell
+•	OA DM5 planned for 1509 Helix release. Does Intel need early access to test libraries on this version? Yes. Girish to pass on in WW34. DONE. Check with regressions for all library cells
+•	Anafi issues 
+•	Helix Usage on Anafi:
+•	73 Netlist(but fairly independent of FDK release) but 75 SDL. Validation concerns? Lyndon to check internally and get back
+•	Device Level readiness : Requested are the fundamental enhancements in Core Helix. (RowStack with additional automation may solve this for 10nm)
+>>> Auto-ordering devices in row to maximize abutment in row targeted for 1509. New pattern generator should be able to do that. 
+>>> Multi-row gate alignment & auto-ordering not planned for 1509. Further plan need prioritization from Lyndon 
+>>> ADT support can use the code for devices
+•	Choices of track patterns & tool limitations may be the major causes of this
+•	More useful for cell based placement. 1x & 2x are supported but we may support multiple height placement (partition based on prboundary may help)
+•	Helix R&D need direction between rowStack/pnStack for further development. ETA WW23
+•	Eval to start by Early May (r0.4 – pre-release r0.5). Real Design Start: Late Q3 tentatively
+•	RowStack Issues: Target kit 75.6 r0.5
+•	Layout Regeneration flow: 
+•	Ankita can share the migrated data in this meeting or some other forum
+•	Brief status update shared. First look from Lyndon seems that results are good quality & we may work on area optimization(always a priority for FPGAs) further. 
+•	Open : 1275 release update
+•	Bus notation for templates: [] is Verilog Name Space. Cdl supports both. Evaluate where the change is needed CD/Helix/Library. HSD filled. > Target still r1.0
+•	ADT abutment: May have a difference between Virtuoso & CD(eg Mirroring is not happening with Auto-abutment in CD). Enhancement on Helix to support non-Mos Pcells. Supporting Abutment protocol in rowStack with some known limitations. 
+•	Open: Fix for pins in negative axis & Import Floorplan without floating pins issue. Girish : DONE
+•	Space to be inserted in beginning of pattern. May need cdl based flow for 1275 data. To be supported in rowStack for r1.0 > DONE. Ankita/Mayank to verify the fix
+•	Coloring of pins support. Lower layer(M1) pins support. DONE
+•	Native Legalizer capability Specs: > Girish to check with Bulent on Native capability
+•	Pin Placement should have label attached to it & should place Pin Layers > DONE
+•	Pooja: How to filter out the schematic dummies from reaching or being constrained in schematic? Answer: Add lvsIgnore property to the device. Ask AIP DA to have a script to add this property to all dummies hierarchically. AR: Mayank to follow up. Add this to the validation scenarios. 
+•	Routing Aware placement: Synopsys needs specs
+•	Show real scenario of changes made to ensure routability
+•	Capability to automatically choose DTC based on the spacing needed for routability (being enabled in migration utility)
+•	Open: (Ankita/Prayash): Suggestion for Checker for Track Available in the overlapping region with Device Diffusion. Need a way to identify which track to use? AR: Ankita to develop slides to convey this as a spec. Girish to spec out based on Tool level understanding. DONE on the Spec. Waiting to hear back from SNPS discussions 
+•	Laya: Require support for M1 pins. > DONE
+ 
+FDK Release schedule(internal milestones):
+•	1273.3 1.8; Shelf ww33.4, Freeze ww35.4(SP1-2) (Will get pushed out. Laya to confirm)
+•	1273.6 2.3; shelf ww34.4, Freeze ww36.4(?). Girish to confirm if SP1-3 is production build
+•	1275 0.4; shelf ww05.4, Freeze ww08.4
+•	1275 0.5; shelf ww23, Freeze ww25 (SP1-1)
+•	1275 1.0; shelf ww40.4, Freeze ww42.4 (1509)
+ 
+Helix development update/issue sheet:
+•	Mayank presented the Stdcell Native gridding spec. Girish to confirm the status on this: 
+Suggestions/Feedbacks: 
+•	Mayank: Check if Flip-Y is really allowed for these cells with the stdcell team. But in that case gridding for such a cell will have to be non-default. (Allow Horizontal flips off by default. Answer for this will impact the scenario when we turn this variable ON. Flipping + Legalization may need extra effort)
+>> Verify turning this parameter ON
+>> Check if all even odd equivalent cells are same width
+>> Mayank:  Flip all cells from stdcell library & see if equivalents are still retained using the current legalization logic
+>> Open:  If even & odd have width differences then how to change the legalization strategy? Harish: Take Offline on discussion with Stdcell Library team
+•	Check if there could be stdcells which don’t have an equivalent B cell (Possible cases are when the cell starts consistently with A/B grid and has a double pitch so it also ends at the same grid)
+•	Helix R&D should check how to leave spaces for transitition between 1 grid to another
+•	Check with stdcell team, if the filler cells will be available from A-B transitions and vice versa
+
+AR:
+1.	Ankita to send snapshot to Girish on rowStack vs row spacing issue. 
+2.	Pin shape gridding should be made independent of top metal. Consider de-coupling of Top Metal for Pin Optimization and boundary snapping after feedback from Lyndon >> STAR Filled
+3.	QA automation:
+i.	Girish to evaluate creation on some Helix internal testcases. Unit Testcases for rowStack. Anafi testcases on 1273 are already added (& run daily) 
+ii.	Prayash has created 2-3 testcases as a part of megaTest. WIP on contribution on Design Testcases(Mayank to follow up) from all team members. MIP OR testcase. Anafi Testcase for RowStack.Plan to add ADT based RowStacks for r1.0 release (Abutment protocol testcases being generated by library team. )
+iii.	Prayash to present the Testing Scenarios WW32 meeting
+ 
+ 
+Thanks and Regards
+Mayank
+ 
+ 
+
+* fool warren buffett
+All official Motley Fool Stock Advisor returns as of August 3, 2015. All other numbers as of August 3, 2015. David Gardner Monte Carlo analysis as of November 1, 2013. The Motley Fool owns shares of 3D Systems, Activision Blizzard, Amazon.com, Apple, Berkshire Hathaway, Ford, Google (A & C shares), Intel, Microsoft, Netflix, Priceline Group, Tesla Motors, Walt Disney, and Whole Foods Market. John Mackey, co-CEO of Whole Foods Market, is a member of The Motley Fool’s board of directors.
+* Two stars:
+STAR: 9000931687- Support fixed/locked "as-is" figGroup in absoluted location during placement
+STAR: 9000920785- CDPV:: the locked oaFigGroup is treated as normal oaFigGroup
+
+* STAR2: 9000920785- CDPV:: the locked oaFigGroup is treated as normal oaFigGroup
+case location is at /remote/stars/testcases/9000920785/9000920785.tar.gz
+
+the oaFigGroup cluster2 in DempPLL/layout is locked oaFigGroup object.
+the cluster2 in the placed results is normal oaFigGroup object.
+
+cdesigner -replay  replay_oaFigGp.log &
+* STAR1: 9000931687- Support fixed/locked "as-is" figGroup in absoluted location during placement
+In 2015.09 release, GCP doesn't honor "as-is" figGroup status, which will allow it floating during placement regardless its status. In SP1, GCP should honor "as-is" figGroup status as following:
+** normal - current 2015.09 behavior (as a hard-macro and floating around in placement results)
+** fixed/locked - as a hard-macro and located in an absolute coordinates as in "current" layout view during placement.
+
+Test case can be found from /remote/stars/testcases/9000931687/9000931687.tgz
+
+Lib/cell/layout: DemoPLL/twoStageCascodeNmos/layout
+
+This layout has one oaFigGroup FG__0 whose placementStatus is marked as fixed.
+
+Placement library: DemoPLL_HLX
+
+hxdsn: DemoPLL_HLX/twoStageCascodeNmos/netlist.hxdsn
+
+* 14 failures: 
+fcm_patternCellHelixTest fcm_vpatternCellHelixTest
+fcm_patternCellHelixMXTest fcm4_ref_pll_abut
+fcm4_density_pattern fcm4_ignoreLayers fcm4_patternContext
+fcm4_ldePatternEncAll fcm4_ldePatternEncSelected fcm4_ldePatternSpc
+fcm4_patternAlign fcm4_autoAbutmentRowVsPattern
+fcm4_density_multiplePatterns fcm4_branchClone_2
+
+* maxwell hxcs 
+--- !HelixConstraint-2
+  # Constraints generated through UCM
+
+  # 
+  # Hierarchical Constraint Groups
+  # 
+constraintGroups:
+  - Name: rows23
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [Mb10, Mb9, Mb1Lin, Mb2Lin, Mb21Lin]
+
+  - Name: rows22
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [Mb8, Mb21, Mb2, Mb1]
+
+  - Name: rows21
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [Mb6, Mb4.m1, Mb4.m2, Mb16.m1, Mb5.m1, Mb16.m2, Mb5.m2]
+
+  - Name: rows20
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [Mb4Lin, Mb6Lin, Mb16Lin]
+
+  - Name: rows19
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [M8, M7]
+
+  - Name: rows18
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [M5, M6]
+
+  - Name: rows17
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [M24, M23]
+
+  - Name: rows16
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [M14a, M14b]
+
+  - Name: rows15
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [M13a, M13b]
+
+  - Name: rows14
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [M21.m4, M22.m1, M21.m3, M21.m2, M22.m4, M22.m3, M22.m2, M21.m1]
+
+  - Name: rows13
+    Type: Row
+    Param: {XFlip: [], AbutmentType: auto2, AbutDiffWidth: true, KeepContacts: false, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], Alignment: center}
+    Contains: [M12, M11]
+
+  - Name: instMatching3
+    Type: Pattern
+    Param: {Pattern: [[Mt1a, M9], [Mt1b, M10], [Mt2a, Mt2b]], ElementType: device, AbutmentType: none, AlignmentInRows: bottom, KeepContacts: false, AbutDiffWidth: true, DeviceSpacing: 3, VerticalGaps: {1: 1, 0: 1}, LeftDummies: 0, RightDummies: 0}
+    Contains: [M9, M10, Mt1a, Mt1b, Mt2a, Mt2b]
+
+  - Name: column3
+    Type: Column
+    Param: {YFlip: [], AbutmentType: none, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], CustomSpacing: {Value: 0, CorrectAfterForDRC: true, PRBoundary: true}, Alignment: center}
+    Contains: [rows15, rows16, rows17]
+
+  - Name: __hx__implicit__top__partition__
+    Type: Partition
+    Param: {}
+    Contains: [Mb3, Mb7, cC1n, cC1p, column3, rows13, rows14, rows18, rows19, rows20, rows21, rows22, rows23]
+
+  # 
+  # End
+  # 
+
+**************************************************
+            Summary of run
+
+  Time:            Wed Aug 26 06:46:25 2015
+  Run time:        16921.57 s
+  Number of tests: 228
+  User Name:       integ-cn
+  Host name:       barium
+  Platform:        Linux64
+  OPTMODE:         opt
+  Harness Option:  hxnightly
+  OA version:      22.50.011
+  Python version:  2.6.2
+  Santana version: K-2015.09
+  Changelist:      2931219
+  Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck/santana
+  CNI_ROOT:        /remote/helix01/integ-cn/builds/output/santana_qsck/opt/linux_rhel40_64
+  PartnerData:     /remote/helix01/integ-cn/builds/p4/santana_qsck/partnerData
+  PDT_LOG_DIR:     /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/pdt_hxnightly_logs
+  Helix Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck/helix
+  Logs are:        /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs
+  Results:    REGRESSION             
+
+--------------------------------------------------
+           Results for pyHelix
+--------------------------------------------------
+
+Tech setting: tsmc250
+Test runtime: 94.75 s
+OK
+
+--------------------------------------------------
+           Results for seeker
+--------------------------------------------------
+
+Tech setting: tsmc250
+Test runtime: 6.83 s
+OK
+
+--------------------------------------------------
+           Results for helixIntegTest
+--------------------------------------------------
+
+Tech setting: umc65L
+Test runtime: 169.33 s
+OK
+
+Tech setting: tsmc90L
+Test runtime: 117.38 s
+OK
+
+Tech setting: umc90L
+Test runtime: 104.68 s
+OK
+
+Tech setting: cni130L
+Test runtime: 134.40 s
+OK
+
+--------------------------------------------------
+           Results for hx_TermClass
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 29.52 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nor3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 109.11 s
+OK
+
+--------------------------------------------------
+           Results for fcm_nor3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 115.49 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vco_lc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 37.89 s
+OK
+
+--------------------------------------------------
+           Results for fcm_vco_lc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 40.76 s
+OK
+
+--------------------------------------------------
+           Results for fcm_bandgap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 384.97 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_bandgap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 181.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm_nor2rotate
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 20.58 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nor2rotate
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nor2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.60 s
+OK
+
+--------------------------------------------------
+           Results for fcm_nor2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 21.19 s
+OK
+
+--------------------------------------------------
+           Results for fcm_dist_trkhold_cr2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 134.83 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_dist_trkhold_cr2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 67.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 175.83 s
+OK
+
+--------------------------------------------------
+           Results for fc_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 664.38 s
+OK
+
+--------------------------------------------------
+           Results for fcm_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 541.51 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 813.00 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ref_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 705.69 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_multi_lib
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.89 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_multi_lib_pattern
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 46.00 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_multi_lib_macro
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm_multi_lib
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.39 s
+OK
+
+--------------------------------------------------
+           Results for fcm_multi_lib_pattern
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 31.11 s
+OK
+
+--------------------------------------------------
+           Results for fcm_multi_lib_macro
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.74 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_resistor_chain
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 16.18 s
+OK
+
+--------------------------------------------------
+           Results for fcm_resistor_chain
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 24.24 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 109.63 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vpatternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 457.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm_vpatternCellTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 324.58 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_islandSnap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm_islandSnap
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.87 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rdr_1
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 14.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm_rdr_1
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 13.39 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rdr_2
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 29.07 s
+OK
+
+--------------------------------------------------
+           Results for fcm_rdr_2
+--------------------------------------------------
+
+Tech setting: cni130RDR
+Test runtime: 61.75 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrix7x7
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 74.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm_matrix7x7
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 78.57 s
+OK
+
+--------------------------------------------------
+           Results for fcm_matrix36
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 236.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrix36
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 84.67 s
+OK
+
+--------------------------------------------------
+           Results for fcm_soft_cluster_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 23.49 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_soft_cluster_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 25.19 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_soft_cluster_test1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 73.55 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_flips
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.59 s
+OK
+
+--------------------------------------------------
+           Results for fcm_flips
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.34 s
+OK
+
+--------------------------------------------------
+           Results for fcm_gaps
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 37.59 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gaps
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 37.92 s
+OK
+
+--------------------------------------------------
+           Results for fcm_clones
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 61.77 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_clones
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 74.24 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.75 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.56 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.57 s
+OK
+
+--------------------------------------------------
+           Results for fcm_terminalLocTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 39.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vpatternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 72.10 s
+OK
+
+--------------------------------------------------
+           Results for fcm_vpatternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 43.83 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 58.46 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 37.36 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrix_holes
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 15.40 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_auto_abutment_overlap
+--------------------------------------------------
+
+Tech setting: ibm32L
+Test runtime: 10.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm_proximity_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 41.88 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_proximity_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 23.06 s
+OK
+
+--------------------------------------------------
+           Results for fcm_proximity_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 56.25 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_proximity_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 27.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm_matchShapes
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 58.06 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matchShapes
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 40.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm_twell
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 26.67 s
+OK
+
+Tech setting: tsmc65L
+Test runtime: 20.70 s
+OK
+
+Tech setting: tsmc45L
+Test runtime: 23.26 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_big_partition
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 277.12 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 31.23 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix_2
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 15.19 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix_3
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 17.57 s
+OK
+
+--------------------------------------------------
+           Results for fcm_bracketTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.24 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.09 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_2
+--------------------------------------------------
+
+Tech setting: tsmc45L
+Test runtime: 13.85 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_3
+--------------------------------------------------
+
+Tech setting: tsmc45L
+Test runtime: 14.58 s
+OK
+
+--------------------------------------------------
+           Results for fcm_auto_abutment_4
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 12.33 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_auto_abutment_grid_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 18.55 s
+OK
+
+--------------------------------------------------
+           Results for fcm_griddedContactRing
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 44.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm_isrContactRing_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 17.57 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gridded_rings_0
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 20.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm_isrContactRing
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.36 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_contactRing_island_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 14.11 s
+OK
+
+--------------------------------------------------
+           Results for fcm_customContactRing
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.61 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gridded_rings_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 21.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_vmatrix_3
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 16.78 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_design_builder_2
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 16.23 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_design_builder_1
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 9.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_runopts_test
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 304.64 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_evenW_evenL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 201.61 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_evenW_oddL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 206.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_oddW_evenL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 206.03 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_oddW_oddL
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 196.52 s
+OK
+
+--------------------------------------------------
+           Results for fcm2_test_brackets
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 74.37 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.78 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay2
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 21.79 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_instances_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 40.92 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_nwell_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 16.87 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellGridTest
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 36.90 s
+OK
+
+--------------------------------------------------
+           Results for fz_ref_pll_0
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 243.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_twellabut1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 27.86 s
+OK
+
+--------------------------------------------------
+           Results for prune_ref_pll_0
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 54.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellHelixTest
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 19.31 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm_patternCellHelixTest/tsmc28L/multi_1_fullCycle_patternCellHelixTest_tsmc28L.log
+fcm_patternCellHelixTest FAILED
+
+Tech setting: tsmc45rfL
+Test runtime: 16.82 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm_patternCellHelixTest/tsmc45rfL/multi_1_fullCycle_patternCellHelixTest_tsmc45rfL.log
+fcm_patternCellHelixTest FAILED
+
+Tech setting: cni130L
+Test runtime: 15.25 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm_patternCellHelixTest/cni130L/multi_1_fullCycle_patternCellHelixTest_cni130L.log
+fcm_patternCellHelixTest FAILED
+
+--------------------------------------------------
+           Results for fcm_vpatternCellHelixTest
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 19.58 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm_vpatternCellHelixTest/tsmc28L/multi_1_fullCycle_vpatternCellHelixTest_tsmc28L.log
+fcm_vpatternCellHelixTest FAILED
+
+Tech setting: tsmc45rfL
+Test runtime: 15.20 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm_vpatternCellHelixTest/tsmc45rfL/multi_1_fullCycle_vpatternCellHelixTest_tsmc45rfL.log
+fcm_vpatternCellHelixTest FAILED
+
+Tech setting: cni130L
+Test runtime: 15.62 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm_vpatternCellHelixTest/cni130L/multi_1_fullCycle_vpatternCellHelixTest_cni130L.log
+fcm_vpatternCellHelixTest FAILED
+
+--------------------------------------------------
+           Results for fcm4_twellabut2
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 59.77 s
+OK
+
+--------------------------------------------------
+           Results for fcm_patternCellHelixMXTest
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.32 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm_patternCellHelixMXTest/cni130L/multi_1_fullCycle_patternCellHelixMXTest_cni130L.log
+fcm_patternCellHelixMXTest FAILED
+
+--------------------------------------------------
+           Results for fcm4_twellabutH
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 68.77 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_thin_thick
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 21.16 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ref_pll_abut
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 120.80 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_ref_pll_abut/tsmc45rfL/multi_4_fullCycle_ref_pll_abut_tsmc45rfL.log
+fcm4_ref_pll_abut FAILED
+
+--------------------------------------------------
+           Results for fcm4_floor_plan_h
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 25.18 s
+OK
+
+Tech setting: tsmc90L
+Test runtime: 17.50 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_gridded_rings_2
+--------------------------------------------------
+
+Tech setting: st20L
+Test runtime: 13.89 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 32.32 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 14.71 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 21.42 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 31.86 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 20.06 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 14.42 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 19.10 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 19.99 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 12.32 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 12.11 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 13.74 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 12.01 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 12.66 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 13.33 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.88 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_4
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 12.50 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrix_4
+--------------------------------------------------
+
+Tech setting: tsmc90L
+Test runtime: 15.05 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_halo
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 21.50 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_blackBox_1
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 33.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_blackBox_2
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 28.32 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 28.56 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 16.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 27.08 s
+OK
+
+--------------------------------------------------
+           Results for fcm_mcp_std_cell_5
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 30.92 s
+OK
+
+--------------------------------------------------
+           Results for xgen
+--------------------------------------------------
+
+Tech setting: tsmc250
+Test runtime: 33.42 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_frame
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.15 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_column
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 11.27 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_matrix
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 13.32 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_pattern
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 13.33 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_density_pattern/tsmc45rfL/multi_4_fullCycle_density_pattern_tsmc45rfL.log
+fcm4_density_pattern FAILED
+
+--------------------------------------------------
+           Results for fcm4_density_row
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 12.94 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_top
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 16.86 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_density_vmatrix
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 12.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_construction_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.73 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_branchClone_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.72 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ignoreLayers
+--------------------------------------------------
+
+Tech setting: cni130TestL
+Test runtime: 12.84 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_ignoreLayers/cni130TestL/multi_4_fullCycle_ignoreLayers_cni130TestL.log
+fcm4_ignoreLayers FAILED
+
+--------------------------------------------------
+           Results for fcm4_ref_pllTest
+--------------------------------------------------
+
+Tech setting: cni130TestL
+Test runtime: 114.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternContext
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.62 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_patternContext/cni130L/multi_4_fullCycle_patternContext_cni130L.log
+fcm4_patternContext FAILED
+
+--------------------------------------------------
+           Results for fcm4_ldeColumnOfRows
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.45 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeColumnOfRows_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.18 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeMatrixEnc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.38 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeMatrixSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.08 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldePartition
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.62 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldePatternEncAll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.57 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_ldePatternEncAll/cni130L/multi_4_fullCycle_ldePatternEncAll_cni130L.log
+fcm4_ldePatternEncAll FAILED
+
+--------------------------------------------------
+           Results for fcm4_ldePatternEncSelected
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.58 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_ldePatternEncSelected/cni130L/multi_4_fullCycle_ldePatternEncSelected_cni130L.log
+fcm4_ldePatternEncSelected FAILED
+
+--------------------------------------------------
+           Results for fcm4_ldePatternSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.82 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_ldePatternSpc/cni130L/multi_4_fullCycle_ldePatternSpc_cni130L.log
+fcm4_ldePatternSpc FAILED
+
+--------------------------------------------------
+           Results for fcm4_ldeRow
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.98 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeVMatrixEnc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.80 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ldeVMatrixSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.83 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 20.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_filter1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 33.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 14.24 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align3
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 12.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay3
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 14.12 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_demo_pll
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 166.38 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_filter2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 355.65 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_patternAlign
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.52 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_patternAlign/cni130L/multi_4_fullCycle_patternAlign_cni130L.log
+fcm4_patternAlign FAILED
+
+--------------------------------------------------
+           Results for fcm4_ordering1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.47 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ordering2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.28 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ordering3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.42 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ordering4
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 18.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_filter3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 36.34 s
+OK
+
+--------------------------------------------------
+           Results for cleanup_ldeVMatrixSpc
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 3.80 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_alignment_column
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.01 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_prb_alignment_row
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 9.90 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_stripeRouteGroup2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.14 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_stripeRouteGroup3
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.38 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_autoAbutmentRowVsPattern
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.85 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_autoAbutmentRowVsPattern/cni130L/multi_4_fullCycle_autoAbutmentRowVsPattern_cni130L.log
+fcm4_autoAbutmentRowVsPattern FAILED
+
+--------------------------------------------------
+           Results for fcm4_density_multiplePatterns
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 13.48 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_density_multiplePatterns/tsmc45rfL/multi_4_fullCycle_density_multiplePatterns_tsmc45rfL.log
+fcm4_density_multiplePatterns FAILED
+
+--------------------------------------------------
+           Results for fcm4_matrixAlignPrbRowsColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.71 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixAlignPrbRows
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixAlignPrbColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.35 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixSpacingPrbRowsColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.27 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixSpacingPrbRows
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.04 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_matrixSpacingPrbColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.36 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_vmatrixSpacingPrbRowsColumns
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.31 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_columnSpacingPrb
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.25 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_row
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.55 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlay4
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.37 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_matrix
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.64 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_vmatrix
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.96 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_align4
+--------------------------------------------------
+
+Tech setting: tsmc28
+Test runtime: 12.94 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_ref_pll_live
+--------------------------------------------------
+
+Tech setting: cni130
+Test runtime: 664.82 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_netext1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.81 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_stack1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 16.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_alignedArray1
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 21.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_custom_stack2
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 17.01 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_branchClone_2
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 11.59 s
+Test did not run correctly
+Check the log: /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs/linux_rhel40_64/fcm4_branchClone_2/cni130L/multi_4_fullCycle_branchClone_2_cni130L.log
+fcm4_branchClone_2 FAILED
+
+--------------------------------------------------
+           Results for fcm4_branchClone_aggressive_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 15.05 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_layerBoundary_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.16 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_doubleHeight_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 21.50 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_doubleHeight_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 44.45 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 18.20 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack2
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 24.54 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_firm
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 659.35 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_frozen
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 111.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_symm
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 601.46 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack3
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 71.17 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack4
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 35.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack5
+--------------------------------------------------
+
+Tech setting: tsmc65L
+Test runtime: 25.84 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_lde
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 14.92 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_nor
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 16.01 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_topLevelSpacingPrb_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 12.25 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_partitionSpacingPrb_1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 10.68 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_nand
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 19.30 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_inv
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 306.17 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_packedPartition
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 220.81 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_packedPartition1
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 304.00 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_single
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 416.05 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_prBoundary
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 134.48 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_pack_shapes
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 221.33 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rectilinearPartition_1
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 19.91 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_rectilinearPartition_2
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 17.40 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_pnstack_gridding
+--------------------------------------------------
+
+Tech setting: tsmc45rfL
+Test runtime: 365.43 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_overlapLayers_top
+--------------------------------------------------
+
+Tech setting: cni130L
+Test runtime: 13.76 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_std_cell_end_caps
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 13.79 s
+OK
+
+--------------------------------------------------
+           Results for fcm4_mcp_std_cell_end_caps
+--------------------------------------------------
+
+Tech setting: tsmc28L
+Test runtime: 12.53 s
+OK
+
+--------------------------------------------------
+           Results for pdt_tsmc_ref_pll_DFM_9U_8K_m4
+--------------------------------------------------
+
+pdt_tsmc_ref_pll_DFM_9U_8K_m4 will not run with python 2.6.2
+
+--------------------------------------------------
+           Results for pdt_tsmc_ref_pll_m4
+--------------------------------------------------
+
+pdt_tsmc_ref_pll_m4 will not run with python 2.6.2
+
+--------------------------------------------------
+           Results for TSMC
+--------------------------------------------------
+
+TSMC will not run with python 2.6.2
+
+--------------------------------------------------
+           Results for local_st20PyCellCode_cmos20lp
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitA
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitB
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_cnTestDlo
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitRDR
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKitTest
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_appleKit
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_csrPyCellCode
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for local_baseKit
+--------------------------------------------------
+OK
+
+--------------------------------------------------
+           Results for baseKit
+--------------------------------------------------
+OK
+
+
+
+pv regression cases at /berry/secure18/m1119/helix_share/regression.test/results/release/2015.09/2015_08_21_2015.09-PRE/regression
+TestCase					PV-OWNER		KEYWORD		RD-CC-OWNER		STATUS
+test_suites/2014_01_07_net_based_fgEnclose/2014-01-07        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_01_07_PNStack/2014-01-07.1          prajoshi          golden                  siarhei                    Failed
+test_suites/2014_01_08_PNStack/2014-01-08            prajoshi          golden                  siarhei                    Failed
+test_suites/2014_01_17_pitch_violation/2014-01-17        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_01_17_Segfault/2014-01-17.1         prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_01_28_PNStack/2014-01-28            prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_02_03_PNStack/2014-02-03            prajoshi          golden                  siarhei                    Failed
+test_suites/2014_03_13_bridging/2014-03-13/semi_custom_eval_testDesign_1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_03_13_bridging/2014-03-13/semi_custom_eval_testDesign_2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_03_24_grid/2014-03-24               prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_03_27_oaShape/2014-03-27            prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_04_16_input_filter/2014-04-16/case2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_05_12_StructuredPartition/2014-05-12        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_05_20_Frame/2014-05-20              prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_12_Helix_bugs/2014-06-12/case1/ASIC_StdCell_Example3_la_le_register_0        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_12_Helix_bugs/2014-06-12/case2/ASIC_StdCell_Example3_la_le_register_0        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_12_Helix_bugs/2014-06-12/case3/ASIC_StdCell_Example3_la_le_register_0        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_12_Helix_bugs/2014-06-12/case4/ASIC_StdCell_Example3_la_le_register_0        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_16_SBR/2014-06-16/ASIC_StdCell_Example1_dr        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_16_SBR/2014-06-16/ASIC_StdCell_Example1_dr2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_17_auxiliary_cells/2014-06-17/StructuredPartition_aux_cells        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_19_StructuredPartition/2014-06-19        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_24_StructuredPartition/2014-06-24/synopsys_eval_pm_pdpfd_dig_cntrl_hierarchy_pins        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_27_StructuredPartition/2014-06-27/case1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_06_27_StructuredPartition/2014-06-27/case2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_07_17_AutoMap/2014-07-17/case1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_07_17_AutoMap/2014-07-17/case2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_06_StructuredPartition/2014-07-28/test1        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_06_StructuredPartition/2014-07-28/test2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_06_StructuredPartition/2014-07-28/test3        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_06_StructuredPartition/2014-07-28/test4        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case3        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case4        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case5        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case6        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case7        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case8        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_07_Terminal_Pin/2014-08-06/case9        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_08_StructuredPartition/2014-08-08/case1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_08_StructuredPartition/2014-08-08/case2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_08_StructuredPartition/2014-08-08/case3        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_08_StructuredPartition/2014-08-08/case4        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_12_Partition/2014-08-12          prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_13_Grid_Alignment/2014-08-13/case1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_13_Grid_Alignment/2014-08-13/case2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_08_13_Grid_Alignment/2014-08-13/case3        prajoshi          golden                  siarhei                    Failed
+test_suites/2014_08_13_Grid_Alignment/2014-08-13/case4        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_09_03_Left_Fill_Cell_Name/2014-09-03.1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_09_03_Row_Counting/2014-09-03        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_10_22_Stray_metal_Memory/2014-10-22/case1        prajoshi          golden                  siarhei                   Succeed
+test_suites/2014_10_22_Stray_metal_Memory/2014-10-22/case2        prajoshi          golden                  siarhei                   Succeed
+test_suites/2015_01_26_StructuredPartition_Vertical_Offset/2015-01-26        prajoshi          golden                  siarhei                   Succeed
+test_suites/2015_02_10_StructuredPartition_Segfault/2015-02-10        prajoshi          golden                  siarhei                   Succeed
+
+

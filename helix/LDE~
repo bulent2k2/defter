@@ -1,0 +1,1 @@
+To handle LDE, call fgNoOverlap before fgMinSpace

@@ -1,0 +1,190 @@
+* Accelarating Physical Design in Maxwell with help from Helix&AVP
+
+Legend:
+*: Heading 1 (Chapter)
+**: Heading 2 (Section)
+***: Heading 3 (Sub-section)
+
+* Purpose
+
+In this document, we address various key challenges for accelarating layout in
+Maxwell that can be overcome by utilizing various capabilities of Helix &
+AVP.
+
+Specifically, we can group those key challenges under three areas:
+
+ - jump start layout by (quick) floorplanning from SCH/SDL
+
+ - incremental placement with symmetry
+
+ - constraint inference from SCH and LAY
+
+** Background -- Please skip this section if familiar with the current tools and terminology
+
+Helix(TM) can generate high-quality transistor-level layouts for analog and
+custom digital circuits. It achieves this feat by relying on water (:-) (H2O, a
+hierarchy of hierarchy of constraints.)
+
+HFL is a prototype tool that can create an H2O by use of a set of "templates".
+
+Maxwell is the next generation environment that combines the best of Custom
+Designer and Laker tools. 
+
+It has a schematic editor (SE) and a layout editor (LE).
+
+It provides capabilities to create custom device modules and SDL to provide
+cross-probing based capabilities between the schematic (SCH) and the layout
+(LAY). 
+
+AVP is a set of advanced functionalities for fast placement of devices,
+cells and macros. It employs state of the art algorithms and implementation
+for very fast and accurate (scanline-based) layout analysis and placement.
+
+* Jump start layout by (quick) floorplanning from SCH/SDL
+
+* Incremental placement
+
+Given a layout they "like", designers would rather change it incrementally
+so that while what is missing is added on, what is good is preserved.
+
+E.g., the user may really like the current relative placement (topology) of
+the instances in her circuit, and if there are new instances to be added,
+or some instances to be resized, she would much rather see an "incremental"
+update to her current layout, rather than an "optimal"
+re-floor-planning. (Her reasons for this strong inclination may be complex
+and hard to articulate, but let's keep that outside the scope of this
+write-up).
+
+Another common example is the case when she wants to push instances away
+(without disturbing the floor-plan too much), so that space can be created
+for new or growing instances or for interconnect to go thru).
+
+We propose to enhance Helix with the following core features so that the
+user can accelarate the task of coming up with a good placement and be able
+to efficiently change it incrementally.
+
+** Freezing the "topology" of selected (or all) instances
+
+*** New command in LE: "Fix Topology"
+
+Given a placement, the user selects a sub-set of instances and asks the
+tool to automatically create "topological" constraints from the layout
+(while preserving existing constraints where it should).
+
+The new constraints are going to be mostly a combination of rows, columns,
+arrays (matrix or pattern) and PNStack. Where complex symmetry and spiral
+topologies exist, (Packed)Partitions will be created automatically. 
+
+For each new constraint, the aspect ratios are going to be fixed as well so
+that Helix will not entertain large changes of the overall aspect ratio
+which may not be acceptable to the user, even though, fundamentally, the
+topology is not perturbed.
+
+Note that for slicing floorplans (without self-symmetric objects and
+without spirals), the result would be a hierarchy of horizontal and
+vertical slices. I.e., a hierarchy of row and column constraints. 
+
+Also note that the user can run "Fix Topology" multiple times on disjoint
+sub-sets of the instances. The result will be a set of "fixed topology
+groups". Each group, internally, will preserve its topology, however, the
+groups may be shuffled around as needed. To also preserve inter-group
+topologies will also be supported through running "Fix Topology" on
+any mix of groups and instances. (Groups may be represented with new
+OaFigGroups).. 
+
+When there are "symmetric" objects in the selected set, we will also
+automatically identify symmetry groups: self-symmetric objects and
+symmetric pairs (we have done this with Mohit :-). 
+
+*** Enhanced command in SE/SDL: "Update Layout"
+
+When used after "Fix Topology", this command will automatically legalize
+the placement (without changing the fixed topology groups) under the
+following changes:
+  some instances have new (smaller or larger) layouts
+  some instances are deleted in SCH  (they will be deleted in LAY)
+  some instance are new in SCH (they will be added in LAY)
+
+*** Run Helix on a "firm" OaFigGroup (of instances)
+
+This will be a light-weight mechanism to enable Helix to run on a sub-set
+of the instances of a circuit (we already have this implemented for Pattern
+constraint).
+
+** Freezing the "layout" of selected (or all) instances
+
+*** New command in LE: "Fix Layout"
+
+Similar to the Fix Topology command, this will fix the layout of selected
+instances so that Helix will treat the whole group as a fixed macro and not
+change its placement or orientation.
+
+*** Run Helix with "fixed" OaFigGroups
+
+Any fixed group of instances (plus optionally guard rings around them) are
+fixed not only in their internal placement, but also fixed in the immediate
+parent in location and orientation.
+
+There may be more than one such fixed group.
+
+We let the user add additional constraints (rules) to relate such groups to
+other free groups or elements.
+
+*** Summary
+
+Note that given these three new commands and their implementation in Helix,
+the user will be able to make changes in the layout with ease and
+automation: if she wants to change the "fixed" group somewhat due to a
+mismatch with SCH (new fingers, or changed W/L), or due to changed tech/DFM
+rules (increased spacing, enclosure, etc.), she can run a new command:
+
+*** New command in LE: Un-Fix Layout
+
+It would simply mark the group "unfixed" meaning that the group is free to
+be replaced, but immediately, run Fix Topology command on it.
+She can then run Update Layout which runs Helix on each sub-group and then
+the circuit automatically.
+
+* Constraint inference
+
+As hinted above, for truly incremental placement acceleration, we need to
+identify what is good in the current placement (of selected or all of the
+instances) of the circuit and then be able to do two things with it with
+ease:
+1- extract what is good in the layout (topology, aspect ratios, symmetry, alignments)
+2- enable the user to change it incrementally (refine topology, aspect
+ratios, symmetry, break or introduce new alignments)
+
+We have already discussed the latter above. Here, let us identify what is
+needed to extract the "goodness" in the layout. We will also address
+briefly how the designer can give hints from the schematic (using
+constraint templates), to help with this process when the layout is missing
+or "noisy."
+
+It is fairly easy for the designer to specify symmetric pairs and
+self-symmetric objects in SCH. 
+
+However, for even easier use, we can also automatically extract
+differential pairs and matched devices in the SCH in order to eliminate
+this manual input.
+
+** New command in SE/SDL: "Generate Topology"
+
+This is similar to the command in Titan, but will also make use of CA
+(Circuit Analyzer of AVP) to identify symmetry and matching constraints. 
+
+The first task is to come up with a "sch" like floor-plan quickly, using
+BlackBox constraints (BBC) in Helix.
+
+** New Helix/AVP command to do area estimation
+
+Before BBCs can be created, we need to do area estimate for each instance
+in the circuit. For primitive instances, we evaluate pcells and get
+accurate info. For, macros, we recurse and run area estimation within the
+children of the macro.. etc..
+
+Next, using the topology and the alignments in the SCH, we create a seed
+floorplan using Row, Col, Sym constraints. (Sym is a template using a combo
+of the new Array and Symmetry Group constraints).
+
+* The End

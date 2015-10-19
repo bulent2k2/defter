@@ -1,0 +1,29 @@
+
+
+cell a has b(1) b(2)
+cell b has c(1) c(2)
+
+4 occ of c:
+a:b1:c1
+a:b1:c2
+a:b2:c1
+a:b2:c2
+
+2 occ of b:
+a:b1
+a:b2
+
+* spacing:
+hbond1: m1-m2 == m3-m4 == m5-m6
+hbond2: m1-m7 == m3-m8 == m5-m9
+* width:
+hbond1: m1=m3=m5
+hbond2: m2=m4=m6
+
+
+lay1(h) -> pre-pro1 -> lay2(h)
+       hbond2
+lay2(h) -> chem-a -> chem-b -> lp ... -> gen via/derived shapes -> lay3(f)
+lay3(f) -> restore-hier3a -> lay4(h) != lay3 (some sub-cells have missing shapes)
+        3b
+lay5(h) == lay3

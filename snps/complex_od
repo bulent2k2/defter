@@ -1,0 +1,34 @@
+*************************************
+* Now in VNC: ~/share/bz/complex_od *
+*************************************
+* Bug 2950 - gr-groups break in new mode pdiff/ndiff generation flow
+  /slowfs/titan1/alx-share/sysReg/cnxt/noa_gr_group_test/test.tcl
+* Bug 2945 - PP/NP abutment not fully supported in new hflow
+* Bug 2907 - Chem-A Problem for the Microchip (uchip) Testcase
+  /slowfs/titan1/alx-share/sysReg/uchip/uchip_rcvblk/run.tcl
+  test/alx/unit/mig/od2diff
+* Bug 2908 - Unit Test Case Creation for Chem-A and Merge/expand Problem
+
+
+* THOUGHTS
+I think we need to explore an alternative to what we do now: cutting OD into disjoint/abutted ndiff/pdiff mols. Let me review the current state: cutting single complex OD into ndiff/pdiff mols is done by default in old flow (each resulting diff mol is exclusively ndiff or pdiff. This is achieved using VF boolean operations (pdiff := od AND pp, ndiff := od NOT pdiff) in flat chem-a. For the new flow (which does not us VF), we require the input to be modified by using the mig::od::gen_ndiff_pdiff cmd, which is the GSP equivalent of VF in old flow.. The difference is that for the new flow, we do the ndiff/pdiff generation in each sub-cell as opposed to doing it flat, so that the resulting shapes don't break hierarchy and won't cause slivers.. (this was one cause of slivers in old flow).
+
+The alternative is to handle complex OD mols natively without cutting them into ndiff/pdiff. By "complex OD" I mean a mol which overlaps not only nplus or pplus, but both (or if there is no nplus in the input, OD goes over a PP edge), and then update bond generation to handle them correctly.
+
+My recommendation is that we clarify the requirements by studying comparatively: tsmc180lp vs tsmc45gs.
+
+The former has such complex OD, but I am not sure about the latter.
+
+I am assigning this to Rahul to help clarify the requirements by studying the complex OD related rules in the two DRMs.
+
+Hi Rahul,
+
+Please let me know if you have any questions on what we need from you. Once you understand the OD rules regarding abutted np/pp, it would help a lot if you can put together a set of unit tests to cover various scenarios. UCHIP/CNXT test cases have real examples of such OD (overlapping both NP and PP). Also you can see the new test cases from IDT (See: Bug 2945).
+
+Thanks,
+Bulent
+
+ps. Two unit tests may help experiment and clarify:
+    test/alx/unit/misc/od2diff/main.tcl  (how to prep input data for new flow)
+    test/alx/unit/misc/abutted_ndiff_pdiff/main.tcl (how to run new flow)
+You can use the latter as a template to create more tests for complex OD..

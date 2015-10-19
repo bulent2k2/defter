@@ -1,0 +1,151 @@
+2014 August 11
+
+      PNStack:
+        Param:
+          mapping:
+            AllowedGroups:
+              optional: yes
+              sequence:
+                type: AllowedGroup
+            PNSpacing: 
+              type: number
+              optional: yes
+            MinRows:
+              type: int
+              range: {min: 1}
+              optional: yes
+            MaxRows:
+              type: int
+              range: {min: 1}
+              optional: yes
+            GateAlignment: 
+              oneof: ['left', 'center', 'right', 'none']
+              optional: yes
+            PRow: &placementRowType
+              optional: yes
+              mapping:
+                Height:
+                  type: number
+                  range: { min: 0}
+                  optional: yes 
+                RowAllowedGroups:
+                  sequence: 
+                    type: str
+                  optional: yes 
+                Alignment: 
+                  oneof: ['center', 'bottom', 'top']
+                AllowStacking: 
+                  oneof: ['true', 'false']
+                  optional: yes
+                ContactRing:             # take the same param as top-level CR
+                  type: ContactRingParam
+                  optional: yes
+            NRow: *placementRowType
+            MatchRings:
+              oneof: ['true', 'false']
+              optional:
+                default: 'true'
+            MatchDeviceOrientation:
+              oneof: ['true', 'false']
+              optional:
+                default: 'false'
+            CustomGateAlignment: *customAlignmentType
+            AbutmentType: 
+              oneof: ['none', 'auto1', 'auto2']
+              optional: yes
+            BoundaryAssociation: *boundaryAssociationType
+            Twell:
+              oneof: ['true', 'false']
+              optional: yes                
+            PlaceGroups:
+              optional: yes 
+              sequence: 
+                type: PlaceGroup
+            FixDimension:
+              mapping:
+                Direction:
+                  oneof: ['height', 'width']
+                Value:
+                  type: number
+                  range: { min: 0}
+              optional: yes
+
+
+- !Schema
+  name: AllowedGroup
+  desc: An allowed group for PNStack constraint  
+  mapping:
+    Name:
+      type: str
+    Contains:
+      sequence:
+        type: str
+    OverlapLayers: &overlapLayersType
+      sequence: 
+        type: str
+      optional: yes
+
+
+- !Schema
+  name: PlaceGroup
+  desc: PlaceGroup parameters 
+  mapping:
+    Name:
+      type: str
+    Type:
+      type: str
+      oneof: [group, stack, symmetry, clone, align, match]
+      optional:
+        default: 'group'
+    Contains:
+      sequence:
+        type: str
+    Low:
+      optional: yes
+      sequence:
+        type: str
+    High:
+      optional: yes
+      sequence:
+        type: str
+    AxisType:
+      oneof: ['horizontal', 'vertical', 'either']
+      optional:
+        default: 'vertical'
+    MirrorOrientation:
+      oneof: ['true', 'false']
+      optional:
+        default: 'true'
+    ReferenceBox:
+      type: BoundingBoxType
+      optional: yes
+    AlignAt:
+      optional: yes
+      type: str
+      oneof: [top, bottom, center, left, right, inner]              
+    Offsets:
+      optional: yes
+      type: str
+
+
+- !Schema
+  name: BoundingBoxType
+  desc: Parameter definition for StripeRoute bounding box
+  mapping:
+        CustomFunction:
+          type: str
+          optional: yes
+        CustomParams:
+          type: map
+          optional: yes
+        IncludeLayers:
+          sequence:
+            type: str
+          optional: yes
+        ExcludeLayers:
+          sequence:
+            type: str
+          optional: yes
+        PRBoundary:
+          oneof: ['true', 'false']
+          optional: yes

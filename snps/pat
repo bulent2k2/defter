@@ -1,0 +1,398 @@
+* Buckets
+IT: inline template (compound constraint type)
+PE: pattern editor (with canvas and pattern generator features)
+CB: call-back
+
+1- By ww48 or earlier:
+- Auto grouping (Auto Apply Templates command)
+- Enhancement to support device auto-mapping for custom pattern param of inline templates
+- Support for m-factor changes (in hxtmpl file features)
+- Error message in case of bad net-names in hxtmpl file (tap power nets)
+- IT custom GUI to have CB support
+- IT custom GUI to have PE with pattern generators
+
+2- Will try to deliver as close to ww48 as possible (no firm commitment yet):
+- Text-pattern generator to support multi-level aliases (aliases using aliases)
+- Enhancements to the canvas (the abstract graphics pane): 
+    display of net-names on pins
+    accurate display of device W (height)
+    display of taps
+    ruler on the left
+    display of device rows based on DTC
+    enforcement for correct assignment of devices to rows
+    command to flip devices left/right
+    etc..
+
+* We have 6 weeks now: ww43-48
+
+6*5 = 30 days * 2 people = 60 days of effort
+
+IT: inline template (compound contraint type)
+PE: pattern editor (with canvas and pattern generator features)
+CB: call-back
+
+1- m-factor support: 7-10
+2- IT custom GUI to have CB support: 2* (for Girish/Bulent)
+3- IT custom GUI to have PE: 7-10
+4- IT default GUI to have CB support: 5
+5- IT default GUI to have PE: 8-11
+
+Total: 36 max, 27 min
+We may not need 4 and 5 for phase 1. Remaining: 20 max, 14 min
+
+Estimates from Kumar:
+
+1.	PatternEditor Canvas along with PatternGenerator in InlineTemplate default Gui – (8-11 days)
+2.	Callback support in inlinetemplate default gui. (~5 days)
+3.	Support for m-factors in Auto Apply Templates flow. (7-10 days)
+
+It will take around 7-10 days for the following:
+1.	Provide a way to access PatternEditor Canvas along with PatternGenerator functionality for the user to use in custom gui script for inline templates.
+2.	API to access the “Pattern” parameter from the custom gui script.
+3.	My understanding is that we are not providing other Pattern Constraint parameters (e.g. parameters for Dummies and Gaps) in the first phase.
+
+
+* Update from Friday meeting with Intel:
+
+The following proposal was communicated to Intel to address phase 1 of their spec for pattern editor functionality.
+SNPS also committed to provide more details on what we will deliver (features by date) for the meeting on Friday 17th October.
+
+Intel's feedback so far:
+Pattern editor is very critical for us.
+Without this device level placement with Helix gui will be very time consuming for Intel methodology.
+So please make it very high priority.
+What will be provided by ww48-2014 as production release.
+
+Goal: Provide the following flow so that Intel can do device-level placement with Helix UI: 
+Step 1: User runs the existing ‘Auto apply template’ capability, which generates Inline Template constraints
+Step 2: User edits the Inline templates with a more powerful GUI which allows pattern creation etc.
+Step 3: User continues to run Helix normally
+
+For this flow to work well, we propose to provide the following enhancements:
+
+To the hxtmpl format:
+1.1 Option to "bundle" parallel devices (in both sch and lay)
+1.2 Support changes in m-factors (when bundling is turned on)
+1.3 Parameterize layer names
+1.4 Parameterize net names
+
+To the Inline Template UI:
+2.1 Support for custom GUI with callback support for inline templates
+2.2 Inline template form to provide various pattern editing features
+a- User can bring up Abstract Graphical Editor to edit the pattern
+b- User can specify a Pattern Generator (including a text-pattern)
+c- User can specify call-backs (using python code)
+2.3 Abstract graphical pane enhancements for supporting device tile configurations
+
+
+* Phase 1
+
+1. ICF templates: Devices placed in the pattern should follow one of the provided ICF templates. 
+Expectation: The output of the pattern should be drc clean and on grid. 
+Ex. Two row of devices with tap in between.
+
+Note: part of (1) they describe a "Device Tile Configuration (DTC) Editor Tab." We feel that this does not belong in Helix. It is a form they can put together to manage DTCs.. A DTC will then be an argument to their Inline Template. We expect Intel CAD will write the Inline Templates they need with our help. (Girish already provided one to them which can do a Halo of a Column of Contact-Rings(Taps) of Rows..
+
+2. Auto Identification of the pattern structures from schematic and integrating it with pattern editor:
+Pattern Editor should identify the pattern like current mirror or diff pair from schematic and provide automatic matched pattern for the same automatically.
+
+Helix already provides "Auto Apply Templates" command to do this. 
+
+3. Abstract Graphic pane features:
+- Abstract view of the group/pattern. (Already available)
+- Interactive. Goal is to be able to perform most pattern editing functions from here by drag & drop or by 1 or 2 clicks of the mouse (Available)
+- All flat objects (devices/taps) auto-snap to correct vertical position based on the pattern template definition. (Not sure whether will be in phase 1)
+- Moving (i.e. drag & dropping) a device/template between two other objects will spread them out to allow room for the new object. (Available)
+- Auto abutment will occur if enabled & if the two adjacent objects share nodes. (Available)
+
+
+* Dashboard
+
+** I see 6 entries in the dashboard waiting for a response from R&D. These are:
+	row 4 – Incremental placement based on fixed topology
+	row 6 – Modular grid management (in Santana.tech)
+	row 7 – Engine to support modular grid directly (not from Santana.tech)
+	row 8 – Enhancements to UI for inline templates
+	row 9 – Enhancements to hxtmpl for parameterization
+	row 10– Pattern editor enhancements for supporting ICF templates
+
+Project 1: Enhancements to hxtmpl for parameterization
+Task 1.1 Option to "bundle" parallel devices (in both sch and lay)
+Task 1.2 Support changes in m-factors
+Task 1.3 Parameterize layer names
+Task 1.4 Parameterize net names
+
+Project 2: Enhancements to inline template UI and pattern editor
+Task 2.1 Support for custom GUI scripts with callback support for inline templates
+Task 2.2 Inline template form to provide various pattern editing features
+  a- User can bring up Abstract Graphical Editor to edit the pattern
+  b- User can specify a Pattern Generator (including a text-pattern)
+  c- User can specify call-backs (using .py code)
+Task 2.3 Pattern editor enhancements for supporting ICF templates
+  Details to be decided based on answers to the questions Girish has sent to Intel ICF.
+
+* phase 1
+
+1- Support for "device tile configurations"
+DTC defines the basic structure of the "pattern".
+A basic example is a column (COL1) that interleaves rows of devices, rows of taps and halos.
+If left or right halos are needed, then, we would have:
+A row (ROW1) that combines (Halo-Left, COL1, Halo-Right).
+
+GUI to manage a set of DTCs on disk. Load/save. Create a new one. Edit an existing one.
+
+2- Auto grouping of devices based on src netlist in hxtmpl files
+This will re-use "Auto apply templates" command.
+
+Add support for m-factor changes and gracefully handle exceptions.
+
+3- Use text-pattern editor mostly as is. 
+Enhance it to be DTC aware: Given a DTC, it will enforce the correct number of "lines" to correspond to the rows of devices.
+
+4- Enhancements on the abstract graphic pane ("canvas" for short)
+
+Most of the enhancement will likely be handled beyond phase 1.
+Major changes in for phase 1 will focus on enabling DTC-aware editing:
+Enforce a fixed number or device rows.
+Auto-abutment for each row will be provided using existing "Row" functionality.
+
+* ***** Below NOW IN WORD DOC ***** *
+* Pattern Editor for Devices and Device Templates
+* Introduction
+
+Intel ICF requests support for a new kind of "Pattern" constraint. In the
+rest of this document, let us denote it as PAT and attempt to identify the
+core functionality that is sufficient to enable the desired design flow. 
+
+Here, we will first outline what the Pattern constraint provides. Next, we
+will compare and contrast that with PAT to help identify the "missing"
+functionality that needs to be developed.
+
+Please note that there are at least two distinct ways to define the user
+interface for PAT: 1) enhance Pattern to provide all PAT functionality, 2)
+implement a new constraint called PAT, etc..
+
+There are pros and cons to both options and we need to investigate further
+to find out whether there are other and better options to consider. But,
+that is outside the scope of this document. Here, we will assume the second
+option above (a new pattern constraint) just for the sake clarity.
+
+* Pattern Constraint
+
+Pattern constraint, Pattern for short, creates one or more rows of devices
+where an "interdigitation" pattern can be provided by the user for each
+row. 
+
+Intra-row devices can be abutted in various ways, and inter-row devices
+can be aligned, again, in various ways. Please see the user guide for the
+details. 
+
+Finally, please also note that the user can also specify how many dummy
+devices are to be inserted and how they are interdigitated with the non-dummy
+devices.
+
+* The GUI for Pattern Constraint
+
+The GUI for Pattern provides a "canvas" which shows an abstract view of all
+the devices (dummy and non-dummy). The devices can be arranged on the
+canvas by convenient drag and drop operations.
+
+The GUI also provides a form for "text-pattern" entry, where, each line
+defines a row of devices. To make it easier to specify the pattern, short
+aliases can be used to refer to an element in a group of devices. E.g., for
+M1 in the schematic with M=4, and for M2 with M=2, we get the following
+alias map:
+
+ A -> M1
+ B -> M2
+
+Note that B is a placeholder for each of the two layout instances for M2:
+M2.1, M2.2, and likewise for A.
+
+Below are some sample text-patterns. 
+
+Four rows:
+ AA
+ AB
+ BA
+ AA
+
+Two rows:
+ AABAA
+ AABAA
+
+Three rows with six dummies:
+ @@A@
+ ABBA
+ @A@@
+
+* PAT, The New Pattern Constraint
+
+Pattern constraint is customized for primitive devices (MOS and
+Resistors). {CHECK: can we have pch and pch25 get mixed in one
+pattern??}. PAT comes with two distinct modes depending on the types of
+elements it places: 
+1) devices (primitives: flat devices, or pcell instances)
+2) instances (each cell is a PAT of devices)
+
+The first mode is very similar to Pattern and is to be used to create
+"device templates." A device template is simply a new "sub-cell" that
+combines one or more rows of devices and taps.
+
+The second mode can then be used to place instances of device templates in
+one or more rows.
+
+We do not know whether Intel indends to do hierarchical patterning where a
+third mode is required:
+3) instances (each master is a PAT of instances)
+
+* Core requirements for PAT
+
+Similar to Pattern, PAT's GUI is to have a canvas and a text-pattern entry.
+
+* Text-pattern
+** Req 1: Sub-pattern aliases
+Provide a short-cut mechanism for patterns of aliases, so that the user can
+specify new aliases to refer to sub-patterns. E.g., given:
+
+A -> M1
+B -> M2
+
+user can add:
+
+C -> ABBA
+D -> BAAB
+
+which simplifies complex patterns from:
+
+BAABABBABAAB
+ABBABAABABBA
+
+to:
+
+DCD
+CDC
+
+Note that the user may want to mix the first and second level aliases:
+
+ADCDA
+BCDCB
+
+It is NOT clear whether higher level aliases are of significant value:
+
+X -> ADCDA
+
+It is NOT clear whether the user may want to specify explicitly whether a
+filler cell is required between two devices even when they can abut.
+
+* Canvas
+** Req 1: Accurate scaling/visualization
+Provide visualization of the modular grid and the devices with accurate
+scaling so that the user gets immediate feedback how many devices would fit
+in a row along the width of a modular grid and how many rows would fit
+along the height. 
+
+Note that PAT is simpler than Pattern in that it only requires a boundary
+abutment of devices or instances. In fact, in modes 2 and 3, PAT is always
+comprised of abutted instances in rows and abutted rows in a column such
+that there are no empty spaces between instances.
+
+** Req 2: Filler cells
+Two instances are "compatible" when they can be placed side by side. This
+is the case only when the adjacent pins are connected to the same net. 
+In that case, their boundaries can and will abut. When they are not
+compatible, a "filler" cell is to be placed in between. User will enter in
+a configuration file a filler cell for each pairing of instances that is to
+be implemented in PAT.
+{HOW/WHEN TO INSERT FILLER CELLS AUTOMATICALLY IN CANVAS?}
+** Req 3: Auto identification of compatibility
+The tool needs to check internally whether two cells are compatible given
+their current flips. 
+** Req 4: X and Y flips
+The user can specify Y-flips (flip around Y-axis) on each device.
+The user can specify X-flips on each row which flips all the devices on
+that row.
+
+{CHECK: No auto-flipping to maximize abutment and minimize filler cells. Is
+it required? If so, it will go to a later phase}
+
+* Device group manager
+Intel requested to have a widget that can help to visualize all device
+groups in the circuit. Note that PAT works on one device group at a
+time. E.g., a Diff-Pair, or a Current-Mirror. 
+
+At the present, we think that the Constraint tap in the Helix GUI is
+sufficient to manage device groups. 
+
+** Req 1 Auto creation of groups
+
+The "Auto Apply Templates" functionality (A2T) can be used as is to group
+devices in a circuit into device groups.
+
+A2T does matching of circuit elements to a set of hxtmpl templates provided
+by the user and then creates HOCs (hierarchy of constraints) for each match
+as defined in the hxtmpl files.
+
+Please note that A2T can be used as is as long as the user specifies a
+PAT to be created in each hxtmpl of interest. The assignment of devices to
+the PAT is fairly straightforward as the HOC is trivial in this case: only
+one level of PAT constraint and no auto-digitation is required. 
+
+** Req 2 Handle m-factor mismatches
+
+For PAT, hxtmpl files need to provide a netlist snippet (with $DEVICE and a
+sub-netlist). This is already supported with 2013.12. 
+
+We require A2T to be enhanced so that parallel devices (with identical
+S,G,D,B connections) are "bundled" before matching is performed. The
+bundling needs to be performed on both the source and the target
+netlists. This is because the source can have parallel devices.
+
+After matching is found, the target "bundles" need to be expanded so that
+all the devices in the bundle(s) are assigned to the PAT.
+
+Note that manual creation and editing of device groups is already supported
+using the existing Helix GUI.
+
+* Compound constraint types
+** Req 1 New compound constraint types (inline templates)
+Intel requested a rich set of properties that control the inner workings of
+each PAT. We envision that we may need to create a set of new compound
+constraint types (aka inline templates) to provide the rich behavior
+requested. 
+
+In a nutshell, each new type will compound a Column of Rows. 
+
+The "transition region," if any, may be implemented using a custom
+ContactRing. 
+
+It is possible that one new type per mode is sufficient. But, the
+implementation may be more flexible if we allow for multiple types per
+mode.
+
+E.g., given a major switch (flat devices versus instances as elements,
+e.g.), we can switch the type used for implementation.
+
+Similarly, we can switch the type depending on whether a transition ring
+is needed.
+
+This might simplify the GUI (and also possibly its implementation) -- the
+form without the transition ring, if it is not selected, would be simpler. 
+** Req 2 -- Need to flush this out by detailed analysis of the parameters Intel needs.
+{CHECK: Did they provide a complete list? Will they ever?? If not, we need
+to design/support generic arguments. Probably for later phases}
+* Other requirements (for later phases of development)
+
+This is not a complete list. I will add more items later.. Please refer to
+Intel's presentation in berryfarm for details.
+
+** Canvas has a rich set of visualization and editing features 
+** Canvas and text-pattern entry are synched real time
+** All three modes are supported
+** One cockpit provides a complete view of the whole circuit with all device groups, etc..
+
+* The end
+
+
+
+

@@ -1,0 +1,299 @@
+* A High-level Specification for Auto Constraint Generation in Helix [1]
+
+** 1-Introduction
+
+a) Purpose
+
+Helix can produce high-quality layouts for a circuit automatically. However, this requires the user to craft a good set of constraints that describes adequately what she expects to see in the layout.
+
+Understandably, this puts a rather large burden on the user before the first good layout is generated. 
+
+To help overcome this obstacle, Helix First Look (HFL) has been developed which helps generate an initial set of constraints automatically. 
+
+Figure: User -> Configuration -> HFL -> Constraints -> Helix Engine -> Layout
+
+HFL has already demonstrated significant value despite the limitations of its current implementation.
+
+Based on the learnings from HFL, this document proposes a high-level specification of a new approach that addresses the limitations of the current implementation of HFL. The new approach is meant to provide a general purpose, extensible framework that enables powerful auto-constraint generation in Helix.
+
+b) Background and Need
+
+c) Scope
+d) Reviewers
+e) Approvers
+f) Target Production Date
+g) Document State
+(Draft -> Proposed -> Accepted -> Approved -> Closed -> Deferred -> Cancelled)
+
+** 2-Current Flow
+
+** 3-Desired Flow
+
+** 4-Summary of Desired Changes
+
+** 5-Assumptions and Constraints
+
+** 6-Proposed Changes for UI (High-level Overview)
+
+** 7-Changes to Impacted (Helix) Modules 
+
+** 8-Known Issues and Limitations
+
+** Bib:
+[1] http://www.wholeteam.org/images/High-level_Approach_Specification_Template_WholeTEAM.pdf
+* Auto template generation! (:-)
+  Each template represents a class of constraints..
+  c++: object -> a UCell (an instantiation of a constraint)
+       class -> a constraint type (e.g., Row/PNStack)
+       template class (a parameterized class) -> constraint template
+* A fairly complete list of requirements on new helix templates we have been discussing as a team:
+	m-factor support
+	generic layer name support
+	generic net name support
+	many-identifier-to-many-implementer architecture
+	support connectivity-pattern based matching
+	etc..
+* A higher abstraction level where users can get more automation in generation of constraints:
+1- constraints for top-down planning (Pin, BBox, Frame, etc..)
+  top-level and attribute-related (?) constraints
+2- instance-placement constraints
+  enhancements to eliminate certain limitations of the existing functionality
+3- general symmetry handling
+4- layout topology re-use 
+  based on selected Helix result. could also be based on existing layout
+5- incremental placement (freeze selected sub-ucells, or instances)
+* Thu Aug 21st -- 1:1 w/ Ross
+** my agenda:
+0- Update on release plans: 2014.12 2015.6 (every 9 months..)
+1- What ICF wants that we can deliver by December
+(June is too late for them..)
+2- Continue to work on ng template definition with our current mirror example
+
+* Wed Aug 20th -- 1:1 w/ Ming
+Ming:
+
+ICF requirements..
+   -- 
+
+Hi-level skeleton by TOMORROW!
+ -- template ng
+ -- -> instantiate and get hxtmpl or inline-tmpl
+ -- -> "pattern" to use arg of m-factor ...
+ -- -> custom code
+ -- -> convention trumps configuration
+
+what happens to hxtmpl, inline templ.., 
+
+ex: ucell hier for inv for 1x, 2x, 4x, 16x
+
+hxtmpl: save/reuse very easy.. unless "things" change (m-factor, net, ...)
+
+auto-tmpl generation -> ngtmpl -> hxtmpl
+
+..usage model..
+
+
+
+-- incremental placement/layout re-use --
+DTS vs ICF
+
+
+"fix" -- freeze devices -- 
+
+Phase 1: release in dec -- coding to finish mid Nov. 
+Phase 2: 
+
+
+ICF <-> Ross helped by Girish..
+
+Beetween? Mirko/Yakov ? want to eliminate any trouble. Ming to talk to them today/tomorrow...
+
+Restore Joe back to the team.. when?
+
+Unofficially technical leader.. 
+* Wed Aug 20th -- 1:1 w/ Ross
+- don't claim "automated layout"
+1) hard to believe/achieve
+
+need input from the user...
+HFL helps designer to enter recipes..
+
+2) alienates mask designers..
+
+- tackle how to improve editing of constraints/constraint structure..
+Does not stop the user, so won't do it.. Have other things to do (14nm e.g!)
+
+(see the GUI! move elements around, insert/delete constraints.. implicit partition
+row can't have single elem
+cr can't have multiple elem
+)
+
+click on inline-template to expand it (if it is implicit in autoconfig file of hfl)
+
+
+template-based flow:
+  Custom written GUI and code (Design Data to Constraints, e.g.)
+* Tue Aug 19th -- 1:1 w/ Mirko 
+(there is a method in the madness)
+** Two aspects (from Intel ICF):
+***  -- AI: Ask Ross: read third party constraints (in OA)? Ross's prototype.. mismatch in "style" one element belonging in many constraints..
+  -- Berry Gifford? From Maxwell Project ... (Mirko to fwd discussion to me). Yakov to meet Berry..
+** Re-usable templates, template-based flow..
+** hxtmpl
+   fixed class (non-template)
+** inline templates
+   python code!
+** custom constraint == custom construction
+   santana api, lingo
+
+constraint hierarchy -> one or more forms (layouts) for each layer
+form has physical component (compound component)
+  pins??
+compComp contains shapes (corresponds to OA)
+form has dlo (dynamic layout obj)
+  dloGen ()
+contact ring -> one form around one form
+{pr-boundary is not part of form}
+custom construction -> python function with one form, pr-boundary, params as arg
+  custom islands (by altera)
+  
+** AI: Ask Ross: HFL does not use topology tools (sub-gemini)
+
+assisted template reuse..
+
+** My agenda
+  Intel ICF..
+  HFL XGen InlineTemplates
+  /remote/orion14/bulent/ws/tot2/builds/build_tot3_qsci_opt/helix/pylib/PyHelix/GetXGenTemplateProcedures.py
+  /remote/helix01/user/bulent/proj/site_ext/star/9000769259/work1/sitex/XGenPython
+  centerline sym
+  branch-clone example?
+  incremental placement
+
+* Fri Aug 15th -- 1:1 w/ Ross  
+-- Ross Addinal -- 
+-- John Hapli --
+-- Ravi Rao --
+
+Intel porting flow
+   BBox constraint? (scaling for x and y)
+
+  -> YAML -> generate constraints
+  Design_Data_To_Constraints is not part of HFL. Why? HFL is not scalable/supportable. Too much code. Has cfg file. 
+
+  pin, frame, cell-aspect-ratio filter (output), finish
+
+  rows + proximity constraints (like a nail)
+  switch from {soft cluster is a magnet} to proximity
+
+Glen  ..HFL.. Kumar?
+
+..PlugIn mechanism..
+
+ID Identifier  -> Template association (matching)
+IM Implementer -> Template instantiation?
+
+1-HFL to run plug-ins (defined in cfg file)
+2-plug-in has identifier + implementer (hi-volt PMOS) python function
+returns a tuple..
+3-implementer takes the return value and creates constraints..
+why dual? an implementer can be reused by other ids
+e.g., set a rule-set per ckt..
+
+Toshiba STARS to extend HFL (e.g., length of MOS device -> size of dummy..)
+
+HFL code review..
+For each ckt, group and sort all devices..
+ - well type p n or twell
+ - conn of well
+ - device type (pmos, pmos_hv, pmos_lv, etc..)
+ - device size (%5 threshold to match size)
+-> groups of devices..
+
+Read in cfg file 
+-- what constraints to create. e.g., VMatrix
+-- island constraints for wells with same conn
+-- contact ring around..
+
+Hierarchy tree for each distinct well with contact ring around..
+
+But maybe over-grouped! Caps on input vs output.. Can split manually..
+
+WIFI CKT at CSR 400 tr flat. 3 vdd and 2 gnd.
+By hand + Helix 1.5 days. Mask designer 1 w.
+By HFL, 2 sec for HFL, 10 min for Helix. 140 solutions..
+
+Added Topo recognition, etc. later
+
+Routing constraints interspersed in ucell hierarchy..
+
+Plan: 
+Looping is needed for top-down/bu convergence of routing..
+
+Cluster clusters based on connections..
+
+?Ordering and looping (or goto?) scheme for plug-ins?
+
+..Plug-ins using full power of XGen..
+
+Unified templates: Template <-> Plug-in..
+
+hxtmpl -> no power
+inline -> gui but not powerful
+hfl -> too powerful, but can't change
+
+consistent scheme -> 
+
+
+!!Kumar!!
+
+
+Write a "spec"!
+
+First a high-level 
+
+Regular weekly call 
+
+Rajiv and Prashant to 
+
+1-
+2-
+3-
+
+
+* Sub-problems
+* Question:
+Girish:
+-- Major requests/pain points..
+  tool setup (wrappers, adaptors, santana, etc.)
+  constraint creation
+-- Kumar's assisted template reuse..
+--  Template library.. input (see: CA)
+-- CustomConstraints? loads named hxtmpl without form.. (so does not support AutoMap?)
+-- InlineTemplates?
+-- HFL test-case?
+* Proposal (FSPEC)
+TODO 1) Read the Laker document! Desktop/Templates
+
+  [+] Did more study on the new GTO test-case. PackedPartition reduced run
+  time from 4h to 2h. Column took about 40 minutes. Switching from VMatrix to
+  Matrix improved runtime significantly from 40m to only 6min!
+
+From Nishath ->
+1) High level proposal/fspec for template based flow - end of July, early August...
+    Girish..
+    Template library.. input (see: CA)
+    Limitations..
+
+2) Device level place&route...
+    nvidia...
+
+** questions to ponder :-)
+What do you want to do, how much will it cost, and how much time will it take?
+How does the proposed project relate to the sponsor's interests?
+What difference will the project make to: your university, your students, your discipline, the state, the nation, or any other concerned parties?
+What has already been done in the area of your project?
+How do you plan to do it?
+How will the results be evaluated?
+Why should you, rather than someone else, do this project?
+* The end

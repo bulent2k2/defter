@@ -1,0 +1,40 @@
+* 2014.02.19
+[namerneny@synopsys-chamber-xterm1 ra_test_PNStack_abutment2]$ cnhxgui &
+[1] 24613
+[namerneny@synopsys-chamber-xterm1 ra_test_PNStack_abutment2]$ terminate called after throwing an instance of 'oaCommon::oaPlugInError'
+
+** *****************************************
+Signal: Abort
+Backtrace:
+utl::Lib::backtrace(std::vector<std::string, std::allocator<std::string> >&)
+utl::Lib::printBacktrace()
+vwr::vwrMainWindowProxy::signalHandler(int)
+/lib64/libc.so.6 [0x323aa302d0]
+gsignal
+abort
+__gnu_cxx::__verbose_terminate_handler()
+/home/scratch.dgradin/users/rkang/HelixData/gcc44x_64_Py251_2013.12_leftcell/plat_linux_gcc44x_64/lib/libstdc++.so.6 [0x7fffedf87e26]
+/home/scratch.dgradin/users/rkang/HelixData/gcc44x_64_Py251_2013.12_leftcell/plat_linux_gcc44x_64/lib/libstdc++.so.6 [0x7fffedf87e53]
+/home/scratch.dgradin/users/rkang/HelixData/gcc44x_64_Py251_2013.12_leftcell/plat_linux_gcc44x_64/lib/libstdc++.so.6 [0x7fffedf87f4e]
+oaCommon::SharedLib::open()
+oaCommon::PlugInLib::PlugInLib(char const*)
+oaCommon::oaPlugInMgr::getClassFactory(char const*, oaCommon::Guid const&, void**)
+oaCommon::oaPlugInMgr::createInstance(char const*, oaCommon::IBase*, oaCommon::Guid const&, void**)
+OpenAccess_4::oaLockSet<(OpenAccess_4::oaLockResourceTypeEnum)0>::createLock()
+OpenAccess_4::oaLockSetMgr::initResources()
+OpenAccess_4::oaInitBaseDB()
+OpenAccess_4::oaInitDMDB()
+OpenAccess_4::oaInitTechDB()
+OpenAccess_4::oaInitDesignDB()
+gutl::gutlOpenAccess::initialize(bool)
+vwr::vwrMainWindowProxy::init()
+sys::sysSys::init()
+hgui::hguiMainWindow::start()
+main
+
+Try using the --debug switch and send the
+.cnitools directory to Synopsys support.
+** *****************************************
+
+[1]    Abort                         cnhxgui
+* The end

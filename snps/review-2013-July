@@ -1,0 +1,71 @@
+* Product not mature. Not many customers..
+Too many tweaks...
+* Future (see today!): 
+Had a good discussion with Girish re: system level integration with sbr and
+helix to identify and implement big changes, and integration with auto-fix
+ to separate design intent from DRC. (3 hour + discussion with Girish. Re: editing on abstract visualization, abstracting wires, integration w/ auto-fix sbr and helix, to separate design intent from drc, incremental routing (drc) and incremental placement (manual))
+* Customer support
+  Greendale 2012-01
+  Dongbu180 2012-04
+  STARC 2012-07 -> 2013-03
+  Revsonic pcell generation (flow integration with Laker) 2012-11 (?)
+  IDT TSMC55 2013-04
+  IDT GF180 2013-05
+  Sato refPDK45 2013-07
+Learnings and actions taken
+Highlight some enhancements and bugs
+* Major events in timeline
+** Nov 2011 Sunil joined
+** Feb 2012 Deep chip article 2012/02/23 Based on Greendale tape-out and early Dongbu results
+** Apr-May Dongbu finishes. IDT post-mortem
+** Apr-Jul Join SNPS, presentations to management and cross-team discussions
+** Jul STARC work begins
+   First priority to migrate MIMCAPs to NMOSCAPs
+** Aug Revsonic request for GDS -> ALX -> Laker flow
+** Sep STARC requests SDL compliance -- pcell inst (&name) preservation
+   Also provides CCI data from Calibre 9/18/2012
+** Oct Mohit joined, Himanshu left
+** Nov? Switch STARC to "new-mode" (hierarchical mols)
+** Dec 2012 Revsonic data received and result delivered
+** Jan? Switch STARC to "new-flow" (new hier flow)
+** Jan 2013 Technical seminar to AMSG division
+** Mar 2013 STARC work ends
+** Apr-Jun 2013 Discussions on Zandro integration
+* Re-writing of major modules:
+  airdb chem-a generation
+    Move from VF to GSP
+    direct link from mols to db objects
+  hflow
+    hbond generation
+    hierarchy creation
+    via generation
+  via array creation
+  path creation
+  net/pin/text preservation
+  pcell flow
+* New modules
+  Tile plane based selection of mols (2012.10)
+  Higher level interface for custom bonds (Jbond api) (2012.10)
+  {alx define purpose}
+  {alx sdl map}
+* Enhancements
+  Abstract cell feature (productized). Faster and more general migration. (2012.10)
+  Improvements to pcell flow: (inst name preservation, handle dummy devices, auto pcell detection, improved abutment handling)
+  Enable CCI flow to run on sub-cell (BIAS)
+  Enhance CDL mapping to handle R and C
+* 2013.03 and .06
+  MPP/Path preservation
+  Symmetry under non-uniform resizing (device, abstract and wire)
+  Pcell inst preservation
+  Wiring QoR
+  New Hierarchy Flow and QoR (0 via pop-ups in STARC top!)
+  SDL compliance, cross-probing {alx sdl map} 
+  Area/compaction
+  Runtime improvements ({alx migrate} and {alx run pcell}) More than 2x. 4x on STARC top cell.
+  native OA mode
+  Save/restore
+  Abstract flow improvements {alx map abstract pins|shapes}
+* > 150 unit tests (cvs test)
+From 60 on beginning of 2012 (cvs checkout -D 20120101 test/alx)
+* On going
+  Laker integration
