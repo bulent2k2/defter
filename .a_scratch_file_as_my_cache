@@ -3450,3 +3450,19 @@ test_suites/2015_01_26_StructuredPartition_Vertical_Offset/2015-01-26        pra
 test_suites/2015_02_10_StructuredPartition_Segfault/2015-02-10        prajoshi          golden                  siarhei                   Succeed
 
 
+* regression on Mon Oct 19th, 2015.
+** Barium:
+  Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck/santana
+  CNI_ROOT:        /remote/helix01/integ-cn/builds/output/santana_qsck/opt/linux_rhel40_64
+  PartnerData:     /remote/helix01/integ-cn/builds/p4/santana_qsck/partnerData
+  PDT_LOG_DIR:     /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/pdt_hxnightly_logs
+  Helix Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck/helix
+  Logs are:        /remote/helix01/integ-cn/builds/logs/helix_qsck/opt/linux_rhel40_64/testopt_hxnightly_logs
+** Krypton:
+  Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck_2015.09/santana
+  CNI_ROOT:        /remote/helix01/integ-cn/builds/output/santana_qsck_2015.09/opt/linux_rhel40_64
+  PartnerData:     /remote/helix01/integ-cn/builds/p4/santana_qsck_2015.09/partnerData
+  PDT_LOG_DIR:     /remote/helix01/integ-cn/builds/logs/helix_qsck_2015.09/opt/linux_rhel40_64/pdt_hxnightly_logs
+  Helix Built from:      /remote/helix01/integ-cn/builds/p4/santana_qsck_2015.09/helix
+  Logs are:        /remote/helix01/integ-cn/builds/logs/helix_qsck_2015.09/opt/linux_rhel40_64/testopt_hxnightly_logs
+* The end
