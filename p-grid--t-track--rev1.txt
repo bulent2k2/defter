@@ -1,0 +1,80 @@
+Copy in folder/DONE/
+*************************************
+* P-grid and T-pattern requirements *
+*************************************
+
+R1) Any component placed in Maxwell (denoted as "obj") to be decorated optionally with one or two proposed UCM decorators:
+  a- placement grid (p-grid) decorator
+  b- track pattern (t-pattern) decorator
+
+p-grid specifies x&y pitch + offset for the obj's "origin" (Q? Do we need a param to determine how the origin is to be computed, if it does not exist?)
+t-pattern specifies what shapes (type/layer) in obj need to be snapped on which track groups (if any)
+
+Here, obj is one of the following: 
+  instance (oa*Inst*), figGroup (oaFigGroup) or placementGroup (UCM)
+
+Note:
+  a- We assume no gridding without decoration (even if global p-grids are defined)
+  b- We assume full snapping without decoration (when one t-pattern group per layer is defined)
+
+R2) Turning off snapping to t-patterns for any collection of objects should be supported with a "glob" decorator (all obj-types, no layers -- see below). Note: This is needed because, by default (when there is no t-pattern decoration), we expect all shapes&pins to be snapped to appropriate tracks. Further, note that if an object is decorated with both a p-grid and a t-pattern, then, it should be placed on a valid grid point (as defined by p-grid) that also snaps its shapes/pins (as per its t-pattern). If this is infeasible, an error should inform the user what p-grid and what specific t-pattern caused the infeasibility. This is the responsibility of the LE/GCP-place/GCP-copyBack.
+
+R3) We require UCM to support decorating multiple objs with a single decorator (one p-grid, or one t-pattern, or one of each) for brevity and convenience (this is already available, I think).
+
+R4) We also require UCM to support entering "spacing" values in terms of p-grids when applicable: if there is a p-grid decorator on a Row, spacing of its components will use the pitch value of the p-grid as 1 unit. Otherwise, it will be in microns (with support for u for microns and n for nano for clarity). 
+
+R5) Visualization for p-grids and t-patterns (this is already planned in visibility filter). 
+
+R6) Track group names to be unique (among all regions). Note: When multiple non-overlapping regions exist, the t-pattern can automatically pick up the track pattern per layer, or per group. If multiple regions overlap the placement location, the track group names will be unique so as to determine without ambiguity what group to use. Otherwise, t-pattern decorator would need to specify a priority among overlapped groups with name clashes. We would like to avoid this if possible.
+
+For details, please see [1].
+
+p-grid examples:
+
+  p-grid: <name>  X <pitch> <offset> Y <pitch> <offset>
+
+  mygrid1 X 1.2 0.1  Y 1.8 0.0
+  mygrid2 X 2.4 0.1  Y 1.8 0 0
+
+  insts: {I0, I1, I2} -> mygrid1
+  cluster1, standardCells1 -> mygrid2
+  figGroup1 -> mygrid3
+  
+t-pattern example:
+  t-pattern: <name> <obj-types> <layers> [<obj-types2> <layers2> ...]
+
+  <layer>: a routing layer from oaTech, or a track group name (in case of multiple groups per layer). 
+
+  turn_off_snapping * ""
+
+  trackf1  "pin"   "m4 m3"   (or, trackf1 "pin" "m4group1 m3group2")
+  trackf2  "shape" "m3 m4"
+  trackf3  "pin"   "m4 m3"   "shape" "m2 m1"
+  trackf4  "pin"   "m1 m2"   "shape" "diff poly"
+  trackf5  "pin shape" "m1 m2"
+
+  {I0,I2} -> trackf1
+  I1 -> tracks2
+  cluster1, stdandardCells1 -> tracks3
+  figGroup -> tracks4
+
+===
+REF
+===
+[1] http://sp-amsg/sites/CustomDesigner/ReleaseMgmt/L201606/Planning/GCP-072015/Gridded GCP-Maxwell-16.06-publish.pptx
+
+Barry: Can use the "Origin" field/param of insts/fig-groups to grid
+Jon: The platform needs to support origin better for fig-groups.
+Barry/Jon: Track Assistant to have a new tab? Grid Assistant?
+Barry: A selected sub-set per design: Allowed p-grids
+Barry: No track patterns in tech/design, still get a set of default p-grids
+Barry: Auto assignment of decorators to many instances?
+Fred: This is done by bottom up construction.. 
+Bulent: When there is no routing, user intervention is needed now. Based on size and pin count, we might estimate routing complexity and the number of layers to be used..
+Barry: This proposal concerns not only UCM, but also infrastructure and technology groups. They need to be informed. Minutes to be sent to Randy..
+Fred/Jon: Also LE needs to be involved to support p-grids
+Jon: Check with MSIP whether they would be interested in p-grids.
+Fred: Should we go public about it, or keep quiet for now (and leave the other guys behind)?
+Fred: Look into scheduling.. Stan have already stated that the team is overbooked.
+Jon: Pins/tracks have a dimension based tagging, there is request to have a "strength" field and the tool to do a regex on it.. But, could also be a number (from supply lines)
+

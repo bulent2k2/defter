@@ -1,9 +1,108 @@
+* sifre snps 2015.11.03
+What is your mother's maiden name?
+ »  ********
+What is your city of birth?
+ »  ********
+What is your date of birth? (MM/DD/YY) Ex: 01/31/60
+ »  ********
+What was the make/model of your first car?
+ »  honda civic 96
+* pnstack new stars
+STAR: 9000976845- PNStack to optimize abutment for each "critical" row
+STAR: 9000976847- PNStack crash in internal function: HandlePermutableForms
+** STAR: 9000976845- PNStack to optimize abutment for each "critical" row
+PNStack to optimize abutment for the "critical" row
+For both the single-row (MaxRows=1) and multi-row cases (MinRows > 1), the user expects the following:
+1- The "widest" row (p or n), denoted as the "critical row", must have the "minimum" number of diffusion chains ("chains" in short) so that the area of PNStack is minimized.
+2- For all other rows, it is OK to have more than the minimum number of chains so long as the number of CMOS alignments is maximized. (I.e., it is OK to reduce abutment so that alignment is improved, except for the critical row.
+3- To maximize CMOS alignment, number of fingers that are aligned must be maximized. Therefore, it is not sufficient to only align the instances. Given MN1 and MP1, with common gate net, e.g., with 2 and 3 fingers each, aligning only one of the fingers would be sub-par. 
+** STAR: 9000971711- Some of the PNStack multi-row solutions waste area
+/berry/secure18/m1118/bulent/helix/reg/star/cmos_multi_row_issues.tgz
+gtar -zxf <tgz file above>
+cd cmos_multi_row_issues/output
+source /berry/secure18/m1118/bulent/helix/full_setup_for_joe.sh
+export MCP_CONFIG_FILE=~bbasaran/helix/mcp/default
+time Helix.exe -D -f pm_sdffrr_1x
+The following solutions have large wasted space in a number of rows: layout 000, 002, 003.
+layout001 (NP.PN.NP.PN.NP) is pretty good. But, removing the last (top-most) p-row would improve the area further.
+
+** STAR: 9000971713- PNStack multi-row with dynamic alignment has illegal overlap and grid violations
+/berry/secure18/m1118/bulent/helix/reg/star/cmos_multi_row_issues.tgz
+gtar -zxf <tgz file above>
+cd cmos_multi_row_issues/output
+source /berry/secure18/m1118/bulent/helix/full_setup_for_joe.sh
+export MCP_CONFIG_FILE=~bbasaran/helix/mcp/dynamic_align
+time Helix.exe -D -f pm_sdffrr_1x
+1) overlap between p-row and n-row (layout002)
+2) grid rule violations
+  PNStack1 contains an internal violation of the pitch rule DF_02.ndiff.
+
 * Advanced node requirements
 - Disclaimer  : I assume DRC rule support will be there :-). Focusing on grid/track pattern support here..
 - Flow        : Place blocks/Plan&Assign IO/Place cells/Place devices
 - Device-level: RowStack + PNStack
 - Cell-level  : StdPart with A-B grid support
 - Block-level : Track pattern awareness (transparent "constraints")
+* finfet
+Hi Xiaodan,
+
+This is not a “bug” but a “feature” .. Seriously, Packed style is a requirement from a customer where they don’t want DRC rules to be used. Instead Xgrid and Ygrid param values are to be provided by the user to align placement of instances on a grid.
+
+Please update those params to a large (multiple of finfet grid pitch) value and re-try.
+
+Regards,
+Bulent
+
+From: Siarhei Lekhtsikau 
+Sent: Tuesday, October 20, 2015 5:14 PM
+To: Ming Su
+Cc: Mirko Spasojevic; Jun Yang; Sheng Han; Bulent Basaran; Xiaodan Liu
+Subject: RE: About track pattern question with 10nm PDK
+
+Hi Xiaodan,
+
+I double checked that a wide alignment constraint is present in the OA tech DB, and it is properly converted into DRC operations for GCP geometry engine.
+
+The problem seems to be specific to Cluster constraint with “Packed” style.
+If you change it to any other style - for example, “Normal” - then the fin fet gridding rules are obeyed.
+
+I suggest you open a STAR for this bug.
+
+Best regards,
+Siarhei
+
+From: Ming Su 
+Sent: Tuesday, October 20, 2015 8:38 AM
+To: Siarhei Lekhtsikau
+Cc: Mirko Spasojevic; Jun Yang; Sheng Han; Bulent Basaran; Xiaodan Liu
+Subject: RE: About track pattern question with 10nm PDK
+
+Hi Siarhei,
+
+Please help to check if necessary info is in oaTech of this PDK and we collect it properly.
+
+Thanks,
+Ming
+
+From: Xiaodan Liu 
+Sent: Tuesday, October 20, 2015 6:35 AM
+To: Ming Su
+Cc: Mirko Spasojevic; Jun Yang; Sheng Han; Bulent Basaran
+Subject: About track pattern question with 10nm PDK
+
+Hi Ming,
+
+I ran GCP with a simple case that based on reference10nm, but the instances are off FIN grid in placement result. Should I do some extra setting in tech file and so on? 
+
+Case data:  /slowfs/amsgcn1/liuxd/Case_toRD/reference10nm/reference10_Rev1.0_20151020.tar.gz
+Design:  testLib/Asymm_pair
+
+BTW, Helix standalone can handle the FIN grid with AbsoluteReles(true) setting in tech property map file. 
+
+BR,
+Xiaodan
+
+
 * blue screen again (:-)
 Problem signature:
   Problem Event Name:	BlueScreen
@@ -298,7 +397,259 @@ oa::save $design
 
 * Weekly scratch
 ** Call it: "weekly report" and kime yollayacagimi biliyom :-)
+** 2015.12.04
+Summary: 
+    [+] p-grid/t-config
+    [+] berry setup, buildenv.bash, mcp regressions, guidance to PV team, etc..
+
+Had a meeting with Randy, Jon and Barry on p-grid requirements and proposal. Compiled inputs, updated slides and published a major revision. 
+
+Had a meeting with Oleg, Siarhei and Yakov to answer questions and clarify the requirements/proposal. We covered most of the p-grid part and will continue early next week to cover the tile-config part. 
+
+Had some discussions with Girish on origin for p-grid purposes, the requirement on multiple grids per grid intent, etc.
+
+Attended meetings on 1:1, Maxwell Patents, Nishath's OPS, Triage, MCP sync, AMS technical seminar on dual/triple patterning.
+
+Upon Joe's request, updated the setup file in berry which started to fail recently due to the switch in gcc and oa versions. Got it to work on nightly. Found issues in running Joe's local build. Came up with a workaround and enabled him to debug in berry. 
+
+Based on Amrish's csh env scripts, updated my buildenv.bash script, which also started to fail recently.
+
+Looked into MCP regressions and recommended a number of tests to be added to GCP regressions.
+
+Forwarded fspec and info on multi-row STARs to Jun upon her request.
+
+Plan:
+  - Continue p-grid/t-config review meeting with team
+  - 7 new PNStack failures in Berry
+  - Identify MCP tasks required for 16.06 features
+  - Review docs forwarded to me from DRS
+  - Reproduce the 4-input nand+inv test-case issues in berry
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+
+** 2015.11.30
+This weekly covers the last two weeks (Nov 15-30). 
+
+Summary: 
+    [+] p-grid/t-pattern requirements/proposal/project spec
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+    [+] 3-day ETO and Thanksgiving Holiday
+
+Wrote and published the first draft of project spec on track region handling in placement. Got some feedback and updated the document accordingly. Earlier, had a meeting with Fred and Jon to review the requirements.
+
+Had a follow up meeting with folks from the India team to finish presentation of p-grid/t-pattern requirements/proposal.
+
+Had a meeting with Kumar on MCP tasks, p-grid support in Partition, StdPart, and tile-config support in PNStack, RowStack (row/tile configurations), Rows/Column, also algorithms for optimal diffusion sharing, trunk generation. Sent him a paper on eulerian trail and left-edge algorithms. And the fspec doc on symmetry.
+
+Had a couple of discussion with Yakov on p-grid handling, tech property map, row/tile configurations, etc.
+
+Continued testing for multi-row PNStack (in berry and SNPS) and filed various STARs (bugs and enhancements). New STARs:
+  -- 9000976845- PNStack to optimize abutment for each "critical" row
+  -- 9000976847- PNStack crash in internal function: HandlePermutableForms
+  -- 9000971713- PNStack multi-row with dynamic alignment has illegal overlap and grid violations
+  -- 9000976848- PNStack multi-row should not place a pmos device over an nmos row, or vice versa
+  -- 9000975953- PNStack does not honor group settings
+  -- 9000975813- PNStack to prioritize series and parallel connections
+  -- 9000975812- PNStack 3-row solution has only 2 p-rows and has diffusion pitch errors
+  -- 9000975318- PNStack multi-row does not produce the expected NP.PN structures
+
+Modified: 9000958660 PNStack MinRows param is not honored in one layout (and has illegal overlaps)
+
+Plan:
+  - Review docs forwarded to me from DRS
+  - New build env and setup issues in berryfarm
+  - Two PNStack failures in berryfarm
+  - Reproduce the 4-input nand+inv test-case issues in berry
+  - Review and update open STARs on MCP (PNStack/StdPart/(Packed)Partition)
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+
+** 2015.11.14
+Summary: 
+    [+] p-grid/t-pattern requirements/proposal
+    [+] row-based placement (for Intel ICF/MIP and GCP) and berry setup
+    [+] RowStack demo/testing
+    [+] Berry regression reviews and re-golden
+
+Gave a presentation of the p-grid/t-pattern requirements and proposal to folks in India. There were some good questions/discussions so we could not finish the last RowStack/PNStack section (device-level layout). We will meet to continue and wrap it up early next week.
+
+After getting some more input from colleagues, revised the proposal with two new slides and four slides with major updates. Checked in rev0.2 into the requirements share-point: http://sp-amsg/sites/CustomDesigner/Specs/Requirement/Placement-Grids-Requirements-16 06-Track-Pattern-Support.pptx
+
+Sent out an invite to initiate a second round of reviews by platform experts.
+
+We also met with Girish and Ming to clarify how RowStack addresses track-pattern requirements and how it can be implemented in Maxwell. Girish and I need to discuss and flush out more details.
+
+Spent some time to revive my RowStack test-case. The original test-case was rather big and took too long to run. Created a new sample to demonstrate how RowStack is different form a simple Column of Rows. During the prep and the demo to the team, encountered various issues. Most of them I was able to work-around, but, need to communicate them to Girish to get them fixed.
+
+Various discussions with Girish and Joe regarding the latest feedback from MIP. Wrote a basic spice parser/flattener to help create a test-case to reproduce the new issues Girish observed in berryfarm.
+
+Re-used a 14nm test-case in berry to create a multi-row PNStack test-case. It helped reproduce various issues Girish had observed at Intel and also pointed out some other issues. Joe is working on the more urgent star (the second below):
+  STAR: 9000971711- Some of the PNStack multi-row solutions waste area
+  STAR: 9000971713- PNStack multi-row with dynamic alignment has illegal overlap and grid violations
+
+Also observed another issue with multi-row PNStack, but I realized that I have already filed this a while ago: "Error: Mcp 'PNStack1' MaxRows must be greater or equal to MinRows." It is easy to work around so not critical for now.
+
+The berry setup I prepared for Joe a few weeks ago failed to work with Joe's recent builds. Spent some time to debug (oa libs were out of sync) and cleaned up the script. Provided him an update which helped him run the test-case for two STARs in Berry.
+
+Reviewed StdPart releated regressions in berry and re-goldened 6 of them. 
+
+Plan:
+  - Finish presentation of p-grid/t-pattern requirements/proposal to India team
+  - Reproduce the 4-input nand+inv test-case issues in berry
+  - Review meeting with platform experts
+  - Review and update open STARs on MCP (PNStack/StdPart/(Packed)Partition)
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+
+** 2015.11.9
+*** mailed
+Summary: 
+    [+] p-grid/t-pattern requirements/proposal
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+    [+] berry regression review
+
+Did major updates to p-grid/t-pattern proposal and presented to the team. Got useful input (thanks!). Updated the slides and published them in share-point. Will present to team in Noida next.
+
+Investigated regressions in berry due to PNStack and StdPart changes. Reviewed results for 19 tests. Now, it is down to 6. Need to re-review and re-golden this week.
+
+Investigated Jimmy's star and communicated w/ Jimmy.. STAR 9000968867 Title: Running GCP with oaFigGroup that has placement status leads to long run time
+
+Helped Joe work around lxCreatePins related errors.
+
+Re-built standalone and reviewed the fix to PNStack issue for MIP. Out of two problems, the critical one is fixed and abutment works now. The second problem (center alignment causing diffusion y-grid violations) is still open. Reduced priority. Described the expected solution. Re-assigned to Joe: STAR: 9000961819- PNStack does not abut correctly with abutDiffWidth
+
+Created Enclosure: CBF - STAR: 9000957724 - Sort the results in GCP Placement Results pane (with fixed fig-groups). And requested Varun to review code.
+
+*** scratch
+Summary: 
+    [+] p-grid/t-pattern requirements/proposal
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+    [+] berry regression review
+
+Did major updates to p-grid/t-pattern proposal and presented to the team. Got some good input (thanks!). Updated and published them in share-point. Will present to team in Noida next.
+
+Investigated regressions in berry due to PNStack and StdPart changes. Reviewed results for 19 tests. Now, it is down to 6. Need to re-review and re-golden this week.
+
+Investigated Jimmy's star and communicated w/ Jimmy.. STAR 9000968867 Title: Running GCP with oaFigGroup that has placement status leads to long run time
+
+Helped Joe work around lxCreatePins related errors.
+
+Re-built standalone and reviewed the fix to PNStack issue for MIP. Out of two problems, the critical one is fixed and abutment works now. The second problem (center alignment causing diffusion y-grid violations) is still open. Reduced priority. Described the expected solution. Re-assigned to Joe: STAR: 9000961819- PNStack does not abut correctly with abutDiffWidth
+
+Created Enclosure: CBF - STAR: 9000957724 - Sort the results in GCP Placement Results pane (with fixed fig-groups). And requested Varun to review code.
+
+Plan:
+  - Present p-grid/t-pattern requirements/proposal to India team
+  - Clarify how RowStack addresses track-pattern requirements and how it can be implemented in Maxwell
+  - Review and re-golden 6 regressions in berry
+  - Review and update open STARs on MCP (PNStack/StdPart/(Packed)Partition)
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+
+** 2015.10.30
+
+Summary: This week the focus was on three areas:
+    [+] 2015.09-1 package testing in berry
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+    [+] p-grid/t-pattern proposals
+
++++++++
+Details
++++++++
+
+2015.09-1 package testing:
+    [+] Inspected 19 failed regressions in berry. Most, if not all, require only re-goldening. One test gets duplicate results, but I was not able to reproduce with manual runs. It may be due to an error in test harnesss, not in functionality. Will investigate further.
+    [+] Manually tested the ICF/MIP test-cases in berry. The plan is to add these into the regressions in berry.
+    [+] Verified fix for STAR: 9k952651- PNStack support for AbutmentType auto2 (S/D swapping)
+    [+] Verified the GUI fix for 9k952651.
+
+Row-based placement:
+    [+] Prepared and distributed slides to visualize various cases to help clarify AbutDiffWidth requirements for GCP (re: 9k961819). 
+    [+] Created test-cases in berry to exercise the new alignment features in MCP. Encountered issues and filed two stars: 
+    	-- STAR: 9k966242- PNStack crashes with symmetric group
+	-- STAR: 9k966244- PNStack to support alignment groups
+    [+] PNStack status discussion w/ Girish
+    [+] Discussions with Joe to clarify the issue with STAR: 9k965234- PNStack fails to abut adjacent source/drain on same net. It seems to be a bug in DRC-awareness. Joe promised to look into this again after fixing urgent SP1 STARS.
+
+p-grid/t-pattern proposals:
+    [+] Participated in various meetings -- a long one with Intel's James Masters, a shorter one with Fred et al to prep for Intel meeting. Also had email conversations to help clarify requirements. Had a number of email exchanges with Fred to clarify p-grid definition and how to bridge it with t-groups in tech. No decision on that front yet. After the meeting Fred also met with Lyndon and it is becoming more clear that customers want a combo solution (track patterns + placement grids) and they want both in tech. 
+    [+] Had a meeting with Oleg and Siarhei and also an email conversation with Yakov on track-pattern requirements. Here are the major topics of discussion: rendering during placement as primary client of non-uniform grid points, getting grid points from design/tech, in which module the component flippping considerations fall, track patterns through hierarchy of constraints (the most basic being, e.g., a column of two rows), the need to modularize fgMinSpacing/fgPlace API and maybe introduce a new fgGrid method, etc. Cut short due to time restriction. We need to continue the investigation and discussions. 
+    [+] 1:1 w/ Girish re: requirement for proximity to track type as opposed to snapping to a specific track
+
+Other:
+    [+] Encountered an issue in berry with qrsh -P iperm. Interactive testing has been hindered due to direct login violations. Filed a CCT. Got some help from Iulian and IT folks, too. Created a setup script for the team to peruse which provides three easy to use aliases for interactive testing/debugging. So far, my experience is very positive. The whole thing is streamlined/automated and I no longer get kicked out due to direct login violations. Sent out the script to Siarhei who asked about it and the rest of helix_coder.
+    [+] Compiled info on how to run layout xor (geoCompare) as per Girish's request and sent it out. Also had a conversation with Oleg to clarify the recent fix from Prashant late on Friday regarding Xor_Flattend dependency. The fix should be good. Prashant also clarified over the weekend.
+
+Plan:
+    - Investigate duplicate layout issue in berry regressions
+    - Re-golden berry regressions due to changes in StdPart
+    - Follow up on two new test-cases from Xiaodan w/ PackedPartition and fixed fig-groups.
+    - Follow up on p-grid/t-pattern proposal
+    - Develop a regression package w/ Intel FDK in berry
+    - Follow up on routable placement challenges
+    - Improve the "optimal" chaining to reduce number of trunks (w/o dog-legs) required to route.
+    - Visualize and improve routability of row-based device placement
+    - Is it possible to get a good upper-bound for maximum abutment and alignment for PNStack?
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+
+
 ** 2015.10.26
+
+Summary: This week the focus was on two areas:
+    [+] p-grid/t-pattern proposals
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+
++++++++
+Details
++++++++
+
+p-grid/t-pattern proposals
+    [+] Had 1:1s with Girish, Jon and Fred. There is a justified questioning and push-back on having p-grids in technology (due to duplication of t-patterns). Considering options. Will meet with Intel this week to hopefully get more clarification on requirements.
+    [+] Looked into how to mix p-grids and t-patterns. It requires more investigation and promises a more elegant/combined solution.
+    [+] Explored consequences of the idea of a t-pattern decorator. Promising, but requires more clarification of requirements.
+    [+] Reviewed various docs (t-pattern spec from Jon, docs in share-point on 10nm initiative, Yakov's doc on t-pattern "location problem").
+
+Row-based placement:
+    [+] Testing in berry for PNStack abutment/alignment. Focused on a new test-case (nor3_inv) where dynamic alignment mode has number of issues. Packaged and informed Joe. The good news is that with the default mode (static alignment), the result is decent thanks to the fix for 9k952651.
+    [+] Started to package various test-cases in berry to help regression test PNStack on Intel FDK.
+    [+] Tested the fix for STAR: 9k952651- PNStack support for AbutmentType auto2 (S/D swapping). It looks good.
+    [+] Re-opened the STAR above for GUI enhancement. Varun implemented it promptly. Thank you, Varun.
+    [+] Testing and clarifications w/ Joe and Girish re: 9k961819- PNStack does not abut correctly with abutDiffWidth. There were two separate issues here: (a) dummy poly to be removed when S/D are on the same net. (b) When S/D are on different nets, what to do with dummy poly. (a) is more urgent and is now being fixed. Unfortunately, testing in Maxwell was unfruitful due to missing callbacks for abutment in reference45nm PKD. Planning to clarify this (issue (b)) further.
+    [+] Wrote code to find the "optimal" value for the number of chains for a row of devices
+    [+] Wrote code to find the "optimal" value for the number of trunks (w/o dog-leg) needed for a given row of pins (aka the single-sided channel)
+
+Other:
+    [+] Reviewed Girish's slides on apFigGroup requirements. Provided him some feedback.
+    [+] Reviewed latest results for two failures in Helix/StdPart. Provided recommendations to Xiaodan.
+    [+] Helped Joe with berry bash setup/qrsh alias to pick a good machine
+    [+] Attended ops, triage and mcp sync-up
+
+Plan: 
+    - Verify the GUI fix for 9k952651.
+    - Clarify AbutDiffWidth requirements for GCP (re: 9k961819)
+    - Follow up on two new test-cases from Xiaodan w/ PackedPartition and fixed fig-groups.
+    - Follow up on p-grid/t-pattern proposal
+    - Develope a regression package w/ Intel FDK in berry
+    - Follow up on routable placement challenges
+    - Improve the "optimal" chaining to reduce number of trunks (w/o dog-legs) required to route.
+    - Visualize and improve routability of row-based device placement
+    - Is it possible to get a good upper-bound for maximum abutment and alignment for PNStack?
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+
 ** 2015.10.19
 
 Summary:
@@ -748,6 +1099,7 @@ Review track region spec in Maxwell
 * berry for joe and more on MIP test-cases
 gtar -zxf /remote/stars/testcases/9000954673/test/pnstack_with_boundary_assoc/flattened_decoder.tgz
 cd flattened_decoder/
+export MCP_CONFIG_FILE=~bbasaran/helix/mcp/dynamic_align
 make run
 make p
 
