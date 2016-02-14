@@ -1,0 +1,1813 @@
+* First draft to Ming:
+1- Bulent has been a key technical lead in the team with a wide scope of roles and responsibilities. 
+2- He interacted with not only most direct reports of Ming, but also helped supervise Joe Wang, Biying (summer intern) and direct reports of Sumit: Girish, Prashant, Varun and Kumar. Bulent helped lead other senior members of the team and resolved technical and personal conflicts effectively.
+3- He interfaced with Fred, Jon, Randy and Barry to help lead the novel placement-grid feature and completed its requirements and core proposal to work seamlessly with track pattern/region functionality.
+4- Bulent has lead the support efforts with Intel DTS, nVidia and Altera. Jointly with Girish, he helped fill the role played by Ross and supported Intel ICF. Another example is the Samsung/NVDA 10nm PDK trailblazing/readiness effort which Bulent initiated and accomplished single-handedly to successfully set up and run PCX, Santana and Helix/MCP. Created various test-cases and filed STARs.
+5- Bulent was responsible to clarify requirements, finalize specifications and trailblazing unit/flow/berry testing for challenging new solutions: 
+ - Helix Standalone: StructuredPartition (performance and multiple-height support), Block-placement mode (correctAfterForDrc), short-aware boundary tile abutment, Symmetry, ECO, Cell Boundary and Blockage support, multi-row PNStack, RowStack automation, HEI, Pattern re-design as Column of Rows, Pin-placement, etc.
+ - Maxwell: Fixed fig-group, CMOS, Cluster intents and Placement-Grid solution (for cell, block and device placement)
+ - Summer intern: Topology re-use project: Defined the problem, provided test-cases, feed-back, and did code review/last week presentation, code/doc transfer.
+6- He also substituted as team manager to cover Ming's ETO in August.
+
+* From Keep:
+
+NE YAPTIN
+
+Season of reviews
+R&R
+rnr
+
+Non-uniform grid and track pattern Proposal (Sep 2015)
+Intel MIP abutment/alignment improvements
+
+Management to cover for Ming's FTO (August 2015)
+
+Biying's project: Defined the problem, provided test-cases, feed-back, and did code review/last week presentation, code/doc transfer.
+
+Std Part improvements, berry updates (36 out of 55 tests all updated)
+
+Reuse topology initiation for intern
+
+ICF: Support for Device Template based Placement Flow  -> RowStack spec... Later package a test-case for PV team to create regressions from.
+
+DTS: Symmetry/ECO
+Maxwell: New Pattern as Col of Rows instead of imitating python based old pattern
+
+
+Nvidia!
+
+* 2016 January
+
+Jan 25, 2016 (previous week was mostly p-grid meetings/disc.updates.. and some PNStack Intel/MIP discussions/test-case)
+
+Summary:
+    [+] p-grid project
+    [+] Berry regressions due to MCP changes
+    [+] ETO on Monday (MLK Jr. Holiday) and Friday pm.
+    [+] Misc.
+ 
+Gave a presentation on p-grid requirements/proposal to a wider audience. Updated the slides and published a minor rev.
+ 
+Started to work on creating test-cases with p-grids. Wrote some code to create tracks/groups/regionDefs/regions. UCM coding is in progress. Core API is checked in, but UI (tcl commands and GUI) are still in the pipeline and should be finished in a few days (according to Astghik and Lusine). Investigated the ref10 test-case, but it still seems to have some issues (could not copy back result). Switched back to snps40.
+ 
+Had various conversations with Yakov, Prashant, Joe and Mirko on p-grid transfer from platform and representation in GCP/schema.
+ 
+Had some conversations with Kumar and Girish on StdPart A/B grids. Provided StdPart test-cases to Kumar (for Helix and GCP). Compiled some questions and forwarded to Girish who forwarded them to Mayank who gave us some informative answers promptly.
+ 
+Reviewed 14 berry regression failures. Two are due to temporary run problems. The rest require re-goldening. Informed Kumar.
+ 
+Started to study the over-due course from Synopsys Univ.
+ 
+Attended Ops, Triage, MCP sync meetings
+ 
+Plan:
+- One remaining regression in berry
+- Flexible fig-group issue reported by Mirko
+- p-grid testing: Create UCM p-grid intent when UCM-UI-cmd code is checked in
+- Required and over-due course from Synopsys University
+- Review GCP fspec, add p-grid related input
+- Create new PNStack stars (to meet MIP requests)
+
+
+Jan 11
+
+Summary:
+    [+] p-grid project
+    [+] PNStack/CMOS/MCP
+    [+] ETO on Monday
+ 
+p-grid project:
++ We had a good review meeting with Nari. Identified a few opens and working on resolving them now.
++ Earlier, had 1:1s with Randy and Ming and updated slides in prep for meeting with Nari
++ Had a brief conversation with Mirko on passing p-grid data from platform to gcp
+ 
+PNStack/CMOS/MCP:
++ Investigated a multi-row pnstack STAR from PV (9000988018- one of the pnstack multiple row result is not expected) and re-assigned to Varun with clarification on what needs to be fixed first.
++ Had discussions with Joe, Girish, Ming and Nishath on signal-flow requirement and enhancements.. (9000985087 - incorrect signal flow in PNStack). Reviewed impact of latest fix on PNStack for signal-flow, abutment, alignment. Created a REF layout showing the right ordering of devices for signal flow and best abutment (two diff only) as per Joe's request. Experimented with Rows, manual and auto-reordering.
++ Conversation w/ Varun and Joe on the "aspect ratio" target functionality for Mcp/Top-level/Partition.
+ 
+Misc.:
++ Intel Berry refresh/quiz
++ Finally got a Helix standalone build (nightly failed due to disk). But, my build has problems finding correct libs (.so)
++ Read 10nm slides from MSIP with detail on instance snapping
++ One day ETO on Monday
+ 
+Plan:
+- Meet w/ Jon and Randy to flush out more details and resolve opens on p-grid project (IP)
+- Review GCP fspec, add p-grid related input
+- Create test-case with uniform track patterns
+- Required and overdue course from Synopsys University
+
+2015 December
+
+2015.12.13
+Summary:
+    [+] p-grid/t-group: Published a new minor revision on requirements after internal meetings and discussions. Responded to Nari's questions
+    [+] Reviewed the latest 10nm requirements from Intel ICF
+    [+] Intel MIP/PNStack: Review of STAR 9k947003 and the decoder test-case
+    [+] ETO on Thu/Fri
+ 
+Met with Yakov, Oleg and Siarhei to finalize our internal discussions (at least for now) on p-grid requirements and implementation proposal. I think we are mostly in sync now. The few concerns raised by Siarhei are due to the more general nature of the proposal than what is absolutely necessary for Altera and ICF. I do not see a major urgency to resolve them yet. But, captured them in requirements (-1- multiple t-groups in p-grid definition and -2- multiple p-grids in one intent). Please note that they are not material to the on-going work.
+ 
+As per Nari's request, did a quick write up that clarifies why p-grids are needed (in addition to track groups) and why one global placement grid is not sufficient.  Thanks to Girish for providing his insights, too.
+ 
+Had an email conversation with Girish re: multiple track groups per orientation per p-grid. Attempted to describe one use case and captured it in the requirements document.
+ 
+Defined and submitted four placement methods for fast-track patent application. Sent out supporting documentation (doc and ppt).
+ 
+Reviewed the impact of Joe's latest check-in re: STAR 9k947003 (see below). Added the decoder test-case which has poorer results than we used to get. Located the slides I had written a while ago and sent it out with the latest results..
+ 
+Had a discussion on the decoder test-case with Girish. Looked it up from older STARs and re-filed on the open MIP STAR: 9k947003 "PNStack does not abut transistors as needed".
+ 
+Debugged Joe's seg fault in Berry in GDB and identified it as a build problem, not a Berry env or a test-case problem. Sent a request to Amrish to help provide a shell to debug and fix Joe's build environment. This issue has been going on for a while now. Hope we can get it ironed out soon..
+ 
+Reviewed the latest failures in berry on PNStack/StdPart. It looks like they are caused by the latest check-ins from Joe. Joe is working on fixing two regressions in PV regressions. I think he fixed them. I will look into how it impacts the regressions in Berry.
+ 
+ 
+Plan:
+  - Internal patent proposal review
+  - Complete task definitions for MCP related commitments in 16.06
+  - Flush out one-dimensional p-grids requirement for device placement
+  - Discuss with Randy precedence of p-grids vs. rows in OA
+  - Review plans with Barry and discuss a few open technical challenges
+  - Clarify with Anoop/Girish the new 10nm requirements
+  - Review SED spec
+  - Reproduce the 4-input NAND+INV test-case issues in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+ 
+ 
+Regards,
+Bulent
+ 
+ 
+
+
+2015.12.04
+Summary: 
+    [+] p-grid/t-config
+    [+] berry setup, buildenv.bash, mcp regressions, guidance to PV team, etc..
+
+Had a meeting with Randy, Jon and Barry on p-grid requirements and proposal. Compiled inputs, updated slides and published a major revision. 
+
+Had a meeting with Oleg, Siarhei and Yakov to answer questions and clarify the requirements/proposal. We covered most of the p-grid part and will continue early next week to cover the tile-config part. 
+
+Had some discussions with Girish on origin for p-grid purposes, the requirement on multiple grids per grid intent, etc.
+
+Attended meetings on 1:1, Maxwell Patents, Nishath's OPS, Triage, MCP sync, AMS technical seminar on dual/triple patterning.
+
+Upon Joe's request, updated the setup file in berry which started to fail recently due to the switch in gcc and oa versions. Got it to work on nightly. Found issues in running Joe's local build. Came up with a workaround and enabled him to debug in berry. 
+
+Based on Amrish's csh env scripts, updated my buildenv.bash script, which also started to fail recently.
+
+Looked into MCP regressions and recommended a number of tests to be added to GCP regressions.
+
+Forwarded fspec and info on multi-row STARs to Jun upon her request.
+
+Plan:
+  - Continue p-grid/t-config review meeting with team
+  - 7 new PNStack failures in Berry
+  - Identify MCP tasks required for 16.06 features
+  - Review docs forwarded to me from DRS
+  - Reproduce the 4-input nand+inv test-case issues in berry
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+
+####################
+
+
+
+This weekly covers the last two weeks (Nov 15-30).
+ 
+Summary:
+    [+] p-grid/t-pattern requirements/proposal/project spec
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+    [+] 3-day ETO and Thanksgiving Holiday
+ 
+Wrote and published the first draft of project spec on track region handling in placement. Got some feedback and updated the document accordingly. Earlier, had a meeting with Fred and Jon to review the requirements.
+ 
+Had a follow up meeting with folks from the India team to finish presentation of p-grid/t-pattern requirements/proposal.
+ 
+Had a meeting with Kumar on MCP tasks, p-grid support in Partition, StdPart, and tile-config support in PNStack, RowStack (row/tile configurations), Rows/Column, also algorithms for optimal diffusion sharing, trunk generation. Sent him a paper on Eulerian trail and left-edge algorithms. And the fspec doc on symmetry.
+ 
+Had a couple of discussion with Yakov on p-grid handling, tech property map, row/tile configurations, etc.
+ 
+Continued testing of multi-row PNStack functionality (in berry and SNPS) and filed various STARs (bugs and enhancements). New STARs:
+  -- 9000976845- PNStack to optimize abutment for each "critical" row
+  -- 9000976847- PNStack crash in internal function: HandlePermutableForms
+  -- 9000971713- PNStack multi-row with dynamic alignment has illegal overlap and grid violations
+  -- 9000976848- PNStack multi-row should not place a pmos device over an nmos row, or vice versa
+  -- 9000975953- PNStack does not honor group settings
+  -- 9000975813- PNStack to prioritize series and parallel connections
+  -- 9000975812- PNStack 3-row solution has only 2 p-rows and has diffusion pitch errors
+  -- 9000975318- PNStack multi-row does not produce the expected NP.PN structures
+ 
+Modified: 9000958660 PNStack MinRows param is not honored in one layout (and has illegal overlaps)
+ 
+Plan:
+  - Review docs forwarded to me from DRS
+  - New build env and setup issues in berryfarm
+  - Two PNStack failures in berryfarm
+  - Reproduce the 4-input nand+inv test-case issues in berry
+  - Review and update open STARs on MCP (PNStack/StdPart/(Packed)Partition)
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+ 
+Regards,
+Bulent
+ ***********************************************************************************
+Nov 15, 2015
+
+Summary:
+    [+] p-grid/t-pattern requirements/proposal
+    [+] row-based placement (for Intel ICF/MIP and GCP) and berry setup
+    [+] RowStack demo/testing
+    [+] Berry regression review and re-goldening
+ 
+Gave a presentation of the p-grid/t-pattern requirements and proposal to folks in India. There were some good questions/discussions so we could not finish the last RowStack/PNStack section (device-level layout). We will meet to continue and wrap it up early next week.
+ 
+After getting some more input from colleagues, revised the proposal with two new slides and with major updates to four slides. Checked in rev0.2 into the requirements share-point: p-grid/t-pattern req/prop.
+ 
+Sent out an invite to initiate a second round of reviews by platform experts.
+ 
+We also met with Girish and Ming to clarify how RowStack addresses track-pattern requirements and how it can be implemented in Maxwell. Girish and I need to discuss and flush out more details.
+ 
+Spent some time to revive my RowStack test-case. The original test-case was rather big and took too long to run. Created a new sample to demonstrate how RowStack is different form a simple Column of Rows. During the prep and the demo to the team, encountered various issues. Most of them I was able to work-around, but, need to communicate them to Girish to get them fixed.
+ 
+Various discussions with Girish and Joe regarding the latest feedback from MIP. Wrote a basic spice parser/flattener to help create a test-case to reproduce the new issues Girish observed in berry-farm.
+ 
+Re-used a 14nm test-case in berry to create a multi-row PNStack test-case. It helped reproduce various issues Girish had observed at Intel and also pointed out some other issues. Created two new STARs. Joe is working on the more urgent star (the second below):
+  STAR: 9000971711- Some of the PNStack multi-row solutions waste area
+  STAR: 9000971713- PNStack multi-row with dynamic alignment has illegal overlap and grid violations
+ 
+Also observed another issue with multi-row PNStack, but I realized that I have already filed this a while ago: "Error: Mcp 'PNStack1' MaxRows must be greater or equal to MinRows." It is easy to work around so not critical for now.
+ 
+The berry setup I prepared for Joe a few weeks ago failed to work with Joe's recent builds. Spent some time to debug (OA libs were out of sync) and cleaned up the script. Provided Joe an update which helped him run the test-case for two STARs in Berry.
+ 
+Reviewed StdPart related regressions in berry and re-goldened 6 of them.
+ 
+Plan:
+  - Finish presentation of p-grid/t-pattern requirements/proposal to India team
+  - Reproduce the issues with 4-input NAND + INV test-case in berry
+  - Review meeting with platform experts
+  - Review various spec docs
+  - Review and update open STARs on MCP (PNStack/StdPart/(Packed)Partition)
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+ 
+Regards,
+Bulent
+ 
+
+
+***********************************************************************************
+Nov 9, 2015
+ 
+Summary:
+    [+] p-grid/t-pattern requirements/proposal
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+    [+] berry regression review
+ 
+Did major updates to p-grid/t-pattern proposal and presented to the team. Got useful input (thanks!). Updated the slides and published them in share-point. Will present to team in Noida next.
+ 
+Investigated regressions in berry due to PNStack and StdPart changes. Reviewed results for 19 tests. Now, it is down to 6. Need to re-review and re-golden this week.
+ 
+Investigated Jimmy's star and communicated w/ Jimmy.. STAR 9000968867 Title: Running GCP with oaFigGroup that has placement status leads to long run time
+ 
+Helped Joe work around lxCreatePins related errors.
+ 
+Re-built standalone and reviewed the fix to PNStack issue for MIP. Out of two problems, the critical one is fixed and abutment works now. The second problem (center alignment causing diffusion y-grid violations) is still open. Reduced priority. Described the expected solution. Re-assigned to Joe: STAR: 9000961819- PNStack does not abut correctly with abutDiffWidth
+ 
+Created Enclosure: CBF - STAR: 9000957724 - Sort the results in GCP Placement Results pane (with fixed fig-groups). And requested Varun to review code.
+ 
+Plan:
+  - Present p-grid/t-pattern requirements/proposal to India team
+  - Clarify how RowStack addresses track-pattern requirements and how it can be implemented in Maxwell
+  - Review and re-golden 6 regressions in berry
+  - Review and update open STARs on MCP (PNStack/StdPart/(Packed)Partition)
+  - Develop a regression package w/ Intel FDK in berry
+  - Follow up on routable placement challenges
+  - Visualize and improve routability of row-based device placement
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Test topology re-use engine
+ 
+Regards,
+Bulent
+ 
+***********************************************************************************
+Nov 2, 2015
+
+Summary: This week the focus was on three areas:
+    [+] 2015.09-1 package testing in berry
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+    [+] p-grid/t-pattern proposals
+ 
++++++++
+Details
++++++++
+ 
+2015.09-1 package testing:
+    [+] Inspected 19 failed regressions in berry. Most, if not all, require only re-goldening. One test gets duplicate results, but I was not able to reproduce with manual runs. It may be due to an error in test harness, not in functionality. Will investigate further.
+    [+] Manually tested the ICF/MIP test-cases in berry. The plan is to add these into the regressions in berry.
+    [+] Verified fix for STAR: 9k952651- PNStack support for AbutmentType auto2 (S/D swapping)
+    [+] Verified the GUI fix for 9k952651.
+ 
+Row-based placement:
+    [+] Prepared and distributed slides to visualize various cases to help clarify AbutDiffWidth requirements for GCP (re: 9k961819).
+    [+] Created test-cases in berry to exercise the new alignment features in MCP. Encountered issues and filed two stars:
+        -- STAR: 9k966242- PNStack crashes with symmetric group
+        -- STAR: 9k966244- PNStack to support alignment groups
+    [+] PNStack status discussion w/ Girish
+    [+] Discussions with Joe to clarify the issue with STAR: 9k965234- PNStack fails to abut adjacent source/drain on same net. It seems to be a bug in DRC-awareness. Joe promised to look into this again after fixing urgent SP1 STARS.
+ 
+p-grid/t-pattern proposals:
+    [+] Participated in various meetings -- a long one with Intel's James Masters, a shorter one with Fred et al to prep for Intel meeting. Also had email conversations to help clarify requirements. Had a number of email exchanges with Fred to clarify p-grid definition and how to bridge it with t-groups in tech. No decision on that front yet. After the meeting Fred also met with Lyndon and it is becoming more clear that customers want a combo solution (track patterns + placement grids) and they want both in tech.
+    [+] Had a meeting with Oleg and Siarhei and also an email conversation with Yakov on track-pattern requirements. Here are the major topics of discussion: rendering during placement as primary client of non-uniform grid points, getting grid points from design/tech, in which module the component flipping considerations fall, track patterns through hierarchy of constraints (the most basic being, e.g., a column of two rows), the need to modularize fgMinSpacing/fgPlace API and maybe introduce a new fgGrid method, etc. Cut short due to time restriction. We need to continue the investigation and discussions.
+    [+] 1:1 w/ Girish re: requirement for proximity to track type as opposed to snapping to a specific track
+ 
+Other:
+    [+] Encountered an issue in berry with qrsh -P iperm. Interactive testing has been hindered due to direct login violations. Filed a CCT. Got some help from Iulian and IT folks, too. Created a setup script for the team to peruse which provides three easy to use aliases for interactive testing/debugging. So far, my experience is very positive. The whole thing is streamlined/automated and I no longer get kicked out due to direct login violations. Sent out the script to Siarhei who asked about it and the rest of helix_coder.
+    [+] Compiled info on how to run layout xor (geoCompare) as per Girish's request and sent it out. Also had a conversation with Oleg to clarify the recent fix from Prashant late on Friday regarding XOR/Flatten dependency. The fix should be good. Prashant also clarified over the weekend.
+ 
+Plan:
+    - Investigate duplicate layout issue in berry regressions
+    - Re-golden berry regressions due to changes in StdPart
+    - Follow up on two new test-cases from Xiaodan w/ PackedPartition and fixed fig-groups.
+    - Follow up on p-grid/t-pattern proposal
+    - Develop a regression package w/ Intel FDK in berry
+    - Follow up on routable placement challenges
+    - Improve the "optimal" chaining to reduce number of trunks (w/o dog-legs) required to route.
+    - Visualize and improve routability of row-based device placement
+    - Is it possible to get a good upper-bound for maximum abutment and alignment for PNStack?
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+ 
+Regards,
+Bulent
+ 
+***********************************************************************************
+
+Oct 26
+
+Summary: This week the focus was on two areas:
+    [+] p-grid/t-pattern proposals
+    [+] row-based placement (for Intel ICF/MIP and GCP)
+ 
++++++++
+Details
++++++++
+ 
+p-grid/t-pattern proposals
+    [+] Had 1:1s with Girish, Jon and Fred. There is a justified questioning and push-back on having p-grids in technology (due to duplication of t-patterns). Considering options. Will meet with Intel this week to hopefully get more clarification on requirements.
+    [+] Looked into how to mix p-grids and t-patterns. It requires more investigation and promises a more elegant/combined solution.
+    [+] Explored consequences of the idea of a t-pattern decorator. Promising, but requires more clarification of requirements.
+    [+] Reviewed various docs (t-pattern spec from Jon, docs in share-point on 10nm initiative, Yakov's doc on t-pattern "location problem").
+ 
+Row-based placement:
+    [+] Testing in berry for PNStack abutment/alignment. Focused on a new test-case (nor3_inv) where dynamic alignment mode has number of issues. Packaged and informed Joe. The good news is that with the default mode (static alignment), the result is decent thanks to the fix for 9k952651.
+    [+] Started to package various test-cases in berry to help regression test PNStack on Intel FDK.
+    [+] Tested the fix for STAR: 9k952651- PNStack support for AbutmentType auto2 (S/D swapping). It looks good.
+    [+] Re-opened the STAR above for GUI enhancement. Varun implemented it promptly. Thank you, Varun.
+    [+] Testing and clarifications w/ Joe and Girish re: 9k961819- PNStack does not abut correctly with abutDiffWidth. There were two separate issues here: (a) dummy poly to be removed when S/D are on the same net. (b) When S/D are on different nets, what to do with dummy poly. (a) is more urgent and is now being fixed. Unfortunately, testing in Maxwell was unfruitful due to missing callbacks for abutment in reference45nm PKD. Planning to clarify this (issue (b)) further.
+    [+] Wrote code to find the "optimal" value for the number of chains for a row of devices
+    [+] Wrote code to find the "optimal" value for the number of trunks (w/o dog-leg) needed for a given row of pins (aka the single-sided channel)
+ 
+Other:
+    [+] Reviewed Girish's slides on apFigGroup requirements. Provided him some feedback.
+    [+] Reviewed latest results for two failures in Helix/StdPart. Provided recommendations to Xiaodan.
+    [+] Helped Joe with berry bash setup/qrsh alias to pick a good machine
+    [+] Attended ops, triage and mcp sync-up
+ 
+Plan:
+    - Verify the GUI fix for 9k952651.
+    - Clarify AbutDiffWidth requirements for GCP (re: 9k961819)
+    - Follow up on two new test-cases from Xiaodan w/ PackedPartition and fixed fig-groups.
+    - Follow up on p-grid/t-pattern proposal
+    - Develop a regression package w/ Intel FDK in berry
+    - Follow up on routable placement challenges
+    - Improve the "optimal" chaining to reduce number of trunks (w/o dog-legs) required to route.
+    - Visualize and improve routability of row-based device placement
+    - Is it possible to get a good upper-bound for maximum abutment and alignment for PNStack?
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+ 
+Regards,
+Bulent
+ 
+
+* 2015 october 16
+Summary:
+ 
+[+] Prepared a presentation on Advanced Node Requirements on Layout Automation and presented to Nishath's OPS
+[+] Attended Anoop’s presentation on Monday and participated track pattern discussion on Friday
+[+] ETO on Tue/Wed
+[+] Investigated in berry a new issue Girish encountered at Intel and filed a STAR: 9000961819- PNStack does not abut correctly with abutDiffWidth
+[+] Had some email conversations with Jon/Barry/Randy on p-grid requirements on platform. Asked a number of questions and awaiting answers
+[+] Attended triage meeting
+ 
+Plan:
+    - Read Girish's req. doc on apFigGroup
+    - Follow up on p-grid and t-pattern proposals
+    - Investigate 10nm ref PDK from Jimmy
+    - Trunk generation to visualize routing complexity in row-based device placement
+    - Is it possible to get good estimate of maximum abutment and alignment for PNStack?
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+ 
+Regards,
+Bulent
+ 
+
+* 2015 october 12
+Worked on:
+ 
+[+] SP1      : Demo of fixed figGroup support
+ 
+    - Also filed 5 STARs observed during the prep work
+ 
+[+] Intel MIP: PNStack abutment/alignment
+ 
+    - Investigated decoder results from PNStack; reported findings and expectations
+    - Added new test-case with PermuteRule param to STAR: 9000952651- PNStack support for AbutmentType auto2 (S/D swapping)
+    - Investigated issues with multi-row PNStack and reproduced in SNPS
+    - Updated 5 older STARs on PNStack and prioritized those relevant to MIP
+ 
+[+] 16.06    : Track pattern/p-grid proposal
+ 
+    - Conversed with Jon to clarify p-grid definitions in oaTech-extension..
+    - Brief discussion with Yakov, earlier 2:1 with Girish and Yakov
+ 
+[+] Misc.
+ 
+    - ETO on Friday
+    - Meeting with Indushekhar
+    - Created STAR on "Pin master missing error" from PNStack on NVDA10nm
+    - Put together a Pyros/Maxwell session for Ming to view cut-poly/cut-diff related params in NVDA10
+ 
+Plan:
+    - ETO on Tue and Wed
+    - Intel ICF presentation from Anoop
+    - Read the fspec on track regions and p-grids from Jon.
+    - Visualize routing complexity in row-based device placement
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Test topology re-use engine
+
+* 2015 october 5
+Worked on the following:
+[+] 16.06    : Track pattern/p-grid proposal
+[+] Intel MIP: PNStack abutment/alignment: STARs: 9000947003, 9000952651, 9000956435(new)
+[+] Misc.    :
+    - STAR: 9000956440- Row has DRCs with abutDiffWidth
+    - Finished required IP/Confidential Info training
+ 
+Plan:
+[-] Intel MIP: New issues (nand3_inv, decoder1, multi-row)
+[-] SP1      : Demo of fixed figGroup support
+[-] Misc.    :
+    - Review specs on wide-alignment, uniform track patterns and inst snapping
+    - Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+    - Test topology re-use engine
+ 
+Regards,
+Bulent
+* 2015 september 28
+
+Worked on the following:
+[+] 16.06    : Track pattern/p-grid proposal
+[+] Intel MIP: PNStack abutment/alignment: STARs: 9000947003 and 9000952651
+[+] SP1      : fixed figGroup support
+[+] SP2      : tested and created STARs on McpPartition
+ 
+Plan:
+[-] 16.06    : Revise the proposal and present to platform team
+[-] Intel MIP: More testing (basic NAND/NOR)
+[-] Misc.    :
+  - Review specs on wide-alignment, uniform track patterns and inst snapping
+  - Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+  - Test topology re-use engine
+ 
+Details:
+  - STAR: 9000952651- PNStack support for AbutmentType auto2 (S/D swapping)
+  - STAR: 9000954672- PackedPartition with boundary association creates corrupt/empty layout
+  - STAR: 9000954673- Partition (MCP) with boundary association creates duplicate layouts
+  - Discussions and 1:1s w/ Siarhei, Oleg, Joe, Prashant and Mirko
+  - Attended Jimmy's presentation on methodology storyboards
+  - AMS seminar, OPS, Team, 2:1, 1:1
+  - Berry build/env issues
+
+* 2015 september 21
+
+[15.09SP1]
+ 
+Had some discussions with team members to clarify fixed/locked fig-group
+support. Prashant committed to delivering his part this week. Thanks!
+ 
+ 
+[16.06]
+ 
+Coordinated bunch of meetings/discussions to focus on track pattern
+support. Put together some slides to help bring the team on one page.
+We are not there yet, but, there has been some progress.
+ 
+Came up with rough task breakdown and even rougher effort estimates for two
+16.06 projects: track pattern support, UCM-GCP mismatch.
+ 
+ 
+[Intel MIP]
+ 
+Created a suite of test-cases in SNPS to reproduce, investigate and clarify
+how PNStack fails to maximize abutment due to "hard pin-alignment"
+constraints. Encountered an issue and will capture as a new enhancement in
+PNStack to support auto2 type of abutment (to automatically swap
+source/drain terminals).
+ 
+While investigating the boundary association issue on Column and StdPart
+reported by Girish, encountered a related issue in Partition.
+Created STAR: 9000950214- Partition with boundary association.
+ 
+ 
+[StdPart/Altera/Berry]
+ 
+Inspected and re-goldened six StdPart tests in berry due to Joe's fix for
+StdPart boundary association.
+ 
+ 
+[Plan]
+ 
+File STAR on PNStack to support for source/drain terminal swapping
+ 
+Finalize task breakdown and estimates for top-down planning and nested figGroup support
+ 
+Review specs on wide-alignment, uniform track patterns and inst snapping
+ 
+Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+ 
+Test topology re-use engine
+ 
+ 
+Regards,
+Bulent
+ 
+***********************************************************************************
+***********************************************************************************
+***********************************************************************************
+
+* 2015 09 14
+
+[Intel MIP]
+ 
+PNStack: Put together a number of slides to summarize recent observations and
+thoughts. Earlier, created and ran more, relevant test-cases in berry using
+14nm data. And earlier before, had some 1:1 discussions with Girish and Joe
+[Ref: 9000947003].
+ 
+Boundary Association: Had various conversations with Girish, Mirko and
+Joe. Did more testing to root cause issues. Seems that there are many
+inaccuracies in both the documentation and the current implementation. One
+good piece of news is that 9000947007 (on StdPart) is already fixed
+[Ref: 9000947009].
+ 
+ 
+[Intel DTS]
+ 
+Sent info on the new release (2015.09) to Jose. This release might also
+address the crash in symmetry, or shed more light on it..
+ 
+ 
+[Intel ICF/Altera]
+ 
+Have not heard back from Lyndon yet.
+ 
+ 
+[Support for 0x fixed/locked figGroup/symmetry]
+ 
+Had good discussions with Prashant and Joe to coordinate the efforts.
+Thanks a lot to Prashant for helping with the translator side of things.
+We also discussed and clarified how to handle symmetric groups and
+soft-clusters.
+ 
+ 
+[Maxwell misc.]
+ 
+Reviewed the updates to the UCM fspec and participated in the review
+meeting with Barry.
+ 
+ 
+[Plan]
+ 
+Create STAR on "boundary association" support in Partition.
+ 
+Work on estimates for four areas of focus for 16.06.
+ 
+Work on proposal for Track Pattern/Modular Grid support in 16.06.
+ 
+Create STAR on "Pin master missing error" from PNStack on NVDA10nm
+ 
+Test topology re-use engine
+ 
+ 
+ 
+Regards,
+Bulent
+ 
+
+***********************************************************************************
+***********************************************************************************
+***********************************************************************************
+
+* 2015 09 07
+[Intel ICF/Altera]
+ 
+Had conversations with Joe, Girish, Mayank and Ming re: the new requirement
+on gridded StdPartition. Emailed Lyndon to get feedback on our current
+thinking about the problem and the interface to support.
+ 
+ 
+[Intel DTS]
+ 
+Intel DTS reported a crash in Partition with symmetry. Tried to reproduced
+in house using the release used by Intel (2014.09SP1-3), but failed.
+ 
+They could not give us the 10nm test-case. So, provided a number of
+suggestions to work around the crash. One of them provided a different
+stack trace. Identified another option and communicated to Intel. Waiting
+for their response.
+ 
+While trying to reproduce, encountered a problem and filed STAR:
+9000946339- Partition with groups not to abut devices by default.
+ 
+Earlier provided symmetry and ECO slides to Jose and answered some
+technical questions.
+ 
+Also filed a STAR on the issue I observed with non-disjoint symmetric
+groups create: STAR: 9000945863- Partition with non-disjoint groups goes
+into infinite loop
+ 
+ 
+[Intel MIP]
+ 
+Tried to clarify for Mirko the request from Girish on boundary-association
+need on left/right for Column.
+ 
+Provide a test case to Girish to demonstrate how to use Partition with
+groups + CustomSpacing with DRC/short-aware and abut devices. This could be
+an alternative to StructuredPartition of PNStacks which had some issues.
+ 
+Worked on another Intel MIP issue with StdPart of PNStacks, where there is
+one PNStack per row and it hits an infeasibility. Discussed further with
+Girish and Joe. Created STAR: 9000946288- StructuredPartition gives an
+internal error message.
+ 
+ 
+[Abutment]
+ 
+Investigated two abutment related issues in presence of dummy poly. Put
+together a slide to clarify the need to share dummy poly. Thanks to Girish
+for his slide that shows when dummy poly needs to be automatically removed
+to share diffusions.
+ 
+ 
+[10nm]
+ 
+Created a STAR to track issue observed in 10nm ref PDK: 9000945834-
+Incorrect exception thrown in SDL flow -- looking for lib property map.
+ 
+Created a more complex Helix test case (with both NMOS and PMOS) on nvda10
+PDK. Sent to Siarhei. With latest version of the tech file, DRC result
+looks good.
+ 
+Also tested PNStack on nvda10. Got a "Pin master missing error". Informed
+Joe. Will file a STAR next.
+ 
+ 
+[Support for 0x fixed/locked figGroup/symmetry]
+ 
+Set up a simpler test-case with locked group and ran GCP to show Joe that
+it is preserved as a group-ucell. Also showed him how to run gcp executable
+from shell directly.
+ 
+As per Joe's request, pointed out code/entry point to top-level solver
+ 
+ 
+[Modular Grid/Track Pattern]
+ 
+Gave a presentation to Fred and Randy. In preparation for it, reviewed the
+latest communication between Girish and various team mates and Lyndon. And,
+had conversations w/ Girish re: Gridding Decorator Intent (yet to be
+defined in UCM).
+ 
+ 
+[Misc]
+ 
+Helped Siarhei with partial checkouts in CVS and also investigated the data
+in repository and suggested how to reduce the full check out time.
+ 
+Updated ReadMe in Berry regressions with info on incremental check outs.
+ 
+Reviewed release notes for Helix and Pycell Studio.
+ 
+OPS meeting
+ 
+2:1 sync
+ 
+ 
+[Plan]
+ 
+Labor day holiday
+ 
+File STAR on "Pin master missing error" from PNStack on NVDA10nm
+ 
+Review UCM fspec updates
+ 
+Modular grid discussions
+ 
+Symmetry and fig group on top-level components
+ 
+Test topology re-use engine
+ 
+Review track region spec in Maxwell
+ 
+ 
+ 
+Regards,
+Bulent
+ 
+
+* 2015 08 31
+
+=== Summary ===
+ 
+[+] Managing general release activities during Ming's FTO. 
+ 
+[+] Maintenance of more than 30 test-cases in Berry-farm.
+ 
+[+] Work on various issues observed at Intel by Girish. Details below.
+ 
+[+] Work on 10nm NVDA skill PDK and internal reference PDK
+ 
+[+] Support Biying on topology re-use project
+ 
+[+] Please note that this weekly covers the period since August 3rd. So,
+there are lots of detail below.
+ 
+ 
+=== Details ===
+ 
+ 
+[2015.09 Release (standalone)]
+ 
+[+] Inspected the three failures in PNStack in berry using release
+package. They look OK. Thanks to Siarhei for keeping a local copy of
+goldens for these for future runs.
+ 
+[+] Verified that one PNStack test in berry fails release package but
+passes nightly.
+ 
+[+] Inspected the failure in PV regressions due to Oleg's latest fix. Looks
+good. Requested re-goldening.
+ 
+[+] Built main latest and tested 14 failures in harness. Ran tests again
+after Oleg's fix. Observed that DRC spacing is not sufficient. Informed Oleg.
+ 
+[+] Re-ran 11 failures reported by Siarhei in berry. Corrected two failures
+due to goldens based on a previous RedHat run.
+ 
+[+] Investigated two failures from Siarhei. One is due to a bad golden
+file. I fixed it. The other is an out of date golden file in Siarhei's
+sandbox. Informed him.
+ 
+[+] Investigated remaining failures in my full run. All are due to
+out-of-date goldens.. Realized that regression script was overriding CVS
+files. Informed Prashant who fixed the issue.
+ 
+[+] Investigated and re-goldened 35 test-cases various times due to changes in
+AVP/MCP (one due to enhancement for smaller test-cases, two due to support
+for layers without min-spacing rule in santana-tech).
+ 
+[+] Confirmed that the remaining 6 regressions in Berry are not due to
+StructuredPartition. Asked Siarhei to roll-back to help identify the
+culprit. Thanks a lot, Siarhei!
+ 
+[+] Provided info to Matthew regarding AlignBoundaryLayersToAxis in
+presence of Frame constraint. Reviewed latest draft from Matthew on
+symmetry in Partition, StructuredPartition, CustomSpacing and provided
+further feedback.
+ 
+ 
+ 
+[Intel]
+ 
+[+] Reproduced the problem with CustomSpacing with short-awareness reported
+by Girish. Filed a showstopper: STAR: 9000942079- CustomSpacing
+CorrectAfterForDrc creates a short. After getting hints from Oleg,
+tried to work around by updating Santana tech. However, noticed that we
+still get DRCs after short is eliminated. This was also later fixed by
+Oleg.
+ 
+[+] Created a test-case to reproduce a problem Girish observed at Intel
+with a branch-clone of PNStack. Filed STAR: 9000940730- BranchClone does
+not work with PNStack .
+ 
+[+] Tried to reproduce PNStack abutment problem Girish observed at
+Intel on 14nm. Created a similar chain of 5 inverters in house. It worked with
+cni130. Requested a test-case in berry.. After getting the test-case,
+reproduced it and informed Joe how to understand the shorts (STAR:
+9000939940- PNStack creates shorts.) Also suggested a temporary fix to Joe
+after he debugged and informed that ndiff/pdiff spacing info was missing in
+Santana.tech. Had discussions with Siarhei and Mirko, who helped with
+existing API in Helix to compute minimum spacing when Santana.tech does not
+provide an explicit API. Joe later improved his code fix making use of
+Mirko's pointer. Thanks to all!
+ 
+[+] While working on the PNStack abutment problem above, observed that with
+the recent AbutDiffWidth option, PNStack abutment has some issues. Created
+new STAR: 9000941136- PNStack AbutDiffWidth option has errors.
+ 
+[+] Had some discussions w/ Girish on Intel MIP evaluation the nature of
+the test-case, various options we have, some of which are more experimental
+in nature. Sent him the latest schema for Partition with soft groups. Next,
+planning to put together a sample test-case in house for further piloting.
+ 
+[+] Discussions to converge on various technical challenges:
+  -- Altera cell placement flow requirement (native STD-cell gridding) --
+  with Joe, Girish and Ming
+  -- Pin placement for ICF and Maxwell (handling pin constraints and
+  terminal constraints with/without edge assignment) with Kumar and
+  Girish.
+  -- Row-stack automation review, next steps with Kumar and Girish
+ 
+[+] Reviewed the pin spec from Girish
+ 
+[+] Review Track Pattern slides from Girish
+ 
+ 
+ 
+[Maxwell]
+ 
+[+] After Mirko's report that there needs to be a fixed or locked element
+for a GroupUCell to be create from an figGroup, I updated the STAR data to
+have a locked elem in the figGroup. However, Joe still reports that there
+are no GroupUCell's. Need to debug with Mirko further: (STAR: 9000920785-
+CDPV:: the locked oaFigGroup is treated as normal oaFigGroup.)
+ 
+[+] Helped Yakov with purify build of gcp (gcp-pg) from SWE
+ 
+[+] Reviewed and provided feedback on Barry's spec to handle dummies.
+ 
+[+] Discussions with Girish, Barry and Ming re: UCM-GCP priorities and
+custom-construction.
+ 
+[+] Discussion w/ Girish/Mirko on SED generated constraints for CMOS and
+its support by PNStack. Earlier, reviewed the req slides Girish forwarded
+to me.
+ 
+ 
+[+] Put together a table to manage MLK's based on the last two runs.
+ 
+ 
+ 
+[10nm readiness]
+ 
+[+] Set up Helix to enable a first run on 10nm nvda10 on Samsung secure
+machine. Used Schematic driven (SDL) flow, however, bypassed some of the
+setup details cndfls requires, by manually configuring the hxnet
+files. Observed various DRC errors on a purely NMOS test-case with one Row.
+The DRC seem to be internal to pcells from the PDK. Informed Siarhei. Next,
+planning to create another, slightly more complex test-case with NMOS +
+PMOS. The first had only NMOS.. 
+ 
+[+] Worked on NVDA10 PCX setup. Got inconsistent versions for PCX, CD and
+Maxwell. Worked with Prashant and Ming to fix the setup using 2014.12-SP2-2
+version of CD and 2014.09-SP1-1 version of Helix built with GCC 4.72.
+ 
+[+] Provided info on 10nm ref pdk to Siarhei. 10nm test-case with one Row
+has four issues. Sent test-case to Siarhei. Siarhei pointed out the problem
+with the usage, and has also fixed one of the issues. I need to file a STAR
+for one of the other minor issues.
+ 
+ 
+ 
+[Topology re-use]
+ 
+[+] Did a detailed code review w/ Biying before she left.
+ 
+[+] Provided a test-case with StartLayout option (ECO) to Biying..
+ 
+[+] Provided a test-case with non-slicing placement..
+ 
+[+] Reviewed Biying's report and respond to her questions.
+ 
+[+] Had a 1:1 w/ Girish regarding the topology re-use project and requirements
+ 
+[+] Had conversations with Biying regarding handling non-slicing floor-plans..
+ 
+ 
+ 
+[Misc]
+ 
+[+] Attended core team meetings during Ming's ETO.
+ 
+[+] Updated STARs as per triage meetings.
+ 
+[+] Compiled modular grid/routing track related docs/specs and sent out to
+Siarhei.
+ 
+[+] Reviewed track region spec in Maxwell.
+ 
+[+] Queried CRM to identify SP1 tasks and informed Siarhei as per his request.
+ 
+[+] Studied a presentation on Viper: spatially sorted layout files.
+ 
+[+] ETO: Aug 5/6 (feels like ages ago!)
+ 
+ 
+ 
+[Plan]
+ 
+[-] Develop and communicate spec to address ICF's requirement on gridded StdPart.
+[-] 10nm NVIDIA -- Create a more complex test case (with both NMOS and PMOS)
+[-] Fixed/Locked figGroup related STARs
+[-] File a STAR on the issue I observed with non-disjoint symmetric groups
+[-] Symmetry on top-level components
+[-] Internal test-case and piloting for Intel MIP
+[-] Review track region spec in Maxwell
+[-] Update ReadMe in Berry regressions with info on incremental check outs
+ 
+ 
+Regards,
+Bulent
+ 
+
+* 2015 08 03
+
+[Summary]
+
+ETO during last week.
+The previous week, ETO on Friday.
+Attended the full day GCP planning meetings.
+
+
+[StdPart]
+
+Completed inspecting 36 berry benchmarks due to changes in StdPart and PNStack.
+Updated the goldens in cvs. Informed Siarhei on various options re: how to test SP3 build which uses the old code.
+As per Joe's request, put together the setup needed to run Helix.exe on the GCP test-case for STAR: 9000928776- CDPV: StructuredPartition creates complete empty rows
+Marked fixed/fix-validated and added content for documentation: STAR: 9000877448- Inconsistency in StructuredPartition user interface (regarding odd/even rows)
+Marked fixed the following STARs: 
+9000878458- StructuredPartition params MinRows/MaxRows and OddNumberRowsAllowed
+9000760351- StructuredPartition support for 1:2:4x cells in a single constraint
+9000651377- Use AVP row placer as StructuredPartition constraint engine
+9000861320- EndCap row does not flip as needed in StructuredPartition
+
+
+[Plan]
+- Not feeling well (got cold in summer time!) and will take some of the rest of the day off.
+- Re-run and investigate berry regressions after Joe's enhancement for smaller test-cases and update goldens as needed.
+- Review new SPEC from Altera/ICF: Native STD-cell gridding in Helix
+- Investigate non-MOS device abutment request from ICF
+- File a STAR on the issue I observed with non-disjoint symmetric groups
+- ETO: Aug 5/6
+
+
+* 2015 07 20
+
+[StdPart]
+- Ran berry regressions after latest updates from Joe. Currently investigating the results.
+- Also ran all the regressions using old SP to compare as reference
+
+[Release]
+- Provided updates to symmetry documentation and also wrote up doc content on Custom Spacing.
+- Provided more content to Matthew to clarify descriptions of group params.
+
+[Intel]
+- Helped Mayank with validating the support for bash env in HEI. Provided unix command info to identify users with bash as login shell.
+- Validated Joe's quick fix for Sym w/ only self-sym components. This enables us to use McpPartition as a single solution instead of Row, Column, AlignedArray.
+- Berry runda 10nm confirmation. Created my work space. 
+- Brief conversation with Kumar re: RowStack automation. 
+
+[Maxwell]
+- Provided input to Girish on enhancements for CMOS Intent as part of the fspec on mismatch between UCM and GCP
+- Review Girish's slides on "Placement Constraints Support -- Addressing mismatch between UCM and GCP
+
+[Topology Reuse]
+- Reviewed Biying's new algorithm on slicing approximation of topologies. Provided her some feedback and suggestions for improvement. 
+
+[Misc]
+- ETO on Jul 10 and 13
+
+[Plan]
+- GCP planning meetings
+- Review of changed results in BerryFarm regressions
+- File a STAR on the issue I observed with non-disjoint symmetric groups
+- Review the user-guide copy from Matthew and provide feedback
+- Create test case for sec10 and run Helix on it for Siarhei
+- ETO: Jul 27-31
+- ETO: Aug 5/6
+
+
+* 2015 07 06
+
+[StdPart] 
+
+- Prepared a presentation on all the benchmarking and testing work we have done recently
+- Investigated the anomaly (100-cell design from Xiaodan) and reported results with recommendations. Removing power from connectivity computation seems to have made a big difference.
+- Re-ran all test cases in Berry after Joe's fix on Jun 22
+- Ran new code on Nvidia MS1 test-case (from Tuan Do). 
+
+[Release]
+
+- Provided content to Matthew on Symmetry in Partition. 
+
+[Intel]
+
+- Had a discussion with Girish on RowStack automation/spec
+- While preparing content for user guide and release notes, encountered an issue with new Symmetry feature. Filed a STAR which Joe fixed promptly: 9000922578- Partition to support symmetry groups with only self-symmetric components
+
+[Misc]
+
+- Build latest and run the failed test fcm4_pnstack_packedPartition1. It passed.
+- Clean up disk orion14 after getting a request from Mike Burgun. Deleted some old builds. 
+- ETO on July 3 due to July 4th holiday in US
+- Had a two day ETO on Jun 29/30
+
+[Plan]
+
+- File a STAR on the issue I observed with non-disjoint symmetric groups
+- Duplicate some of the regressions for AvpSP in BerryFarm
+- Create test case for sec10 and run Helix on it for Siarhei
+- Investigate auto re-ordering in RowStack and pattern generation
+- ETO: Jun 10
+- ETO: Jul 27-31
+- ETO: Aug 5/6
+
+
+* 2015 06 22
+
+[StdPart]
+
+- Encountered various issues during testing/benchmarking. Investigated further
+  and informed Joe to help address them. 
+
+- Wrote code to evaluate connectivity metric based on half perimeter of bbox
+  of pins. Also investigated the results in Maxwell. This activity pointed
+  out various things: 1) pin (I/O) constraints are not handled. 2) for
+  smaller test-cases, placement quality is inferior to the reference results
+  even for local nets. Pointed the PinConstraint code to Joe who is working
+  adding it to the interface. After his fix, we need to re-evaluate the second. 
+
+- Had a conversation with Mirko to clarify global optimization params and
+  their support in SP.
+
+- Created a test case in snps with pin/term issue I saw in Berry. Sent it to Joe
+  who promptly fixed the issue.
+
+- Updated data.tar.gz files in Berry to run AvpSP (but not checked them in yet).
+
+- Identified a different test-case with another shifting and bbox
+  problem. Compared with reference and forwarded to Joe who fixed it soon 
+  after. 
+
+[Altera]
+- Communicated clarifications to the team on shorts-checker/fixer in santana
+  and helix.
+
+[Misc.]
+- Had conversations with Biying to clarify the command I/O and desired
+  outcome for freeze (reuse) topology command. 
+- Triage, demo, Altera, 1:1, Naji review, Helix team, 2:1
+
+[Plan]
+
+- Finalize benchmark runs and prepare a presentation
+- Continue testing StdPart in Berry, Nvidia and Samsung
+- Investigate auto re-ordering in RowStacka dnpattern generation
+- Create test case for sec10 and run Helix on it for Siarhei
+- ETO: Jun 29/30
+- ETO: Jul 6/7
+- ETO: Jul 27-31
+- ETO: Aug 5/6
+
+
+* 2015 06 15
+[StdPart]
+ 
+- Continued to investigate remaining test-cases from Altera. There are
+  more than 20 structured partitions in berry that we have tested with.
+  We have now investigated most.
+- The only major issue remaining seems to be the support for boundary
+  association (with or without) pin constraints: the resulting layouts are
+  shifted which causes parent CustomConstruction to fail.
+- Observed two other (minor) issues observed this week:
+  a) missing tap cells,
+  b) error in counting rows in 2x-only designs.
+- I will continue this work to complete the investigation and send out the
+  results to Mirko for further review.
+ 
+[Altera]
+ 
+- Lyndon reported an issue with HEI code where users whose login shell is
+  bash saw a failure. Provided a quick workaround I have been using myself.
+  Later fixed and checked in the code.
+ 
+[RowStack]
+ 
+- No update this week.
+ 
+[Topology Reuse]
+ 
+- Gave an overview and introduction to Biying on topology re-use
+  problem. Did a demo with Helix GUI. Created a test-case for her with
+  multiple nested partitions.
+ 
+[Misc.]
+ 
+- Attended tech seminar on HSPICE signal integrity support
+- Interviewed a candidate for routing team
+- Meetings, etc..
+ 
+[Plan]
+ 
+- Complete StdPartition testing, file STARs for remaining issues, if any
+- Create test case in SNPS with pin/term issue observed in Berry.
+- Create test case for sec10 and run Helix on it for Siarhei
+- Respond to Biying's question on desired outcome for re-use
+- Investigate re-ordering in pattern generation
+- Proposal re: device placement with DTC and ADT
+ 
+Regards,
+Bulent
+ 
+
+* 2015 06 08
+[StdPart]
+ 
+- Investigated many StructuredPartitions from Altera. Ran the new MCP-based
+  StdPart. Encountered a number of corner-cases and informed Joe who
+  promptly fixed most of them, if not all :-). This work is in progress and
+  will probably take most of my time for one more week.
+ 
+[RowStack]
+ 
+- Wrote a response to Lyndon regarding device placement plans and aligning
+  with ICF's methodology.
+- Created a test-case that demonstrates that MOSFET sequences (with same W)
+  are re-ordered. Informed Yakov.
+- Created another test-case where Row fails to find the optimum solution
+  with 0 diffusion gaps (because, it minimizes the wire-length). Requested
+  Girish to clarify the requirement with Intel ICF. Packaged the test-case
+  and sent to Yakov.
+ 
+[Misc]
+ 
+- Had some discussions with Girish re: top-down pin placement requirements
+  from Intel ICF.
+- Helped Siarhei with sec10 setup for PCXtreme
+- Meetings, etc..
+ 
+[Plan]
+ 
+- StdPartition testing/benchmarking
+- Re-ordering with a pattern generator
+- Proposal re: device placement with DTC and ADT
+- Intro to topology re-use for Biying
+- Interview candidate for routing team
+ 
+Regards,
+Bulent
+ 
+
+* 2015 05 25/06 01
+
+[RowStack]
+
+- Did some testing on RowStack GUI. Hit various issues:
+  . Mismatch in test-case and latest in P4. Girish sent me an updated
+  stackTemplate.yml file. 
+  . Issue with large design in text-pattern generator. This is a limitation
+  for now due to using single letter aliases. So, can at most run 26 inst
+  RowStack with text-pattern generator.
+  . DeviceGroup generator losing window focus. Informed Girish. According
+  to him this is an issue with Helix GUI. He will file a STAR. I tested it
+  with Pattern Editor, it works. Seems to effect only RowStack UI.
+- Had various conversation with Girish to help clarify requirements and use
+  models. Dummy fill requirement is shifted from the engine to RowStack
+  InlineTemplate. 
+- Had various conversations with Yakov to describe RowStack
+  functionality/history and automation needs. 
+- Did some testing to clarify auto-reordering behavior in Row and Column
+  constraints. They both work on non-MOSFET elements (sub-ucells or
+  macros are both supported, in general). 
+- Sent an email to Lyndon to inquire about update on device-placement
+  requirements. 
+
+[StdPart]
+
+- Spent some time creating a "medium" size test-case with fill, left-fill,
+  end-cap and tap cells. It has about 100 instances (without counting the
+  aux cells). Reference runtime is about 20min. 
+- The new test-case helped catch various issues which Joe fixed promptly: 
+  . Internal tap cell name collission
+  . Fill boundary computation (w/ AbutmentBoundary option)
+  . Missing solutions (w/ allowed row count)
+  
+[Maxwell]
+
+- Had various discussions with Prashant and Barry. Answered questions on
+  PNStack. Requested enhancements to UCM for a per-row Height param (for
+  CMOS intent) and SitePolicy for the whole cell. Also clarified the 7
+  distinct patterns that are to be supported by allowing clients to assign
+  devices to two CMOS rows (but allowing multiple rows in layout).
+- Watched the demo on SED/UCM.
+
+[10nm]
+
+- Continued investigating multi-patterning problem and implications on
+  placement, if any.
+
+[Misc]
+- Sent an email to Yakov and Oleg re: enhancing fgPlace -allowTouch and 
+  CustomSpacing with CorrectAfterForDRC functionality. Did not hear
+  back. Will set up a meeting to follow up. 
+- Attended various meetings.
+- Attended tech-seminar on GCR by Bing.
+- Read paper from Sunil on Analog Layout Generation.
+- Memorial Day Holiday.
+
+[Plan]
+- Review std-part regression results in harness and compare Mcp vs Seeker
+  based implementations, then do the same in Berry.
+- Proposal for RowStack automation.
+
+
+* 2015 05 18
+[Altera/Intel ICF/DTS]
+. Packaged the RowStack test case from Girish and sent it out to Ellen with detailed instructions. It already helped catch some issues in the first test-run by her! Spent some time to clean up hard-coded references (in lib.defs, etc.), combined ref libs under one root, separated dependencies to HEI and Intel site from p4. 
+. Moved on to testing the GUI. It works from Girish's sandbox, but hits an issue when pointing to latest in p4. Informed Girish. 
+. Looked in the issue from Mayank re: checking in hx_placement/hxcs views in oaLib. Provided pointers on reconfiguring design view abstract object in Synchronicity for DFII. 
+
+[Maxwell/Misc]
+. Had a few conversations with Prashant on Partition ECO and Symm. Provide him details on PNStack/PackedPartition/Partition w/ Sym/ECO support and how to map UCM to the same.. Also pointed out some relevant test-cases, fspecs, other doc.
+. Continued to study Laker documentation. 
+. Meetings: core team, triage, 1:1, 2:1, Helix team, Nishath's OPS, 1:1 w/ Prashant
+
+[10 nm]
+. No update this week
+
+[Plan]
+. Discuss with Girish re: interface for RowStack automation
+. Provide test-cases to Ellen so that HEI is covered with regressions
+. Intel ICF/Altera: Investigate and create test for RowStack automation
+. Continue Laker investigation on custom digital automation
+. Setup and run ICV on sec10 data.
+. Provide test-cases to Ellen so that RowStack GUI is covered with regressions
+. Continue sec10 (color/dpt/tpt/qpt) rule investigation
+. Clarify spec on tap cell distance in StdPart
+. Test PNStack to see if it can abut when W1!=W2 (Also file STAR on out of date doc)
+. Altera: Investigate berry test-cases on StdPart
+
+[Old plan]
+[-] Continue review of UCM f-spec.
+[-] Read the project spec on templates
+[-] Intel DTS: Continue testing cell-boundary/blockage support
+
+
+* 2015 05 11
+
+[10nm]
+. We now have complete prerequisite collateral (for sec10): PDK/DRM/ICV runset/ICC-placement/GCR-routing/PCX + basic oaTechLib & Santana.
+. Completed CD setup/testing with PCXtreme. Thanks to Prashant for tips/tricks! CDF callbacks are not supported with CD, but this does not stop Helix work/testing.
+. Looked for an ICV deck for sec10. Found one that matches our PDK from NVDA. Informed Siarhei.
+. Re-copied data from ICC to OA (Samsung test-case). Also created basic test-case with pcells (sec10 pdk from Nvidia). Ran Pyros/DRC on both.
+. Investigated ICC placement and GCR routing of Samsung 10 test-case. Copied/prepared data and informed Siarhei.
+. Started to investigate complex/color rules in sec10
+. No update on tsmc10. We have basic layout, but not DRM/runset yet.
+ 
+ 
+[Altera/Intel ICF/DTS]
+. Continued testing AvpSP. Used PNStacks to create "cell" layout. Found out an issue with AbutmentBoundary option: leaves some gaps which cause DRC (pplus spacing and off-grid contacts). Filed STAR: 9000895642- StructuredPartitionMode(AVP) - leaves gaps when AbutmentBoundary option is used
+. Provided two test-cases to Girish to help demonstrate custom digital automation.
+. Good progress on requirements/clarifications on RowStack automation (and how it maps to InlineTemplates/Pattern/Row/PNStack). Had a couple of long conversations and got in sync with both Girish and Yakov.
+ 
+ 
+[Maxwell/Misc]
+. One day ETO (Thursday)
+. Started to study Laker docs/labs
+. Setup p4v in laptop (again, after disk change)
+. Setup and run pycscope on helix/santana + ae. Many files have (python) syntax errors. Manually cleaned many, but there is more..
+. Meetings: triage, Altera, 1:1, update to Naji, Helix team
+ 
+ 
+[Plan]
+. Continue Laker investigation
+. Provide test-cases to Ellen so that HEI and RowStack are covered with regressions
+. Continue sec10 (color/dpt/tpt/qpt) rule investigation
+. Clarify spec on tap cell distance in StdPart
+ 
+
+* 2015 05 04
+
+10nm
+
+[+] Set up PCellXtreme on 10nm PDK from Samsung. Pyros worked OK. CD had problems. Got some hints from Prashant and will try them next.
+[+] Prepared data/vnc for Siarhei to look at data in Samsung secure disk..
+[+] Studied the DRM for Samsung 10nm.
+[+] Located an ICC database using Tsmc 10nm. Converted to OA. It has full device-level layout for a number of cells. However, oaTech has rules only for POLY and above (excluding active POLY). Provided the data to Siarhei.
+[+] Converted samsung10 ICC data (a bunch of lib-cells) to OA. However, the data is missing most of device-level layers and also seem to be inconsistent with the samsung10 PDK techlib.
+
+
+Altera
+
+[+] Did some testing of the new StdPart with cell layout from PNStack. Hit an infinite loop that Joe fixed promptly. Hit another issue with boundary abutment option. Will file a non-urgent STAR.
+
+
+Intel ICF
+
+[+] Had a discussion with Girish regarding regressions for RowStack and HEI. We agreed that it would help to have them automated. We can get started with the two test-cases I have been testing with.
+[+] Had some discussion with Girish regarding the custom digital needs, including the request regarding device abutment across constraints. The consensus is that a higher-level abstraction/automation (e.g., use of PNStack and StdPart) would give a better overall solution. We have identified a number of challenges: CorrectAfterForLVS (similar to CorrectAfterForDRC) for Row/Partition/Pattern; support for folding threshold and auto-folding accordingly; DRC correction between insts in a row and between rows in StdPart.
+[+] Continued testing RowStack and started to put together a larger circuit to test automation
+
+
+Maxwell/Misc/Meetings
+
+[+] Read IPL constraints doc from Barry/Ming
+[+] Looked into the code regarding optimization modes and clarified the behavior with some of the options. Thanks to Yakov for pointing out the code/line numbers!
+[+] Tried auto-order option in Row and confirmed that it supports abutment.
+[+] Triage, Altera, 1:1, Helix, Nishath's OPS, 2:1
+[+] Installed Pycell Studio in my laptop and played around with some of the tutorials.
+
+
+Plan
+
+[+] Address plug-in setup problem in CD so PCX can eval skill pcells for 10nm Samsung PDK
+[+] Prepare a demo of StdPart of PNStacks and share with Girish.
+[+] Test PNStack to see if it can abut when W1!=W2 (Also file STAR on out of date doc)
+[-] Altera: Investigate berry test-cases on StdPart
+[-] Intel ICF/Altera: Investigate and create test for RowStack automation
+[-] Continue review of UCM f-spec.
+[-] Read the project spec on templates
+[-] Intel DTS: Continue testing cell-boundary/blockage support
+
+
+* 2015 04 27
+
+Intel ICF:
+
+[+] Continued looking into RowStack automation. Got a nice unit test from Girish and started to play with the GUI. Found a number of issues and forwarded to Girish who promptly fixed or helped me understand how to fix my setup. Now, trying to put together a good test for automation (device re-ordering and device assignment)
+[+] Continued investigating/testing HEI from CD. Found a few issues. Girish helped fixed the code and/or the setup to address them promptly.
+
+
+Altera:
+
+[+] Investigated top-down width/height or more general PRBoundary constraints for StdPart as a sub-constraint..
+
+
+Release/PNStack:
+
+[+] Reproduced failure in package build. Works in main latest. Filed equivalent STAR: 9000891351- OFFGRID.* violations in PNStack
+
+
+Maxwell:
+
+[+] Had some discussions on copy-back, how to support clones (layout001,002, ...)/auto-cloning Helix supports by default... Match constraint does not handle multiple occurrences in distinct subckts. Output/input filter would be too sub-optimal (how do we know how to pick the best variant unless we look at the context!)
+[+] Built CD (sparse) and attempted to use HEI through it.
+
+
+Meetings:
+
+[+] Altera, 1:1s w/ Girish, Joe, Ming and Nishath, UCM demo, OPS, Sync with Joe/Ming, Pattern with Kumar/Yakov/Ming, 
+[+] Talked with Nishath regarding Nvidia/Sams10 expectations/priority/deadlines
+[+] Attended UCM demo by Barry. Very helpful!
+
+
+Plan:
+
+[-] 10nm readiness: try Helix on the latest PDK from nvidia.
+[-] Altera: Investigate berry test-cases on StdPart
+[-] Intel ICF/Altera: Investigate and create test for RowStack automation
+[-] Continue review of UCM f-spec.
+[-] Read the project spec on templates
+[-] Read IPL constraint spec doc
+[-] Intel DTS: Continue testing cell-boundary/blockage support
+
+
+* 2015 04 20
+
+Summary: 
+
+[+] Trip to MV.
+[+] 5-day ETO
+
+Intel DTS:
+
+[+] Continued testing. A new test-case with blockages had an infinite loop/memory leak problem. Promptly fixed by Joe. Also found an issue where ObserveBlockages param could not be turned off. Debugged to code in constraint compiler. Pointed out the line to Joe, who promptly fixed it. We also had a good discussion to clarify requirements for fixing coordinates of frozen (but not firm or soft) groups. Also, realized that IgnorePRBoundary/Blockages would be a better name, because we want the default mode to handle PRBoundary and Blockages. Joe agreed and promptly fixed the code. Also observed a case where empty space is not utilized when PRBoundary is rather big. Communicated with Joe. Not a critical issue for now.
+
+Altera:
+
+[+] Various discussions on StdPart. Wrote to Lyndon regarding the only new requirement that needs further input from him: width/height input. 
+
+[+] Had various meetings/discussions to investigate device-placement problem. Please see Intel ICF-RowStack automation below.
+
+Intel ICF:
+
+[+] Continued to investigate HEI. After the last issue from the field (which Mayank worked around by re-running from scratch), things are quiet. However, I continued to work on a local/in-house test-case to get HEI working through CD. It is a challenge, indeed! Fixed two issues with input from Girish. A third one failed cndefls. Got some help from Glen to fix it. A fourth issue is encountered where the working directory seems to be incorrect in HEI.
+
+[+] RowStack automation: Investigated proposal to re-use PNStack as a PatternGenerator for higher-level automation for RowStack (can automatically search for different number of rows and automatically assigns insts to rows). This sounds very promising for the long term, as well as being a lower-hanging fruit.However, for the shorter term, Intel seems to request only auto re-ordering/abutment for each row. The plan is to have Row constraint enhanced to handle auto-dummy insertion. If/when Intel switched to using Pattern instead of Row, we would also re-use the new Pattern implementation for Maxwell in standalone and re-use the enhancement in Row as is!
+
+
+Maxwell:
+
+[+] Had some meetings and conversations with Kumar, Prashant and Girish to iron out the new Pattern constraint implementation. We all agreed to improve re-use Island/Column and Row (DRY: do not repeat yourself!), instead of copy/paste from existing code for Column/Row, etc. Kumar seems to have figured out a way to do just that in C++! Alternatively, we also brainstormed a pure tcl-based mechanism to provide a fast and extensible solution.
+
+[+] Various discussions with Barry and Girish regarding support for InlineTemplates.
+
+
+Plan:
+[-] Intel DTS: Continue testing cell-boundary/blockage support
+[-] Altera: Investigate berry test-cases on StdPart
+[-] Review Instance Groups in CD.. Continue review of UCM f-spec w.r.t. symmetry and discuss with Barry as needed.
+[-] Read the project spec on templates
+[-] Samsung 10: Put together a test-case for StructuredPartition using Sams10 PDK.
+
+
+* 2015 03 30
+
+Intel DTS: Continued testing of new features. Observed a seg fault in a different test case with cell boundary. Reported as STAR: 9000877330- Intel DTS - Partition seg faults when reference layout has PRBoundary. Fixed promptly by Joe. Created a test-case with Blockages.
+ 
+Intel ICF: Had a conversation with Girish regarding PNStack for RowStack automation. Showed some examples to him to demonstrate that PNStack can do multiple rows, including P only or N only and odd number of device rows (e.g., PPPP, or PPP).. Also discussed the idea to unify pattern and row constraints such that a column of rows can provide all features provided separately by pattern and row constraints today.
+ 
+Intel ICF: Discussed signal-flow based placement request from users. It seems that use of Partition (if not Row/Column) will solve most of their needs. The challenge seems to be educating them to understand and love the way of constraints.
+ 
+Altera: Ran a few tests and investigated structured-partition interface. Had good conversation on StdPart interface and captured with STAR: 9000877448- Inconsistency in StructuredPartition user interface (regarding odd/even rows). Also encountered some other problems and captured with 9000878458- StructuredPartition params MinRows/MaxRows and OddNumberRowsAllowed.
+ 
+Altera: Investigated issue from Ellen on Partition and Row constraints with CustomSpacing (include-layer=diff, with very small spacing value) + CorrectAfterForDRC. Informed Ming accordingly. It is now tracked as STAR 9000878756: DRC errors when CorrectAfterForDRC is set true in row/column constraints.
+ 
+Samsung 10: Got a test-case from Ashish and Mohit. Thanks! Got access permission from Mi. Investigated the data. There does not seem to be any device layout -- mostly interface: boundary, pins and blockages.
+ 
+Long-term: Had a conversation with Girish regarding ease-of-use and automation challenges. PDK-independent and higher-order templates seem promising. Need to put more thought into it and capture in presentation format.
+ 
+Misc: Phone screened an intern candidate.
+ 
+Plan:
+  [-] Intel DTS: Continue testing cell-boundary/blockage support
+  [-] Samsung 10: Put together a test-case for StructuredPartition using Sams10 PDK.
+  [-] Continue review of UCM f-spec wrt symmetry and discuss with Barry as needed.
+  [-] Tackle a few STARs from triage meeting assigned to me
+  [-] Plan session during team meeting to facilitate discussion on increasing automation and ease of use
+  [-] ETO next week (April 6-10) Spring break in Atlanta. 
+
+* 2015 03 23
+
+Summary:
+  [+] Nvidia: Got feedback from George on MS3 target cell width (90um, min width result we got so far was 370u!), and the desired pattern for bipolar transistors. Also met him to get input on the overall floor-plan and discuss further steps. Increased number of rows for two large PMOS devices (from 50 to 144) to fit under 90um. Updated netlist to split off various other pieces of the large core circuit into two additional sub-circuits. Also updated some of the fill layers/implant layers which helped eliminate most of the DRC and internal pitch violations.
+  [+] Nvidia: Noticed that pcell eval was taking a very long time in some MS3 subcircuits when abutment was turned on even for only one class of device pairs (with many instances). Communicated to Prashant who confirmed that this was a planned future enhancement. Filed to track: STAR: 9000876182- nVidia ms3 - speed up by re-using abutment solution
+  [+] Nvidia: Girish reported an issue with abutment when L1!=L2. Tested with in-house data. Seems to be working fine.
+  [+] Intel DTS: Created a basic test using boundary and blockages. Had some problems. Runtime for ~120 instances was almost 18h. Communicated to Joe who promptly fixed them. Also had some good conversation on how to improve the user interface. Decided to turn on by default ObservePRBoundary and ObserveBlockages params. Encountered a crash with a new test-case. Joe already fixed it!
+  [+] Intel ICF: Provided my contact info to Mayank and soon enough got the first service call! 
+  [+] Samsung10: Looked around to find OaTech and gds layer map info for Siarhei. Located and untarred the data and informed him.
+  [+] Altera: Had some StdPart related conversations with Joe and Mirko to clarify current behavior and specs especially regarding row flipping and double height cell alignment.
+  [+] Put together a high-level list draft re: areas to invest in order to improve ease of use and automation with Helix. The intention is to help brainstorm with the team and ensure no major holes are left.
+
+Plan:
+  [-] Nvidia: Placement improvements for Tuan Do's design
+  [-] Plan session on increasing automation and ease of use
+  [-] Put together a requirements spec to automate Device Placement with DTC methodology: RowStack
+  [-] Intel DTS: Continue testing cell-boundary/blockage support
+  [-] Review UCM and communicate with Barry regarding hi-level symmetry, incremental placement and soft group support
+  [-] Tackle a few STARs from triage meeting assigned to me
+
+* 2015 03 16
+
+Summary:
+  [+] Nvidia: George finally came back and we had a good first meeting on Friday after a long hiatus. There is a lot of progress on both MS2 and MS3 for SOW. But, there are also a number of challenges ahead. I spent most of my time on improving MS3 run-time (it is now down to ~6 hours from ~10h mostly thanks to switching from Pattern or VPattern to VMatrix), investigating and resolving many DRC violations (due to missing fill-layers and incorrect setting of dummy poly widths). Similarly, internal violations (of OD pitch rule) seem to be mostly due to OD_fin fill layer. We will have a technical review meeting on Wednesday (in addition to the weekly dashboard meetings on Friday) to get further input from George on floor-plan and constraints.
+
+Plan:
+  [-] Nvidia: Prepare for the technical review.
+  [-] Nvidia: Investigate internal pitch violation errors.
+  [-] Nvidia: Continue to improve runtime/floor-plan and DRCs
+  [-] High-Level Requirements and Implementation Spec -- Device Placement with DTC methodology: RowStack automation
+  [-] Intel DTS: Prepare test-cases on cell-boundary/blockage support
+  [-] Address failure in berry-farm on PNStack
+  [-] Review UCM and communicate with Barry regarding hi-level symmetry, incremental placement and soft group support
+  [-] Tackle a few STARs from triage meeting assigned to me
+
+* 2015 03 09
+
+Summary:
+  [+] Nvidia: Updated the dashboard and sent out to the stakeholders. Communicated with George about the latest status. He will be back on Friday. On MS3, reduced runtime from 19h to about 10h. Hit an issue after updating the netlist, and resolved after getting a very good hint from Mirko. Thanks!
+
+  [+] Maxwell/PNStack: Created two new STARs: STAR: 9000870236- PNStack: automation for row count params, STAR: 9000870110- PNStack (and all other constraints using AVP) to support -r (dry-run) mode.
+
+  [+] Altera: Created STAR: 9000869568 (Object to layer mapping in DRC Script for Santana.tech) and had brief communication with Siarhei on it.
+
+  [+] Intel DTS: Asked a few questions to Jose to help refine the specs. 
+
+
+Plan:
+  [-] Nvidia: Continue to improve runtime/floor-plan and DRCs in MS3
+  [-] Intel DTS: Prepare test-cases on cell-boundary/blockage support
+  [-] Address failure in berryfarm on PNStack
+  [-] Review UCM and communicate with Barry regarding hi-level symmetry, incremental placement and soft group support
+  [-] Tackle a few STARs from triage meeting assigned to me
+
+
+* 2015 03 02
+Nvidia:
+  [+] MS2 showstopper: Helped reproduce and debug the huge memory leak observed by Girish. Root-caused to PCX code. Sent stack-trace to Prashant who worked around it promptly. It will be fixed soon after main is open to check ins.
+  [+] Tuan Do's test-case. Worked with Girish to help identify structure in the test-case and address various DR violations due to borders of components. 
+  [+] Continued investigating and fixing DR violations in MS3 subcircuits. Work in progress.
+
+Release/Maxwell/Intel DTS/Altera:
+  [+] As per Intel DTS's request, provided them the demo notes and test-case data
+  [+] Provided content for release notes and reviewed last draft.
+  [+] Installed and tested the release package in Nvidia chamber
+  [+] Ran PNStack regressions in berryfarm and investigated one failure.
+  [+] Tested on ECO/SYM test-cases sent to Intel.
+  [+] Tested GUI changes. Found three issues relating to STAR: 9000863784- Enhance GUI for CustomSpacing: add new param CorrectAfterForDRC).
+  [+] Validated fixes to 9000863784 and 9000864570
+  [+] Reviewed UCM on PNStack and (Packed)Partition and provided input
+  [+] Did more testing of the new block placement functionality for Altera. Found another issue with the engine. Created a new test-case STAR: 9000865507- DR violations in top-level (partition) with CustomSpacing/CorrectAfterForDRC
+  [+] Created two stars based on our conversation with Intel:
+      STAR: 9000866385- Intel DTS - cell boundary for ECO/incremental placement (Partition)
+      STAR: 9000866387- Intel DTS - Blockages for ECO/incremental placement (Partition)
+  [+] Tested avp mode in SP to do DRC aware row-based placement. Got a crash and provided the test-case to Joe who promptly fixed it.
+  [+] Tested pn-stack. Got an off-grid placement. Informed Joe.. Created a STAR: 9000865880- OFFGRID.* violations in PNStack
+  [+] Created: STAR: 9000866383- Memory leak (need to free various pointers to free space in OA)
+
+Misc:
+  [+] Got my laptop shipped back from IT with a new SDD (harddrive) on it. Setup nvidia access, vnc, etc.. No more blue screens, we hope :-)
+
+Plan:
+  [-] (Nvidia) MS3: try cnnet2hx without expansion
+  [-] (Nvidia) Update dashboard and send out
+  [-] Prepare test-cases on cell-boundary/blockage support
+  [-] STARs from triage meeting
+
+
+* 2015 02 23
+
+Summary:
+  [+] Had a very good trip to MV with productive visits to customers (Intel DTS, NVidia and Altera), as well as internal R&D meetings (and a yummy buffet to celebrate the Chinese New Year!)
+ 
+Intel:
+  [+] Visited Intel DTS on site and gave a demo of hi-level symmetry and ECO placement features. It was very well received by Intel representatives. Also, we helped clarify expected flow and usage of the new features.
+ 
+Nvidia:
+  [+] Met Swathi (AC @ Nvidia) for the first time. She was very helpful with introductions to Nvidia, setting up meetings with Sriram and Tuan Do. Thanks!
+  [+] Met with Tuan to understand the requirements he had on the test-case. Gave him a quick intro to various aspects of Helix.
+  [+] Earlier, created a separate (and third) StructuredPartition in Tuan's test-case to achieve alignment of m3 pre-routes.
+ 
+Altera:
+  [+] Met Lyndon at Altera and confirmed good alignment on device placement problem/style between Intel ICF and Altera.
+  [+] 10nm requests: Had good brainstorming meetings with various team members. Came up with various proposals and rough effort estimates for cell and device placement requests.
+  [+] Tested new block placement functionality. Created STAR: 9000864570- Column constraint with CustomSpacing/CorrectAfterForDRC has DR violations
+  [+] Tested the GUI support and identified two issues. Informed Prashant. Amrish promptly fixed them both.
+  [+] For the previous line item, created STAR: 9000863784- Enhance GUI for CustomSpacing: add new param CorrectAfterForDRC
+ 
+Maxwell:
+  [+] Reviewed and updated: STAR: 9000856031- Partition re-use not support ContactRing
+  [+] Reviewed and updated: STAR: 9000860338- Partition not warn that sym pair not "matched" layout
+ 
+Misc.
+  [+] One day holiday on Monday
+ 
+Plan:
+  [-] (Maxwell) Review UCM on PNStack and (Packed)Partition
+  [-] Validate fixes to 9000863784 and 9000864570
+  [-] Provide content for release notes.
+  [-] Update STARs as per triage meeting
+  [-] (Nvidia) Update dashboard and send out
+  [-] (Nvidia) Work on spec and constraints for Tuan Do's testcase.
+  [-] (Intel DTS) Provide demo notes and test-case data to Intel DTS.
+  [-] Write feedback for season of reviews.
+  [-] (Nvidia) Compare DRC status of first two MS#3 results
+ 
+
+* 2015 02 16
+
+Intel
+  [+] Prepared for the demo with new test-cases for ECO. Also encountered a few issues and had various conversations w/ Joe (re: OrientationTransform, negative coordinates, frozen pcells, etc.).
+ 
+Nvidia
+  [+] Provided a status update to Glenn T.
+  [+] Did a fresh new MS3 run with the latest constraints for the whole design hierarchy using the latest TECH dir (from Girish/Siarhei). Used  the "Big" config of LSF to do one full run. Took about 19 hours (compare to first run with long rows: 3 days!). The bad news is we have work to do to look into and resolve all the DRCs (about 90k :-()). But, I hope most of them are caused by my quick and dirty manual constraints.
+  [+] Learned more of git (and loving it more and more!), cloned the latest constraints, created a branch to capture latest run..
+  [+] Created two git branches to capture MS3 results to date: Ross's result with long rows and the latest result with manually improved constraints (to replace long rows with Partition/Pattern/Matrix/etc.).
+  [+] Filled the table to be sent to Ashkan to transfer data to SNPS. But, first untarred the one big file and eliminated duplication.
+  [+] Created a snapshot of the latest constraints for MS3 (git commit).
+ 
+Maxwell
+  [+] Started reading/reviewing the UCM fspec document (only more than 300 pages or so :-).
+ 
+Misc.
+  [+] Ran pnstack regressions in berry farm to help investigate regression failures there. There are some new drcs. Thanks to Siarhei for help with debug.  
+  [+] Reading and playing with "git." What a wonderful software tool to help create software tools :-)!
+  [+] Reading a tutorial on "constraint programming" from CMU.
+  [+] The SSD drive in my laptop had gotten a lot worse with many more blue screens and large data files getting corrupted a lot more often (Outlook, OneNote, etc..). IT sent me a loaner which is working out great :-). How easy it has gotten to move on to a new machine! Sent back to IT mine for them to plug in a new SSD.
+ 
+Plan:
+  [-] Visit to MV, Nvidia and Intel DTS.
+  [-] Provide content for release notes.
+  [-] Help tweak test-case to help test the new block-placement mode better.
+  [-] Write feedback for season of reviews.
+  [-] Compare DRC status of first two MS#3 results
+ 
+
+* 2015 02 09
+
+Intel/Maxwell
+
+  [+] Prepared a demo test-case for sym (basic test with two sym axes). Encountered some issues and informed Joe who promptly improved results.
+
+  [+] Had some fspec discussion with Joe on sym group flipping/rotation (wrong focus), overlap-layer param per group (not needed).
+
+  [+] Marked fixed: STAR 9000816479- Intel ICF requests (tracking November, 2014 delivery)
+
+  [+] Had a brief conversation with Prashant on re-use with hard vs soft macros (layout vs topology).
+
+ 
+
+Nvidia
+
+  [+] Investigating the new layout to see where it needs to be improved.
+
+  [+] Marked a STAR fixed. As it is already addressed by Siarhei and Girish. STAR: 9000847419- nVidia ms3 - various kinds of design rule violations
+
+  [+] Marked "Need further review": STAR: 9000847418- nVidia ms3 - Helix reports "internal pitch rule violatio
+
+ 
+
+Altera
+
+  [+] Created a unit test-case to help Yakov test the enhancement to solve the "block-placement" problem (using DRC correction on custom spacing). Without the new enhancement, it currently has min-spacing errors between "blocks". QA team could take this test-case and proliferate it to test the feature extensively.
+
+  [+] Tested eng build manually in berryfarm to confirm that the matrix test-case (2014-07-17/case2) worked ok (boundary layer shape created by finish script is longer aligned with origin).
+
+  [+] Updated log and reassigned to Yakov: STAR 9000828626- CustomSpacing EnforceDesignRules option to support Include/ExcludeLayers
+
+ 
+
+Misc./Meetings
+
+  [+] Switched from csh to bash (long overdue, but better late than never! :-), and converted my big bad build setup script and a few other utilities (aliases, etc) to bash as well.
+
+  [+] Meetings: Triage, ...
+
+
+* 2015 02 02
+Nvidia
+  [+] SOW#3: Finally, got the first result for "el gordo", the humongous circuit band-gap core, with a reasonable layout quality. The main challenge was figuring out the issue with PNP22 (bipolar transistor) cell. In HFL output, it was grouped into a VMATRIX. I had changed it to a PATTERN, to help speed up the run. However, it was giving an error after a long run time. Upon "Preview Pattern", it was also giving an error much faster (:-). Mirko tried to help (Thanks!). However, the netlist compiler configuration was correct. The problem was due to a bug in Pattern constraint, I think. The ElementType was set to device. Changed it (in .hxcs, as it is read-only in GUI) to macro. The run went through. 
+  [+] Also spent some time partitioning the large row/vpattern (with 5k elements!) into smaller Patterns. This resulted in a partition of 11 patterns. The total runtime for el gordo is just shy of 2 days. The rest of the circuits, including the top-block do not take more than a few hours at most. 
+  [+] A quick look at the layout shows a lot of promise (much better than the first result with looong rows). Will try to improve the run-time further first and then refine the constraints..
+  [+] Compiled the data we need transfered for SOW data/work and created one tar file.
+  [+] Looked for the 10nm tech data in nvidia incoming data as per Siarhei's request. Thanks to Ashish for providing the path to PDK..
+  [+] Looked into VDR discrepancy in ross's area. Also ran drc on Ross's result. There were many violations including VDR rules in that run, too.
+
+ 
+
+ 
+
+Intel/SP1 release/Maxwell
+  [+] Helped Joe multipleExpansionParam for cnnet2hx. Debugged and fixed his test-case.
+  [+] Responded many good question from QA team thanks to their good testing of the brand-new hi-level symmetry and ECO features.
+  [+] Looked into three regression failures. Results were good. Seems to be a problem with the harness.
+ 
+
+
+Altera
+  [+] Lyndon agreed to the interface for "block-placement" support. I looked into coming up with a test-case as per Yakov's request. However, as per Siarhei, there is no test-case @snps with a modular (block) grid. Therefore, I am trying to re-use some of the test-cases from Lyndon in Berryfarm. Work in progress.
+
+ 
+
+ 
+
+Plan
+  [-] Improve layout and run-time for SOW#3 test-case
+  [-] Set up a test-case for block placement mode in berry
+
+
+*2015 01 26 (for two weeks)
+
+Altera
+  [+] Various good conversations/meetings regarding finish script vs origin shifting (STAR: 9000777674- Matrix does not support AlignBoundaryLayersToAxes()). There were two separate issues confusing the matters and they are both fixed now. Earlier, spent some time to investigate further the data in berry and the related code.
+  [+] Updated and re-opened STAR: 9000828623- New placement mode to enforce design and mod-grid rules ("block" placement).
+  [+] Looked into merge-able layers. They seem to be hard-coded to "nwellLayer, pwellLayer, twellLayer, od2Layer, rpoLayer." Yakov confirmed, but he also stated that with coding other layers could be added. Also updated the STAR to capture this..
+  [+] Attended the altera meeting and provided an overview of Intel ICF DTC flow.
+  [+] Checked with Lyndon to confirm that overlap-layers and block-placement mode will be exclusive. I.e., when block-placement mode is turned on, overlap-layers will have no effect.
+ 
+nVidia
+  [+] Received a new test-case from Swathi (from Memory? team). Girish and Mirko have worked on it. I looked at the test-case and tried to run DRC on the latest result, but got a failure due to missing layer definition. Siarhei helped with a new santana.tech. Thanks to all!
+  [+] Did more runs on MS3. I think the key message is that a significant portion (many or most) of these DRCs are due to (internal to) the primitives. So, nothing Helix could do about. We will continue to investigate..
+  [+] Inspected the sub-cell results in ms3. Identified various long rows causing the results to be unacceptable. Converted them to *pattern, *matrix.
+  [+] On the largest sub-cell, Helix gives an error due to a missing cell (PNP22) after a 3-hour run time. However, pyros can open the cell. Captured test-case and communicated to team members. Fortunately, we can reproduce the problem instantaneously with Pattern's Preview feature!
+ 
+Intel/SP1 release/Maxwell
+  [+] Updated the hi-level fspec slides with details on params and behaviors for symmetry and ECO.
+  [+] Had a conversation with Joe to go over the details of PlaceGroup param.
+  [+] Put together a rough test-plan to help the QA team start testing.
+  [+] Also created a basic test for ECO placement. However, it exposed a few issues. Filed a new STAR: 9000852448- Partition with a frozen group takes too long for multiple results.
+  [+] Started reviewing slides on sed vs pattern constraint (as per Kumar's request)
+ 
+Misc
+  [+] One day ETO on last Monday
+  [+] I looked into three failed regression runs. Work in progress.
+  [+] Season of reviews..
+  [+] Had various outlook crashes (both outlook and owa), blue screens earlier (and later) in the week. Fortunately, owa from int.synopsys.com worked (:-). Probably, have a bad SSD.. IT wants to order a new one.. Also, my cell phone (with the soft token on it) died today. Thankfully, IT gave me a loaner/emergency token that is valid for a day or two!
+ 
+Plan
+  [-] Look into regression failures
+  [-] Investigate issues on ms3 and new test-case (nVidia)
+ 
+
+* 2015 01 12
+nVidia
+  [+] Reviewed the new setup details on pcell xtreme and communicated to nVidia. Thanks to Prashant and Ming for the pointers.
+  [+] Updated weekly dashboard/slides and sent them out
+  [+] Did some runs on ms3 test-case. Observed various subcells with internal pitch rule violation, long-run times and DRC. Later did a new git clone on ms3. No longer getting fin_grid and internal pitch violations on the smaller sub-cell. Thanks to Siarhei for doing a fresh run on his side. Did a diff between the two check-outs. Could not find anything that would explain the difference in results. However, some of the larger sub-cells still report internal pitch violation. Need to reproduce on a small subcell and update the STAR.
+  [+] Filed two stars to track some of the issues in the first run:
+      STAR: 9000847419- nVidia ms3 - various kinds of design rule violations
+      STAR: 9000847418- nVidia ms3 - Helix reports "internal pitch rule violation"
+  [+] On ms3, one of the top sub-blocks is very large and has a large Pattern (with >1000 fingers). It cannot even be previewed due to std::exception. Will file a STAR
+  [+] Worked on the a sample test-case from nVidia on samsung 14. Debugged and fixed some env issues
+      1- pdk_v3 used in setupenv script but not available for sams14. Fixed by adding a soft link to existing pdk
+      2- Got ...Word too long error from helix_12012014/quickstart/tcshrc. This was due to polluted env. Solution is to unsetenv PYTHONPATH and OA_PLUGIN_PATH before sourcing setupenv..
+ 
+Altera
+  [+] Had discussions with Yakov on altera requests/issues. The good news is that we are in sync on the desired functionality for block-placement mode. Yakov also pointed out that using the CustomSpacing API will save us significant amount of implementation cost.
+  [+] Provided a response to Lyndon on his question re: top-level vs partition..
+  [+] Reviewed Altera's input on 10nm requirements..
+  [+] Had discussions with Oleg and Siarhei on new allowTouch option for fgPlace
+  [+] Updated Task: 6100015562 updated related STARs..
+ 
+Maxwell
+  [+] Reviewed the "Maxwell Auto Placer" fspec.
+ 
+Plan
+  [-] Season of reviews..
+  [-] File STARs on nVidia issues (preview pattern failure)
+  [-] Investigate the problems with HFL constraints on ms3 and provide a timeline to address them (nVidia)
+  [-] Update Fspec on modular grid/DR support based on latest discussion (Altera)
+  [-] Fspec on incr placement support (Intel DTS)
+  [-] Update fspec on symmetry based on review input
+  [-] Fspec on re-using topology from selected helix layout (Intel ICF)
+  [-] Document pattern & template enhancements (Intel ICF)
+
+* 2015 01 05
+nVidia
+
+  [+] During the last work week, most of my focus has been on nVidia. Prepared for the status meeting, ramped up on the chamber, latest data on ms2, ms3 and ms4. Read the documents provided by Ross. Did a few runs, and followed up on the action items.
+
+ 
+
+ 
+
+Handover
+
+  [+] Read many documents provided by Ross and had a number of meetings/discussions to go over various details.
+
+ 
+
+ 
+
+Altera
+
+  [+] Continued to work on the fspec. As part of it, I had some good discussions with Siarhei and Oleg and filed a new STAR: 9000841588- Enhance fgPlace() option useInitialPlacement to preserve boundary abutment.
+
+  [+] We had a good review meeting with Lyndon and clarified various points from his feedback on the recent proposal.
+
+  [+] Investigated fgPlace options.. useInitialPlacement and infiniteLayers
+
+  [+] Had a good 1:1 with Mirko to clarify various points from Altera's feedback
+
+Intel/Symmetry
+
+  [+] Created three test-cases based on the examples from the fspec for testing multi-axes, non-disjoint and hierarchical symmetry groups
+
+  [+] Reviewed and updated the latest dashboard on Intel ICF
+
+  [+] Had a 1:1 with Girish and discussed the recent request regarding  manual space control for devices on a row.
+
+Misc
+
+  [+] FTO: company shutdown and one sick-day
+
+
+Plan
+  [-] Investigate the problems with HFL constraints on ms3 and provide a timeline to address them (nVidia)
+  [-] Review the new setup details on pcell xtreme and communicate to nVidia.
+  [-] Fspec on modular grid/DR support (Altera)
+  [-] Update fspec on symmetry based on review input
+  [-] Fspec on incr placement support (Intel DTS)
+  [-] Fspec on re-using topology from selected helix layout (Intel ICF)
+  [-] Fspec on pattern & template enhancements (Intel ICF)
+
