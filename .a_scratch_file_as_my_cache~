@@ -614,7 +614,6 @@ Plan:
 - Meet with Shabbir to sync on SED requirements for Intel and more
 - Meet with Sumit/Prashant/Kumar/Varun..
 - Review STAR: 9001008939- CDPV:upper constraint group does not be placed with a compatible placement grid
-- Review STAR: 9001010253- CDPV:cell prboudary does not be placed on placement grid
 - Test with multiple tracks in a track group (all but the first are expected to be ignored).
 - Continue testing p-grids in tech
 - Review various fspecs including HFL req/fspec

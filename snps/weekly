@@ -17,7 +17,7 @@ Intel DTS:
   [-] (Altera) File STAR on santana support for prBoundary
   [-] Prepare test-cases on cell-boundary/blockage support
   [-] STARs from triage meeting
-* test.bash
+* test.bash shell
 test () {
     src_path=$1
     src_dirs=$2
