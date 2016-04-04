@@ -1,3 +1,123 @@
+* TODAY:
+* 1) WEEKLY
+* Jerry
+* OIL change
+* latest work:
+** tuesday/wednesday/thurday
+ICF meeting!
+
+Tried out lib search path mechanism to support two libs with sch/lay views in both. It worked :-). Provided detailed instructions to Laya..
+
+Patent revision, answers to questions..
+
+Final rename, I hope: STAR: 9001024513- CDPV: partial run misses a solution despite a large enough boundary
+
+First renamed to: 9001024513 RANKED E3|CDPV: partial run fails due to (boundary param + only one sub-component)|Maxwell
+Then renamed to: Renamed to: STAR: 9001024513- CDPV: partial run on Rows intent fails to create two rows
+Original name: 9001024513 NEEDS-INFO B3|CDPV:partical placement result is not complete when boudary is pre-existing|Maxwell
+
+TODO: Last bug request from Ming:  See: francium-9 (:-)
+TODO: Validate fix.. Fixed by Varun. STAR: 9001020265- CDPV: placement result is not expected when prbounday is pre-existing
+
+Had a discussion with Joe on supporting single component run with Partition with or without boundary constraint.
+
+Investigated, clarified requirements and re-assigned to Iulian. STAR: 9001024513- CDPV: partial run fails due to (boundary param + only one sub-component) STAR Number: 9001024513
+ 
+Title: CDPV:partical placement result is not complete when boudary is pre-existing
+
+Information: License 'Auto Placer' checked out. (LICENSE-003)
+Information: License 'Auto Placer' checked in. (LICENSE-004)
+Error: Placement error: Unable to compile constraints for cell 'matrix_bdry_2@test_prboudary': Internal error:
+Exception:  Partition constraint "__hx__implicit__top__partition__" must contain at least 2 entities.
+ (AMS_PLACEMENT-001)
+
+constraintGroups:
+  - Name: rows3
+    Type: Matrix
+    Param: {Pattern: [[M2.m1, M2.m2, M4.m2, M4.m1, M1.m2, M1.m1]], RowLimits: {Lower: 1, Upper: 2}, XFlip: [], YFlip: [], AbutmentType: auto2, AbutDiffWidth: true, HorizontalOverlapLayers: [], VerticalOverlapLayers: [], AlignmentInRows: center, AlignmentInColumns: center, AutoOrder: true, WrapStyle: leftToRight}
+    Contains: [M2.m1, M2.m2, M4.m2, M4.m1, M1.m2, M1.m1]
+
+  - Name: __hx__implicit__top__partition__
+    Type: Partition
+    Param: {PartialLayout: {PointArray: [0, 0, 0, 10110, 20868, 10110, 20868, 0]}}
+    Contains: [rows3]
+
+** monday:
+*** summary
+anaqua application finished and submitted.
+sparse build create_tclIndex problem. Came up with a workaround.
+Investigated and re-assigned: 9001024517 CDPV:: PNstack can not be created from 
+*** detail
+9001024517 NEW B3|CDPV:: PNstack can not be created from SED chain|Maxwell
+
+launch SED chain to create CMOS constraint in UCM, then B^# and A^#
+are listed in Placement of GUI. The console complains error
+message as below and ignore the PNstack in hxcs.
+Error: In cmos constraint 'cmos1' no instance name corresponding to
+index 'B^#' found in 'Instances' section. (AMS_PLACEMENT-034)
+
+case data: ~stars/testcases/9001024517/9001024517.tar.gz
+maxwell -replay pnstack_sed.log &
+* ss#
+* ICF userid/pw
+bulbasar, bizimBirBangPetimiz
+* snap origin/snap target
+Hi Mirko,
+
+We need to enhance the engine to compute the bbox of ucells as it is computed by the platform. bbox of a ucell should be computed OR'ing the bbox'es of its components. bbox of an instance is computed using an industry-wide convention/preference order. It is something like the following (please check with platform experts to get the exact spec):
+
+** - Use SnapBoundary, if any
+- Otherwise, use PRBoundary, if any
+- Otherwise, use bbox of instance,drawing LPP, if any
+- Otherwise, use oa.getBbox api
+
+This test-case clearly shows the problem: Top-level has only one component: standardCells1 (ucell1). I modified the pgrid intent on it to clearly show that the bbox of ucell1 is computed using all contents.
+
+** constraintGroups:
+  - Name: standardCells1
+    Type: StructuredPartition
+    Param: {TapCellName: openCellLibrary/TAPCELL_X1/layout, LeftEndCap: openCellLibrary/BOUNDARY_LEFTBWP/layout, RightEndCap: openCellLibrary/BOUNDARY_RIGHTBWP/layout, FillCellNames: [openCellLibrary/FILLCELL_X1/layout, openCellLibrary/FILLCELL_X2/layout, openCellLibrary/FILLCELL_X3/layout], AuxCellConnectivityMap: {VDD: VDD_TOP, VSS: VSS_TOP}, RowSpacing: {Value: 0}, TapCellDistance: {Value: 0}, UtilizationTarget: 0.8, TapCellDefaultPlacement: single, TapCellDefaultLocation: interior, AllowHorizontalFlip: true, FlipOdd: false, FlipEven: true, DoubleHeightCellAlignment: none, OddNumberRowsAllowed: false, RowHeight: 0.0}
+    Contains: [I0, I1, I2, I3, I4]
+
+  #
+  # End
+  #
+  #
+  # Placement Grid Definitions
+  #
+
+placementGridDefinitions:
+  - Name: inst1
+    XPitch: 0.2
+    YPitch: 0.25
+    XOffset: 0
+    YOffset: 0
+
+  - Name: placementGrid1
+    XPitch: 3
+    YPitch: 3
+    XOffset: 2
+    YOffset: 2
+
+  #
+  # End
+  #
+
+ucellGridDefinitions:
+  - Name: I0
+    PlacementGridName: inst1
+  - Name: I1
+    PlacementGridName: inst1
+  - Name: I2
+    PlacementGridName: inst1
+  - Name: I3
+    PlacementGridName: inst1
+  - Name: I4
+    PlacementGridName: inst1
+
+  - Name: standardCells1
+    PlacementGridName: placementGrid1
+
 * Review:
 
 Maxwell: PGrid, CMOS and Cluster constraints
@@ -38,6 +158,10 @@ STATE OF GEORGIA HOME STUDY PROGRAM DECLARATION OF INTENT FORM
 
 * Roof, Dan/Joshua
 (+ 685 235 185) ; $1105
+* turkce
+Yazı Karakterleriyle[değiştir | kaynağı değiştir]
+A B C Ç D E F G Ğ H I İ J K L M N O Ö P R S Ş T U Ü V Y Z
+a b c ç d e f g ğ h ı i j k l m n o ö p r s ş t u ü v y z
 * directory-spot:
 pinar isye bizimBirPetimiz
 https://www.directoryspot.net/schools/oakgroveelmentaryatlanta/
@@ -525,63 +649,248 @@ SNPS40
 Relative Placement Intent!
 prBoundary -> box -> W/H -> MCP partition... 
 * Older:
-** AI: - Test cases to Joe (Partition) and Kumar (StdPart)
-** AI: MING: Talk to Nishath re: trip to India
-** AI: - MIP berry regressions/build/communication
-** AI: - Check UCM fspec -- Email to Barry: Ming told me that p-grid support will be finished this week.. 
-** AI: - rev10 test-case + global track region in design
-** AI: - 1:1 Girish review PNStack bugs..
 * WEEKLY Call it: "weekly report" and kime yollayacagimi biliyom :-)
-*** 1:1 on Tuesday
-- Question to Mayank on A-B grid fill-cells
-- Copy Result
-- PNStack -> CMOS -> Maxwell -> MIP
+** 2016.04.04
+*** Plan: Plan: See top on "latest work"
+Plan: 
+- ICF new customer with two libs..
+- Slides on proposal.. p-grid phase 2. Decorators..
++ Investigate various STARs on MCP 
+- Respond to lawyer's feedback on the patent write-up
++ Anaqua application for the patent
+- Required courses
+- Slides for off-site team meeting on placement grids and RowStack
+- 924834 UCM STAR on figGroup origin
+- Decorator handling in platform
+- Address pgrid promotion across hierarchy
+- Auto pgrid definition/decoration
+- Origin/snapTarget handling
+- Investigate how to productize auto-grouping (HFL--) functionality
+- Row-stack for 17.03
+SED chain.
+**** todo: move to outlook 1:1 agenda..
+1:1 on Tue:
+Discuss with Fred and Jon on 
+(1) p-grid promotion across cell
+(2) automation: define and decorator
+
+figGroup input vs output (lePG) origin along with snapTarget promote inst origin or snapTarget if exists
+
+rowStack -> support from SED.. talk with Shabbir 17.03
+
+1:1 with Mirko on guard-ring vs placement grid
+924834 UCM STAR on figGroup origin
+
+1:1 on Tue (last):
+- copy back during partial run (Place selected)
+- figGroup origin is always at 0,0. Platform puts it on ll corner of bbox
+- move origin (without moving fig-group) ile::addToFigGroup removeFromFigGroup
+
+
+pgrid phase 2: 
+- snapTarget
+- origin
+- figGroup
+- decorator
+
+FOR 17.03! row-stack support: SED+Placer. With Shabbir? Bill? 
+Look at SED first.. SED will have pattern generation in 16.06.
+** 2016.03.28
+*** email
+Summary:
+[+] Mostly busy with Intel ICF support and completing the long form write up for the first patent application. 
+
+Intel:
+[+] ICF support. There is a new user in Oregon (MIP team) ramping up on Helix and he has various issues. Had a few meetings with him. The workaround for oaVia binding issue has other issues. Looking into it. Got suspended due to Holi last week. 
+[+] Had some discussions and questions on odd/even grids. On GNAC (antenna protection diode) instances to protect some gates. Also on how to handle sub-blocks without layout (but with multiple occurrences) from StructuredPartition.. Gave some suggestions.. 
+
+STARs:
+[+] Validated the fix for STAR: 9001019953- Crash in DN (sdl_browser)
+[+] Updates and discussion (see below) on STAR: 9001019753 CDPV: symmetric decorator is ignored in partition constraint
+[+] Conversation on STAR: 9000957761- PRBoundary and Blockage shapes in reference LCV to be honored.
+[+] After my input, Xiaodan closed STAR: 9001020702- CDPV:: ref10 PNstack gates do not align
+
+Symmetry decorators:
+[+] Answered Ellen's question to clarify symmetry usage. Identified a few symmetry decorator exceptions to handle. Otherwise harder to understand and use. Informed Prashant.
+
+PGrid:
+[+] Had some conversations with Jon and Barry on decorators and fig-group origin. Need to follow up for a proposal.
+[+] Completed the long-form (long!) write up for the patent application. Waiting for the lawyer's review.
+
+Misc.:
+[+] Fixed my helix standalone setup. My builds have been failing for a while. 
+
+Plan: 
+- Anaqua application for the patent
+- Investigate various STARs on MCP 
+- Required courses
+- Slides for off-site team meeting on placement grids and RowStack
+- 924834 UCM STAR on figGroup origin
+- Decorator handling in platform
+- Address pgrid promotion across hierarchy
+- Auto pgrid definition/decoration
+- Origin/snapTarget handling
+- Investigate how to productize auto-grouping (HFL--) functionality
+- Row-stack for 17.03
+
+
+Regards,
+Bulent
+*** draft
+Summary:
+[+] Mostly busy with Intel ICF support and completing the long form write up for the first patent application. 
+
+Intel:
+[+] ICF support. There is a new user in Oregon (MIP team) ramping up on Helix and he has various issues. Had a few meetings with him. The workaround for oaVia binding issue has other issues. Looking into it. Got suspended due to Holi last week. 
+[+] Had some discussions and questions on odd/even grids. On GNAC (antenna protection diode) instances to protect some gates. Also on how to handle sub-blocks without layout (but with multiple occurrences) from StandardPartition.. Gave some suggestions.. 
+
+STARs:
+[+] Validated the fix for STAR: 9001019953- Crash in DN (sdl_browser)
+[+] After my input, Xiaodan closed STAR: 9001020702- CDPV:: ref10 PNstack gates do not align
+
+Symmetry decorators:
+[+] Answered Ellen's question to clarify symmetry usage. Identified a few symmetry decorator exceptions to handle. Otherwise harder to understand and use. Informed Prashant.
+
+PGrid:
+[+] Had some conversations with Jon and Barry on decorators and fig-group origin. Need to follow up for a proposal.
+[+] Completed the long-form (long!) write up for the patent application. Waiting for the lawyer's review.
+
+Misc.:
+[+] Fixed my helix standalone setup. My builds have been failing for a while. 
+
+Plan: 
+- Investigate various STARs on MCP 
+- Required courses
+- Slides for off-site team meeting on placement grids and RowStack
+- 924834 UCM STAR on figGroup origin
+- Decorator handling in platform
+- Address pgrid promotion across hierarchy
+- Auto pgrid definition/decoration
+- Origin/snapTarget handling
+- Investigate how to productize auto-grouping (HFL--) functionality
+- rowStack for 17.03
+
+** 2016.03.21
+This weekly covers the last two weeks (March 8-18). 
+
+Summary:
+    [+] Intel ICF support
+    [+] PGrid testing & phase 2 
+    [+] STARs
+    [+] Patent write-up & Misc
+
+Intel:
++ A new user (in Oregon) has an issue with AlignBoundaryLayersToAxes and BoundaryTile abutment.. A work-around exists. Will work further once Indushekhar confirms my RUNDA access to base-layers in 1275.
++ Investigated oaVia issue reported by Mayank. 
++ Completed Intel Foundry Services customer training
++ Discussion re: 1275 base-layer support
+
+STARs:
++ STAR: 9001020265- CDPV: placement result is not expected when prbounday is pre-existing
+  Investigated three different runs. Two issues: Snap Boundary is not handled. MCP fails to find solution that fits in PRBoundary. Assigned to Varun.
++ After getting more information, packaged updated data and assigned to Prashant: Renamed to: STAR: 9001019753- CDPV: cluster containing itself in its child symmetry group and other exceptions
++ Investigated and updated with explanation on how to use CMOS intent: STAR: 9001020702- CDPV:: ref10 PNstack gates do not align
++ Investigated and updated with comments on how to use symmetry decorators: STAR: 9001019753- CDPV: symmetric decorator is ignored in partition constraint
++ Investigated and updated with comments: STAR: 9001014642- CDPV:: GuardRing can not be directly added to instances level
++ Validated fix by Prashant for STAR: 9001015496- Placer fails with duplicate constraint name error
++ Encountered a crash in sdl/design navigator. Reproduced. Packaged data/setup/env/tcl. Created STAR: 9001019953- Crash in DN (sdl_browser)
++ Verified the fix and closed: 9001003212 Crash in UCM GUI when applying changes -- after renaming a placement grid
++ Validated fix for: STAR: 9001013152- "Place selected" cmd fails when selected objs are in a shared p-grid decorator
+
+PGrid:
++ Discussion w/ Mirko/Ming on p-grid support in singleton decorators. Following up with Jon and Barry.
++ Had some discussions with Yakov before his leave on the need to promote p-grids. Clarified requirements for phase 2.
++ Helped answer Ellen's questions on placement-grid creation code, track region api commands, instance/drawing layer/purpose.
++ Wrote code to move fig-group origin to lower-left corner of the group. Works well.
++ Studied and played with tcl commands for interacting with fig-groups..
++ Provided some guidelines to Ellen on how to test the pgrid support.
+
+Misc:
++ Write up for patent long form. Need to give it a couple more days this week.
++ Compiled MCP tasks and STARs from standalone 
++ Discussion w/ Varun on handling blockage objs.
++ Tried out ref10 latest version.
++ Watched Siarhei's demo on guard ring
++ Did a sparse build of gcp/pycell. Hit an issue with platform.so. Worked around by building the platform module. Thanks to Oleg for help! Also did a runBuild and got some errors despite using ref as is and no code changes. 
+
+Plan:
+- Complete the patent write up
+- 924834 UCM STAR on figGroup origin
+- Decorator handling in platform
+- Address pgrid promotion across hierarchy
+- Auto pgrid definition/decoration
+- Origin/snapTarget handling
+- Investigate how to productize auto-grouping (HFL--) functionality
+- rowStack for 17.03
+
+** 2016.03.07
+
+STARs:
++ Investigated issue with cluster intent creating duplicate results. MCP related issue. Asked Ming to assign resources. [9000993933 CDPV:: placer creates duplicate results for cluster intent (MCP)]
++ During reviewing a recent fix, encountered an issue with UCM->Placer translation. Filed a STAR: [9001015496- Placer fails with duplicate constraint name error]
+
+PGrid:
++ Started to investigate how to support decorator intents and the "origin" question.
++ Filed a new STAR for an issue I have encountered during demo to Intel: [9001013152- "Place selected" cmd fails when selected objs are in a shared p-grid decorator]. Thanks to Glen for the quick fix!
++ Reviewed and retargeted to SP1. This is the "origin" problem and will be addressed along with snapTarget support in phase2 [9001010253- CDPV: prboundary is not placed on placement grid]
++ Reviewed and re-opened (for SP1). This is the "decorator" support problem. [9001010332 CDPV: constraint group with enclose decorator is placed out of placement grid]
+
++ Looked at two test-cases, but they are missing data. Informed Ellen: [9001008939- CDPV:upper constraint group does not be placed with a compatible placement grid] [9001008931- CDPV:manual group is not placed with placement grid setting]
+
+Misc.:
++ Had some discussions with Yakov and Prashant about the change of the implementation for the Matrix constraint in GCP
++ Copied over test-case data from Girish. 
++ Ops, triage, team and MCP-sync meetings
++ Participated in Engineering Week at my daughter's school. 
+
 *** Plan:
-- Meet with Girish to sync on Helix support items
-- Meet with Intel ICF and Intel MIP teams
-- Meet with Anoop to sync on reqs for 10nm and beyond 
-- Meet with Shabbir to sync on SED requirements for Intel and more
-- Meet with Sumit/Prashant/Kumar/Varun..
-- Review STAR: 9001008939- CDPV:upper constraint group does not be placed with a compatible placement grid
+- Investigate the "origin" issue for p-grid  (especially for figGroups)
+- Investigate the "decorator" issue for p-grids
+- Patent content/write-up (due March 16th)
+- Trip reservation for team meeting in MV
+- Review setup/test-case data in Berry
+- Required and overdue courses from Synopsys University
 - Test with multiple tracks in a track group (all but the first are expected to be ignored).
 - Review various fspecs including HFL req/fspec
-- Continue responding to performance feedback requests
-- Patent content/write-up (due March 16th)
 - Requirements/proposal for snapTarget support in 16.06sp1, estimate effort, identify affected sub-modules.
 - Review Templates/Relative placement in UCM
-- Required and overdue course from Synopsys University
 - Update test-plan for p-grid when/if needed.
 - Report issues on track region functionality
 - Review GCP fspec, add p-grid related input
 
-*** crash:
-              /c Frame 2. OpenAccess_4::oaObject::getDatabase() const
-              /c Frame 3. itk::trackRegionDef::getGroups(OpenAccess_4::oaAppObject const&, std::list<OpenAccess_4::oaAppObject*, std::allocator<OpenAccess_4::oaAppObject*> >&)
-              /c Frame 4. ams_placement::hx_placement_grid::populate_grp_region_offsets(OpenAccess_4::oaDesign const*)
-              /c Frame 5. ams_placement::hx_constraint_group::create_pgrid_constraints(std::list<snps_boost_1_59_0::shared_ptr<design_rule_service::intent::placement_grid>, std::allocator<snps_boost_1_59_0::shared_ptr<design_rule_service::intent::placement_grid> > >&)
-              /c Frame 6. ams_placement::hx_constraint_group::create_placement_constraints()
-              /c Frame 7. ams_placement::manager::create_hx_constraints(std::string const&, std::string const&, std::string const&)
-              /c Frame 8. ams_placement::manager::place(ams_placement::placement_options const&)
-              /c Frame 9. lp_commands::auto_place::execute_auto_place()
-              /c Frame 10. lp_commands::auto_place::execute(command::option::values const&)
-              /c Frame 11. command::procedure::execute_and_catch(command::option::values const&)
-              /c Frame 12. command::procedure::execute(int, Tcl_Obj* const*)
-              /c Frame 13. command::manager::command_callback(void*, Tcl_Interp*, int, Tcl_Obj* const*)
-              /c Frame 14. cdesigner:TclNRRunCallbacks
-              /c Frame 15. /remote/sweifs/PE/products/cd/main/clientstore/cd_main_us01_build1/object_root/bin-linux64/cdesigner ::0x0xb5e6ded
-              /c Frame 16. cdesigner:Tcl_EvalEx
-              /c Frame 17. console::console::execute(std::string const&, console::console::logging_mode)
-              /c Frame 18. console::console::execute_command_and_log(std::string const&, console::console::command_type, console::console::logging_mode)
-              /c Frame 19. window_commands::tcl_action::execute(window::top_level*, window::assistant*, window::central_widget*)
-              /c Frame 20. window::command_action::execute(gui_component::state*, gui_component::dock_widget*)
-              /c Frame 21. gui_component::command_action::trigger(gui_component::state*, gui_component::dock_widget*, bool)
-              /c Frame 22. gui_component::command_action::qt_metacall(QMetaObject::Call, int, void**)
-              /c Frame 23. QMetaObject::activate(QObject*, QMetaObject const*, int, void**)
-              /c Frame 24. QAction::triggered(bool)
-              /c Frame 25. QAction::activate(QAction::ActionEvent)
-              /c Frame 26. /remote/sweifs/PE/products/cd/main/clientstore/cd_main_us01_build1/qt/linux64/shared/release/lib/libQtGui.so.4 ::0x0x2
+** 2016.02.29
+Intel ICF/MIP:
++ Met Indushekhar and his team on Tuesday. As per their request, prepared for and then presented a demo of various new features of the placer in Maxwell. This had a wider audience including designers from MIP and AIP (analog ip) teams. Overall feedback is very positive.
 
-** 2016.02.15
+Visit to Bengaluru:
++ Had various meetings with Girish to cover ICF status, ICF flow, ICF setup files, custom contact ring, row-stack and auto-grouping.
++ Had 1:1 meetings with Amrish and Kashyap. 
++ Had meetings with Shabbir and his team. We discussed ICF usage, requirements and SED status.
++ Had 1:1 with Anoop and discussed ICF history/status.
+
+Visit to Noida:
++ Presented ICF update to Sumit, Prashant and Kumar.
++ 1:1s with all members of Sumit's team.
++ Reviewed pin placer with Kumar and Amrish. Saw a demo and provided some feedback.
++ Had discussions to address various questions Varun and Kumar had on MCP.
+
+Misc:
++ Wrote more responses to performance feedback requests
+
+Plan:
+- Review various STARs on pgrid
+- Required and overdue courses from Synopsys University
+- Trip reservation for team meeting in MV
+- Test with multiple tracks in a track group (all but the first are expected to be ignored).
+- Review various fspecs including HFL req/fspec
+- Patent content/write-up (due March 16th)
+- Requirements/proposal for snapTarget support in 16.06sp1, estimate effort, identify affected sub-modules.
+- Review Templates/Relative placement in UCM
+- Update test-plan for p-grid when/if needed.
+- Report issues on track region functionality
+- Review GCP fspec, add p-grid related input
+
+** 2016.02.21
 PGrid:
 + Did testing of p-grids in tech. Got some crashes. Also observed by Kumar. Reported to Prashant.
 + Did some testing with p-grid on top-design. Hit the same crash as above.

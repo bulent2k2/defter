@@ -1,0 +1,206 @@
+* Anacapa
+
+** SUBMISSION
+	
+Record ID	81092727	Last Modified	28 Mar 2016 15:08:59
+Invention Reference		Invention Short Title	Method and Apparatus for Device, Cell and Block Placement Using Placement Grids and Regions
+View	Review Status and Patent Application Details	Invention Status	Submitted
+
+Record Submitted:
+Invention Submitted: Congratulations! You have successfully submitted this invention disclosure. Confirmation email has been sent to all named inventors. The IP department has also been notified.
+
+ 
+Record Id:81092727
+Short Title:Method and Apparatus for Device, Cell and Block Placement Using Placement Grids and Regions
+ 
+Please click here to return to My Requests
+ 
+ 	 
+** STEP1
+
+Record ID	81092727	Last Modified	28 Mar 2016 15:03:57
+Invention Reference		Invention Short Title	Method and Apparatus for Device, Cell and Block Placement Using Placement Grids and Regions
+View	Review Status and Patent Application Details	Invention Status	Draft
+
+Step 1 - Disclosure	
+Instructions	
+ABOUT THIS FORM
+
+Use this form to describe an idea for submission to the Patent Filter Committee for review and potential patenting. In addition to this form, there are also buttons on the upper left side of the screen for Steps 2-4 to attach related Documents, Related Art and information about the inventors and their managers.
+
+SAVE BEFORE LEAVING A STEP
+
+You can complete Steps 1-4 in any order. However, you must click on the Save button before leaving a Step, or you will lose your data. You don't have to complete everything at one time. You can login again later and continue from where you left off.
+
+SUBMIT YOUR COMPLETED DRAFT
+
+After you complete all Steps (including getting your manager's approval), go to "Step 4 - Approvals" and press the "Submit" button. Your IDF will be submitted to the SNPS patent department.
+
+WHAT HAPPENS AFTER SUBMISSION
+
+After you submit your IDF:
+1. The SNPS patent department may contact you with questions or suggestions for your IDF. They will also schedule your IDF for presentation at the next monthly meeting of the Patent Filter Committee. The presentation is 10 min, followed by 10 min for questions.
+2. The PFC will evaluate your idea and make a decision on whether to file a patent application.
+3. The patent department will contact you regarding the PFC's decision.
+
+Invention	
+ABOUT YOUR INVENTION
+
+This section summarizes the highlights of your invention. Please try to identify and explain the key features of the invention. Do not get sidetracked by secondary features.
+
+1. 1 - Title
+Method and Apparatus for Device, Cell and Block Placement Using Placement Grids and Regions
+2. 2 - Problem
+This invention addresses the problem of hierarchical placement of components for custom circuits in presence of complex and non-uniform track patterns and regions.
+3. 3 - My Solution
+Our invention solves the problem by automatically deriving placement grids from track patterns and then automatically applying the correct grid to each component in the design and constraint hierarchies. 
+
+Our invention also provides rich APIs/commands for the users to refine and customize placement grid definitions and assignments.
+4. 4 - The Main Idea
+The main ideas of this solution are:
+1) Auto placer and the layout editor to support multiple placement grids concurrently.
+2) Automatically defining placement grids based on track patterns in the design
+3) Automatically assigning placement grids to components to be placed
+5. 5 - Advantages
+The end user is liberated from having to manually grid complex custom placements.
+Number of routing iterations are reduced thanks to eliminating pins mis-aligned with track patterns. 
+Placement grid definitions are automated and saves significant setup time.
+Placement grid applications (decorators) are automated.
+Distinct components in a design will automatically snap to distinct placement grids as necessary.
+Manual editing also benefits from this automated snapping during commands like move, instantiate, etc..
+
+6. 6 - Other Solutions
+State-of-the-art does not automate placement grid definitions. There are no existing approaches that automate auto-decoration. State-of-the-art layout editors support only one placement grid per design.
+7. 7 - Keywords
+Placement
+Auto placers
+Placement grids
+Track patterns
+Layout editors
+Device-level layout
+Cell layout
+Block layout
+8. 8 - List of Related Documents
+Method and Apparatus for Device, Cell and Block Placement Using Placement Grids and Regions
+March 2016
+Inventors: Bulent Basaran, Jon Bendicksen and Fred Sendig.
+SNPS Ref.: 2869US01
+FW Ref.: 22524-33237
+Patent Value	
+ABOUT PATENT VALUE
+
+Valuable product features are not always valuable patents. This section summarizes the main criteria used by the PFC to evaluate the potential value of a patent.
+
+9. 9 - Innovation
+5=New fundamental technology. Revolutionary idea.
+10. 10A - Use by SNPS
+5=Yes. Key feature for product.
+11. 10B - Use by SNPS (cont.)
+2.3 - Custom Designer, Laker	  
+12. 10C - Use by SNPS (cont.)
+2016.06
+13. 11A - Use by others
+5=Yes. All competing products face this problem.
+14. 11B - Use by others (cont.)
+4=Probably. There are only a few good solutions.
+15. 11C - Standards Use
+2.27.4 - Si2 - OAC (Open Access Coalition)	  
+16. 12 - Visiblity
+4=Easy. Can tell by using the product.
+17. 13 - Comments
+Customers at Altera and Intel have asked for this feature.
+Dates	
+ABOUT DEADLINES
+
+Patent applications must be filed before certain deadlines. This section will help identify those deadlines.
+
+18. 14A - External Disclosure
+NO
+19. 14B - External Disclosure (cont.)
+16.06 documentation
+20. 15A - Product Release
+YES
+21. 15B - Product Release (cont.)
+16.06
+22. 16A - Public Use
+NO
+23. 16B - Public Use (cont.)
+16.06 release demos
+Additional Information	
+24. 17 - Technology Category
+1.9 - A30. Custom Design, AMS	  	1.3 - A14. Place & Route	  
+5.18 - E99. General Applicability	  	5.13 - E70. FinFETs, Corrugated	  
+5.2 - E19. Analog, mixed signal	  
+25. 18 - Business Unit
+2.1 - DG (Design Group)	  
+Approvals	
+26. 19 - Manager Approval
+YES
+27. 20 - Comments and Feedback
+
+* Title: Method for Device, Cell and Block Placement Using Placement Grids and Regions
+                Inventors: Bulent Basaran and Fred Sendig
+                SNPS Ref.: 2869US01
+                FW Ref.: 22524-33237
+
+* 1- Describe the technology focus or area that the invention relates to
+Traditional layout editors employ a simple one-placement-grid per design methodology. This is no longer sufficient due to the large increase in Design Rule complexity in advanced semiconductor manufacturing nodes, e.g., 14nm or below. This challenge has forced chip designers to adopt a "track-pattern" based routing approach to interconnect devices, cells and blocks in a chip.
+
+With this invention, we provide a method to support multiple placement grids in layout editors and do that seamlessly. This liberates the mask designer from having to spend an inordinate amount of time worrying about aligning the placement of objects precisely to complex grids while crafting the layout. 
+
+The invention focuses on physical design (layout) that is a key task and a bottleneck in the design of integrated circuits. A typical SoC, System on a Chip, comprises mainly two kinds of blocks: (a) standard-cell based digital circuits, (b) custom (analog or digital) circuits. The layout of the former can be automated using auto-place-and-route (APR) tools. The latter is not amenable to APR tools and require expertise of concerted efforts of many layout design craftsmen (also known as mask designers). 
+
+During manual crafting of layout for custom circuits, the first challenge is placement of "blocks", "cells" and "devices," the focus of this invention. Mask designers use state-of-the-art tools known as "layout editors" to achieve their tasks. Such tools attempt to provide more and more sophisticated methods to help ease the burden due to the complex "rules" the mask designers need to ensure their layout complies with. These rules, known as Design Rule Checks (DRCs), get more and more numerous and complex with each advance in chip manufacturing technology. 
+
+To help address this challenge, chip designers have long attempted to simplify how "nets" are routed. Each net is simply the connection between a set of input/output (interface) pins on placement objects. Instead of free form wiring topologies on various metalization layers (metal1, metal2, ...), they impose "track patterns" for each metal layer. 
+
+Given that wiring has to follow pre-defined tracks, the hierarchical placement of a chip becomes severly constrained. A small block may require only metal1 and metal2 to be routed completely, but a bigger one may also need metal3, and an even bigger one may need metal4 and so on. When such non-uniform blocks need to be placed in a design, the mask designer can no longer rely on one grid to do the layout. If the grid is set to be coarse (to accommodate metal4, e.g.), much area would be wasted due to whitespace among smaller blocks. If it is set to be fine enough to accommodate metal1, she would have to inadvertently entertain many placement configurations that would be illegal and would make the placement unroutable for higher metal. 
+
+Using our invention, the mask designer is completely librated from this concern. Each placement object is automatically decorated with an appropriate placement grid and both manual layout commands like Move, Instantiate and automated placement engines honor its grid, i.e., the block, cell or device will automatically align and snap to the nearest, or optimal grid line, or grid point.
+* 2- Provide a simplified, non-technical description of features, functions and benefits of the invention
+Our invention is used to create a placement grid definition automatically for each track pattern available for the metalization of the design. There are many track patterns for each layer, and ten metal layers or more available for routing. As such, this automation saves considerable time during the setup of the technology input to the layout tools.
+
+Based on the schematic design and a rough area estimate, each circuit (cell or block) is decorated automatically with an appropriate placement grid. For smaller objects like devices and cells, the grid is finer. For larger blocks, it is coarser. 
+
+When layout for lower level blocks starts to become available, either with pure placement or with some pins or even with some partial or full routing, the placement grid decorators can be refined using the new information. E.g., if a sub-component already uses a coarser grid, then, the parent design is promoted with the coarser grid.
+
+Our invention also allows the user to overwrite the grid assignment for full control, design exploration and what-if studies.
+
+Both the layout editor and the placement engine help accelerate the layout activity by honoring all the grids applicable to each design automatically. 
+
+The resulting placement will be both the most compact possible and also much more likely to be routable with a reasonable effort and minimal cost of change.
+* 3- Provide the details on how the invention achieves the features, functions and benefits
+
+There is a new gang in the “layout” town: Track regions, comprised of tiles, consisting of a collection of groups of tiles containing individual tracks that are typed and colored, all on the same layer and orientation (H or V)… Maxwell Custom Design Platform [Doc 2005] has recently been undergoing major construction to adopt this new gang stored in either a design or a technology database [Track Regions Fspec by Jon], [OA reference guide].
+
+The driving force behind these major add-ons is a tectonic shift that has been slowly brewing the last few decades at dominant chip design and/or manufacturing companies like Intel, AMD, Apple, and more recently TSMC and Samsung, etc… Designing and manufacturing a state of the art chip, e.g., a cutting edge microprocessor, FPGA, graphics or app processor, pushing the boundaries of the die size have become increasingly more complex. Many levels of hierarchy in not only the schematic but also the layout views, combined with the exponential increase in the many pages of red books and DRMs describing the ever more complex rules of the layout game (so that one can hope to yield at least one functional die and ramp it up fast) have been pushing design and technology teams towards a track-pattern based design. 
+
+The analogy of cars preferring to go on faster and safer highways/roads, as opposed to the free outback country is applicable here: wires prefer to go on pre-defined tracks. This helps address many problems DFM, reliability, etc. 
+
+For layout specifically, power grid design dictates how much resource per layer is to be reserved for power rails (PWR and GND), clock/scan like special signals grab another portion. What is left is better planned carefully to be able to route all the remaining interconnect. It is not kosher, and wastes area, if I have three signal tracks to go through a channel, but after PWR/GND/CLK/SCAN/etc., there is really room for three and a half! That won’t do. Of course, the other scenario (fewer than available tracks) is an old, but tried and true problem currently addressed through congestion analyses and iterations...
+
+Similarly from the technology perspective, managing and ramping yield have been increasingly costly – a typical new state-of-the-art fab costs roughly 10 Billion dollars [See one of the annual 10K reports by Intel]. Semiconductor technologists with deep foresight have been tinkering with ways to reduce the rule complexity and “track patterns” came to help.
+
+This trend seems to be here to stay. Many customers of ours have been feeding us various forms of requirements, STARs, wish-list items where it became clear that unless tracks are handled as first class objects in their full glory, the ad-hoc solutions will make our tools increasingly impracticable. Alternatively, the first platform with native support for tracks will have the upper hand in the market place.
+
+E.g., Intel ICF and Altera have requested support for placement grids, device templates, device tile configurations, aligning fig-groups to origin, routing aware placement, track-aware connectivity modeling, etc. Some of these are already old and well known problems (e.g., how to improve placement so that it can be routable, manually or otherwise, without wasting too much area). 
+
+But, others are clearly due to the tectonic shift we have mentioned above.
+
+Maxwell’s router GCR is already track aware. However, unless the placement of objects (devices, cells, blocks) and pins on them are not aware of these tracks, then, routing will only fail with an error and it will be very costly to try to tweak the placement so that the router can then connect things up.
+
+Our method and apparatus span a large range of layout flavors and scales: 
+1)	Device layout: 2 to hundreds of primitive devices/pcells. 
+2)	Cell layout: up to thousands of standard library cells, and 
+3)	Block layout: combining inputs from the previous two flavors.
+4)      Chip layout: combining inputs from the previous two flavors and including early floor-planning across multiple track regions. 
+
+In the rest of this document, we will first define and illustrate the terms we use, like tracks, tiles, regions, devices, cells and block. Then, we describe all major modules that make up this invention:
+a) multiple (uniform) placement grids
+   i ) placement grids for block and cell placement 
+   ii) placement grids for device placement for CMOS and matched device circuits 
+b) non-uniform placement grids for device placement
+   i) tile templates for devices using a generalized form of row-based placement
+c) placement and floor-planning of blocks across multiple track regions
+
+* The end
