@@ -1,63 +1,1256 @@
-* TODAY:
-* 1) WEEKLY
-* Jerry
-* OIL change
-* latest work:
-** tuesday/wednesday/thurday
-ICF meeting!
+* solvnet user: bulent2k2 pw: hadi!1Bakalim email: bbasaran@synopsys.com
+* p-grid work in SP1
 
-Tried out lib search path mechanism to support two libs with sch/lay views in both. It worked :-). Provided detailed instructions to Laya..
+* adsl alacati ttnet tp-link admin W5dGvR5csJKm, linksys evren wifi admin 7MuzC0RSoSji ssid pw: tOnhhsVPZE53
 
-Patent revision, answers to questions..
+ttnet adsl-kullanici: basaran394105117@ttnet
+ttnet adsl-sifre: eVLYb828
 
-Final rename, I hope: STAR: 9001024513- CDPV: partial run misses a solution despite a large enough boundary
+netis adsl modem: guest: last pass generated password: kOFc8xOiFWIk
+* Girish issues:
+- abutment. End of week
 
-First renamed to: 9001024513 RANKED E3|CDPV: partial run fails due to (boundary param + only one sub-component)|Maxwell
-Then renamed to: Renamed to: STAR: 9001024513- CDPV: partial run on Rows intent fails to create two rows
-Original name: 9001024513 NEEDS-INFO B3|CDPV:partical placement result is not complete when boudary is pre-existing|Maxwell
+1 chain:
+mn3.0 mn3.1 mn2 mn0.0 mn1 mn0.1
 
-TODO: Last bug request from Ming:  See: francium-9 (:-)
-TODO: Validate fix.. Fixed by Varun. STAR: 9001020265- CDPV: placement result is not expected when prbounday is pre-existing
+mn3.0 has 2 fingers. So do mn3.1, mn2 and mn1. 
+mn0.0 and mn0.1 each has 1 finger.
+- std-part with boundary association - 4 rows.
+- CAE for ICF/Altera
 
-Had a discussion with Joe on supporting single component run with Partition with or without boundary constraint.
+  +-----ntop-----+
+  || m0         || m1
+  + nleft        + nright
+  |             ||
+  |m2           || m3
+  +----nbottom---+
 
-Investigated, clarified requirements and re-assigned to Iulian. STAR: 9001024513- CDPV: partial run fails due to (boundary param + only one sub-component) STAR Number: 9001024513
+Here is my understanding:
+
+  +-----ntop-----+
+  || m0         || m1
+  + nleft        + nright
+  |             ||
+  |m2           || m3
+  +----nbottom---+
+
+We have four nets in a loop: ntop, nright, nbottom, nleft.
+m0 and m1 each have 2 fingers.
+m2 has a stack of two fingers in series
+m3 has a stack of two series of two fingers
+
+* pasaport passport
+Basvuru Bilgileriniz
+Onay (Referans) Kodu	:	 9223
+Pasaport Türü	:	 Umuma Mahsus (Bordo)
+Basvuru Merkezi	:	 Çeşme İlçe Emn.Md.
+Kaç Kişi için Başvuru Yapılacağı	:	 2
+T.C. Kimlik Numaranız	:	 10640901674
+Adınız	:	 KAYRA SELİN
+Soyadınız	:	 BAŞARAN
+Doğum Tarihiniz	:	 26.07.2006
+Telefon Numaranız :	:	 5395015433
+Ek Başvurular	:	
+16250715120	BARAY ARMAN	BAŞARAN	24.01.2011
+e-Posta Adresiniz	:	 bulent2k2@gmail.com
+Randevu Bilgileriniz
+Randevu Tarihi	:	 28.07.2016
+Randevu Saati	:	 10:30
+Rezervasyon Türü	:	 WEB
+  Submit
+Randevu Al
+Başvuru Yerleri
+Başvuru Belgeleri
+
+Acil Pasaport Hattımıza 09:00/18:00 Saatleri Arasında +90 312 462 91 46 ve 47 Nolu Telefonlardan Ulaşabilirsiniz.
+* Kumar
+  We have min and max width (based on user input). Let's denote them as: w*, W*
+  But, we pick w > w* and W < W* to correct for inaccurate computation of TRA.
+  So, we have w, wa, wb, W
+      where w1 and w2 correspond to two preferred aspect ratios, 1/1 and W/H
+  This gives us three intervals: 
+    ia = w1 - w
+    ib = w2 - w1
+    ic = W - w2
+  Let's order them as i1 (longest), i2, and i3 (shortest).
+  Also, let's denote the mid-points of each of these intervals as w1, w2, w3
+  Case N (number of solutions user wants to see) of
+    0  -> Nothing to do :-)
+    1  -> Use (w1 + w2) / 2
+    2  -> Use w1, w2. Denote this as S(2), 
+    3  -> Use S(2) UNION {w1}
+    4  -> Use S(2) UNION S{w, W}
+    5  -> Use S(4) UNION {w1}
+    6  -> Use S(5) UNION {w2}
+    7  -> Use S(5) UNION {w3}
+    8  -> Use S(7) but replace w1 with w1a and w1b
+          where w1a and w1b divide i1 into three equal segments
+    9  -> Use S(8) but replace w2 with w2a and w2b
+    10 -> Use S(9) but replace w3 with w3a and w3b
+    11 or more, just subdivide the darn [w, W] interval to N-1 parts! :-)
+* mcp-sync 28.6.2016
+attendees: all but Varun (upset stomach)
+
+agenda:
+
+Joe: writing code.., Kumar's problem.., 
+Kumar: share update.. Implementation detail: "aspect ratio of 1 to attract solutions", but also "the target aspect ratio (input H/W)" Also max of min has a bug and is turned off at the moment. AI: Provide results for 36 solutions, and DemoPLL. If needed, collect InstMatch groups into new cells to cache their solutions.. (Dominates runtime).
+Sumit: no
+Varun: sick 
+Relative/Biying
+Review slides..
+Brian's work on -> No time left. Next week.
+
+Biying: (Placement>Fix Topology)
+1- Layout -> Hierarchy of Rows and Columns -> MCP/top-implicit-partition
+2- Layout -> Hier of {Rows/Column/Clusters) -> 
+3- Layout -> Hier of (Rows/Column/Clusters/Relatives)
+
+* 9001054876 CDPV:: fixed manual oaFigGroup location is flexible
+
+Please review the following description with editble mode or refer to FG_4_hierarchy.png.
+This manual oaFigGroup FG_4 includes hierarical FigGroup as below:
+
+                                                        FG_4    top placemnet status=fixed
+                                                             |
+                             --------------------------------------------------------------------------------------------------------
+                             |                                                                       |                              |
+                  column2(fixed)                                                          instMatching3(fixed)                        GuardRing1(fixed)
+                             |                                                                       |
+          --------------------------------                                                  ---------------
+         |                                |                                                  elements(fixed)
+ instMatching1(normal)           instMatching2(normal)
+         |                               |
+  elements(fixed)                 elements(fixed)
+
+As current fixed FigGroup FS, this fixed FG_4 should be treated as fixed "as-is", the location should be fixed in the placment results. But FG_4 location is flexible and that is not expected.
+
+case data:   ~stars/testcases/9001054876/9001054876.tar.gz
+                  maxwell -replay fixed_manual.log &
+
+* ref10 clean up zip files:
+STAR No.	Title
+9001047269 CDPV: submitted devices does not follow mouse cursor when rotate/flip runtime
+9001047265 CDPV: runtime devices in copyback are different from the placement devices
+9001040519 CDPV:: placer pin shapes off grid with ref10 pdk
+9001038774 CDPV: copyback is out of placement Grid
+9001032416 CDPV: the as-is cmos oafigGroup is not wide alignment
+9001031187 CDPV: runtime error when serial copy
+9001030484 CDPV:fix location is not right with 1 fixed device and finger greater than 1
+9001030233 CDPV:placer fail with the design include fixed manual oaFigGroup
+9001030231 CDPV:placer fail when run partial placement on maunal oaFigGroup
+9001029651 CDPV:: full copyback at origin not follow wide alignment
+9001028950 CDPV:the fin of the placed fiinfet is not wide aligment when placedGrid is there
+9001028432 CDPV:: placer stack device Pattern order different from SED
+9001028382 CDPV: pattern results with stack mos are not expected
+9001028304 CDPV:placer does not listen to size policy setting in vpattern
+9001027680 CDPV: the value setting for blocksize policy has precision problem
+9001026739 CDPV: pin shapes are far away from the boundary
+9001026030 CDPV:placer generates incomplete_layout views
+9001025644 CDPV:placer crash when define placementGrid on oaDesign
+9001024567 CDPV: maxtrix devices are not abutted together with auto mode with 10nm data
+9001024513 CDPV: partial run misses a solution despite a large enough boundary
+9001023939 CDPV:when design has hierarchy oaFigGroup ,partital job has submitted issues
+9001023890 CDPV:: a row placement is not giving optimal abutment
+9001023828 CDPV: filter changes and reorder does not make List update correctly
+9001023421 CDPV: rendering selection/highligh on fixed oaFigGroup with undo is unexpected
+9001023360 CDPV:: rendering flightlines/selection is not right when undo part copied result
+9001022683 CDPV: filter expression set can not be reproduced by replayfile
+9001022273 CDPV: placer crash with invalid cmos constraint
+9001022245 CDPV:: fixed "as-is" FigGroup location is flexible if included in guardRing
+9001022240 CDPV:placer jos is abnormal with fixed flexible row with partial placement
+9001021578 CDPV:gallery selection should enable the selection in placement Result  Browser
+9001021577 CDPV: broswer list/chart does not be updated with partial plament correctly
+9001021571 CDPV: when former filters is changed,the filter expression is not available
+9001019753 CDPV: cluster containing itself in its child symmetry group and other exceptions
+9001017052 CDPV:: 1 object can not be directly added into GuardRing constrain in GUI
+9001016503 CDPV:: placer failed if GuardRing element contains fixed/locked apFigGroup
+9001016475 CDPV:: placer ignored GuardRing if no apFigGroup that it containts in design
+9001016336 CDPV:: placer failed if GuardRing elements contain "as-is" FigGroup
+9001014642 CDPV:: GuardRing can not be directly added to instances level
+9001014565 CDPV:(reg) placer fail when column constraint as a member of other constraint
+9001013334 CDPV::Result browswer is not refreshed when it opened before placer run
+9001008939 CDPV:upper constraint group does not be placed with a compatible placement grid
+9001008931 CDPV: manual group is not placed with placement grid setting
+
+* KidChess:
+2nd Hour 3:50-4:50pm (Grades K - 5) - $199
+September 12 - January 23(tentative)   Fall 2016
+* Biying:
+** Jun 22, 2016
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+
+"Fix Topology"
+
+[0- Check-in, re-golden the two failing test-cases]
+1- Only Row/Col (slicing approx)
+2- Row/Col plus pure partitions (topo not preserved exactly (local) within relative partitions )
+3- Option to make partitions with firm softgroups
+
+As-is fig-groups (Z1, Z2) -> GroupUCell1
+Fixed fig-groups (Z3,Z4)  -> GroupUCell2
+
+Relative1 C1, C2, C3 -> PartitionR1 [<- SGroup1(C1, C2, C3)(firm)]
+Relative2 C4, C5     -> PartitionR2 [<- SGroup1(C4, C5)(firm)]
+Cluster1  I1, I2, I3 -> Partition1(I1,I2,I3) <- SGroup1 <- I1 and I2 <- I3
+Rows1  I4, I5, I6    -> Row1
+Rows2  I7, I8        -> Row2
+Col1  I9, I10        -> Col1
+Sym1 I1, I2   
+Sym2 I3
+Sym3 Rows2           -> _Implicit (top) partition_(GroupUCell2, GroupUCell1, Cluster1, Rows1, Rows2, Col1, PartitionR1, PartitionR2) <- SGroup1(Rows2, Col1), SGroup2(GroupUCell2)(fixed)
+Sym4 Col1
+
+Sym5 I4, I5 X -> Sorry. Can't do that. Put I4 and I5 in a cluster keep free
+at top level.
+
+Partition1.SGroup1 <- Low: I1 High: I2 Contains: I1, I2, I3
+_ITPartition_.SGroup1 <- Low: High: Contains: Rows2, Col1  AxisType: either
+   Rows2 - Col1
+or, 
+   Col1 - Rows2
+or, 
+      Rows2
+      Col1
+or,
+      Col1
+      Rows2
+
+** old
+
+oaDesign  + UCM -> (Translator/Prashant) -> hxcs
+
+oaDesign  + hxcs -> (constraint compiler/Iulian) -> hxdsn
+
+oaFigGroup..
+
+Row constraint (Rows)
+
+Rows -> lePlacementGroup (is an oaFigGroup)
+
+3 figGroups in oaDesign
+
+h1 and  h2.
+
+h1, h2 -> Column
+
+Row (i1, i2, i3)
+
+i1 -> Cluster c1
+
+Cluster -> Rows/Column/Relative
+* Meet with Fred:
+This afternoon looked much better. Sorry  for the late notice. Please let me know if I need to reserve a room in MV. 
+
+Here are some thoughts..
+
+Layout Editor (manual): Almost there: instance snapping will support placement grids in SP1. But, can be improved to support fig-groups (user or constraint generated). [Meeting minutes Jon/Jingyu/Barry/Bulent]
+SDL chaining: Almost there. Multi-row (NPPN and PNNP) support is coming up in SP1. [Shabbir,Bill project id]
+SDL matching: Key piece of the puzzle! But, with a few focused enhancements, we can get high mileage. Let’s talk.
+AI: Variable row pitch.. -> Ask Bill.. Jimmy’s STAR on variable pitch spacing… instMatching <- UCM.. 
+Placement Assistant: Need enhancements to support Rows constraint better.
+
+For 16.06 SP1, we will probably have to limit the scope.
+For 17.03, we need a clear scope definition. We probably need to limit the support for multiple track regions: LE to support manual work. But, SDL and  PA need to still focus on single-global track region and support it fully. The user can then do manual floor-planning to put together regions when they interact..
+  
+17.03 User picks active region/tracks + row configuration…Is it too cumbersome? Ravi T. Layout engineers.. Fred -> Debbie -> Indushekhar.. Not as a batch  tool.. 
+Nvidia meeting… Engine only in Virtuoso.. NO. But, steering team is picky.. 
+
+* MCP minutes:
+
+We discussed:
+- partial placement and brief comparison of PointArray vs StartLayout params in the schema.
+- performance: the need to profile the interface vs the engine. There is an 8x inefficiency in memory/disk-space usage due to duplication for each of the 8 orientations. Further, multiple occurrences are also duplicated instead of referring to the same master. So, for i1,i2,i3 instances of the same master, we get 3*8 DLO instances.
+- implicit top structured-partition for designs with many std-cells to be distributed among other custom/analog components
+
+AI: Joe to prepare for a code review on StartLayout, and what object types are supported and how in the interface & engine
+AI: Joe to scope direct-OA interface project for future planning: identify and describe major components that need modification, etc.
+AI: Varun to prepare for a code review on PointArray
+
+
+* Evren soccer try out
+
+Triumph Academy/Select Tryouts 2016-17	U15 Classic TRYOUTS	Evren Basaran
+Order Number	20164750666
+Order Confirmation Message for: Triumph Academy/Select Tryouts 2016-17
+
+Thank you for registering for the Triumph Academy/Select Tryouts for the 2016-17 season! All tryouts will be held at 4670 Granite Drive in Tucker. Please come to as many sessions as possible so our coaches can best assess your skill level. Wear your cleats and shin guards and bring a water bottle. 
+
+Tryout Check-in:  You will need to check in when you arrive for your first day of tryouts so please arrive a few minutes early. There is no need to check in on subsequent days unless you do not have your tryout number.
+
+Thank you!
+
+Select U14 thru U18 Tryouts:
+Wednesday, June 8
+Thursday, June 9 
+
+* Nishath OPS
+Qualcom restructuring, interested in CC..
+Japan SNUG or launch event this week. Went well..
+Renesas and NEC..
+Toshiba asking for push-button. Similarly Nvidia.. 
+DAC: luncheon presentations.. with customers.
+Mediatek is doing eval.. Highest priority.. IFS and layout stars..
+Samsung and Intel joined. Also ST.
+ST: Std-cell, IO, Memory group using on CC. Analog is ? Renewal on CDSN, Automative group, we are doing well.
+MSIP TRM this week.. CAD manager?
+7nm complexity is very high. 4-color. No color issue in TSMC??
+Pre-coloring.. But, resistance is bad. So??
+BBX: {Pre-coloring is good for us!}
+New PDK, Siarhei is looking..
+Interactive routing.. Auto-via engine is not aware of neighboring vias.. (context!)
+Graphical pycell development.. MSIP??
+* tasks for track-aware device placement (see email I sent out on May 19, 9pm)
+- enhance Rows constraint to input a row configuration (RC) (similar to "row-stack" templates: a list of space/device/tap rows) -> UCM dependency
+- enhance Rows to auto-assign components to available rows in the RC
+- enhance Rows to be track aware during connectivity minimization
+- auto generate basic RCs based on selected track region
+- auto-fold schematic devices to fit selected RC -> SDL dependency
+- enhance SED to support RC 
+- enhance SED to dump out Rows constraint (with full placement info after symbolic edits)
+* intel nsg 
+/remote/helix01/user/bulent/test/intel_nsg/outgoing/synopsys_helix_installer_linux_rhel40_gcc483_64_2015.09-1-T0727_py262_TREE
+** new package:
+Hi Amrish,
+
+I have installed the package binary from  /slowfs/amsgcn3/home/integ-cn/2015.09-1-T0725_releasePackages/Helix/synopsys_helix_installer_linux_rhel40_gcc483_64_2015.09-1-T0725_py262
+
+And the package synopsys_helix_installer_linux_rhel40_gcc483_64_2015.09-1-T0725_py262 still have issues.
+
+The cnvresion still complain warings
+[elleny@krypton] cnversion
+CNI_ROOT               = /slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed
+CNI_LICENSE_DIR        = NOT_DEFINED
+CNI_DISPLAY_DIR        = NOT_DEFINED
+CNI_LOG_DEFAULT        = /dev/null
+OA_COMPILER            = NOT_DEFINED
+OA_HOME                = NOT_DEFINED
+OA_PLUGIN_PATH         = /slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/oa/data/plugins:/slowfs/cdes1/elleny/pa ckage_test/2015.09-1_T027/sysRed/quickstart
+PYTHONHOME             = /slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd
+
+Python version         = 2.6.2
+PyCell Studio version  = K-2015.09
+PyCell Studio built    = Apr 16 2015 22:08:50
+Installed platform     = plat_linux_gcc483_64
+
+Platform               = Linux-2.6.18-348.12.1.el5.sfdc00904424.bkl_test-x86_64-with-redhat-5.7-Tikanga
+Hostname               = krypton
+
+PATH:
+    /slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/bin
+  ………….
+
+Checking LD_LIBRARY_PATH...
+    Passed.
+Resolving shared library dependencies...
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Compiler/Code.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Compiler/Visitor.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Compiler/Scanning.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Compiler/Lexicon.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Compiler/FlowControl.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Compiler/Parsing.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Plex/Scanners.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Plex/Actions.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T027/sysRed/plat_linux_gcc483_64/3rd/lib/pyth on2.6/site-packages/Cython/Runtime/refnanny.so'
+    Passed.
+
+[elleny@krypton] pyros -V
+GUI Version:(3.1.43) build:(Apr 16 2015@22:20:42) Santana: K-2015.09 Apr 16 2015 22:08:50 ChangeList # 2800714
+[elleny@krypton] cnhxgui -V
+GUI Version:(2015.09) build:(Apr 16 2015@22:20:42) Santana: K-2015.09 Apr 16 2015 22:08:50 ChangeList # 2800714
+[elleny@krypton] cndbg -V
+GUI Version:(3.1.43) build:(Apr 16 2015@22:20:42) Santana: K-2015.09 Apr 16 2015 22:08:50 ChangeList # 2800714
+
+
+
+Could you please check it again?
+
+Thanks
+Ellen
+
+
+From: Amrish Ganesh Mogaveer 
+Sent: 2016年7月26日 18:15
+To: Jun Yang <elleny@synopsys.com>; Ming Su <msu@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>
+Subject: RE: abutment error
+
+Hi Ellen ,
+Please find the package at same location with fix.
+Thanks,
+Amrish.
+
+From: Jun Yang 
+Sent: Tuesday, July 26, 2016 11:44 AM
+To: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Ming Su <msu@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>
+Subject: RE: abutment error
+
+Hi Amrish,
+
+Could you check whether the marked file name is correct ?
+
+ll synopsys_helix_installer_linux_rhel40_gcc483_64_2015.09-1-T0725_py262
+total 340304
+-rw-r--r--. 1 integ-cn synop15     12294 Jul 25 05:35 helix_INSTALL_README.txt
+-rw-r--r--. 1 integ-cn synop15 302376960 Jul 25 05:35 helix_vK-2015.09-1-T0725_amd64.tar
+-rw-r--r--. 1 integ-cn synop15  44697600 Jul 25 05:35 helix_vK-2015.09-1-T0725_common.tar
+
+When install synopsys packages file in unix machine and run conversion, we noticed the following warning messages.
+Checking LD_LIBRARY_PATH...
+    Passed.
+Resolving shared library dependencies...
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Compiler/Code.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Compiler/Visitor.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Compiler/Scanning.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Compiler/Lexicon.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Compiler/FlowControl.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Compiler/Parsing.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Plex/Scanners.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Plex/Actions.so'
+ldd: warning: you do not have execution permission for `/slowfs/cdes1/elleny/package_test/2015.09-1_T0725/sysRehat/plat_linux_gcc483_64/3rd/lib/python 2.6/site-packages/Cython/Runtime/refnanny.so'
+    Passed.
+
+
+Best regards
+Ellen
+
+
+From: Amrish Ganesh Mogaveer 
+Sent: 2016年7月25日 20:40
+To: Ming Su <msu@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Jun Yang <elleny@synopsys.com>; Sheng Han <sheng@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>
+Subject: RE: abutment error
+
+Hi Ming , Ellen,
+Please find the helix package at /slowfs/amsgcn3/home/integ-cn/2015.09-1-T0725_releasePackages
+
+Thanks,
+Amrish.
+
+From: Ming Su 
+Sent: Friday, July 22, 2016 8:14 PM
+To: Bulent Basaran <bbasaran@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Jun Yang <elleny@synopsys.com>; Sheng Han <sheng@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>; Amrish Ganesh Mogaveer <amrishm@synopsys.com>
+Subject: RE: abutment error
+
+Hi Bulent and Prashant,
+
+Please confirm if we deliver only Helix package will be enough.
+
+Thanks,
+Ming
+
+From: Amrish Ganesh Mogaveer 
+Sent: Friday, July 22, 2016 6:30 AM
+To: Bulent Basaran <bbasaran@synopsys.com>; Amrish Ganesh Mogaveer <AmrishGanesh.Mogaveer@synopsys.com>
+Cc: Prashant Joshi <prajoshi@synopsys.com>; Ming Su <msu@synopsys.com>; Sumit Arora <sarora@synopsys.com>; Jun Yang <elleny@synopsys.com>; Sheng Han <sheng@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>
+Subject: RE: abutment error
+
+Hi Bulent ,
+I will do that .
+Thanks,
+Amrish.
+
+From: Bulent Basaran [mailto:bbasaran@synopsys.com] 
+Sent: Friday, July 22, 2016 3:59 PM
+To: Amrish Ganesh Mogaveer <AmrishGanesh.Mogaveer@synopsys.com>
+Cc: Prashant Joshi <prajoshi@synopsys.com>; Ming Su <msu@synopsys.com>; Sumit Arora <sarora@synopsys.com>; Jun Yang <elleny@synopsys.com>; Sheng Han <sheng@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>
+Subject: FW: abutment error
+Importance: High
+
+Hi Amrish,
+
+My testing of the package failed . 
+
+It seems that the packager doesn’t create PCX related commands (cnserverctl, cnpxm, etc.) for PyCellStudio.
+
+So, we would need a full Helix package. Please create one and inform us so that package testing can be re-done.
+
+Thank you,
+Bulent
+
+From: Xiaodan Liu 
+Sent: Thursday, July 21, 2016 12:53 PM
+To: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>; Ming Su <msu@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Jun Yang <elleny@synopsys.com>
+Subject: RE: abutment error
+
+Hi Ming and Amrish,
+
+Here is the summary for this python 262 package testing.
+
+•  Installation testing.  The package is installed both on suse and rehat machines.  There is no issue found.
+•  Package files check compared with 2015.09-1 release. There are no changes.
+•  OA version and labeling checks.
+o   package labeling : K-2015.09-1-T0719 
+o   package OA version: 22.50:011
+o   Python : 2.6.2 
+
+•  String check are fine.
+•  Tutorial lib data run fine.
+•  Existing pycellstudio related regressions run well.
+•  Doc/pdf files have out-of-date labeling.(Eg: , J-2014.09, I-2013.12), same issue found in 2015.09-1 release.
+
+
+BR,
+Xiaodan
+
+From: Amrish Ganesh Mogaveer 
+Sent: 2016年7月21日 17:45
+To: Xiaodan Liu <liuxd@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>; Ming Su <msu@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Jun Yang <elleny@synopsys.com>
+Subject: RE: abutment error
+
++ Bulent
+
+From: Amrish Ganesh Mogaveer 
+Sent: Thursday, July 21, 2016 2:12 PM
+To: Xiaodan Liu <liuxd@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>; Ming Su <msu@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Jun Yang <elleny@synopsys.com>
+Subject: RE: abutment error
+
+Thanks you all .
+PyCellStudio regression run’s good from my side as well.
+I have backed up the results.
+
+BR,
+Amrish.
+
+From: Xiaodan Liu 
+Sent: Thursday, July 21, 2016 12:01 PM
+To: Prashant Joshi; Ming Su; Amrish Ganesh Mogaveer
+Cc: Sumit Arora; Sheng Han; Jun Yang
+Subject: RE: abutment error
+
+Hi Prashant,
+
+Yes, you are right. This case run pass after I set TCL_LIBRARY version.
+Thanks for your investigation. 
+
+I am working on full package testing and will let you know once I finish.
+
+
+BR,
+Xiaodan
+
+From: Prashant Joshi 
+Sent: 2016年7月21日 13:58
+To: Ming Su <msu@synopsys.com>; Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Jun Yang <elleny@synopsys.com>
+Subject: RE: abutment error
+
+HI Xiaodan,
+
+Could you please send me the test case location? I’ll try & let you know.
+
+Most likely this issue is because of the Tcl loader version of TCL_LIBRARY version.
+
+Thanks,
+Prashant
+
+From: Ming Su 
+Sent: Wednesday, July 20, 2016 8:22 PM
+To: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Jun Yang <elleny@synopsys.com>
+Subject: RE: abutment error
+
+Hi Amrish and Xiaodan,
+
+Prashant confirmed that only PyCell Studio package is required. So, there is no need to re-create the package.
+
+Amrish/Prashant, please help to investigate the issue Xiaodan brought up.
+
+Thanks,
+Ming
+
+From: Amrish Ganesh Mogaveer 
+Sent: Wednesday, July 20, 2016 5:25 AM
+To: Xiaodan Liu <liuxd@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>
+Cc: Ming Su <msu@synopsys.com>; Sumit Arora <sarora@synopsys.com>; Sheng Han <sheng@synopsys.com>; Jun Yang <elleny@synopsys.com>
+Subject: RE: abutment error
+
+Hi Ming / Xiaodan ,
+I don’t see any changes in the depot in 2015.09 branch from yesterday.
+So will re-creating package  have any effect..? 
+
+Thanks,
+Amrish.
+
+From: Xiaodan Liu 
+Sent: Wednesday, July 20, 2016 1:34 PM
+To: Prashant Joshi; Amrish Ganesh Mogaveer
+Cc: Ming Su; Sumit Arora; Sheng Han; Jun Yang
+Subject: RE: abutment error
+
+Hi Prashant and Amrish,
+
+Some regression cases about abutment failed with this package build. The following snapshot is captured by an pyros abutment case.
+
  
-Title: CDPV:partical placement result is not complete when boudary is pre-existing
 
-Information: License 'Auto Placer' checked out. (LICENSE-003)
-Information: License 'Auto Placer' checked in. (LICENSE-004)
-Error: Placement error: Unable to compile constraints for cell 'matrix_bdry_2@test_prboudary': Internal error:
-Exception:  Partition constraint "__hx__implicit__top__partition__" must contain at least 2 entities.
- (AMS_PLACEMENT-001)
+BR,
+Xiaodan
+
+From: Prashant Joshi 
+Sent: 2016年7月20日 12:44
+To: Xiaodan Liu <liuxd@synopsys.com>; Amrish Ganesh Mogaveer <amrishm@synopsys.com>
+Cc: Ming Su <msu@synopsys.com>; Sumit Arora <sarora@synopsys.com>
+Subject: RE: abutment error
+
+Hi Ming,
+
+The PCellXtreme code is solely in the Santana module. The helix module just calls some APIs from Santana module for SKILL abutment. 
+Those APIs have not changed in any sense. 
+
+So a PyCellStudio package should suffice. But it is your call.
+
+Thanks,
+Prashant
+
+From: Xiaodan Liu 
+Sent: Wednesday, July 20, 2016 9:59 AM
+To: Amrish Ganesh Mogaveer <amrishm@synopsys.com>
+Cc: Prashant Joshi <prajoshi@synopsys.com>
+Subject: FW: abutment error
+
+Hi Amrish,
+
+Will the PyCellStudio package be recreated?  So far only Py262 version. 
+If not, I will start package testing now.
+BR,
+Xiaodan
+
+From: Ming Su 
+Sent: 2016年7月19日 21:19
+To: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>; Jun Yang <elleny@synopsys.com>
+Subject: RE: abutment error
+
+Hi Amrish and Prashant,
+
+Just want to confirm:
+•        Prashant’s fix is in PCell Xtreme product, which is included in Helix package, right?
+•        The new created package is only PyCell Studio, right?
+
+It seems there is a misunderstanding here. Please confirm and recreate package as necessary.
+
+Thanks,
+Ming
+
+From: Amrish Ganesh Mogaveer 
+Sent: Tuesday, July 19, 2016 6:52 AM
+To: Ming Su <msu@synopsys.com>; Jun Yang <elleny@synopsys.com>; Xiaodan Liu <liuxd@synopsys.com>
+Cc: Prashant Joshi <prajoshi@synopsys.com>; Sumit Arora <sarora@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>
+Subject: RE: abutment error
+
++ Xiaodan, As Ellen is on leave.
+
+From: Amrish Ganesh Mogaveer 
+Sent: Tuesday, July 19, 2016 4:20 PM
+To: Ming Su; Jun Yang
+Cc: Prashant Joshi; Sumit Arora; Bulent Basaran
+Subject: RE: abutment error
+
+Hi Ming / Ellen,
+Please find the package at /remote/helix01/user/amrishm/2015.09-1-T0719_releasePackages/PyCellStudio/
+
+Thanks,
+Amrish.
+
+From: Ming Su 
+Sent: Monday, July 18, 2016 7:09 PM
+To: Prashant Joshi; Amrish Ganesh Mogaveer; Sumit Arora; Bulent Basaran
+Subject: RE: abutment error
+
+Thank you all.
+
+Prashant, please also check in to 16.06 branch.
+
+Ming
+
+From: Prashant Joshi 
+Sent: Monday, July 18, 2016 6:38 AM
+To: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Sumit Arora <sarora@synopsys.com>; Ming Su <msu@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>
+Subject: RE: abutment error
+
+Hi Amrish,
+
+I have integrated my changes in  Santana_2015.09 branch.
+CL # 3295860
+
+Regards,
+Prashant
+
+From: Amrish Ganesh Mogaveer 
+Sent: Monday, July 18, 2016 3:04 PM
+To: Prashant Joshi <prajoshi@synopsys.com>; Sumit Arora <sarora@synopsys.com>; Ming Su <msu@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>
+Subject: RE: abutment error
+
+HI Prashant ,
+I will create package on your confirmation .
+Thank you.
+
+Best Regards,
+Amrish.
+
+From: Prashant Joshi 
+Sent: Monday, July 18, 2016 2:49 PM
+To: Sumit Arora; Amrish Ganesh Mogaveer; Ming Su; Bulent Basaran
+Subject: RE: abutment error
+
+Hi Amrish,
+
+I have checked-in in only main/dev.
+Will do so in 2015.09 branch & let you know.
+
+Thanks,
+Prashant
+
+From: Sumit Arora 
+Sent: Monday, July 18, 2016 2:48 PM
+To: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Ming Su <msu@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>
+Subject: RE: abutment error
+
+Should be 2015.09 i.e. same branch from which -1 package was created last.
+
+“latest release package is K-2015.09-1, so it should be named as K-2015.09-1-T####.”
+
+From: Amrish Ganesh Mogaveer 
+Sent: Monday, July 18, 2016 2:41 PM
+To: Ming Su <msu@synopsys.com>; Prashant Joshi <prajoshi@synopsys.com>; Bulent Basaran <bbasaran@synopsys.com>
+Cc: Sumit Arora <sarora@synopsys.com>
+Subject: RE: abutment error
+
+Hi Ming ,
+Kindly let me know which branch the package should be made from.
+
+Thanks,
+Amrish.
+
+From: Ming Su 
+Sent: Friday, July 15, 2016 6:57 PM
+To: Prashant Joshi; Bulent Basaran
+Cc: Amrish Ganesh Mogaveer; Sumit Arora
+Subject: RE: abutment error
+
+Hi Prashant, 
+
+This should be a target release package. I believe our latest release package is K-2015.09-1, so it should be named as K-2015.09-1-T####.
+
+Thanks,
+Ming
+
+From: Prashant Joshi 
+Sent: Friday, July 15, 2016 4:23 AM
+To: Bulent Basaran <bbasaran@synopsys.com>; Ming Su <msu@synopsys.com>
+Cc: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Sumit Arora <sarora@synopsys.com>
+Subject: RE: abutment error
+
+Hi Amrish,
+
+The CL # is 3293707
+
+Thanks,
+Prashant
+
+From: Bulent Basaran 
+Sent: Friday, July 15, 2016 1:51 PM
+To: Prashant Joshi <prajoshi@synopsys.com>; Ming Su <msu@synopsys.com>
+Cc: Amrish Ganesh Mogaveer <amrishm@synopsys.com>; Sumit Arora <sarora@synopsys.com>
+Subject: RE: abutment error
+
+Thanks a lot, Prashant! 
+
+Can you please forward Amrish the CL#?
+
+Amrish,
+
+Please start the build/package process.
+
+Regards,
+Bulent
+
+
+
+-----Original Message----- 
+From: Ming Su [msu@synopsys.com]
+Received: Thursday, 14 Jul 2016, 17:33
+To: Prashant Joshi [prajoshi@synopsys.com]; Bulent Basaran [bbasaran@synopsys.com]
+CC: Amrish Ganesh Mogaveer [amrishm@synopsys.com]; Sumit Arora [sarora@synopsys.com]
+Subject: RE: abutment error
+Hi Prashant,
+ 
+OK, I will schedule a target release for Intel. I assume they are using python 262 package.
+ 
+Bulent, please confirm and notify Amrish to start the process.
+ 
+Thanks,
+Ming
+ 
+From: Prashant Joshi 
+Sent: Thursday, July 14, 2016 1:54 AM
+To: Bulent Basaran <bbasaran@synopsys.com>
+Cc: Ming Su <msu@synopsys.com>
+Subject: RE: abutment error
+ 
+Hi Bulent,
+ 
+I have found the reason for the abutment issue.
+Actually this is a regression for us as some existing code was commented in March 2015.
+ 
+This happened during the Maxwell integration phase wherein initially pcellXtreme code from standalone Santana was also integrated in Maxwell. That led to some incorrect compiler warnings and to correct them some working code was commented. The back integration to standalone introduced this issue.
+ 
+Ming,
+ 
+We’ll need to ship a PCX package to Intel with this fix.
+ 
+Regards,
+Prashant
+ 
+From: Prashant Joshi 
+Sent: Wednesday, July 13, 2016 7:28 PM
+To: Bulent Basaran <bbasaran@synopsys.com>
+Subject: RE: abutment error
+ 
+Hi Bulent,
+ 
+Thanks!
+I’ll start working on it and would let you know my findings.
+ 
+Regards,
+Prashant
+ 
+From: Bulent Basaran 
+Sent: Tuesday, July 12, 2016 6:50 PM
+To: Prashant Joshi <prajoshi@synopsys.com>
+Subject: RE: abutment error
+ 
+Hi Prashant,
+ 
+The test-case is in SNPS:
+ 
+    /remote/helix01/user/bulent/test/intel_nsg/incoming/20160629/helix_send.tar.gz
+ 
+Thanks,
+Bulent
+ 
+From: Prashant Joshi 
+Sent: Monday, July 11, 2016 11:54 PM
+To: Bulent Basaran <bbasaran@synopsys.com>
+Subject: RE: abutment error
+ 
+Hi Bulent,
+ 
+Do you have this testcase copied over @ Berry farm ?
+ 
+I’ll start taking a look at this issue.
+ 
+Thanks,
+Prashant
+ 
+From: Bulent Basaran 
+Sent: Monday, July 11, 2016 10:54 PM
+To: Krishnan, Rekha <rekha.krishnan@intel.com>
+Cc: Chinya, Manjunath K <manjunath.k.chinya@intel.com>; Prashant Joshi <prajoshi@synopsys.com>
+Subject: RE: abutment error
+ 
+Dear Rekha,
+ 
+I am sorry for the delay.
+ 
+Prashant has been very busy with the upcoming 16.06SP1 release of custom compiler. I believe he is almost done and will soon debug the test-case.
+ 
+Regards,
+Bulent
+ 
+From: Krishnan, Rekha [mailto:rekha.krishnan@intel.com] 
+Sent: Monday, July 11, 2016 1:03 PM
+To: Bulent Basaran <Bulent.Basaran@synopsys.com>
+Cc: Chinya, Manjunath K <manjunath.k.chinya@intel.com>
+Subject: RE: abutment error
+ 
+Bulent, 
+ 
+Any update on the pcell abutment error? Hope you were able to use our testcase.
+ 
+Thanks
+Rekha
+ 
+From: Krishnan, Rekha 
+Sent: Wednesday, June 29, 2016 8:34 PM
+To: Bulent Basaran
+Subject: Re: abutment error
+ 
+Ok thanks, let me know once you have an update.
+
+Rekha 
+ 
+
+On Jun 29, 2016, at 8:31 PM, Bulent Basaran <Bulent.Basaran@synopsys.com> wrote:
+Yes, it did! Thank you. We will work on it and  let you know ASAP.
+ 
+Bulent
+ 
+From: Krishnan, Rekha [mailto:rekha.krishnan@intel.com] 
+Sent: Wednesday, June 29, 2016 5:05 PM
+To: Bulent Basaran <Bulent.Basaran@synopsys.com>
+Subject: RE: abutment error
+ 
+Yes that worked 
+File is send, file name is helix_send.tar.gz.asc
+And password is helix
+Let me know if the password worked.
+-Rekha
+ 
+From: Bulent Basaran [mailto:Bulent.Basaran@synopsys.com] 
+Sent: Wednesday, June 29, 2016 1:36 PM
+To: Krishnan, Rekha
+Subject: RE: abutment error
+ 
+Hi  Rekha,
+ 
+Yes, apparently, they  changed the config to require a solvnet email:
+How and where customers can upload files to Synopsys (North America server)
+Customers should be informed to upload their files to: 
+1.	Type the command ftp ftp-na.synopsys.com or the IP address (198.182.61.14) 
+2.	SolvNet username and password should be used. 
+3.	Type the command cd /pub/incoming 
+4.	Type bin command (optional) 
+5.	Type hash command (optional) 
+6.	Type the command put (filename) to place file in the incoming directory. 
+7.	Type quit command to exit 
+Note: When the file transfer is completed, the synchronization process will copy the file to the internal FTP system: (us01-ftp-int.synopsys.com). The customer must communicate the filename and transfer status to you once the file transfer is complete. Files on the internal server will be removed after they reach 5 days old.
+ 
+-----Original Message-----
+From: Bulent Basaran 
+Sent: Wednesday, June 29, 2016 3:29 PM
+To: 'Krishnan, Rekha' <rekha.krishnan@intel.com>
+Subject: RE: abutment error
+ 
+I am sorry. That used to work before. I am trying to get info from others here. I will let you know.
+ 
+In the meantime, please cross your fingers (!) and try your solvnet password used to download the software.
+ 
+-----Original Message-----
+From: Krishnan, Rekha [mailto:rekha.krishnan@intel.com] 
+Sent: Wednesday, June 29, 2016 1:55 PM
+To: Bulent Basaran <Bulent.Basaran@synopsys.com>
+Subject: RE: abutment error
+ 
+Yes that's what I tried, login was fine but when I entered the password as my email it said it is incorrect
+ 
+ 
+-----Original Message-----
+From: Bulent Basaran [mailto:Bulent.Basaran@synopsys.com] 
+Sent: Wednesday, June 29, 2016 10:50 AM
+To: Krishnan, Rekha
+Subject: RE: abutment error
+ 
+Rekha,
+ 
+Did you try the following?
+ 
+1. ftp ftp-na.synopsys.com
+2. User: anonymous
+3. Password: <your Intel.com email>
+ 
+This is anonymous ftp, the third section in the doc.
+ 
+Thanks,
+Bulent
+ 
+-----Original Message-----
+From: Krishnan, Rekha [rekha.krishnan@intel.com]
+Received: Wednesday, 29 Jun 2016, 12:10
+To: Bulent Basaran [Bulent.Basaran@synopsys.com]
+Subject: RE: abutment error
+ 
+Bulent,
+The password as email did not work, said login failed.
+Do you need enable the login at your end.
+Thanks
+Rekha
+ 
+-----Original Message-----
+From: Bulent Basaran [mailto:Bulent.Basaran@synopsys.com]
+Sent: Tuesday, June 28, 2016 10:05 AM
+To: Krishnan, Rekha
+Subject: RE: abutment error
+ 
+Hello Rekha,
+ 
+Please find it attached.
+ 
+Warmly,
+Bulent
+ 
+-----Original Message-----
+From: Krishnan, Rekha [mailto:rekha.krishnan@intel.com]
+Sent: Monday, June 27, 2016 5:28 PM
+To: Bulent Basaran <Bulent.Basaran@synopsys.com>
+Subject: RE: abutment error
+ 
+Bulent, can you send me ftp info for sending the data to you?
+ 
+Thanks
+Rekha
+ 
+-----Original Message-----
+From: Bulent Basaran [mailto:Bulent.Basaran@synopsys.com]
+Sent: Monday, June 20, 2016 12:17 PM
+To: Krishnan, Rekha
+Subject: RE: abutment error
+ 
+Hi Rekha,
+ 
+I believe the pdk is sufficient for this debugging. It was called compLib, was it?
+ 
+But, to be safe please also add technologyLib and a sample sch cell.
+ 
+Regards,
+Bulent
+ 
+-----Original Message-----
+From: Krishnan, Rekha [rekha.krishnan@intel.com]
+Received: Monday, 20 Jun 2016, 15:13
+To: 'Bulent Basaran' [Bulent.Basaran@synopsys.com]
+Subject: RE: abutment error
+ 
+Bulent,
+Prashanth and you are added to our RUNDA, so should be able to share data, can you let me know what all info you would need from me to look at the helix abutment issue so I can send those to you?
+ 
+Thanks
+Rekha
+ 
+-----Original Message-----
+From: Krishnan, Rekha
+Sent: Wednesday, May 25, 2016 1:50 PM
+To: Bulent Basaran
+Subject: RE: abutment error
+ 
+Yes sure, send an invite now, can you fwd the invite to Prashant, couldn't find his email id.
+ 
+-Rekha
+ 
+-----Original Message-----
+From: Bulent Basaran [mailto:Bulent.Basaran@synopsys.com]
+Sent: Wednesday, May 25, 2016 9:56 AM
+To: Krishnan, Rekha
+Subject: RE: abutment error
+ 
+Hi Rekha,
+ 
+Can we have a session with Prashant 10am Pacific tomorrow? He will help debug abutment issue.
+ 
+Bulent
+ 
+-----Original Message-----
+From: Krishnan, Rekha [mailto:rekha.krishnan@intel.com]
+Sent: Tuesday, May 24, 2016 5:51 PM
+To: Bulent Basaran <Bulent.Basaran@synopsys.com>
+Subject: RE: abutment error
+ 
+Attaching the debug log files.
+Let me know if you receive it
+-Rekha
+ 
+-----Original Message-----
+From: Bulent Basaran [mailto:Bulent.Basaran@synopsys.com]
+Sent: Tuesday, May 24, 2016 12:32 PM
+To: Krishnan, Rekha
+Subject: RE: abutment error
+ 
+Let's try 1:30pm, or else tomorrow.
+ 
+I am running late for 1pm
+Bulent
+ 
+-----Original Message-----
+From: Bulent Basaran [bbasaran@synopsys.com]
+Received: Tuesday, 24 May 2016, 12:53
+To: rekha.krishnan@intel.com [rekha.krishnan@intel.com]
+Subject: RE: abutment error
+ 
+1pm works. 2pm won't give us much time. I need to pick up my little son by 2:45pm or so.
+ 
+ 
+-----Original Message-----
+From: Krishnan, Rekha [rekha.krishnan@intel.com]
+Received: Tuesday, 24 May 2016, 11:58
+To: Bulent Basaran [Bulent.Basaran@synopsys.com]
+Subject: RE: abutment error
+ 
+Will this afternoon at 2 work for you? or 1 is fine too
+ 
+-Rekha
+ 
+-----Original Message-----
+From: Bulent Basaran [mailto:Bulent.Basaran@synopsys.com]
+Sent: Tuesday, May 24, 2016 6:02 AM
+To: Krishnan, Rekha
+Subject: RE: abutment error
+ 
+Hi Rekha,
+ 
+Can we meet at 11am your time? Please send me an invite, if that works.
+ 
+I have some update on contact rings but also Prashant tells me that the log file does not seem to correspond to the abutment issue. So, I would like to reproduce that with you and check the log file again.
+ 
+Cheers,
+Bulent
+ 
+-----Original Message-----
+From: Krishnan, Rekha [rekha.krishnan@intel.com]
+Received: Tuesday, 24 May 2016, 3:59
+To: 'Bulent Basaran' [Bulent.Basaran@synopsys.com]
+Subject: RE: abutment error
+ 
+Bulent, Hope you got the log files, missed sending you an invite today, we would need the abutment issue also to be fixed, let me know if we can meet tomorrow to go over next steps, and then we can meet with Manju to provide a status update.
+ 
+Thanks
+Rekha
+ 
+From: Krishnan, Rekha
+Sent: Friday, May 20, 2016 3:18 PM
+To: Bulent Basaran
+Subject: RE: abutment error
+ 
+Attaching the cni_debug.log error and the snapshot on myCustomContactRing
+ 
+[cid:image001.png@01D1B557.6AB00DC0]
+ 
+ 
+ 
+From: Krishnan, Rekha
+Sent: Friday, May 20, 2016 1:35 PM
+To: 'Bulent Basaran'
+Subject: abutment error
+ 
+[cid:image002.png@01D1B557.6AB00DC0]
+ 
+
+** Unfortunately,  we are not getting enough information from the log files in order to root-cause the PCX issues. 
+
+I would like us to meet with Abhishek and Prashant to help nail down this issue with PCX. They are our experts and live in Noida. 
+
+Can we have a meeting with them early morning your time?
+
+As you probably know, your time zone is half a day away from theirs. So, 9am your time would be  9:30pm theirs. 
+
+Please let us know your availability today or tomorrow morning.
+
+* mcp-coder
+
+MCP engine..
+
+1- Area estimation
+
+2- Global placer
+
+(Gordian paper from DAC/IEEE TCad paper?)
+
+3- Detailed placer
+
+(Kilkpatrick paper on Simulated Annealing..)
+
+4- Compaction / Sequence Pair
+
+(DAC best paper on sequence pair..)
+
+(Longest path, constraint graph based compaction..)
+
+* Direct interface to OA in CC
+
+* Multi-tasking
+
+* STARs on PNStack (CMOS), Partition (Cluster + implicit Top-level + Symmetry + Fixed fig-groups), ... 
+
+PackedPartition (rectilinear support) -> Cluster cluster
+
+StructuredPartition -> Std Cell constraint
+
+NEW: Partition -> Cluster with Relative Constraint
+
+* fin-grid
+1-	Current commitment for PA (placement assistant), until  17.03, is to support only tech rules for “device placement”. Ming, please confirm. 
+2-	(1) means that results in PG (placement gallery) should be correct for fin grid (but, agnostic to track patterns). Glen, please confirm.
+3-	In 17.03, PA needs to support NUTP (non-uniform track patterns) as per Track Regions fspec. Do we also want to support UTP (uniform track patterns) for older/planar nodes? Given one design/test-case, only one of them should be active. NUTP does make UTP obsolete. I am not sure what the plans area. Ming, can you please talk to Stan and find out?
+4-	I love crappy drawings. They save time and explain things. Thank you, Glen.
+* NSG:
+To convert your OA tech DB to Santana techfile, you can use cntechconv utility from PyCell Studio.
+* TODO: New STAR2:
+Error: No member of cluster constraint '__hx__implicit__top__partition__' with symmetry style set is part of any symmetric constraint. The symmetry will be ignored. (AMS_PLACEMENT-081)
+
+* TODO: New STAR:
+Top-level with one fixed group and one std-cell constraint creates poor results. This issue was encountered during demo of Std Cell constraint to Jimmy.
+
+Top level has only two components:
+1- A fixed column
+2- An std-cell constraint
+
+We get four results. 001 and 002 are ok. 000 and 003 are not acceptable.
+
+To reproduce: 
+make gcp
+make pyros
+
+# INFO(GCP-192)Found mcp config file /remote/us01home36/bbasaran/helix/mcp/my_default_cfg.
+# INFO(GCP-189)Layout0(Target=6.680 Aspect=6.175 Util=0.865 EffUtil=0.692 WL=102960.000)
+# INFO(GCP-189)Layout1(Target=1.670 Aspect=1.425 Util=0.938 EffUtil=0.750 WL=90705.000)
+# INFO(GCP-189)Layout2(Target=0.742 Aspect=0.679 Util=0.875 EffUtil=0.700 WL=95955.000)
+# INFO(GCP-189)Layout3(Target=0.417 Aspect=0.390 Util=0.856 EffUtil=0.685 WL=97210.000)
+# INFO(GCP-192)Found mcp config file /remote/us01home36/bbasaran/helix/mcp/my_default_cfg.
+# INFO(GCP-189)Layout0(Target=1.000 Aspect=0.937 Util=1.002 EffUtil=0.862 WL=0.000)
+# INFO(GCP-189)Layout1(Target=4.333 Aspect=1.703 Util=0.927 EffUtil=0.797 WL=0.000)
+# INFO(GCP-189)Layout2(Target=0.231 Aspect=0.286 Util=0.739 EffUtil=0.635 WL=0.000)
+# INFO(GCP-189)Layout3(Target=7.667 Aspect=1.993 Util=0.372 EffUtil=0.320 WL=0.000)
+# INFO(GCP-191)Layout4 duplicated.
 
 constraintGroups:
-  - Name: rows3
-    Type: Matrix
-    Param: {Pattern: [[M2.m1, M2.m2, M4.m2, M4.m1, M1.m2, M1.m1]], RowLimits: {Lower: 1, Upper: 2}, XFlip: [], YFlip: [], AbutmentType: auto2, AbutDiffWidth: true, HorizontalOverlapLayers: [], VerticalOverlapLayers: [], AlignmentInRows: center, AlignmentInColumns: center, AutoOrder: true, WrapStyle: leftToRight}
-    Contains: [M2.m1, M2.m2, M4.m2, M4.m1, M1.m2, M1.m1]
+  - Name: sopenCellLibrary
+    Type: StructuredPartition
+    Param: {TapCellName: openCellLibrary/TAPCELL_X1/layout, RightEndCap: openCellLibrary/TAPCELL_X1/layout, FillCellNames: [openCellLibrary/FILLCELL_X1/layout, openCellLibrary/FILLCELL_X2/layout, openCellLibrary/FILLCELL_X3/layout], RowSpacing: {Value: 0}, TapCellDistance: {Value: 0}, UtilizationTarget: 0.8, TapCellDefaultPlacement: single, TapCellDefaultLocation: interior, AllowHorizontalFlip: true, FlipOdd: false, FlipEven: true, DoubleHeightCellAlignment: none, OddNumberRowsAllowed: false, RowHeight: 0.0}
+    Contains: [I36, I37, I38, I39, I40, I41, I42, I43, I44, I45, I55, I56, I58, I61, I63, I65, I68, I69, I70, I71, I72, I73, I74, I75, I76, I10, I11, I31]
+
+  - Name: column1
+    Type: Column
+    Param: {YFlip: [], AbutmentType: none, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], CustomSpacing: {Value: 0, CorrectAfterForDRC: true, PRBoundary: true}, Alignment: center}
+    Contains: [I35, I34, I33, I32]
 
   - Name: __hx__implicit__top__partition__
     Type: Partition
-    Param: {PartialLayout: {PointArray: [0, 0, 0, 10110, 20868, 10110, 20868, 0]}}
-    Contains: [rows3]
+    Param: {AbutmentType: none}
+    Contains: [sopenCellLibrary, column1]
 
-** monday:
-*** summary
-anaqua application finished and submitted.
-sparse build create_tclIndex problem. Came up with a workaround.
-Investigated and re-assigned: 9001024517 CDPV:: PNstack can not be created from 
-*** detail
-9001024517 NEW B3|CDPV:: PNstack can not be created from SED chain|Maxwell
+* TMP:
+--- !HelixConstraint-2
+  # Constraints generated through UCM
 
-launch SED chain to create CMOS constraint in UCM, then B^# and A^#
-are listed in Placement of GUI. The console complains error
-message as below and ignore the PNstack in hxcs.
-Error: In cmos constraint 'cmos1' no instance name corresponding to
-index 'B^#' found in 'Instances' section. (AMS_PLACEMENT-034)
+  # 
+  # Hierarchical Constraint Groups
+  # 
+constraintGroups:
+  - Name: standardCells1
+    Type: StructuredPartition
+    Param: {TapCellName: openCellLibrary/TAPCELL_X1/layout, RightEndCap: openCellLibrary/TAPCELL_X1/layout, FillCellNames: [openCellLibrary/FILLCELL_X1/layout, openCellLibrary/FILLCELL_X2/layout, openCellLibrary/FILLCELL_X3/layout], RowSpacing: {Value: 0}, TapCellDistance: {Value: 0}, UtilizationTarget: 0.8, TapCellDefaultPlacement: single, TapCellDefaultLocation: interior, AllowHorizontalFlip: true, FlipOdd: false, FlipEven: true, DoubleHeightCellAlignment: none, OddNumberRowsAllowed: false, RowHeight: 0.0}
+    Contains: [I8, I7, I6, I5, I4, I3, I9]
 
-case data: ~stars/testcases/9001024517/9001024517.tar.gz
-maxwell -replay pnstack_sed.log &
+  - Name: column1
+    Type: Column
+    Param: {YFlip: [], AbutmentType: none, OverlapLayers: [], AutoOrder: false, IgnoreNetsForOrdering: [], CustomSpacing: {Value: 0, CorrectAfterForDRC: true, PRBoundary: true}, Alignment: center}
+    Contains: [I2, I1, I0]
+
+  # 
+  # End
+  # 
+
+* TODAY:
+* Jerry
+* OIL change
 * ss#
 * ICF userid/pw
 bulbasar, bizimBirBangPetimiz
@@ -650,25 +1843,18 @@ Relative Placement Intent!
 prBoundary -> box -> W/H -> MCP partition... 
 * Older:
 * WEEKLY Call it: "weekly report" and kime yollayacagimi biliyom :-)
-** 2016.04.04
-*** Plan: Plan: See top on "latest work"
-Plan: 
-- ICF new customer with two libs..
-- Slides on proposal.. p-grid phase 2. Decorators..
-+ Investigate various STARs on MCP 
-- Respond to lawyer's feedback on the patent write-up
-+ Anaqua application for the patent
-- Required courses
-- Slides for off-site team meeting on placement grids and RowStack
-- 924834 UCM STAR on figGroup origin
-- Decorator handling in platform
-- Address pgrid promotion across hierarchy
-- Auto pgrid definition/decoration
-- Origin/snapTarget handling
-- Investigate how to productize auto-grouping (HFL--) functionality
-- Row-stack for 17.03
-SED chain.
-**** todo: move to outlook 1:1 agenda..
+** todo: move to outlook 1:1 agenda..
+[SELF! SEE THIS:]
+- ref10 work (see ref10: above)
+
+from 1:1
+- track pattern support (+ commitment from Bill to work with us on our proposal. Email from Bill!)
+- Task: Hi-level f-spec/design spec -- Interface spec: for enhancement of Rows..
+[Tech lead role.. in Custom Compiler.. Exposed to the whole platform and people.. 
+ Proactively colead with Barry, Jon, Bill, Shabbir, ..] 
+- Intel ICF: test the new code on new test-case from Laya
+- Discuss with Bill re: track-awareness in SED/matching mode
+*** older
 1:1 on Tue:
 Discuss with Fred and Jon on 
 (1) p-grid promotion across cell
@@ -695,6 +1881,977 @@ pgrid phase 2:
 
 FOR 17.03! row-stack support: SED+Placer. With Shabbir? Bill? 
 Look at SED first.. SED will have pattern generation in 16.06.
+** 2016.09.12
+Overview of the last two weeks
+
+[Intel]
++ NSG: Met with Rekha and helped her clean up the Helix/PCX setup and her work area. Packaged the test-case from Rekha as a tar file and passed on to Prashant to debug the pcell eval/tcl init problem. Also used Virtuoso to bring up HEI and Helix to ensure that CDesigner is not the culprit of some of the problems. Confirmed that we get the same pdk init error.
++ Earlier, found out that there were some missing libraries in Rekha's latest test-case. Requested and received the missing libs. 
++ Later, got a fix from Prashant in Helix code. Also got his help with using his local build. We were able to get a good run for the fairly complex hv_termo_analog circuit. Thanks a lot, Prashant! 
++ It looks like CDesigner has problems with helix debug build. So, I put together and am using two separate setups, one to run CD/HEI and another to run Helix/PCX.
++ Continued testing and hit an issue with cndefls. Packaged the test-case and sent out to Iulian and Glen for further investigation.
++ Rekha reported that she was also able to get more successful runs with the latest/clean setup!
+
+[PGrids]
++ Helped Yakov with snapTarget shape/property in Ellen's test-case (Re: STAR 9001086969)
++ Conversation with Abhishek on Copy Result to help promote p-grids.
++ Conversations with Joe to clarify PGrid anchor concept. Many thanks go to Yakov and Prashant who also provided good detailed info on existing APIs!
++ Got good feedback and some questions from Bill's team. Seems like we now have a shared vision. Responded and also requested that early feedback is provided to the user when she inputs inconsistent data.
++ Investigated STAR: 9001089245. Seems like the input data is inconsistent (between pgrid pitch values and the width/height of the cells). { CDPV:Standard Cells constraint placements are off P-Grid }
++ Investigated and had a follow up discussion in the triage meeting: STAR: 9001091071- CDPV: groups decorated with both p-grid and (guard-ring or routing stripe)
+
+[Reuse/Relative]
++ Discussion with Prashant/Joe/Ming on STAR: 9001082920- Relative intent with hierarchical constraints does not generate correct output
++ Created new STAR: 9001087913- Relative constraint needs Orientation added to the table
++ Created new STAR: 9001090300- Placer to support Relative intent based on UCM table
+
+[MCP-sync]
++ Summarized the results from the latest investigations for PNStack enhancements: signal-flow, routability and area (pin alignment, abutment, channel height). Presented to the team in the sync meeting.
++ 1:1 with Kumar on cost function and annealing.
+
+[Misc.]
++ Various code reviews for Kumar and Brian. Finished all my overdue reviews, too.
++ Completed one of the required classes: Diversity and inclusion
++ Discussion and investigation on 17.03 dependencies
+
+[Plan:]
+- Compete the second required course on Confidential Information
++ Req/Proposal for track aware (gridded) device placement. Updated the slides to address all relevant constraints.
++ MCP-sync
++ opampX10 test-case for device-level
++ Met Prashant to discuss device grids (track groups with more than one instance track). If a p-grid has multiple instance tracks, we will translate it as device-grid. The immediate parent UCell is automatically assigned, again by the translator, a block grid that corresponds to the first instance track. As such, the devices will always stay on the appropriate grid. User has the option to override (to make the block grid coarser). So, translator will check for that.
+- Watch Jimmy's demo
+- Discussion with Prashant on pgrid enhancements
+- New release to Intel NSG
++ Met Prashant to discuss things. Longer term items got us excited and could not get to 17.03 :-). Will do that on Monday.
+- Work with Kumar to clarify requirements and proposal for routability in row-based designs
+- Work with Varun to clarify the rectilinear PRBoundary support for ICF
+- Further communication with Jyun-Ze from Bill's (SED) team to refine detailed requirements (watch the SED demos, too!)
+- Document user interface enhancements in InstMatching and Rows (internal implementation using PA's VPattern/VMatrix&Row to support row-stack requirements).
+- Compile and publish PNStack test-cases and the code to visualize track assignments in CC
+- Compile Tcl utilities, unit tests and send out to Brian
+- Update the fspec with an overview of p-grid functionality
++ More MCP code review 
++ Investigate STAR: 9001094418. And help Brian add support for stack-mos (| basename delimiter). {Group Devices runtime is much longer and doesn't consider stack mos group.}
++ Two 17.03 planning meetings.
++ ICF meeting. 
++ MCP-sync minutes:
+0) Update: team is busy fixing SP1 stars. Sumit is on vacation next week.
+1) Brief discussion on STAR {9001089245 CDPV:Standard Cells constraint placements are off P-Grid}. In the test-case, we have an aux-cell (ENDCAP) with width that is not a multiple of x-pitch. The origin of the cells are not on grid. Not a high priority. AI: Bulent/Joe to discuss Joe's concerns with p-grid anchor support.
+2) Intel ICF requirement on rectilinear PRBoundary creation. We discussed Laya's slides [ATTACHED], clarified requirements and discussed solution. Helix GUI has "Create Top PRBoundary" parameter with: none/bbox/promote*  options. We need to add a polygon option. AI: Bulent to send out API info from Siarhei.
+3) Intel ICF requirement on PNStack enhancement for routability. Clarified that there is no code that does "channel width" estimation as yet. Joe emphasized the need to investigate the quality of the cost function for given optimal layouts and to see why the engine does not produce them. Kumar asked about trade-offs for alignment, optimal chaining and number of routing tracks (trunks). However, there is no easy answer. The customer wants it all: (a) do not miss any alignments (all gates and output node), (b) find the best chaining, (c) should require the minimum number trunks. We need a set of test-cases to cover typical/common circuitry like inv/nand/nor/mux/decoder etc.. AI: Pick a good PDK/test-case in CC and develop and test with CMOS/SED/PNStack in CC as well as Helix standalone.
+4) 17.03 Track aware device placement. Discussed requirements & proposal on SED with p-grids; and what this means for the placer.
+
++ Reviewed p-grid STAR with updated data from Ellen {9001089245 CDPV:Standard Cells constraint placements are off P-Grid}. Some aux cells have off-grid width. Assigned back to Ellen. Also reduced the priority for now.
++ One more code review with Brian
+
+
+** 2016.08.29
+======
+Weekly
+======
+
+[Intel]
+
++ Continued to investigate old PNStack STARs and test-cases. Wrote some code in .py and .tcl to help visualize wiring complexity in CC by implementating the left-edge algorithm. This helps assign trunks to tracks effectively. The key finding is that the connectivity model in the engine, currently, does not represent the main wiring challenges of row-based designs accurately. This is the core impetus behind the "signal flow" requirement from ICF. Will present in mcp-sync meeting.
++ Intel NSG: Reproduced some of the issues reported by Rekha in house. Set up CDesigner (14.12)/HEI and the NSG test-case we received last week. The test-case is missing some symbols and layouts (from two missed libraries). Requested Rekha to send them over, too. However, we can still reproduce some PDK/PCX related issues here. Reported to Prashant to investigate further. Rekha has also reported an issue with cndefls, but, I was able to run it successfully at SNPS. Her issue seems to be specific to her env/lib.defs. I will talk to her, too.
++ Attended weekly ICF/PSG meeting. Communicated our request to re-clarify the top priorities to help us focus, as we have a large number of outstanding issues we have been discussing. Laya has the action item. We also had a couple of discussions on env (custom bashrc) clean-up and tcl error in Helix. Girish did not attend. Had a separate 1:1 with him to discuss and clarify the details regarding pdk auto-init and tcl call-back support in Helix vs CC.
+
+[PGrid]
++ Met with Yakov and helped with CC features and test-cases. Also requested tutorial info from Jimmy who has provided the link to a share-point.
++ Created: STAR: 9001085784- Decorating user fig groups for placement (i.e., Placement Grid decorator). This is now a dependency  of STAR: 9001008931- CDPV: manual group is not placed with placement grid setting.
++ Reviewed the p-grid STAR on Column constraint. Looks good to me. Asked Ellen to check again and close: 9001083115- CDPV:Promoted p-grid with column does not work corretly. However, the one on Rows constraint is confirmed: STAR Number: 9001083084 -- Title: CDPV:Promoted p-grid with row does not work correctly.
++ Provided a description of snapTarget support to Ellen. She tested and filed a star accordingly as our code does not seem to support them yet.
+
+[MCP/Partition/Relative]
+
++ Held an MCP-coder meeting and sent out the minutes.
++ Did two rounds of code review for Kumar code@3345948 and code@3339130 for STAR 9001077531: Improve results when fixed boundary is specified.". Also had some discussions with Joe on this. Joe has some new recommendation on an alternative and supposedly more natural solution. We need to discuss the specifics further.
++ Investigated Biying's star on relative constraint. Identified various issues. Forwarded to Prashant and Joe. Prashant fixed his part and passed on to Joe. Joe had a question and I responded to him. STAR: 9001082920- Relative intent with hierarchical constraints does not generate correct output
+
+[Misc PA STARs]
++ STAR: 9001067968- {PA batch realizer failed to realize row-column constraints} Reviewed and informed Jui-Hsiang that the behavior is as expected. Also showed how to resolve the DRCs by updating the Separation parameter of the constraints. 
++ Attempted to file a star on Place Selected running on a Cluster of type "packed". Seems to have been fixed as of Thu. Later Joe confirmed that he turned on MT on Wed. I confirmed this by observing multiple threads being consumed by the packed cluster.
+
+[Plan:]
+- Put together requirements on PA for Rows/InstMatching to be track aware.
+- Review the new p-grid related STARs
+- Continue work on performance test with devices
+- Review latest demos in core team (and SED demos from Bill!)
+- Discuss with Jimmy abutment and interleaving requirements on pattern generation
+- Review star from PV Yerevan on performance and discuss with Jimmy to clarify use cases and requirements
+- ICF: Discuss priority of Altera issue on StdPart boundary assoc issue. Try old engine. Also try 4 ordered pins on the right edge.. Also check priority/urgency..
+- Create another test-case to reproduce another StdPart problem from Girish.
+- Intel NSG: provide sample code for custom contact ring
+- FILE BUG ON: Enhance PA to run without interconnect layers in tech.
+   ~stars/testcases/9001076890/test_instMatch_placementGrid.tgz
+- Presentation on algorithmic background and future of PA
+  - Add a table of key:Constraint -> value:Algorithms
+- Required and overdue Synopsys courses
+
+** 2016.08.22
+======
+Weekly
+======
+
+[Intel]
++ ICF: Had a meeting with Girish and Laya and discussed signal-flow requirements. WIP.
++ ICF: Focused on PNStack enhancements (to address signal flow and abutment requests). Reviewed some of the open stars (there are a total of 28 of them) and will discuss internally. The decoder test-case is a good showcase. But, there are at least a handful of STARs that might be dependencies.
++ ICF: Investigated a star, but, could not reproduce. STAR Number: 9000921140 (Import Floorplan fails when non-existent file included as SOFTINCLUDE). Requested test-case from Laya.
++ NSG: Had a meeting with Rekha after she resolved the issue with Virtuoso access problem. Helped her create a new test library with hierarchical schematics/layouts. We hit bunch of new issues. Met a couple of times. Did not have any luck. Requested a test-case which arrived today. WIP to set things up and re-produce.
++ NSG: Had terminal mismatch problem in the first hier run. Gave instructions on how to relax terminal checking. Helped a bit. 
+
+
+[PGrid]
+
++ Put together a hierarchical test-case for Yakov (using soft-macro setting). 
++ Described the new p-grid features for block placement as per Ellen's request and provided a test-case.
++ Reviewed one of the star's from PV. Found out that the origin of all six instances are indeed on grid. Informed Ellen. STAR: 9001083056- CDPV:the placement of macrocells without boundary are out-of Pgrid
+
+
+[Fix topology]
+
++ Helped Biying create a 5x bigger test-case. The new Partial Slicing algorithm works very well and fast (despite having n*n*n worst case in theory). Had a 1:1 with her and a wrap-up/summary meeting with Mirko and Ming.
++ Reviewed Biying's code/checkin
+
+
+[MCP/CMOS/(Packed)Partition]
++ Presented new device-level results from rx_ana. The "Place" command took 26h to run due to a combination of two things: (a) irregular boundary handling, (b) slowness when only one thread is available. Joe is investigating the second which is a bottleneck for all apps of MCP.
++ Did a new PackedPartition run with placement grids.. Used Place Selected as one master still fails in Place. Irregular boundary handling taking too long..
++ Observed that only 1 thread is active. Reported and had some follow up discussion. Will file a STAR on it.
++ Investigated and confirmed new STAR: 9001081697- CDPV: placed devices are out of wide alignment with CMOS constraint.
+
+
+[CC/UCM]
++ Created a new STAR: 9001082269- Constraint creation commands to register to Command Options/History Bar. Stan set the target release as 17.03.
+
+
+[Plan:]
+- Investigate FinFet boundary support in CMOS and respond to Ellen.
+- Review emails from: DRS_DO_NOT_REPLY
+- Provide a description of the following problems to Biying (1) global placement for relative clustering, (2) symmetry extraction (see ALX spec)
+- Continue to clean up many work areas using very old revisions of contaminated ref10 PDKs
+- Help Joe with purify build.. Sym Partition has inconsistent results..
+
+** 1:1 2016.07.20
+ICF- account team (strategic for Intel) and another one (Juan Hernandez) for Altera, Debbie for ICF
+
+SP1- Requirement slides. Short term (must have), Long term ... What each team needs to support
+Apporved for Placer LCA: AKM/Macronas/MSIP. Not approved: MEDIATEK
+
+** 2016.08.15 covers the period since 2016.07.30
+
+Summary
+=======
+
+This report covers the period since 2016.07.30.
+
+In the last two weeks, both Intel ICF and NSG activity (standalone Helix work) picked up. 
+
+I also had a 3-day ETO (Aug 3-5) and a half-day sick leave (son had syncope)
+
+
+Details
+=======
+
+[Intel]
++ NSG: Had two meetings with Rekha. First, we confirmed that the fix release is functional and addresses the abutment problem! (:-) Then, we tried to reproduce the issue with Matrix she reported, but could not. Gave her another intro to constraints: Partition, Matrix, Pattern (failed due to incorrect version of Tcl!) Also helped her with a hierarchical run. The last meeting was interrupted due to an issue with Virtuoso not opening up schematics after deleting layout views. She will report back and we'll continue.
++ Two Intel ICF/PSG sync meeting. Discussed (a) rectilinear PRBoundary generation, (b) Row and PNStack signal flow/max abutment, (c) StdPart boundary assoc. Edge position did not help. Top priority: PNStack signal flow..
++ Helix standalone license issue is resolved - workaround by Mirko, also Keith, Mike, Kervin Chang (SWE). Earlier we could not run helix standalone. Opened a CCT request to renew licenses on bear. 
++ ICF: Laya reported many issues with Pattern editor and RowStack. We requested her to provide details and test-cases. Awaiting.
+
+
+[Placement Grids]
++ Communicated latest rev of pgrid requirements on SED matching mode to Bill and Shabbir. Also published here: [http://sp-amsg/sites/CustomDesigner/Specs/Requirement/Placement-Grids-Requirements-17-03.pptx]. 
++ Sent a request to Nari and Fred to review SED enhancement proposal for device-level track awarenss using general (non-uniform) placement grid decorators
++ Met with Yakov to review the results on the pgrid origin/promotion test-cases. Top-level works well with origin. However, promotion in constraint hierarchy has issues. Likewise, promotion in cell hierarchy has issues. After his fixes, we met again, and found some other issues with accessing and checking the integrity of the new oa-property.
++ Filed a STAR on CE: STAR: 9001076890- Adding objects to Placement Grid decorator "steals" them from inst Matching
+
+
+[Performance]
++ Continued work on Performance with device-level test-case from MSIP. Encountered a number of issues. Filed one STAR: 9001079168- "Place Selected" fails on some devices. Will file another soon. Glen addre
+ssed the STAR promptly. Attempting to validate with the next nightly, I identified one more problem, re-opened the star and updated the work log. The good news is that I confirmed all the  other masters to work fine.
++ Worked around the issues by encapsulating the failing masters within as-is groups. Got the first run of the large "flattened" design. With 14 components, PackedPartition takes 26 hours to finish! Granted, some components are very large, but, this is still surprisingly slow. Next, I will try regular Partition as well as MCP Partition to compare.
+
+
+[MCP]
++ Met Kumar and discussed (1) BlockSize support, (2) AspectRatio calculation improvements, (3) Altera STAR: 9001072502.
++ Discussions with Kumar on: 9001077531 NEW E2|Improve results when fixed boundary is specified|Custom Compiler
++ Discussion on default range of aspect ratios.
++ Discussion with Kumar on design for multiple aspect ratios..
+
+
+[Device grouping]
++ Completed code review for Brian fixing issue with split device support in device grouping (STAR: 9001075311 NEW B3|GCP GroupDevices 'steals' members from existing constraints|Custom Compiler)
+
+
+[CC Fspecs]
++ Review UCM spec update for 16.06SP1 in DRS (to cover for Ming). 
+
+
+[Misc]
++ 3 day ETO: Aug 3-5
++ Out half a day on Friday Aug 12th of due to son blacking out. Thanks to 13-1, his injuries are not too bad!
+
+
+
+*** AI: Check with Siarhei polygon PRBoundary creation. Finish script only?
+*** AI: ICF meeting: Signal flow: do you want option to control? Or change the default result, or multiple candidates to pick from, 
+*** AI: Signal flow on PNStack.. Other constraints? Only Row. Anything else? Signal flow or max abutment? Both!
+*** ICF:
+Amrish to attend or not?
+Option in case there is a trade-off.
+Multiple PNStacks in a column?
+Alternatives?
+First group P and N based on signal flow and from the same gate..
+The current solution is bad, so option is not needed..
+Laya to send out slides on signal flow on other constraints
+AI: Send out STARs on four issues.. (2 old + 2 new)
+AI: Import floor-plan
+AI: Slides on expectation/requirements/sample test-case
+Girish: Stack mos legs to stay together (don't interleave)
+*** email
+Summary
+=======
+
+This report covers the period since 2016.07.30.
+
+In the last two weeks, both Intel ICF and NSG activity (standalone Helix work) picked up. 
+
+I also had a 3-day ETO (Aug 3-5) and a half-day sick leave (son had syncope).
+
+
+Details
+=======
+
+[Intel]
++ NSG: Had two meetings with Rekha. First, we confirmed that the fix release is functional and addresses the abutment problem! (:-) Then, we tried to reproduce the issue with Matrix she reported, but could not. Gave her another intro to constraints: Partition, Matrix, Pattern (failed due to incorrect version of Tcl!) Also helped her with a hierarchical run. The last meeting was interrupted due to an issue with Virtuoso not opening up schematics after deleting layout views. She will report back and we'll continue.
++ Two Intel ICF/PSG sync meeting. Discussed (a) rectilinear PRBoundary generation, (b) Row and PNStack signal flow/max abutment, (c) StdPart boundary assoc. Edge position did not help. Top priority: PNStack signal flow..
++ Helix standalone license issue is resolved - workaround by Mirko, also Keith, Mike, Kervin Chang (SWE). Earlier we could not run helix standalone. Opened a CCT request to renew licenses on bear. 
++ ICF: Laya reported many issues with Pattern editor and RowStack. We requested her to provide details and test-cases. Awaiting.
+
+
+[Placement Grids]
++ Communicated latest rev of p-grid requirements on SED matching mode to Bill and Shabbir. Also published here: [http://sp-amsg/sites/CustomDesigner/Specs/Requirement/Placement-Grids-Requirements-17-03.pptx]. 
++ Sent a request to Nari and Fred to review SED enhancement proposal for device-level track awareness using general (non-uniform) placement grid decorators
++ Met with Yakov to review the results on the p-grid origin/promotion test-cases. Top-level works well with origin. However, promotion in constraint hierarchy has issues. Likewise, promotion in cell hierarchy has issues. After his fixes, we met again, and found some other issues with accessing and checking the integrity of the new oa-property.
++ Filed a STAR on CE: STAR: 9001076890- Adding objects to Placement Grid decorator "steals" them from inst Matching
+
+
+[Performance]
++ Continued work on Performance with device-level test-case from MSIP. Encountered a number of issues. Filed one STAR: 9001079168- "Place Selected" fails on some devices. Will file another soon. Glen addressed the STAR promptly. Attempting to validate with the next nightly, I identified one more problem, re-opened the star and updated the work log. The good news is that I confirmed all the  other masters to work fine.
++ Worked around the issues by encapsulating the failing masters within as-is groups. Got the first run of the large "flattened" design. With 14 components, PackedPartition takes 26 hours to finish! Granted, some components are very large, but, this is still surprisingly slow. Next, I will try regular Partition as well as MCP Partition to compare.
+
+
+[MCP]
++ Met Kumar and discussed (1) BlockSize support, (2) AspectRatio calculation improvements, (3) Altera STAR: 9001072502.
++ Discussions with Kumar on: 9001077531 Improve results when fixed boundary is specified
++ Discussion on default range of aspect ratios.
++ Discussion with Kumar on design for multiple aspect ratios..
+
+
+[Device grouping]
++ Completed code review for Brian fixing issue with split device support in device grouping (STAR: 9001075311 GCP GroupDevices 'steals' members from existing constraints)
+
+
+[CC Fspecs]
++ Review UCM spec update for 16.06SP1 in DRS (to cover for Ming). 
+
+
+[Misc]
++ 3 day ETO: Aug 3-5
++ Out half a day on Friday Aug 12th due to son blacking out. 
+
+
+[Plan]
+- MCP-coder: prepare and present new device-level results from rx_ana. 26h run!
+- Intel ICF: Debug STAR on import floorplan failure. 
+- Intel ICF: Investigate signal flow enhancement on PNStack and Rows
+- Intel NSG: New issue reported this week. 
+- Biying discussion on global placement for analog..
+- Investigate FinFet boundary support in CMOS and respond to Ellen.
+- Review emails from: DRS_DO_NOT_REPLY
+- Review latest demos in core team (and SED demos from Bill!)
+- Altera issue on StdPart boundary assoc issue. Try old engine. Also try 4 ordered pins on the right edge.. Also check priority/urgency..
+- FILE BUG ON: Enhance PA to run without interconnect layers in tech.
+    ~stars/testcases/9001076890/test_instMatch_placementGrid.tgz
+- Create another test-case to reproduce another StdPart problem from Girish.
+- Provide a description of the following problems to Biying (1) global placement for relative clustering, (2) symmetry extraction (see ALX spec)
+- Continue to clean up many work areas using very old revisions of contaminated ref10 PDKs
+- Put together requirements on PA for Rows/InstMatching to be track aware.
+- Continue work on performance test with devices
+- Presentation on algorithmic background and future of PA
+  - Add a table of key:Constraint -> value:Algorithms
+- Intel NSG: provide sample code for custom contact ring
+- Required and overdue Synopsys courses
+
+** 2016.07.29 covers the period since 2016.07.19
+Summary
+=======
+ 
+This report covers the period since 2016.07.19.
+
+Intel NSG/ICF/PSG; track-awareness/placement-grid; 3-day ETO.
+
+Details
+=======
+
+[Intel NSG] 
+
++ Used RDS to deliver the Helix package (2015.09-1.T727_py262) to Intel NSG. It should address the PCX abutment issue they've observed. Just got confirmation from Rekha that she received the auto email from RDS. Thanks to Prashant, Amrish and Ellen for their help!
++ Earlier verified the Helix package with Intel's data to confirm that PCX server comes up and evaluates abutted pcells.  
++ Earlier, attempted to verify the new PyCell package. After setting up PCX with Prashant's help, we realized that PyCell studio does NOT have PCX! Now, we know that PCX is delivered only as part of Helix package. With hindsight, that does make some sense.
+
+[Intel ICF/PSG] 
+
++ We had our weekly meeting with both Girish and Indushekhar in attendance. 
++ Girish reported two issues on Helix. I reproduced in SNPS and filed two STARs:
+  . STAR: 9001072554- Row auto-reorder fails to find a 1-chain solution
+  . STAR: 9001072502- StructuredPartition boundary association is ineffective in some cases
++ Had a 1:1 with Girish. He reported two issues with StdPart. We've addressed one of them by clarifying the behavior when all insts are 2x. 
++ Reviewed the high-priority issues reported by Intel ICF. 
+
+[PGrid]
+
++ Put together a few slides to clarify 17.03 requirements on SED matching mode. Will communicate to Bill's and Shabbir's teams next week.
++ Had a 1:1 with Yakov to help explain the test-cases and the results expected. We will have another one later today to look at the results after Yakov's fixes.
++ Had a 1:1 with Girish and discussed requirements and proposal on SED to support RowStack methodology.
+
+[Other]
+
++ We had an mcp sync meeting and discussed various topics and updates.
++ As per Glen's request, investigated "Group Devices" command. Ran some tests. It does filter out constrained devices. His test-case may have a basename/flat name issue due to recent SDL/UCM changes. 
++ As per Barry's request, packaged and sent out a test-case for Std Cell constraint with aux-cell param setting.
++ Had a 1:1 with Biying and discussed various topics: symmetry, implicit top partition, etc..
+
+[Plan]
+- 3 day ETO: Aug 3-5
+- Meet with Yakov to review the results on the pgrid origin/promotion test-cases
+- Communicate latest rev of pgrid requirements on SED matching mode. 
+- Put together requirements on PA for Rows/InstMatching to be track aware.
+- Provide a description of the following problems to Biying (1) global placement for relative clustering, (2) symmetry extraction (see ALX spec)
+- File a STAR on CE inst-matching. Reminder to Barry..
+- Continue to clean up many work areas using very old revisions of contaminated ref10 PDKs
+- Continue work on performance test with devices
+- Presentation on algorithmic background and future of PA
+  - Add a table of key:Constraint -> value:Algorithms
+- Intel NSG: provide sample code for custom contact ring
+- Intel ICF: work on various AIs I own
+- Required and overdue Synopsys courses
+
+
+** 2016.07.18 covers the period since 2016.06.30
+Summary
+=======
+ 
+This report covers the period since 2016.06.30.
+
+Focused on track-awareness/placement-grid related work; Had a 3-day ETO anda 2-day July 4th holiday.
+
+Details
+=======
+
+[Intel] 
++ ICF meeting got rescheduled so that Girish and Indushekhar are both able to attend. We will have the first all-hands meeting later this week. 
++ Had a discussion with Girish regarding strategies on how to evaluate CC in Altera/Intel.
++ Laya reported an issue with HxTech. Seems to be a lib.defs error. Waiting to hear back.
++ We have a fix for the NSG abutment issue. Thanks to Prashant. Amrish is now working on a new package.
+
+[CC17.03] Track awareness/P-Grids
++ Prepared slides on device-level placement in CC: SED/UCM/Platform for track/tile awareness. Set up a meeting and presented the requirements/proposal to Jon, Shabbir and Bill and their teams. Barry couldn't attend. Later, as per my action item, put together a test-case for Inst Matching with a basic non-uniform placement-grid decorator. Along that path, encountered an issue with UCM/CE. Informed Barry. Need to follow up for a resolution.
++ Put together a test-case with three variants to help Yakov test his code for new pgrid development: promotion for constraint/cell hierarchy and origin/anchor support.
++ Earlier had a 1:1 meeting with Barry to evaluate our options for "Row Stack" representation in UCM. He helped ask some good questions..
+
+[CC17.03] Performance/exploration flow/ease of use
++ Working on a performance test with devices. Hit some issues with copy back (taking too long and not copying the correct variant) and had to scale back to a smaller test-case. Work in progress.
++ Also continued adding more content to the presentation on algorithmic background and future of PA. Need to continue and refine..
+
+[Misc.]
++ Had an MCP-sync meeting (July 5) and discussed (a) Area estimation work by Kumar, (b) Performance related plans/slides.
++ Provided a larger test-case to Biying to help test "Fix Placement Topology" command
++ Had a long conversation with Yakov regarding technical aspects of working off-site
++ Completed and submitted expense reports for my last three trips
++ Holidays on July 1st and 4th. 
++ ETO on July 13-15.
+
+[Plan]
+- Clean up many work areas using very old revisions of contaminated ref10 PDKs
+- Continue work on performance test with devices
+- Presentation on algorithmic background and future of PA
+  - Add a table of key:Constraint -> value:Algorithms
+- Intel NSG: provide sample code for custom contact ring
+- Intel ICF: work on various AIs I own
+- ETO July 13th. About 10 days until Aug 5th.
+- Required and overdue Synopsys courses
+ 
+** 2016.06.30 covers the period since 2016.06.06
+Summary
+=======
+
+This report covers the period since 2016.06.06.
+ 
+Intel ICF, various Custom Compiler projects and 6 days of ETO (trip to Hawaii :-) 
+
+Details
+=======
+
+[Intel]
++ Had a number of discussions and debugging sessions with Laya and Sasank. Many problems were due to minor mistakes in how Intel folks integrated the new code and due to lack of basic unit testing in their environment. The slowness also was a major handicap. But, the good news is that we root-caused and fixed all the issues.
++ ICF: Switching to new License server at Intel resolved the issue. Closed the Case: 8000914781- Helix is too slow - unacceptable execution/GUI launching time
++ Meeting with Indu and Laya. Communicated that they need to contact Anoop and Debbie.
++ Had a hand-on session with Laya to help her with using/testing Packed Partition.
++ Did more testing of the new finish script/A-B-legalizer in berry. Hit a crash in with(DLO), but worked around it. 
++ Got RUNDA and soon after a test-case from Intel NSG. We will debug in a week or two, hopefully.
+
+[CC16.06SP1]
++ Fruitful conversations with Kumar on area estimation given ambivalent user requirements in presence of a PRBoundary or width/height input
++ More discussion with Joe/Kumar on lack of enough solutions when large PRBoundary is given.
++ 1:1 w/ Varun. Did code review of PartialArray, the solution for PrBoundary/width/height/aspect-ratio control for Place and  Place Selected commands.
++ Gave a quick overview of scalable placement problem, too, to Varun.
++ Discussed PRBoundary support during our MCP sync meetings.
++ 1:1 conversations with Prashant and Yakov. We've nailed down all remaining questions on p-grid anchor and promotion (through cell hierarchy).
++ With Biying, clarified requirements, the value of slicing (Rows/Columns), use of both Cluster and Relative constraints for non-slicing (Cluster to improve area, and Relative to "Fix Topology"). Also gave a walkthru on symmetry/fix-group support in Cluster/Top-level, and described how similar code would help translate Relative constraint, too.
+
+[CC17.03]
++ Had a discussion with Fred re: track-aware device placement plans/priorities
++ Put together about 10 slides to outline algorithmic overview. Gave a dry run to some team members including Sumit. 
++ Performance experiments. Got a new large test-case from MSIP (from Shabbir and Subbu). Failed in Placer. Filed new star:
+  STAR: 9001062030- Place Selected gives "no sdl session" error, but SDL pick and place works
+  Created a test-case myself with 320 instances and have been running a number of experiments. In the meantime, hit a crash in UCM tcl API, but it was due to wrong usage. Will file it ASAP.
++ Discussed Relative constraint during our MCP sync meetings.
++ Attended N7/N10 Advanced Node Meetings
+
+[Plan]
+- Test-case to Bill for Inst Matching with p-grid decorator
+- Hierarchical (cell hier) test case for new pgrid development as per Yakov's request
+- Performance test with devices
+- Clean up many work areas using very old revisions of contaminated ref10 PDKs
++ Presentation on algorithmic background and future of PA
+- Table(Constraint) -> Algorithms
++ Provided a larger test-case to Biying.
++ Presentation to Bill et al on requirements (Row Policy) for track awareness in SED/UCM/Platform
++ 1:1 with Barry to evaluate our options for "Row Stack" representation in UCM
+- Intel ICF: work on various AIs I own
+- Intel NSG: provide sample code for custom contact ring
+- ETO July 1st and 4th -- Will work at least part time
+- ETO July 13th. About 10 days until Aug 5th.
+- Required and overdue Synopsys courses
+
+[SELF! SEE THIS:]
+- ref10 work (see ref10: above)
+
+from 1:1
+- track pattern support (+ commitment from Bill to work with us on our proposal. Email from Bill!)
+- Task: Hi-level f-spec/design spec -- Interface spec: for enhancement of Rows..
+[Tech lead role.. in Custom Compiler.. Exposed to the whole platform and people.. 
+ Proactively colead with Barry, Jon, Bill, Shabbir, ..] 
+- Intel ICF: test the new code on new test-case from Laya
+- Discuss with Bill re: track-awareness in SED/matching mode
+
+** 2016.06.06
+Summary
+=======
+
+Intel ICF and various Custom Compiler projects
+
+Details
+=======
+
+[Intel]
+
++ Laya reported that the MIP showstopper is successfully addressed thanks to the new legalizer code for finish script. The MIP designer saw good results on his design. But, Laya mentioned that her tests had some issues.  She has the action item to send me more details (or setup a debug session), so we can address them.
+
++ Updated most of the ICF dashboard items (top-priority and top-importance) to reflect my view on the readiness of CC vs Helix.
+
++ Compiled and sent out info to Laya on rectilinear packing (Using PackedPartition) in Helix as per my Action Item.
+
++ ICF weekly sync meeting with Laya and Harish.
+
+
+[CC]
+
++ Worked on flushing out second order of details for track=aware device placement in PA, SED and platform. Had a conversation with Shabbir on current plans (for SP1). Work in progress.
+
++ More conversations and a meeting with Barry on Relative constraint usage and requirements. Described our intent to use it as part of the new "Reuse Topology" cmd/solution. There is good consensus and we agreed on two action items: (1) a tcl cmd is needed and (2) orientation needs to be added to bboxes. STAR is filed for (1): {9001054512 Need cm::createRelative Tcl command}
+
++ Reviewed and approved IFS-API change to support deDecoratorGroup (a sibling  of lePlacementGroup)
+
++ Reviewed and recommended the closure of: {STAR: 9001026030- CDPV:placer generates incomplete_layout views}
+
++ Reviewed and re-assigned to Yakov: {STAR: 9001010332- CDPV: constraint group with enclose decorator is placed out of placement grid}
+
++ Investigated and reassigned two other STARs: {9001010253- CDPV: prboundary is not placed on placement grid} and {9001048634- CDPV: prbounday is ignored when it's greater/less then all instances/shapes bbox}
+
++ Created an StdCell test-case with 300 instances to help Joe develop/test MT code. It takes about 15 minutes, but upon monitoring with 'top' observed CPU load up to 1000% and around 16 gcp executables. Joe tells me that his MT code is not in yet, so, this is a little bit of a mystery. One culprit is the parallelization in Helix input and output. Will wait to hear from Joe before investigating further, if needed.
+
++ Had another MCP sync meeting and discussed various mid- and long- term action items. 
+
++ Had the first of our weekly 1:1 meetings with Biying and helped ramp her up on various fronts (synmake, runBuild, code structure, tcl development tricks, etc.)
+
++ 1:3 with Biying, Mirko and Ming
+
+
+[Plan]
+
+- Intel ICF: work on various AIs I own
+- Intel ICF: test the new code on new test-case from Laya
+- Intel NSG: provide sample code for custom contact ring
+- Discuss with Bill re: track-awareness in SED/matching mode
+- Discuss with Fred re: track-aware device placement plans/priorities
+- Expense reports
+- 6 day ETO from Fri Jun 10th to Fri Jun 17th
+- Synopsys courses
+
+
+** 2016.05.30
+*** email
+Summary
+=======
++ Intel ICF and NSG
++ CC Misc.
++ Other
+
+Details
+=======
+
+[Intel ICF]
+
++ Re-implemented the A-B grid legalizer routine to address three issues: 1) Enhance to use an env var to provide std-cell lib names instead of the hard-coding in the old implementation, 2) Fix bug that missed flip opportunities (actually all flips!), 3) Don't swap cells for bussed instances. Sent out the first version on Thursday. Got a test-case from Sasank and upon testing found and fixed various bugs. Sent out a revision on Friday. Waiting to hear from Laya. 
+
++ In the meantime, Amrish was added to the RUNDA (as of Monday). He can help take over the code. I will meet with him and ramp him up.
+
++ Earlier, met with Laya who informed me that the finish script issue was escalated to a showstopper. Then, we had a 2:1 meeting with Sasank, the end user and debugged the problem. It turned out that the original code had some basic bugs which missed all flips, hence the work reported above.
+
++ Prepared a short list of open Helix enhancements requested by ICF for Nishath
+
+
+[Intel NSG]
+
++ Had a joint session with Rekha and Prashant in order to debug the abutment failure. Did not have much progress. Requested the test-case. They are now in the process of adding us to the RUNDA.
+
+
+[CC Misc.]
+
++ Met Jon, Barry, Bing, Jing Yu and Samuel to discuss instance snapping with p-grids. Jing Yu's team is busy with MTK support and they are pushing out full p-grid support to 17.03SP1. But, they will provide some basic support for instance snapping.
+
++ Had two MCP sync meetings and discussed among other things the support for the new relative intent, soft-groups, performance, interfacing options, etc.. 
+
++ Met with Yakov to nail down some more details to complete the requirements specification and the core design of origin/snapTarget/prBoundary/anchor support.
+
++ Attended the N7/N10 Adv Node Meeting. Suggested to improve the name of the new rule. Approved and  improved further by Nari.
+
++ Met patent attorney to help him understand the invention on placement grids. Also read the revision the attorney sent out after our meeting and did a few more revisions on it.
+
+
+[Other]
+
++ One day ETO
+
+
+* plan:
+
+- ICF star -> Anoop
+- ICF engagement -> How CC will be used with the main platform (GenOA, Genesys, Virtuoso)?
+
+1:1
+- 17.03 planning meeting. Fred/Jimmy/Hau Yung/
+  - Multi-row SED? MSIP on uniform track patterns.. (TSMC/Samsung): Via track planner..
+  - AI: Fred (Jimmy?) on use cases for device placement..  Context-aware track region floorplanning -> 17.03SP1. Support single region well in 17.03.
+  - AI: Shabbir and Bill. Started conversation with Shabbir!
+  - PROPOSAL: Cross out RowStack -> Multi-row with cell template support..  SED + PA cooperation.. 
+  - Cash Compensation June 6th. $3,500. 2%. CC contribution is being recognized by upper management.. Thank you! RSU! Equity grant value. $10k.
+
+new plan:
+- Reference layout (old tech? mismatched sch) -> constraints to new sch/lay / relative intent? / Reuse topology
+
+weekly:
+- Expense reports
+- Synopsys courses
+- 6 day ETO from Fri Jun 10th to Fri Jun 17th
+
+older plan:
+- Prepare overview slides on relative placement for MCP sync. We would like to prepare a prototype, demo and plans for an SP1 task
+- Intel ICF: Investigate the test-case on Finish script/legalizer. Meet Amrish to work on enhancements to legalizer. Also, send out a cheat-sheet to Laya for python development in Helix
+- Investigate STAR 9000900964 to understand current design of track awareness during manual placement and abutment of devices with pins. [Ref: CDPV: postSnapAdjustProc and abutment order issue]. 
+- Investigate further Fin-FET/track pattern conflict. Test track patterns on instance layer.
+- Read up on the new Relative and Template constraints in UCM
+- Prepare presentation to help review methods/algorithms(and new prototype for fast-exploration mode) in PA
+- Testing and prototyping for top-level performance for various use cases
+- Complete laptop migration
+- File overdue expense reports
+- Check in a new test-case on auto-grouping (low priority)
+- Continue required but overdue courses
+
+
+*** draft
+Summary
+=======
++ Intel ICF and NSG
++ MCP sync
++ Other
+
+Details
+=======
+
+[Intel ICF]
++ Re-implemented the A-B grid legalizer routine to address three issues: 1) Enhance to use an env var to provide std-cell lib names instead of the hard-coding in the old implementation, 2) Fix bug that missed flip opportunities (actually all flips!), 3) Don't swap cells for bussed instances. Sent out the first version on Thursday. Got a test-case from Sasank and upon testing found and fixed various bugs. Sent out a revision on Friday. Waiting to hear from Laya. 
+
++ In the meantime, Amrish was added to the Runda (as of Monday). He can help take over the code. I will meet with him and ramp him up.
+
++ Earlier, met with Laya who informed me that the finish script issue was escalated to a showstopper. Then, we had a 2:1 meeting with Sasank, the end user and debugged the problem. It turned out that the original code had some basic bugs which missed all flips, hence the work reported above.
+
++ Prepared a short list of open Helix enhancements requested by ICF for Nishath
+
+
+[Intel NSG]
+
++ Had a joint session with Rekha and Prashant in order to debug the abutment failure. Did not have much progress. Requested the test-case. They are now in the process of adding us to the RUNDA.
+
+
+[CC]
+
++ Met Jon, Barry, Bing, Jing Yu and Samuel to discuss instance snapping with p-grids. Jing Yu's team is busy with MTK support and they are pushing out full p-grid support to 17.03SP1. But, they will provide some basic support for instance snapping.
+
++ Had two MCP sync meetings and discussed among other things the support for the new relative intent, soft-groups, performance, interfacing options, etc.. 
+
++ Met with Yakov to nail down some more details to complete the requirements specification and the core design of origin/snapTarget/prBoundary/anchor support.
+
++ Attended the N7/N10 Adv Node Meeting. Suggested to improve the name of the new rule. Approved and  improved further by Nari.
+
++ Met patent attorney to help him understand the invention on placement grids. Also read the revision the attorney sent out after our meeting and did a few more revisions on it.
+
+
+[Other]
+
++ One day ETO
+
+
+[Plan]
+
+- Intel ICF: work on various AIs I own
+- Intel ICF: test the new code on new test-case from Laya and with original constraints from Sasank
+- Intel NSG: provide sample code for custom contact ring
+- Discuss with Fred re: track-aware device placement plans/priorities
+- Discuss with Barry re: relative intent usage/requirements
+- Flush out second order of details for device placement in PA, SED and platform
+- Expense reports
+- Synopsys courses
+- 6 day ETO from Fri Jun 10th to Fri Jun 17th
+
+* plan:
+- Sent out some pointers and brief explanation on how to add new commands to Placement menu.
+- Prepare overview slides on relative placement for MCP sync. We would like to prepare a prototype, demo and plans for an SP1 task
+- Intel NSG: Help debug issues with abutment and contact-rings
+- Intel ICF: Investigate the test-case on Finish script/legalizer. Meet Amrish to work on enhancements to legalizer. Also, send out a cheat-sheet to Laya for python development in Helix
+- Meet with Biying to welcome and discuss plans
+- Investigate STAR 9000900964 to understand current design of track awareness during manual placement and abutment of devices with pins. [Ref: CDPV: postSnapAdjustProc and abutment order issue]. 
+- Investigate further Fin-FET/track pattern conflict. Test track patterns on instance layer.
+- Read up on the new Relative and Template constraints in UCM
+- Prepare presentation to help review methods/algorithms(and new prototype for fast-exploration mode) in PA
+- Testing and prototyping for top-level performance for various use cases
+- Complete laptop migration
+- File overdue expense reports
+- Check in a new test-case on auto-grouping (low priority)
+- Continue required but overdue courses
+
+** 2016.05.23
+Summary
+=======
++ Placement grids and tracks
++ Intel NSG and ICF
++ MCP sync
++ Other
+
+Details
+=======
+[Placement grids and tracks]
+
++ Had a number of long and fruitful meetings and conversations with Yakov and Prashant to clarify various concepts and  requirements: anchor, origin, snapTarget, etc.
++ Had a conversation with Jon to clarify snapTrackPatterns param support relating to placement grids. We will meet with Barry, Bing and Samuel later this week to discuss further.
++ Compiled a list of high-level tasks for track-aware device placement. Responded to a few questions from Ming. Requires more investigation and lower-level details.
+
+
+[Intel NSG]
+
++ Continued to work on setup issues. PCX issues are finally fully resolved on Thursday thanks to a joint session with Prashant/Abhishek. Switched to single-user mode. Worked! Also, fixed issue with large-scale mode. It was probably due to a port conflict. On friday, had another meeting  with Rekha to confirm that things are still working.
++ Afterwards, provided a high-level overview and demo of Helix constraints using her test-casea. Unfortunately, neither abutment (in Row) nor Contact Ring constraint worked. Fortunately, many other things do work now. The debug files don't seem to provide enough info on the abutment issue. Needs further debugging.
+
+
+[Intel ICF]
+
++ Updated Laya about Amrish coming on board. Requested a RUNDA for him. Received a spreadsheet/dashboard (more than  100 items!) and a request from ICF to mark it w.r.t. CC/PA status on each item.
+
+
+[MCP sync]
+
++ Started weekly MCP sync meetings. Collected some relevant papers and sent them out to some team members. Got some questions from Nishath, about which I had a brief converstion with Yakov and responded back to Nishath.
++ Did a brief code review for Kumar's MLK fix
+
+
+[Other]
+
++ Had a conversation with Barry on the new Relative constraint. Explained the details to some team members.
++ Responded to questions and  revision  requests from patent attorney. Will meet him to help him understand the invention on placement grids.
+
+
+[Plan] 
+- Prepare a short list of open Helix enhancements requested by ICF for Nishath
+- Meet patent attorney to help him understand the invention on placement grids
+- Prepare overview slides on relative placement for MCP sync. We would like to prepare a prototype, demo and plans for an SP1 task
+- Intel NSG: Help debug issues with abutment and contact-rings
+- Intel ICF: Investigate the test-case on Finish script/legalizer. Meet Amrish to work on enhancements to legalizer. Also, send out a cheat-sheet to Laya for python development in Helix
+- Meet with Biying to welcome and discuss plans
+- Meet Jon, Barry, Bing and Samuel to discuss instance snapping with p-grids
+- Investigate STAR 9000900964 to understand current design of track awareness during manual placement and abutment of devices with pins. [Ref: CDPV: postSnapAdjustProc and abutment order issue]. 
+- Investigate further Fin-FET/track pattern conflict. Test track patterns on instance layer.
+- Flush out second order of details for device placement in PA, SED and platform
+- Read up on the new Relative and Template constraints in UCM
+- Prepare presentation to help review methods/algorithms(and new prototype for fast-exploration mode) in PA
+- Testing and prototyping for top-level performance for various use cases
+- Complete laptop migration
+- File overdue expense reports
+- Check in a new test-case on auto-grouping (low priority)
+- Continue required but overdue courses
+
+** 2016.05.16
+** email draft
+Summary
+=======
++ Intel NSG and ICF support
++ Placement grid and run-time performance
++ Others
+
+Details
+=======
+
+[Intel ICF]
+
++ Reconvened for the weekly status meeting after a three week hiatus. Discussed shorts-checker requirement which segued into requirements on CC. Indushekhar's team is very interested in getting their hands on the latest build of CC to provide their input on PA as well as the platform. Communicated to Nishath. I am still waiting on the meeting minutes as I have a number of action items I need to follow. File some enhancement STARs and communicate plans on engagement, etc..
++ Worked on the enhancement on legalizer for A-B grid issues. Put together a few slides to clarify the problem and the requirements: how to align track patterns for two vertical layers within standard cells. We need to handle (1) swapping of equivalent master cells, (2) horizontal flipping of off-grid instances. Awaiting the promised test-case in berryfarm from Laya. Started coding.
+
+[Intel  NSG]
+
++ Many Skype meetings with Rekha. We are making daily progress. Also got help from Prashant regarding PCX setup and debugging. The first PCX setup failed with error: PCX server setup configuration file had a parse error. Fixed that. But, still not fully functional. We'll continue to debug this week. In parallel, worked on tech-lib setup. Created a Helix-tech lib and attached maps. OA tech-lib attachment failed. The environment seems to have a different way of doing that. Rekha will work on it. 
+
+[Placement Grid]
+
++ Investigated STAR 9001038774. It is a case of mixing of p-grids with devices. Not a bug. Informed Ellen that it can be closed. {Title: CDPV: copy back is out of placement Grid}
++ Investigated a number of STARs Glen is working on and attempted to clarify requirements and explain observed behavior in le::move, Place* and Copy Results commands. Helped Glen with track pattern  assistant vs track region assistant  and snap-target concepts. Jon also sent a number of issues he's observed with the test-case and current implementation. STARs: 9001029651, 9001042251, 9001043349, 9001043215.
++ Sent out an email to Mirko, Prashant et al to provide some more details on the next phase of development. The focus is on the "origin" problem. The constraint engines need to know the origin and transformation  of each component in the input (cell or group-cell). My understanding  is that DLO does not provide this API. Hence, the need for enhancement. Will discuss further with Prashant. Once origin support is added, the rest of it will be handled within engines and is a low hanging fruit.
+
+[Run-time Performance]
+
++ Investigated STAR 9001044665. It takes more than 10 min running placer on a two-input nand (or nor) gate with  four schematic instances. Reproduced the problem. Observed that the layout view has 800 devices. Ran the new Group Devices command. This  should improve the runtime drastically, however, a ranked STAR needs to be fixed first. Also experimented with turning off lxSplit parameter and then  it ran in less than a minute. Discussed with Jimmy and he provided some more comments with promise to clarify requirements further.
++ Responded to various questions on performance and QoR profile of PNStack vs SED.
+
+[Split instances]
+
++ Had a conversation with Prashant and Barry on the split instance proposal and tried to clarify it. Did a little investigation in CC to understand existing behavior of lxSplit and lxExpandMFactor combos. Waiting to hear further on it from Barry or SDL folks.
+
+[Others]
+
++ Received a new laptop due to refresh and now migrating to it. Did some data transfer and re-install of some of my favorite apps.
+
+[Plan] 
+
+- Intel NSG:  Continue to work on setup issues. PCX then PCell wrapping
+- Intel ICF:  Continue to work on enhancements to legalizer. Also, send out a cheat-sheet for python development in Helix
+- Finish doing the current revision to the patent write-up and send out to the lawyer
+- Investigate further Fin-FET/track pattern conflict. Test track patterns on instance layer.
+- Flush out second order of details for device placement in PA, SED and platform
+- Read up on the new Relative and Template constraints in UCM
+- Prepare presentation to help review methods/algorithms(and new prototype for fast-exploration mode) in PA
+- Testing and prototyping for top-level performance for various use cases
+- Complete laptop migration
+- File overdue expense reports
+- Check in a new test-case on auto-grouping (low priority)
+- Continue required but overdue courses
+
+** 2016.05.09
+This report summarizes the period from 4/25 to 5/9.
+ 
+Summary:
++ Put together and presented "Device placement with track awareness". Also prepared and gave a demo on RowStack.
++ Trip to MV (May 2-4). Attended many presentations/discussions
++ Intel ICF - Met Laya to discuss latest requests from Sasank.
++ Intel NSG - Met Rakhu and Manju to debug setup issue. Sent them an updated PCX cheat-sheet.
++ Compiled a list of dependencies for 16.06SP1 and 17.03.
+
+Details:
++ Slides are in {http://sp-amsg/sites/CustomDesigner/Initatives/physical_automation/Shared%20Documents/Onsite%20May%202016/Device%20Placement%20with%20Awareness.pptx}
++ Two remaining STARs under my name
++ Re-golden two failures due to my check-in
++ Conversation with Prashant/Mirko/Barry on split-instance proposal for stack devices and more
++ A couple of code reviews (from Joe/Prashant)
++ STAR: {9001042559 {CDPV:: "AutoGroup" creates invalid constraint member for split instances}}
+  -> Created new STAR: {9001043508 {Select in Design cmd does not work with basename of devices in constraint}}
++ Meet Intel NSG to debug why device layout has overlaps. Found out that their pcx setup was incomplete. Provided them more info in a cheat-sheet. Nobody reads user guides! (:-)
++ Updated and publish p-grid slides with hyperlinks to references (http://sp-amsg/sites/CustomDesigner/Specs/Requirement/Placement-Grids-Requirements-16%2006-Track-Pattern-Support.pptx)
++ Investigated, commented on and re-assigned to Ellen: STAR: 9000993023- CDPV:: CMOS gatealignment issue with splited devices. 
++ Reproduced, investigated and re-assigned to Prashant: STAR: 9000974436. Changed title from: "Issues in "as-is" figGroup identification method" to "abutment fails for Inst Matching"
+  Also looked into CNI_AEWARE_DIR env var used by reference40nm in the test-case for STAR 9000974436. This is one suspect for the error reported: 'invalid command name "ref40_abutor"
+      while executing
+  "ref40_abutor $abutter $abuttee $abutterPin $abutteePin $abutDir $externalConnection 2"'. (ABUTMENT-001)
+** 2016.04.25
+This report summarizes the period from 4/5 to 4/25. 
+
++ Intel ICF
++ Intel NSG
++ Two new commands: Group Devices and Group Std Cells 
++ Trip to MV
++ 3-day ETO (April 7th, 8th and 11th)
+
+Intel
+=====
+Met Sasank from Intel MIP (Oregon, US) to discuss his issue with StdPart
+abutment and A-B grids. It looks like he needs an enhancement to the
+legalizer code in Finish script. Will discuss further with Laya tomorrow.
+
+ICF requested to find out about shorts-checker support in Helix. Had a good
+discussion with Oleg (cnhxlvs won't help, but in principle we can support
+it) and will communicate to them on Wednesday. 
+
+Met two members of a new group at Intel (NSG) in Folsom, CA, looking into
+Helix for floor-plan exploration. Compiled a set of documents as well as a
+working sample test-case and sent out a tar-file. Met them again today to help 
+debug issues with HEI setup. Later compiled a cheat-sheet on PCX setup and
+sent it to them (too bad my samsung secure disk access is removed :-( and I
+could not access the PCX setup I put together about a year ago). 
+
+16.06
+=====
+A new file (grouping.tcl) is now checked in under src/lp_commands/etc
+(thanks to Glen for pointing out the right module). Also modified startup,
+menus and actions files to hook things up. Got familiar with p4 (again!)
+and runbuild configurations (thanks to Iulian for quick help!). Next, need
+to re-golden one (or two?) failing tests, and check-in a new test-case to
+validate that the functionality works.
+
+Worked on the other six 16.06 STARs assigned to my name. There are now only
+two left. 
+
+Provided requirements to Kumar on bus I/O placement: STAR 9000965453: Bus
+terminal pins are not created in sequence. 
+
+Prepared a demo for Jimmy on StdCell placement. Encountered issues. Filed
+four new stars:
+  STAR: 9001032057- std-cell results are missing 1-row and 3-row solutions
+  STAR: 9001037167- top-level with two components (one fixed, one std-cell) results in wasted area
+  STAR: 9001037170- copy result cmd moves locked group
+  STAR: 9001037216- incorrect messages mentioning symmetry groups and symmetry clusters
+
+Misc.
+=====
+Prepared slides on PGrid and presented to team.
+
+Had some discussions with Barry and Jon on decorator management. The suggestion
+is to work on a new deDecorator (fig-group) object post 16.06.
+
+Responded over email to Siarhei's question on p-grid "snap-origin".
+
+Respond to lawyer's questions and feedback on the patent write-up
+
+Plan:
+=====
+1st priority: PGrid: PGrid next-phase... Jon Bendickson/Randy.. SED/IFS/..  16.01 -> 16.06.    SP1, SP2.. 17.03 16.09?   Finish planning by end of May.
+- 924834 UCM STAR on figGroup origin
+** 2016.04.04
+*** email
+Summary:
+
+[+] Major focus areas: Intel ICF, various STARs and patent review
+
+Intel ICF:
+[+] We have a new time-slot for weekly meetings and we got started on Wednesday! Lyndon was also in attendance.
+[+] Laya gave an update, good news and brought up one new issue. A new group at Intel is exploring Helix. However, they have two libraries with copies of both sch and lay views and they need a way to get sch from one and lay from another. With hints from Iulian, Glen, Mirko and Ming, explored a possible solution. Put together a test-case to emulate the requirement. It seems to work fine. Informed Laya with detailed illustrated description of how to set things up to meet the requirement. She will try it out and let us know.
+[+] We had a discussion on the oaVia (custom) binding issue (via's guessed to be created by SBR) the problem with the workaround used by the user. Communicated that various workarounds (like using simplistic abstract views) have various issues/limitations. We need to root-cause the main issue and hopefully address it. Prashant will help debug this week.
+[+] Mayank brought up a new enhancement request. They are asking whether Helix pin placer can create  multiple shapes for each power pin according to the repeated track pattern. We had an internal discussion with Kumar to follow up. We will discuss the details in this week's sync meeting.
+
+STARs:
+[+] As requested by Ming, I investigated 5 critical stars gating PV's work. They are now either fixed or actively worked on.
+[+] A STAR from CDPV gave us a hard time this week: 9001024513. At first, the ENV var to switch to old constraint compiler got in the way. Thanks to Iulian for pointing out that the new compiler is already ahead of the old one and has some enhancements that are required by this STAR. Next, I stumbled upon a problem with "as-is" fig-group causing a similar misbehavior. Thanks to Prashant for pointing that out! Please see the bullet below for more details. Going back to the original STAR, it seems to be a similar problem to some other STARs Varun fixed recently. I reproduced it with the latest build, and provided a new test-case to help, and re-assigned to him. Thanks in advance, Varun!
+[+] Investigated, reproduced and re-assigned: 9001024517 CDPV:: PNstack cannot be created from 
+[+] Validated fix by Varun: STAR: 9001020265- CDPV: placement result is not expected when prbounday is pre-existing
+
+MCP:Partition/PNStack--CC:Cluster/CMOS:
+[+] Had a discussion with Joe on supporting single component run with Partition with or without boundary constraint.
+[+] Wrote an email to Mirko and other team-members to clarify predicates that necessitate an implicit top-level partition.
+
+PGrid:
+[+] Had a brief conversation with Prashant regarding a new STAR and clarified semantics/promotion of decoration on masters.
+[+] Reminded Barry regarding the decorator grouping request. Hope to have an update this week before my ETO. 
+[+] Created some slides to highlight the challenges of the next phase in p-grid solution. 
+
+As-Is Groups/Copy Results:
+[+] Encountered during STAR investigation two issues with "Copy Results" command relating to as-is groups: (1) In different states, it behaves differently which is a source of confusion. (2) As-is groups are identified by one or more fixed components in a "normal" fig-group. CR does switch a group from free to as-is by using this trick only in some cases as pointed out by (1), but, it does it by modifying only one component, but, not all. I think we need to review this and find a way to improve use-model and ease of use. I wrote an email to discuss further, but we probably need to discuss further in a meeting.
+
+CC/Misc.:
+[+] Completed patent application and submitted to Anaqua. Got some questions and feedback from the lawyer and responding with more write-up, pictures, etc..
+[+] For custom compiler (CC), investigated the sparse build create_tclIndex problem. Came up with a workaround that can be used by the developers and emailed cd-rd. Attempted to fix Synmake in my local build, but encountered an issue trying to build it. Asked Mike for help, but no response so far.
+
+TODO: copy back has issues. Copy back one then switch to the other.. Use the original data from PV test-case: ~/p/star/maxwell/stdcell/9001010191.tar.gz
+
+New- File a STAR: Enhance GCP engine to give warning and handle unbound vias/instances
+- Discuss further with Ming and file STARs to track as-is group inconsistencies as needed.
+- Slides on proposal.. p-grid phase 2. Decorators..
+- Slides for off-site team meeting on placement grids and RowStack
+- ETO on Thu, Fri and Mon: 7th, 8th and 11th (spring break :-)
+- 924834 UCM STAR on figGroup origin
+- Address pgrid promotion across hierarchy
+- Auto pgrid definition/decoration
+- Origin/snapTarget handling
+- Investigate how to productize auto-grouping (HFL--) functionality
+- Row-stack plans for 17.03
+- Required courses
+*** draft
+Summary:
+
+[+] Major activities: Intel ICF support, various STARs and patent review.
+
+Intel ICF:
+[+] We have a new time-slot for weekly meetings and we got started on Wednesday! Lyndon was also in attendance.
+[+] Laya gave an update, good news and brought up one new issue. A new group at Intel is exploring Helix. However, they have two libraries with copies of both sch and lay views and they need a way to get sch from one and lay from another. With hints from Iulian, Glen, Mirko and Ming, explored a possible solution. Put together a test-case to emulate the requirement. It seems to work fine. Informed Laya with detailed illustrated description of how to set things up to meet the requirement. She will try it out and let us know.
+[+] We had a discussion on the oaVia (custom) binding issue (via's guessed to be created by SBR) the problem with the workaround used by the user. Communicated that various workarounds (like using simplistic abstract views) have various issues/limitations. We need to root-cause the main issue and hopefully address it. Prashant will help debug this week. 
+[+] Mayank brought up a new enhancement request. They are asking whether Helix pin placer can create  multiple shapes for each power pin according to the repeated track pattern. We had an internal discussion with Kumar to follow up. We will discuss the details in this week's sync meeting.
+
+STARs:
+[+] As requested by Ming, I investigated 5 critical stars gating PV's work. They are now either fixed or actively worked on.
+[+] A STAR from CDPV gave us a hard time this week: 9001024513. At first, the ENV var to switch to old constraint compiler got in the way. Thanks to Iulian for pointing out that the new compiler is already ahead of the old one and has some enhancements that are required by this STAR. Next, I stumbled upon a problem with "as-is" fig-group causing a similar mis-behavior. Thanks to Prashant for pointing that out! Please see the bullet below for more details. Going back to the original STAR, it seems to be a similar problem to some other STARs Varun fixed recently. I reproduced it with the latest build, and provided a new test-case to help, and re-assigned to him. Thanks in advance, Varun!
+[+] Investigated, reproduced and re-assigned: 9001024517 CDPV:: PNstack can not be created from 
+[+] Validated fix by Varun: STAR: 9001020265- CDPV: placement result is not expected when prbounday is pre-existing
+
+MCP:Partition/PNStack--CC:Cluster/CMOS
+[+] Had a discussion with Joe on supporting single component run with Partition with or without boundary constraint.
+[+] Wrote an email to Mirko and other team-members to clarify predicates that necessitate an implicit top-level partition.
+
+PGrid:
+[+] Had a brief conversation with Prashant regarding a new STAR and clarified semantics/promotion of decoration on masters.
+[+] Reminded Barry regarding the decorator grouping request. Hope to have an update this week before my ETO. 
+[+] Created some slides to highlight the challenges of the next phase in p-grid solution. 
+
+As-Is Groups/Copy Results:
+[+] Encountered during STAR investigation two issues with "Copy Results" command relating to as-is groups: (1) In different states, it behaves differently which is a source of confusion. (2) As-is groups are identified by one or more fixed components in a "normal" fig-group. CR does switch a group from free to as-is by using this trick only in some cases as pointed out by (1), but, it does it by modifying only one component, but, not all. I think we need to review this and find a way to improve use-model and ease of use. I wrote an email to discuss further, but we probably need to discuss further in a meeting.
+
+CC/Misc:
+[+] Completed patent application and submitted to Anaqua. Got some questions and feedback from the lawyer and responding with more write-up, pictures, etc..
+[+] For custom compiler (CC), investigated the sparse build create_tclIndex problem. Came up with a workaround that can be used by the developers and emailed cd-rd. Attempted to fix Synmake in my local build, but encountered an issue trying to build it. Asked Mike for help, but no response so far.
+
+Plan: 
+- Proposal/guidelines for management of decorators in the platform
+- Six 2016.06 STARs assigned to my name.
+- ETO on Thu, Fri and Mon: 7th, 8th and 11th (spring break :-)
+- Slides on proposal.. p-grid phase 2. Decorators..
+- Slides for off-site team meeting on placement grids and RowStack
+- Discuss further with Ming and file STARs to track as-is group inconsistencies as needed.
+- Respond to lawyer's feedback on the patent write-up
+- Required courses
+- 924834 UCM STAR on figGroup origin
+- Address pgrid promotion across hierarchy
+- Auto pgrid definition/decoration
+- Origin/snapTarget handling
+- Investigate how to productize auto-grouping (HFL--) functionality
+- Row-stack plans for 17.03
+
 ** 2016.03.28
 *** email
 Summary:

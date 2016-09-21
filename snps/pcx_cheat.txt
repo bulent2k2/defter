@@ -1,0 +1,34 @@
+* 0) A sample script to setup PCell Xtreme tool:
+
+#!/bin/csh -f
+setenv PWD /a/sample/full/path
+setenv CNI_PROXY_SETTINGS ${PWD}/proxy.xml
+setenv CNI_LOCK_CACHE True
+setenv CNI_LOG_DEBUG ./debug.log
+setenv OA_PLUGIN_PATH ${PWD}:${OA_PLUGIN_PATH}
+
+* 1) Sample proxy.xml file:
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<ProxySetting lib="" type="@">
+  <setupFile loc="/a/sample/full/path/setup.cfg" 
+  toolVersion="all" connTimeout="54" />
+</ProxySetting>
+
+* 2) Sample setup.cfg file (used in 1). Please see Appendix B of pcell_user_guide.pdf
+
+section1
+/a/sample/full/path/serverInfo.log 
+
+section2
+$PCX_SERVER_PATH/serverRun.csh
+
+section3
+/a/sample/full/path/cacheDir1, gpdk 
+
+* 3) cdsSkillPcell.plg needed on top of OA_PLUGIN_PATH
+<?xml version="1.0" encoding="utf-8" ?>
+<plugIn lib="cnPcellProxy"/>
+
+* The end

@@ -1,0 +1,97 @@
+#This is shared with  laptop!
+
+See: h:/helix/tmp/README.txt
+=============== vvvvv ==== Add under here ==== vvvvv ===============
+
+** new with softmacro: ~bbasaran/cc/test/pgrid/test/promo/test_promo_with_hier_run.tgz
+
+              /c Build  (OPT) Config 3327584 compiled on Thu Aug 11 16:03:58 2016 for RHEL64 5.7
+              /c Invocation: /remote/sweifs/PE/products/cd/main/clientstore/cd_main_us01_build2/object_root/bin-linux64/cdesigner
+              /c Execution time: Fri Aug 12 07:43:11 2016
+
+
+gtar -zxf /remote/stars/testcases/9001062030/placer_fails.tgz
+
+cd SDL_Expand_Sch_Test/
+cdesigner
+
+1- Open design: "rx_ana layout">
+2- Bring up Design Navigator / Schematic view>
+3- Select "lar|los|or|M28" -- (Sorting by Master name Z-to-A, this is the first "pmos" device listed)>
+4- Run Place Selected. It errors with message:
+ Error: System exception while executing gi::pressButton: std::exception (COMMAND-001)
+
+ 
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(indent-tabs-mode nil)
+ '(tcl-indent-level 4))
+
+GNU Emacs 24.5.1 (x86_64-unknown-linux-gnu, GTK+ Version 2.10.4) of 2015-10-27 on localhost.localdomain
+
+/remote/helix01/user/bulent/test/intel_nsg/outgoing/synopsys_helix_installer_linux_rhel40_gcc483_64_2015.09-1-T0727_py262_TREE.tgz
+
+STAR: 9001072502- StructuredPartition boundary association is ineffective in some cases
+# TerminalClass definitions
+#
+terminalClasses:
+  - [Name,          Param,            Operation]
+  # --------------------------------------------
+  - [Terminal,      {Weight:    500.0},      ModifyOnly]
+  - [GlobalNet,     {Weight:    2.0},      ModifyOnly]
+  - [InstTerminal,  {Weight:    1.0},      ModifyOnly]
+
+
+
+~/p/test/maxwell/stdpart/test/demo/std_cell_aux_cell.tgz
+
+/remote/helix01/user/bulent/test/maxwell/stdpart/test/demo/std_cell_aux_cell.tgz
+
+openCellLibrary (in SNPS40NE/pdk/openCellLibrary/)
+
+Used in:
+
+~/p/test/maxwell/stdpart/test/demo/std_cell_aux_cell/cniLibClk_placer/STD_CTRL__init@cniLibClk/netlist.hxcs
+
+
+
+
+    /remote/helix01/user/bulent/test/intel_nsg/incoming/20160629/helix_send.tar.gz
+
+/remote/helix01/user/bulent/test/maxwell/pgrid/test/promo/test_rowGrids.tgz
+
+bbTestLib/inv1/layout
+
+
+pgrid_promo_CellHier.tgz
+~/p/test/maxwell/pgrid/test/promo/pgrid_promo_CellHier.tgz
+/remote/helix01/user/bulent/test/maxwell/pgrid/test/promo/pgrid_promo_CellHier.tgz
+
+    _defaultData.doubleData = 1.0;
+    _symTable->addSymbol(
+        "dp.weight.size", 20, CTL::DOUBLE, &_dp._sizeWeight,
+        checkDoubleCost, &_defaultData, false);
+
+See: code/helix/mcp_api/engine/mcp_cls_control.cpp
+
+
+MCP::PL::COST::updateCurrentCost(bool)
+MCP::PL::DP::callInnerLoop()
+MCP::PL::DP::startAnnealing(char const*)
+MCP::PL::DP::callAnnealingPlacer(char const*, bool)
+MCP::PL::DP::detailIterationInitPlace()
+MCP::PL::DP::detailIteration()
+MCP::PL::DP::detailMain()
+mcpAutoPlaceEntry(void*) ()
+placerDPlace(PNStackInfo*, placerOption*) ()
+Helix::McpUCellCreator::InitStates(std::vector<Helix::UCell const*, std::allocator
+
+% gtar -zxf /remote/helix01/user/bulent/test/maxwell/pgrid/test/promo/pgrid_promo_origin.tgz
+% cd ref10test_Origin
+
+/remote/helix01/user/bulent/test/maxwell/pgrid/test/promo/pgrid_promo.tgz
